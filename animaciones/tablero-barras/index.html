@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tablero con barras · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="svc-section">
+      <span class="kicker">Servicios · Tableros de datos</span>
+      <h1 class="svc-h2">Así se ve un tablero en acción</h1>
+      <p class="svc-lead">Las barras crecen hasta su valor cada vez que se muestra una pestaña. El valor final de cada barra está en el HTML (<code>style="--v:.78"</code>): sin JS el tablero ya se ve terminado.</p>
+
+      <div class="svc-demo svc-demo--dash" data-svc-demo="dashboard">
+        <div class="svc-demo__tabs" role="group" aria-label="Tablero">
+          <button type="button" class="svc-demo__tab is-active" data-demo-tab="ventas" aria-pressed="true">Ventas</button>
+          <button type="button" class="svc-demo__tab" data-demo-tab="stock" aria-pressed="false">Stock</button>
+          <button type="button" class="svc-demo__tab" data-demo-tab="finanzas" aria-pressed="false">Finanzas</button>
+          <button type="button" class="svc-demo__replay" data-demo-replay><span class="material-icons-round" aria-hidden="true">replay</span>Repetir</button>
+        </div>
+        <div class="svc-demo__screen">
+          <div class="svc-demo__bar"><span class="svc-demo__dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="material-icons-round" aria-hidden="true">leaderboard</span><span class="svc-demo__label">Tablero de control</span><span class="svc-demo__tag">Datos de ejemplo</span></div>
+          <div class="dash-panels">
+            <div class="dash-panel dash-panel--ventas" data-demo-panel="ventas">
+              <div class="dash-card">
+                <p class="dash-card__title">Productos más vendidos</p>
+                <ol class="dash-rank">
+                  <li style="--v:1"><span>Zapatillas urbanas</span><i class="dash-bar"></i><b>1.240</b></li>
+                  <li style="--v:0.78"><span>Mochila de viaje</span><i class="dash-bar"></i><b>968</b></li>
+                  <li style="--v:0.61"><span>Campera liviana</span><i class="dash-bar"></i><b>756</b></li>
+                  <li style="--v:0.47"><span>Remera básica</span><i class="dash-bar"></i><b>583</b></li>
+                  <li style="--v:0.3"><span>Gorra</span><i class="dash-bar"></i><b>372</b></li>
+                </ol>
+              </div>
+              <div class="dash-card">
+                <p class="dash-card__title">Ventas por zona</p>
+                <div class="dash-cols">
+                  <span class="dash-col" style="--v:0.92"><i class="dash-bar"></i><small>CABA</small></span>
+                  <span class="dash-col" style="--v:0.74"><i class="dash-bar"></i><small>GBA Norte</small></span>
+                  <span class="dash-col" style="--v:0.58"><i class="dash-bar"></i><small>GBA Sur</small></span>
+                  <span class="dash-col" style="--v:0.66"><i class="dash-bar"></i><small>Córdoba</small></span>
+                  <span class="dash-col is-low" style="--v:0.24"><i class="dash-bar"></i><small>Rosario</small></span>
+                </div>
+                <p class="dash-note"><span class="material-icons-round" aria-hidden="true">south_east</span>Rosario es la zona con menos ventas</p>
+              </div>
+            </div>
+            <div class="dash-panel dash-panel--stock" data-demo-panel="stock" hidden>
+              <div class="dash-card">
+                <p class="dash-card__title">Stock por producto</p>
+                <ul class="dash-stock">
+                  <li style="--v:0.72"><span>Zapatillas urbanas</span><i class="dash-bar"></i><b>430 u.</b></li>
+                  <li style="--v:0.55"><span>Mochila de viaje</span><i class="dash-bar"></i><b>312 u.</b></li>
+                  <li class="is-alert" style="--v:0.08"><span>Campera liviana</span><i class="dash-bar"></i><b>18 u.</b></li>
+                  <li style="--v:0.86"><span>Remera básica</span><i class="dash-bar"></i><b>905 u.</b></li>
+                </ul>
+                <p class="dash-alert"><span class="material-icons-round" aria-hidden="true">warning</span>Quiebre de stock: Campera liviana se agota en 3 días</p>
+              </div>
+            </div>
+            <div class="dash-panel dash-panel--finanzas" data-demo-panel="finanzas" hidden>
+              <div class="dash-card">
+                <p class="dash-card__title">Distribución de gastos del mes</p>
+                <div class="dash-stack"><i class="dash-stack__seg dash-stack__seg--1" style="--v:42"></i><i class="dash-stack__seg dash-stack__seg--2" style="--v:27"></i><i class="dash-stack__seg dash-stack__seg--3" style="--v:12"></i><i class="dash-stack__seg dash-stack__seg--4" style="--v:11"></i><i class="dash-stack__seg dash-stack__seg--5" style="--v:8"></i></div>
+                <ul class="dash-legend">
+                  <li><i class="dash-stack__seg--1"></i><span>Sueldos</span><b>42%</b></li>
+                  <li><i class="dash-stack__seg--2"></i><span>Proveedores</span><b>27%</b></li>
+                  <li><i class="dash-stack__seg--3"></i><span>Alquiler</span><b>12%</b></li>
+                  <li><i class="dash-stack__seg--4"></i><span>Marketing</span><b>11%</b></li>
+                  <li><i class="dash-stack__seg--5"></i><span>Otros</span><b>8%</b></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Tablero de datos con barras animadas</h2></div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · tableros-de-datos/index.html</span><span>js/servicios.js → dashboardDemo · initializeServiceDemos</span><span>GSAP</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>Cada barra está dibujada por CSS con <code>transform: scaleX(var(--v))</code> (columnas: <code>scaleY</code>, desde abajo).</li>
+              <li>GSAP anima <code>fromTo</code> de 0 al valor, leído con una función: <code>scaleX: (i, el) =&gt; --v de la fila</code>.</li>
+              <li>Ranking y columnas con <code>stagger: 0.07</code>; la barra apilada se abre de izquierda a derecha; las notas entran al final.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Solo se anima <code>transform</code> y <code>opacity</code>: nunca <code>width</code>/<code>height</code>.</li>
+              <li>La barra apilada usa <code>flex: var(--v)</code> en cada segmento: los porcentajes son los propios <code>--v</code>.</li>
+              <li>Los colores de alerta (<code>.is-low</code>, <code>.is-alert</code>) son solo clases.</li>
+              <li>El botón "Repetir" es un agregado de la librería para volver a ver la animación.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Tablero con barras</small></a>
+</body>
+</html>

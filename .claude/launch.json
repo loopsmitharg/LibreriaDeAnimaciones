@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "libreria",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5510", "--directory", "C:/Users/Usuario/Documents/GitHub/LibreriaDeAnimaciones"],
+      "port": 5510
+    }
+  ]
+}

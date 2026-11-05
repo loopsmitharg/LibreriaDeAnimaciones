@@ -1,0 +1,63 @@
+# Librería de Animaciones
+
+Repositorio interno con la **base** de las animaciones dinámicas que usamos en nuestros proyectos (Loop Smith y CosmeCV), aisladas en demos que funcionan solas.
+
+Abrí `index.html`: cada botón lleva a una demo y cada demo termina con una ficha técnica (cómo funciona, de dónde sale y qué tocar para reutilizarla).
+
+## Estructura
+
+```
+index.html                       Índice con filtros por tipo
+assets/
+  css/fonts.css                  @font-face locales (Outfit, Space Grotesk, IBM Plex Mono, Material Icons Round completo)
+  css/shell.css                  Chrome de la librería (.lib-back, .lib-notes). Nada más se comparte.
+  fonts/                         Fuentes .woff2
+  vendor/                        GSAP 3.12.5 + ScrollTrigger (locales, sin CDN)
+animaciones/<nombre>/
+  index.html                     Demo + ficha técnica
+  style.css                      Estilos de la animación (con sus propios tokens en :root)
+  script.js                      Lógica (comentada, en castellano)
+```
+
+Cada carpeta de `animaciones/` es autocontenida: para usar una animación en otro proyecto se copian su `style.css`, su `script.js` y el markup de la demo, más GSAP si lo usa.
+
+## Catálogo
+
+| Demo | Tipo | Origen |
+| --- | --- | --- |
+| `scroll-logo-al-navbar` | Scroll de intro: el logo viaja al navbar, impacta y rebota | Loop Smith · Inicio (primer scroll) |
+| `scroll-manual-rueda` | Rueda de 3 pasos con riel arrastrable | Loop Smith · Inicio (scroll manual) |
+| `acordeon-horizontal` | Tarjetas en acordeón horizontal con FLIP | Loop Smith · Inicio (tarjetas de servicios) |
+| `scroll-por-etapas-flujo` | Tablero de flujo que avanza por etapas | Loop Smith · Inicio (animación flujo) |
+| `carrusel-nombres` | Rieles de nombres en contrafase que se sincronizan | Loop Smith · Nuestro equipo |
+| `titulos-sticky` | Títulos sticky en grilla de dos columnas (CSS puro) | Loop Smith · Servicios |
+| `chat-autoescrito` | Chat que se escribe solo, con pestañas | Loop Smith · Servicios (chatbots) |
+| `tablero-barras` | Tablero con barras que crecen al cambiar de pestaña | Loop Smith · Servicios (tableros de datos) |
+| `scroll-experiencia` | Lista con foco por scroll + medidor + detalle por hover | CosmeCV · Experiencia |
+| `cursor-invertido` | Cursor con `mix-blend-mode` que invierte colores | CosmeCV · Global |
+| `scroll-horizontal` | Sección anclada con scroll lateral de paneles | CosmeCV · Proyectos |
+
+## Ver las demos
+
+Las demos funcionan abriendo los HTML directo, pero conviene un servidor local (las fuentes y algunos navegadores se portan mejor):
+
+```bash
+python -m http.server 5510
+```
+
+y abrir `http://localhost:5510/`.
+
+## Agregar una animación nueva
+
+1. Crear `animaciones/<nombre-descriptivo>/` con `index.html`, `style.css` y `script.js`.
+2. En el `<head>`: `../../assets/css/fonts.css`, `../../assets/css/shell.css`, su `style.css` y, si hace falta, `../../assets/vendor/gsap.min.js` / `ScrollTrigger.min.js` con `defer`.
+3. Terminar la página con una `<section class="lib-notes">` (ficha técnica) y el `<a class="lib-back">` para volver.
+4. Sumar el botón en el grupo que corresponda de `index.html` y actualizar el contador.
+
+## Reglas que traen las animaciones
+
+- Animar solo `transform` y `opacity` (las barras y trazos SVG son la excepción documentada).
+- Escenas ancladas con `gsap.matchMedia()`: rama `(min-width: 901px)` anclada y `(max-width: 900px)` en flujo, cada una con su limpieza.
+- `prefers-reduced-motion` y "sin GSAP" siempre dejan el contenido completo y legible.
+- Opacidad mínima `0.002` en vez de `0` para elementos que van a aparecer (Chrome descarta la capa con 0).
+- `overflow: hidden` en un ancestro mata `position: sticky`; para recortar en horizontal, `overflow-x: clip`.

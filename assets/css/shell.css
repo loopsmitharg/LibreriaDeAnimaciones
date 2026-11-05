@@ -1,0 +1,38 @@
+/* ==========================================================================
+   Chrome de la librería: lo único compartido por todas las demos.
+   - .lib-back: píldora fija para volver al índice.
+   - .lib-notes: ficha técnica al final de cada demo.
+   Todo con prefijo .lib- para no chocar con las clases de las animaciones.
+   ========================================================================== */
+.lib-back {
+  position: fixed; z-index: 2000; left: 1rem; bottom: 1rem;
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .55rem .9rem .55rem .7rem; border: 1px solid rgba(255,255,255,.16); border-radius: 999px;
+  background: rgba(10,12,18,.82); color: #f4f4f5; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  font: 500 .78rem/1 "Outfit", system-ui, sans-serif; letter-spacing: .01em; text-decoration: none;
+  box-shadow: 0 .75rem 2rem rgba(0,0,0,.35); transition: border-color .25s ease, transform .35s cubic-bezier(.16,1,.3,1);
+}
+.lib-back:hover, .lib-back:focus-visible { border-color: #a3e635; transform: translateY(-2px); }
+.lib-back b { font-weight: 600; }
+.lib-back small { color: #a1a1aa; font-size: .7rem; }
+.lib-back .lib-back__arrow { font-size: 1rem; }
+/* En teléfono solo "← Librería": así no tapa indicadores centrados abajo. */
+@media (max-width: 640px) { .lib-back small { display: none; } }
+
+.lib-notes {
+  position: relative; z-index: 5; padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 5vw, 5rem) 6rem;
+  background: #0a0c12; color: #e4e4e7; border-top: 1px solid rgba(255,255,255,.08);
+  font: 400 1rem/1.65 "Outfit", system-ui, sans-serif;
+}
+.lib-notes__inner { max-width: 62rem; margin: 0 auto; display: grid; gap: 2.25rem; }
+.lib-notes__kicker { color: #a3e635; font: 500 .72rem/1 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+.lib-notes h2 { margin: .6rem 0 0; color: #fafafa; font: 600 clamp(1.8rem, 3.5vw, 2.8rem)/1.05 "Outfit", sans-serif; letter-spacing: -.035em; }
+.lib-notes h3 { margin: 0 0 .6rem; color: #fafafa; font: 600 1.05rem/1.3 "Outfit", sans-serif; }
+.lib-notes p, .lib-notes li { color: #a1a1aa; font-size: .95rem; }
+.lib-notes p { margin: 0; }
+.lib-notes ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .35rem; }
+.lib-notes code { padding: .1rem .35rem; border-radius: .3rem; background: rgba(255,255,255,.07); color: #e4e4e7; font: 400 .85em "IBM Plex Mono", monospace; }
+.lib-notes__grid { display: grid; gap: 2rem; }
+@media (min-width: 801px) { .lib-notes__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lib-notes__meta { display: flex; flex-wrap: wrap; gap: .5rem; }
+.lib-notes__meta span { padding: .35rem .7rem; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; color: #d4d4d8; font: 500 .7rem/1 "IBM Plex Mono", monospace; letter-spacing: .06em; }

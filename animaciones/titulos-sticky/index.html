@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Títulos sticky · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navbar de muestra: los títulos se pegan JUSTO debajo (top: nav + 2rem). -->
+  <header class="demo-nav"><span>Tu<b>Marca</b></span><nav><a href="#a">Servicio</a><a href="#b">Para quién</a><a href="#c">Canales</a></nav></header>
+
+  <main class="svc-page">
+    <header class="svc-hero">
+      <span class="kicker">Páginas de servicio</span>
+      <h1>Títulos sticky en dos columnas</h1>
+      <p>Desde 901px cada bloque es una grilla 5/7: el título queda pegado bajo el navbar mientras su texto pasa. En teléfono se apila en flujo normal.</p>
+    </header>
+
+    <section class="svc-section svc-section--split" id="a" aria-labelledby="t1">
+      <h2 id="t1" class="svc-h2">Tus clientes esperan una respuesta ya</h2>
+      <div class="svc-prose">
+        <p>Hoy las personas escriben esperando una respuesta inmediata. Si nadie contesta, el interés se enfría y la consulta termina en la competencia. Sumar personas para atender todos los canales, todo el día, es caro y difícil de sostener.</p>
+        <p>Un chatbot responde en segundos, a cualquier hora y en varios idiomas. Atiende las consultas repetidas, ordena a los interesados y deja para tu equipo las conversaciones que de verdad necesitan a una persona.</p>
+        <p>Como el título queda fijo, quien lee nunca pierde de qué se está hablando aunque el bloque de texto sea largo. Funciona igual de bien con listas, tarjetas o imágenes en la columna derecha.</p>
+        <p>Cuando el bloque termina, el título se va con él: el sticky está limitado por su propia sección (el padre del <code>h2</code>), así que nunca se superpone con el siguiente.</p>
+      </div>
+    </section>
+
+    <section class="svc-section svc-section--split" id="b" aria-labelledby="t2">
+      <h2 id="t2" class="svc-h2">¿Para quién es este servicio?</h2>
+      <div class="svc-prose">
+        <p>Para empresas, pymes, agencias y profesionales que reciben consultas por canales de mensajería y quieren vender y atender mejor.</p>
+        <div class="svc-signals">
+          <h3>Señales de que lo necesitás:</h3>
+          <ul>
+            <li><span class="material-icons-round" aria-hidden="true">check_circle</span>Respondés las mismas preguntas todos los días.</li>
+            <li><span class="material-icons-round" aria-hidden="true">check_circle</span>Las consultas llegan fuera de horario y se pierden.</li>
+            <li><span class="material-icons-round" aria-hidden="true">check_circle</span>Tu equipo no da abasto en los momentos de más demanda.</li>
+            <li><span class="material-icons-round" aria-hidden="true">check_circle</span>No sabés cuáles interesados están listos para comprar.</li>
+          </ul>
+        </div>
+        <p>El título acompaña todo el recorrido de la lista y recién se suelta cuando la sección se termina.</p>
+      </div>
+    </section>
+
+    <section class="svc-section svc-section--split" id="c" aria-labelledby="t3">
+      <h2 id="t3" class="svc-h2">Canales e integraciones</h2>
+      <div class="svc-prose">
+        <ul class="svc-cards">
+          <li><span class="material-icons-round">chat</span><b>WhatsApp</b><small>API oficial, con plantillas y derivación a personas.</small></li>
+          <li><span class="material-icons-round">language</span><b>Sitio web</b><small>Widget propio con el tono de tu marca.</small></li>
+          <li><span class="material-icons-round">photo_camera</span><b>Instagram</b><small>Mensajes directos y respuestas a historias.</small></li>
+          <li><span class="material-icons-round">hub</span><b>CRM</b><small>Cada conversación queda registrada como lead.</small></li>
+          <li><span class="material-icons-round">event</span><b>Calendario</b><small>Agenda turnos sin intervención humana.</small></li>
+          <li><span class="material-icons-round">table_chart</span><b>Planillas</b><small>Exporta pedidos y consultas en tiempo real.</small></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Títulos sticky en dos columnas</h2></div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · páginas de servicio (chatbots/, tableros-de-datos/…)</span><span>css/styles.css → .svc-section--split</span><span>Sin JavaScript</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><code>.svc-section--split</code> es una grilla <code>5fr 7fr</code> con <code>align-items: start</code>.</li>
+              <li>El <code>.svc-h2</code> lleva <code>position: sticky; top: calc(var(--nav-height) + 2rem)</code>.</li>
+              <li><code>align-items: start</code> es clave: si el título se estirara al alto de la fila, no tendría recorrido para pegarse.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Trampas</h3>
+            <ul>
+              <li><code>overflow: hidden</code> en un ancestro mata el sticky (pasa a ser su scrollport). Para recortar en horizontal usar <code>overflow-x: clip</code>.</li>
+              <li>Mobile-first: el sticky va solo en <code>@media (min-width: 901px)</code>.</li>
+              <li><code>text-wrap: balance</code> evita títulos con una palabra huérfana.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Títulos sticky</small></a>
+</body>
+</html>

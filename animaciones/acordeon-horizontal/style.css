@@ -1,0 +1,87 @@
+:root {
+  --color-bg: #0b1120;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-accent: #a3e635;
+  --color-secondary: #10b981;
+  --color-on-accent: #0b1120;
+  --color-border: rgba(148,163,184,.2);
+  --ease-premium: cubic-bezier(.16,1,.3,1);
+  --ease-inertia: cubic-bezier(.22,.61,.36,1);
+  --page-gutter: clamp(1.1rem, .33rem + 3.59vw, 4.5rem);
+  --text-sm: clamp(.875rem, .84rem + .1vw, .92rem);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; background: var(--color-bg); }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: "Outfit", system-ui, sans-serif; }
+
+.services { min-height: 100svh; display: grid; align-items: center; padding: clamp(4rem, 10vh, 7rem) var(--page-gutter); overflow: clip; }
+.services__inner { width: min(100%, 1600px); margin: 0 auto; display: grid; gap: clamp(1.75rem, 4vh, 3rem); }
+.services__heading { display: grid; justify-items: start; gap: .9rem; }
+.kicker { color: var(--color-accent); font: 500 .75rem/1 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+.services__heading h1 { max-width: 22ch; margin: 0; font: 600 clamp(1.9rem, 1rem + 3.2vw, 4.4rem)/.98 "Outfit", sans-serif; letter-spacing: -.05em; }
+.services__heading p { max-width: 50ch; margin: 0; color: var(--color-text-muted); font-size: var(--text-sm); line-height: 1.6; }
+
+/* Base mobile: lista vertical, sin expandir ---------------------------- */
+.services-accordion { display: grid; border-top: 1px solid var(--color-border); }
+.service-accordion__item { position: relative; display: flex; align-items: center; gap: 1rem; padding: 1.1rem 0; border-bottom: 1px solid var(--color-border); color: var(--color-text); cursor: pointer; outline: none; }
+.service-accordion__signal { display: flex; align-items: center; color: var(--color-accent); }
+.service-accordion__signal i, .service-accordion__signal .material-icons-round:last-child { display: none; }
+.service-accordion__signal .material-icons-round { width: 2.6rem; height: 2.6rem; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: 1.1rem; }
+.service-accordion__copy h3 { margin: 0; font: 600 1.25rem/1.1 "Outfit", sans-serif; letter-spacing: -.02em; }
+.service-accordion__copy p, .service-card__more { display: none; }
+
+/* Desktop: acordeón horizontal con FLIP ------------------------------- */
+@media (min-width: 901px) {
+  .services-accordion { --accordion-pad: clamp(1rem, 1.8vw, 1.9rem); --accordion-gap: clamp(1.5rem, 3vw, 3.5rem); position: relative; min-width: 0; height: clamp(24rem, 56svh, 30rem); display: flex; align-items: stretch; border-block: 1px solid var(--color-border); overflow: hidden; }
+  .service-accordion__item { min-width: 0; flex: .5 1 0; display: grid; grid-template-rows: auto minmax(0, 1fr); align-items: stretch; gap: 1rem; padding: var(--accordion-pad); border-bottom: 0; background: transparent; text-align: left; overflow: hidden; transition: background-color .4s ease; }
+  .services-accordion.is-flipping > .service-accordion__item, .services-accordion.is-flipping .service-accordion__copy, .services-accordion.is-flipping .service-accordion__signal { will-change: transform; }
+  /* Divisores dibujados (un borde se escalaría con la tarjeta). */
+  .services-accordion::before, .service-accordion__item::before { content: ""; position: absolute; z-index: 1; top: 0; bottom: 0; width: 1px; background: var(--color-border); pointer-events: none; transition: background-color .4s ease; }
+  .services-accordion::before { left: 0; }
+  .service-accordion__item::before { right: 0; scale: var(--accordion-counter, 1) 1; transform-origin: right; }
+  .services-accordion:has(> .service-accordion__item:first-child.is-active)::before, .service-accordion__item.is-active::before { background: rgba(163,230,53,.55); }
+  .service-accordion__item::after { content: ""; position: absolute; left: 0; top: 0; width: 2px; height: 100%; background: linear-gradient(var(--color-accent), var(--color-secondary)); transform: scaleY(0); scale: var(--accordion-counter, 1) 1; transform-origin: left top; transition: transform .9s var(--ease-inertia); }
+  .service-accordion__item.is-active { flex: 5.6 1 0; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: minmax(0, 1fr); column-gap: var(--accordion-gap); background: linear-gradient(140deg, rgba(21,31,50,.98), rgba(15,23,42,.86)); }
+  .service-accordion__item.is-active::after { transform: scaleY(1); }
+
+  .service-accordion__signal { gap: 1rem; justify-content: flex-start; opacity: .4; scale: var(--accordion-counter, 1) 1; transform-origin: right center; transition: opacity .4s ease, transform .6s var(--ease-premium); }
+  .service-accordion__signal i { display: block; width: clamp(1rem, 3.5vw, 4rem); height: 1px; background: currentColor; }
+  .service-accordion__signal .material-icons-round { width: 3rem; height: 3rem; overflow: hidden; font-size: 1.2rem; transition: background-color .4s ease, color .4s ease; }
+  .service-accordion__item.is-active .service-accordion__signal .material-icons-round { display: grid; width: 4.2rem; height: 4.2rem; font-size: 1.65rem; animation: serviceIconGrow .5s var(--ease-premium) both; }
+  .service-accordion__item.is-active .service-accordion__signal .material-icons-round:first-child { background: var(--color-accent); color: var(--color-on-accent); }
+  .service-accordion__item.is-active .service-accordion__signal { grid-column: 2; grid-row: 1; align-self: stretch; flex-direction: column; justify-content: center; opacity: 1; }
+  .service-accordion__item.is-active .service-accordion__signal i { width: 1px; height: clamp(3rem, 16vh, 9rem); }
+  .service-accordion__item:not(.is-active) .service-accordion__signal { justify-content: center; opacity: .6; }
+  .service-accordion__item:not(.is-active) .service-accordion__signal i,
+  .service-accordion__item:not(.is-active) .service-accordion__signal .material-icons-round:last-child { display: none; }
+  .service-accordion__item:hover:not(.is-active) .service-accordion__signal { opacity: .95; transform: translateY(-.25rem); }
+
+  .service-accordion__copy { min-width: 0; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; scale: var(--accordion-copy, 1) 1; transform-origin: left center; }
+  /* La columna recorta según el ancho que tendría en este punto del FLIP; su contenido lo devuelve. */
+  .service-accordion__copy > * { scale: var(--accordion-copy-counter, 1) 1; transform-origin: left center; }
+  .service-accordion__item.is-active .service-accordion__copy { grid-column: 1; grid-row: 1; }
+  .service-accordion__copy h3 { font-size: clamp(1.85rem, 3.35vw, 4rem); line-height: .94; letter-spacing: -.055em; }
+  .service-accordion__copy p { display: block; max-width: 46ch; margin: 1.2rem 0 0; color: var(--color-text-muted); font-size: var(--text-sm); line-height: 1.65; }
+  .service-card__more { display: inline-flex; align-self: flex-start; align-items: center; gap: .4rem; margin-top: 1.1rem; padding-bottom: .25rem; border-bottom: 1px solid currentColor; color: var(--color-accent); font-size: .8rem; font-weight: 680; text-decoration: none; }
+  .service-card__more .material-icons-round { font-size: 1rem; transition: transform .3s var(--ease-premium); }
+  .service-card__more:hover .material-icons-round { transform: translate(.25rem, -.25rem); }
+  .service-accordion__item:not(.is-active) .service-accordion__copy p,
+  .service-accordion__item:not(.is-active) .service-card__more { display: none; }
+  /* Keyframes, no transition: el texto entra desde display:none. */
+  .service-accordion__item.is-active .service-accordion__copy p { animation: serviceCopyIn .32s var(--ease-premium) .14s both; }
+  .service-accordion__item.is-active .service-card__more { animation: serviceCopyIn .32s var(--ease-premium) .2s both; }
+  /* El cambio de layout se tapa con un fundido corto de cada lado. */
+  .service-accordion__item.is-active .service-accordion__copy h3,
+  .service-accordion__item.is-active .service-accordion__signal { animation: serviceSwapIn .28s ease .06s backwards; }
+  .service-accordion__item:not(.is-active) .service-accordion__copy { align-items: center; justify-content: center; }
+  .service-accordion__item:not(.is-active) .service-accordion__copy h3,
+  .service-accordion__item:not(.is-active) .service-accordion__signal { animation: serviceRestIn .35s ease .55s backwards; }
+  .service-accordion__item:not(.is-active) .service-accordion__copy h3 { white-space: nowrap; color: rgba(248,250,252,.96); font-size: clamp(1.05rem, 1.3vw, 1.35rem); font-weight: 650; letter-spacing: -.01em; writing-mode: vertical-rl; transform: rotate(180deg); transition: color .3s ease; }
+  .service-accordion__item:not(.is-active):hover .service-accordion__copy h3 { color: var(--color-accent); }
+}
+@keyframes serviceIconGrow { from { transform: scale(.714); } }
+@keyframes serviceCopyIn { from { opacity: 0; transform: translateY(.45rem); } to { opacity: 1; transform: none; } }
+@keyframes serviceSwapIn { from { opacity: 0; } }
+@keyframes serviceRestIn { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .services-accordion * { animation: none !important; } }

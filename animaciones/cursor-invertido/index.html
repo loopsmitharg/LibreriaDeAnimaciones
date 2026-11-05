@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cursor invertido · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- El cursor: un anillo con mix-blend-mode y un punto. Fijos, sin eventos de puntero. -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <main>
+    <section class="band band--dark">
+      <p class="kicker mono">CosmeCV · Global</p>
+      <h1>Pasá el cursor<br />por encima de <span>las palabras</span>.</h1>
+      <p class="band__text mono">El anillo invierte los colores de lo que tiene debajo (<code>mix-blend-mode: difference</code>). Sobre un link o botón crece, se rellena y muestra una etiqueta. Solo aparece con mouse (no en touch).</p>
+    </section>
+
+    <section class="band band--light">
+      <h2>Sobre fondo claro<br />también invierte.</h2>
+      <div class="actions">
+        <a class="pill" href="#" data-cursor="OPEN">Link con etiqueta OPEN</a>
+        <button class="pill" type="button" data-cursor="PLAY">Botón con PLAY</button>
+        <a class="pill" href="#">Link sin etiqueta (GO)</a>
+      </div>
+    </section>
+
+    <section class="band band--dark band--words">
+      <p class="mega">AUTOMATIZAR</p>
+      <p class="mega mega--acid">DISEÑAR</p>
+      <p class="mega">PROGRAMAR</p>
+      <div class="actions">
+        <span class="pill" data-cursor="INFO" tabindex="0">Cualquier elemento con data-cursor</span>
+        <details class="pill"><summary>Un &lt;summary&gt; dice OPEN</summary></details>
+      </div>
+    </section>
+
+    <section class="band band--split">
+      <div class="split__half split__half--light"><h2>Mitad clara</h2></div>
+      <div class="split__half"><h2>Mitad oscura</h2></div>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Cursor con inversión de color</h2></div>
+        <div class="lib-notes__meta"><span>Origen: CosmeCV · index.html (.cursor / .cursor-dot)</span><span>js/main.js → initCursor</span><span>GSAP (quickTo)</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>El anillo tiene borde ácido y <code>mix-blend-mode: difference</code>: resta su color del fondo, así invierte texto e imágenes que pasan por debajo.</li>
+              <li>En estado activo se rellena con el color papel y pasa a <code>exclusion</code>: la palabra de abajo se lee invertida dentro del círculo.</li>
+              <li>Sigue al puntero con <code>gsap.quickTo</code>: el anillo con 0.45s de inercia, el punto con 0.1s (casi pegado).</li>
+              <li>Al entrar en <code>a, button, summary, [data-cursor]</code> crece y muestra la etiqueta de <code>data-cursor</code> (o GO / OPEN).</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Se inicializa solo si hay GSAP, <code>(hover: hover) and (pointer: fine)</code> y no hay reduced-motion.</li>
+              <li>Para que la inversión funcione, el cursor no puede quedar dentro de un ancestro con <code>isolation: isolate</code> o <code>transform</code>: va como hijo directo del <code>body</code>.</li>
+              <li>El tamaño cambia con transición CSS de <code>width/height</code> y <code>margin</code> (el centro no se mueve).</li>
+              <li>Elementos agregados después de la carga no tienen listeners: volver a llamar a la función o delegar.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cursor invertido</small></a>
+</body>
+</html>

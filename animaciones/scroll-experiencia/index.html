@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scroll de experiencia · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="intro">
+      <p class="kicker mono">CosmeCV · Experiencia</p>
+      <h1>Scroll con foco</h1>
+      <p class="intro__text mono">Bajá: la experiencia más cercana a la línea de lectura (42% del alto) se ilumina y las demás se atenúan. Con mouse, el detalle aparece al pasar por encima.</p>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="experience__intro">
+        <p class="kicker mono">02 / Trayectoria</p>
+        <h2>Experiencia</h2>
+        <p>Proyectos, equipos y aulas. Cada etapa sumó una forma distinta de resolver problemas con tecnología.</p>
+        <div class="experience__meter" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="experience__list">
+        <article class="role role--detail" tabindex="0"><time class="mono">2025 — PRESENTE</time><div><h3>Cofundador</h3><p class="role__company mono">Estudio digital</p><p class="mono">Desarrollo de soluciones tecnológicas e interactivas.</p><p class="role__more">Relevamiento con el cliente, arquitectura, programación y entrega. Aplicaciones web, sitios y sistemas interactivos a medida.</p><span class="role__cue mono" aria-hidden="true">HOVER / VER MÁS</span></div></article>
+        <article class="role role--detail" tabindex="0"><time class="mono">2025 — PRESENTE</time><div><h3>Analista de Automatización</h3><p class="role__company mono">Empresa agropecuaria</p><p class="mono">Automatización de procesos del negocio.</p><p class="role__more">Relevamiento de procesos manuales y diseño de los flujos automatizados que los reemplazan.</p><span class="role__cue mono" aria-hidden="true">HOVER / VER MÁS</span></div></article>
+        <article class="role role--detail" tabindex="0"><time class="mono">2025 — PRESENTE</time><div><h3>Desarrollador Web</h3><p class="role__company mono">Institución educativa</p><p class="mono">Sitio institucional.</p><p class="role__more">Estructura de contenidos, maquetado responsive y puesta en producción.</p><span class="role__cue mono" aria-hidden="true">HOVER / VER MÁS</span></div></article>
+        <article class="role role--detail" tabindex="0"><time class="mono">2024</time><div><h3>Profesor de Tecnología <span>(Suplencia)</span></h3><p class="role__company mono">Nivel secundario</p><p class="role__more">Planificación de clases, prácticas guiadas y evaluación.</p><span class="role__cue mono" aria-hidden="true">HOVER / VER MÁS</span></div></article>
+        <article class="role role--detail" tabindex="0"><time class="mono">2023 — 2025</time><div><h3>Profesor Particular de Tecnología</h3><p class="role__more">Clases de programación y herramientas digitales, adaptando el ritmo a cada estudiante.</p><span class="role__cue mono" aria-hidden="true">HOVER / VER MÁS</span></div></article>
+      </div>
+    </section>
+
+    <section class="outro"><p class="mono">Fin de la lista. El medidor de la izquierda llegó al 100%.</p></section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Scroll con foco: lista de experiencia</h2></div>
+        <div class="lib-notes__meta"><span>Origen: CosmeCV · index.html (#experience)</span><span>js/main.js → initScrollSpy (elegirRol) · initMotion</span><span>GSAP + ScrollTrigger (solo el medidor)</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>Grilla de dos columnas: la intro es <code>position: sticky; top: 9rem</code> y acompaña a toda la lista.</li>
+              <li>El medidor es una barra con <code>scaleX</code> scrubbeada entre <code>top 15%</code> y <code>bottom 85%</code> de la sección.</li>
+              <li>Scroll spy: en cada frame (con <code>requestAnimationFrame</code>) se mide el <code>&lt;h3&gt;</code> de cada experiencia y se marca <code>.is-current</code> la más cercana a la línea del 42%. Siempre exactamente una.</li>
+              <li>Con <code>.motion-on</code> las demás quedan a <code>opacity: .26</code> con transición.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Se mide el título, no la tarjeta: la tarjeta es más alta que su contenido (reserva espacio del hover).</li>
+              <li>El detalle por hover se esconde sobre espacio YA reservado (<code>padding-bottom</code>): cero layout shift.</li>
+              <li>El atenuado solo se activa si el motion corre (<code>body.motion-on</code>): sin GSAP o con reduced-motion todo queda legible.</li>
+              <li>En mobile no hay atenuado ni sticky; la descripción se ve siempre.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Scroll de experiencia</small></a>
+</body>
+</html>

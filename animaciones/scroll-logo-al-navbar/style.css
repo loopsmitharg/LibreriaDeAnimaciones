@@ -1,0 +1,72 @@
+:root {
+  --color-bg: #0b1120;
+  --color-bg-soft: #0f172a;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-accent: #a3e635;
+  --color-secondary: #10b981;
+  --color-border: rgba(148,163,184,.2);
+  --color-grid: rgba(148,163,184,.07);
+  --ease-premium: cubic-bezier(.16,1,.3,1);
+  --page-gutter: clamp(1.1rem, .33rem + 3.59vw, 4.5rem);
+  /* El lockup grande es una copia escalada del chico: mismas proporciones. */
+  --brand-ratio-name: .5023;
+  --brand-ratio-gap: .2884;
+  --nav-symbol: 2.15rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; background: var(--color-bg); scroll-behavior: smooth; }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: "Outfit", system-ui, sans-serif; }
+
+/* Símbolo de marca (placeholder): cuadrado redondeado con ícono. */
+.brand-symbol { --s: var(--nav-symbol); width: var(--s); height: var(--s); flex: 0 0 auto; display: grid; place-items: center; border-radius: calc(var(--s) * var(--brand-ratio-gap)); background: linear-gradient(140deg, #bef264, var(--color-secondary)); color: #0b1120; }
+.brand-symbol .material-icons-round { font-size: calc(var(--s) * .62); }
+
+/* Navbar --------------------------------------------------------------- */
+.site-nav { position: fixed; z-index: 100; top: .9rem; left: 50%; width: min(100% - 2rem, 58rem); transform: translateX(-50%); }
+.site-nav__inner { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .55rem .7rem .55rem .85rem; border-radius: 999px; }
+/* El vidrio existe (desenfocado) desde la carga; solo se funde la opacidad. */
+.site-nav__inner::before { content: ""; position: absolute; z-index: -1; inset: 0; border: 1px solid var(--color-border); border-radius: inherit; background: rgba(15,23,42,.7); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); opacity: .002; transition: opacity .45s ease; }
+.brand-landed .site-nav__inner::before { opacity: 1; }
+.site-brand { display: flex; align-items: center; gap: calc(var(--nav-symbol) * var(--brand-ratio-gap)); color: var(--color-text); text-decoration: none; }
+.site-brand__name { font: 700 calc(var(--nav-symbol) * var(--brand-ratio-name))/1 "Outfit", sans-serif; letter-spacing: -.045em; white-space: nowrap; }
+.site-brand__name span, .brand-lockup__name span { color: var(--color-accent); }
+.site-nav__links { display: flex; gap: .25rem; opacity: 0; transform: translateY(-.4rem); transition: opacity .5s ease .1s, transform .6s var(--ease-premium) .1s; }
+.brand-landed .site-nav__links { opacity: 1; transform: none; }
+.site-nav__links a { padding: .55rem .8rem; border-radius: 999px; color: var(--color-text-muted); font-size: .88rem; font-weight: 500; text-decoration: none; transition: color .25s, background-color .25s; }
+.site-nav__links a:hover { color: var(--color-text); background: rgba(148,163,184,.1); }
+@media (max-width: 640px) { .site-nav__links { display: none; } }
+
+/* Brand stage ---------------------------------------------------------- */
+.brand-stage { position: relative; min-height: 160svh; background: var(--color-bg); overflow: clip; }
+.brand-stage__pin { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; overflow: clip; isolation: isolate; }
+.brand-stage__grid { position: absolute; z-index: 0; inset: 0; background-image: linear-gradient(var(--color-grid) 1px, transparent 1px), linear-gradient(90deg, var(--color-grid) 1px, transparent 1px); background-size: clamp(3.5rem, 6vw, 6rem) clamp(3.5rem, 6vw, 6rem); -webkit-mask-image: radial-gradient(circle at 50% 50%, #000, transparent 76%); mask-image: radial-gradient(circle at 50% 50%, #000, transparent 76%); opacity: .8; will-change: transform, opacity; }
+.brand-stage__pin::before { content: ""; position: absolute; z-index: 0; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(16,185,129,.12), transparent 46%); pointer-events: none; }
+
+.brand-lockup { --lockup-symbol: clamp(5.5rem, 13vw, 15rem); position: relative; z-index: 3; display: flex; align-items: center; gap: calc(var(--lockup-symbol) * var(--brand-ratio-gap)); width: max-content; will-change: transform, opacity; }
+.brand-lockup__symbol { --s: var(--lockup-symbol); }
+.brand-lockup__name { color: var(--color-text); font: 700 calc(var(--lockup-symbol) * var(--brand-ratio-name))/1 "Outfit", sans-serif; letter-spacing: -.045em; white-space: nowrap; }
+
+.brand-stage__handoff { position: absolute; z-index: 4; left: var(--page-gutter); right: var(--page-gutter); bottom: 13vh; display: grid; justify-items: center; text-align: center; opacity: 0; pointer-events: none; }
+.brand-stage__handoff p { max-width: 100%; margin: 0; color: var(--color-text); font: 450 clamp(1.2rem, 3vw, 3.2rem)/1.1 "Outfit", sans-serif; letter-spacing: -.045em; }
+.brand-stage__handoff strong { font-weight: 560; }
+@media (min-width: 901px) { .brand-stage__handoff p { white-space: nowrap; } }
+
+/* Indicador de scroll: la flecha cae del anillo y vuelve a entrar desde arriba. */
+.brand-stage__scroll { position: absolute; z-index: 5; left: 50%; bottom: 1.5rem; width: 2.75rem; height: 2.75rem; display: grid; place-items: center; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text); text-decoration: none; transform: translateX(-50%); transition: border-color .3s ease; }
+.brand-stage__scroll::before { content: ""; position: absolute; inset: -1px; border: 1px solid var(--color-accent); border-radius: inherit; opacity: 0; animation: scrollCueRing 2s var(--ease-premium) infinite; pointer-events: none; }
+.brand-stage__scroll .material-icons-round { font-size: 1.25rem; animation: scrollCueDrop 2s ease-in-out infinite; }
+.brand-stage__scroll:hover { border-color: var(--color-accent); }
+@keyframes scrollCueDrop { 0% { transform: none; opacity: 1; } 38% { transform: translateY(.6rem); opacity: 0; } 39% { transform: translateY(-.6rem); opacity: 0; } 68%, 100% { transform: none; opacity: 1; } }
+@keyframes scrollCueRing { 0%, 30% { transform: none; opacity: 0; } 34% { opacity: .7; } 85%, 100% { transform: scale(1.55); opacity: 0; } }
+
+/* Sección siguiente ---------------------------------------------------- */
+.next-section { min-height: 100svh; display: grid; align-items: center; padding: 8rem var(--page-gutter); background: var(--color-bg-soft); }
+.next-section__inner { max-width: 60rem; }
+.next-section__kicker { color: var(--color-accent); font: 500 .75rem/1 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+.next-section h2 { margin: 1rem 0 0; font: 600 clamp(2rem, 5vw, 4.2rem)/1 "Outfit", sans-serif; letter-spacing: -.05em; }
+.next-section p { max-width: 55ch; margin: 1.5rem 0 0; color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.65; }
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-stage__scroll::before, .brand-stage__scroll .material-icons-round { animation: none; }
+}

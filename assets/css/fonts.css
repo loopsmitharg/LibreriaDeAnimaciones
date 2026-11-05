@@ -1,0 +1,13 @@
+/* Fuentes locales de la librería. Rutas relativas a este archivo. */
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("../fonts/outfit-variable.woff2") format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 300 700; font-display: swap; src: url("../fonts/space-grotesk-variable.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-mono-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("../fonts/ibm-plex-mono-500-latin.woff2") format("woff2"); }
+/* Material Icons Round COMPLETO (no el subconjunto de Loop Smith): cualquier ligadura funciona. */
+@font-face { font-family: "Material Icons Round"; font-style: normal; font-weight: 400; font-display: block; src: url("../fonts/material-icons-round.woff2") format("woff2"); }
+/* Cabinet Grotesk (CosmeCV) se sirve desde Fontshare, igual que en el CV. */
+@font-face { font-family: "Cabinet Grotesk"; font-style: normal; font-weight: 500; font-display: swap; src: url("https://cdn.fontshare.com/wf/CKQBK2QBTCDREE7L3MXZ3PPW7LDNJCWU/OTOY7FQFSFOJVZKJWKO2EHUJLOGBDN4Q/4CO2ETY7NITKLUDKMYJ75RHJSPHOJ7XT.woff2") format("woff2"); }
+@font-face { font-family: "Cabinet Grotesk"; font-style: normal; font-weight: 700; font-display: swap; src: url("https://cdn.fontshare.com/wf/XMXWOHABYLQDJ42L65EFRYNVRY37HQCB/B2O4O6V3JMFM2WDCYQI3A47L5U4THDUL/WN5274VQ3AUBDFP74GB4EC4XYJ3EKVNE.woff2") format("woff2"); }
+@font-face { font-family: "Cabinet Grotesk"; font-style: normal; font-weight: 800; font-display: swap; src: url("https://cdn.fontshare.com/wf/ZX6AQLSFYVDPN2URWO2MQFGTYYOHIS64/TPYPKOYWFQVNJHLLRXD4KFYX4LUOUW4Z/6QH2ALVTTK7IRVO5MYOQQ3OZNXW5SSS3.woff2") format("woff2"); }
+
+.material-icons-round { font-family: "Material Icons Round"; font-weight: normal; font-style: normal; font-size: 24px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-feature-settings: "liga"; font-feature-settings: "liga"; -webkit-font-smoothing: antialiased; }

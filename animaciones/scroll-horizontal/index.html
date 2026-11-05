@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scroll horizontal · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="intro">
+      <p class="kicker mono">CosmeCV · Proyectos</p>
+      <h1>Scroll lateral</h1>
+      <p class="intro__text mono">Al llegar a la sección se ancla y el scroll vertical desplaza la pista hacia la izquierda. La barra inferior marca el progreso. Debajo de 781px los paneles se apilan.</p>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="projects__topline mono"><span>SELECTED WORK</span><span class="projects__hint">SCROLL PARA EXPLORAR →</span></div>
+      <div class="projects__track">
+        <div class="project project--intro">
+          <h2>PROYECTOS</h2>
+          <p>Una selección de mundos, sistemas y productos digitales.</p>
+          <span class="mono">04 EXPERIENCIAS / DESPLAZÁ →</span>
+        </div>
+        <a class="project project--a" href="#">
+          <div class="project__art" aria-hidden="true"></div>
+          <span class="project__index mono">01</span>
+          <div class="project__caption"><h3>Sitio oficial</h3><p>Sitio web de una consultora</p><span class="arrow-link">Abrir ↗</span></div>
+        </a>
+        <a class="project project--b" href="#">
+          <div class="project__art" aria-hidden="true"></div>
+          <span class="project__index mono">02</span>
+          <div class="project__caption"><h3>Videojuego</h3><p>Publicado en una tienda indie</p><span class="arrow-link">Jugar ↗</span></div>
+        </a>
+        <a class="project project--c" href="#">
+          <div class="project__art" aria-hidden="true"></div>
+          <span class="project__index mono">03</span>
+          <div class="project__caption"><h3>Pixel art</h3><p>Juego narrativo corto</p><span class="arrow-link">Jugar ↗</span></div>
+        </a>
+        <a class="project project--code" href="#">
+          <div class="code-field mono" aria-hidden="true"><span>const idea = experiment();</span><span>while (curious) build();</span><span>push(origin, project);</span></div>
+          <span class="project__index mono">04</span>
+          <div class="project__caption"><h3>GitHub</h3><p>Más proyectos y experimentos</p><span class="arrow-link">Explorar ↗</span></div>
+        </a>
+      </div>
+      <div class="projects__progress" aria-hidden="true"><span></span></div>
+    </section>
+
+    <section class="outro"><p class="mono">Fin de la pista: el pin se suelta y la página sigue en vertical.</p></section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Scroll horizontal anclado</h2></div>
+        <div class="lib-notes__meta"><span>Origen: CosmeCV · index.html (#projects)</span><span>js/main.js → initMotion (bloque projects)</span><span>GSAP + ScrollTrigger (pin)</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><code>.projects</code> mide 100svh con <code>overflow: hidden</code>; adentro, <code>.projects__track</code> es un <code>flex</code> con <code>width: max-content</code>.</li>
+              <li><code>distance = track.scrollWidth - innerWidth</code>: cuánto hay que correr la pista.</li>
+              <li>Un tween <code>x: -distance</code> con <code>pin: true</code>, <code>scrub: 1</code> y <code>end: +=distance</code>: un px de scroll vertical = un px de desplazamiento.</li>
+              <li>La barra de progreso usa <code>gsap.quickSetter(…, "scaleX")</code> en <code>onUpdate</code>.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li><code>distance</code> se vuelve a medir en <code>refreshInit</code> (resize, fuentes) y el tween usa valores-función con <code>invalidateOnRefresh</code>.</li>
+              <li>Envuelto en <code>ScrollTrigger.matchMedia</code> para desktop; devuelve su limpieza.</li>
+              <li>Sin GSAP (o reduced-motion) la sección queda con <code>overflow-x: auto</code>: se recorre con scroll horizontal nativo.</li>
+              <li>Los paneles hacen zoom suave en hover (<code>transform: scale(1.045)</code> sobre el arte).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Scroll horizontal</small></a>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Logo al navbar · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Navbar compacto desde el primer frame: es el destino del logo. -->
+  <header class="site-nav">
+    <div class="site-nav__inner">
+      <a class="site-brand" href="#" aria-label="Inicio">
+        <span class="brand-symbol site-brand__symbol" aria-hidden="true"><span class="material-icons-round">all_inclusive</span></span>
+        <span class="site-brand__name">Tu<span>Marca</span></span>
+      </a>
+      <nav class="site-nav__links" aria-label="Secciones">
+        <a href="#siguiente">Servicios</a><a href="#siguiente">Equipo</a><a href="#siguiente">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="brand-stage">
+      <div class="brand-stage__pin">
+        <div class="brand-stage__grid" aria-hidden="true"></div>
+        <!-- Copia escalada del lockup del navbar: mismas proporciones, así el cruce es invisible. -->
+        <div class="brand-lockup" aria-hidden="true">
+          <span class="brand-symbol brand-lockup__symbol"><span class="material-icons-round">all_inclusive</span></span>
+          <span class="brand-lockup__name">Tu<span>Marca</span></span>
+        </div>
+        <div class="brand-stage__handoff">
+          <p>Desarrollemos juntos <strong>lo que tu empresa necesita.</strong></p>
+        </div>
+        <a class="brand-stage__scroll" href="#siguiente" aria-label="Bajar"><span class="material-icons-round">south</span></a>
+      </div>
+    </section>
+
+    <section class="next-section" id="siguiente">
+      <div class="next-section__inner">
+        <span class="next-section__kicker">Siguiente sección</span>
+        <h2>El logo ya aterrizó. El resto de la página sigue con scroll normal.</h2>
+        <p>Subí hasta arriba y volvé a bajar: con el primer gesto la página se desliza sola hasta el aterrizaje, y el siguiente gesto nuevo salta la cola vacía del pin hasta esta sección (solo desktop).</p>
+      </div>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div>
+          <span class="lib-notes__kicker">Ficha técnica</span>
+          <h2>Scroll de intro: logo que aterriza en el navbar</h2>
+        </div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · index.html</span><span>js/main.js → initializeBrandMorph · initializeIntroAutoScroll</span><span>GSAP + ScrollTrigger</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>El lockup grande es una copia escalada del del navbar (mismas proporciones <code>--ratio-name</code> / <code>--ratio-gap</code>).</li>
+              <li><code>measure()</code> calcula el <code>x</code>, <code>y</code> y <code>scale</code> que llevan el centro del símbolo grande al centro del chico, usando ese centro como <code>transformOrigin</code>.</li>
+              <li>Una timeline con <code>scrub</code> de exactamente 1s de largo: posición = progreso. En <code>BRAND_LAND</code> (0.455) cruza al logo del navbar.</li>
+              <li>Al aterrizar dispara <code>playImpact()</code>: el símbolo golpea, el nombre sale despedido y rebota 4 veces con amplitud decreciente.</li>
+              <li>Auto-scroll: el primer gesto hacia abajo desliza hasta el aterrizaje (<code>BRAND_SETTLE</code>); el siguiente gesto "nuevo" (rueda tras 200ms de pausa) salta a la sección siguiente.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Ajustá <code>min-height</code> de <code>.brand-stage</code> para cambiar cuánto scroll dura la intro.</li>
+              <li>El impacto vive en <code>playImpact()</code>: cada paso de la timeline está comentado.</li>
+              <li>Encadenar con <code>"&gt;"</code>: un <code>.to()</code> sin posición va al final de TODA la timeline.</li>
+              <li>El vidrio del navbar existe desde la carga con <code>opacity: .002</code>: encender <code>backdrop-filter</code> en vivo congela el render.</li>
+              <li>Con <code>prefers-reduced-motion</code> el navbar queda aterrizado y no hay timeline.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Logo al navbar</small></a>
+</body>
+</html>

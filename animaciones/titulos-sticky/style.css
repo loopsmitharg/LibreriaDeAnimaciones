@@ -1,0 +1,55 @@
+:root {
+  --color-bg: #0b1120;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  --color-accent: #a3e635;
+  --color-border: rgba(148,163,184,.2);
+  --nav-height: 4.5rem;
+  --page-gutter: clamp(1.1rem, .33rem + 3.59vw, 4.5rem);
+}
+*, *::before, *::after { box-sizing: border-box; }
+/* overflow-x: clip (NO hidden): hidden convertiría al html en scrollport y mataría el sticky. */
+html { overflow-x: clip; background: var(--color-bg); scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 1rem); }
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: "Outfit", system-ui, sans-serif; }
+code { padding: .1rem .35rem; border-radius: .3rem; background: rgba(255,255,255,.07); font: .85em "IBM Plex Mono", monospace; }
+
+.demo-nav { position: fixed; z-index: 50; inset: 0 0 auto; height: var(--nav-height); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--page-gutter); border-bottom: 1px solid var(--color-border); background: rgba(11,17,32,.82); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.demo-nav > span { font-weight: 700; font-size: 1.15rem; letter-spacing: -.03em; }
+.demo-nav b { color: var(--color-accent); }
+.demo-nav nav { display: flex; gap: 1.2rem; }
+.demo-nav a { color: var(--color-text-muted); font-size: .88rem; text-decoration: none; }
+.demo-nav a:hover { color: var(--color-text); }
+
+.svc-page { padding-top: var(--nav-height); }
+.svc-hero, .svc-section { width: min(100% - var(--page-gutter) * 2, 1200px); margin-inline: auto; }
+.svc-hero { padding: clamp(4rem, 10vw, 7rem) 0 1rem; }
+.kicker { color: var(--color-accent); font: 500 .75rem/1 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+.svc-hero h1 { max-width: 16ch; margin: 1rem 0 0; font: 600 clamp(2.6rem, 1.7rem + 4.3vw, 6rem)/.92 "Outfit", sans-serif; letter-spacing: -.055em; }
+.svc-hero p { max-width: 56ch; margin: 1.5rem 0 0; color: var(--color-text-muted); font-size: 1.05rem; line-height: 1.6; }
+
+.svc-section { position: relative; margin-top: clamp(4.5rem, 3.4rem + 4.7vw, 8.5rem); padding-bottom: 2rem; }
+.svc-section + .lib-notes { margin-top: 8rem; }
+.svc-h2 { max-width: 22ch; margin: 0 0 clamp(1.5rem, 1.2rem + 1.3vw, 2.5rem); font: 600 clamp(1.9rem, 1.36rem + 2.3vw, 3.4rem)/1.04 "Outfit", sans-serif; letter-spacing: -.045em; text-wrap: balance; }
+.svc-prose { display: grid; gap: 1.2rem; }
+.svc-prose p { margin: 0; color: var(--color-text-muted); font-size: clamp(1rem, .95rem + .2vw, 1.12rem); line-height: 1.75; }
+
+.svc-signals { padding: 1.4rem 1.5rem; border: 1px solid var(--color-border); border-radius: 1rem; background: rgba(255,255,255,.02); }
+.svc-signals h3 { margin: 0 0 1rem; font-size: 1.05rem; }
+.svc-signals ul { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; }
+.svc-signals li { display: flex; gap: .7rem; color: var(--color-text-muted); line-height: 1.5; }
+.svc-signals .material-icons-round { color: var(--color-accent); font-size: 1.25rem; }
+
+.svc-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: .8rem; margin: 0; padding: 0; list-style: none; }
+.svc-cards li { display: grid; gap: .45rem; padding: 1.2rem; border: 1px solid var(--color-border); border-radius: 1rem; background: rgba(255,255,255,.02); }
+.svc-cards .material-icons-round { width: 2.4rem; height: 2.4rem; display: grid; place-items: center; border-radius: .6rem; background: rgba(163,230,53,.1); color: var(--color-accent); font-size: 1.25rem; }
+.svc-cards b { font-size: 1.05rem; }
+.svc-cards small { color: var(--color-text-muted); font-size: .88rem; line-height: 1.5; }
+
+/* El efecto -------------------------------------------------------------
+   Desktop: grilla 5/7; el título se pega bajo el navbar mientras su sección
+   (el padre) siga en pantalla. align-items: start le da recorrido. */
+@media (min-width: 901px) {
+  .svc-section--split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 6rem); align-items: start; }
+  .svc-section--split .svc-h2 { position: sticky; top: calc(var(--nav-height) + 2rem); }
+}
+@media (max-width: 640px) { .demo-nav nav { display: none; } }

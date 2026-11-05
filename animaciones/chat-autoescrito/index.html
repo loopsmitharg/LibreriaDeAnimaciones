@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat autoescrito · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="svc-section">
+      <span class="kicker">Servicios · Chatbots</span>
+      <h1 class="svc-h2">Qué puede hacer tu chatbot</h1>
+      <div class="svc-feature">
+        <!-- Las pestañas viven FUERA de la demo: se buscan en toda la .svc-feature. -->
+        <ul class="svc-options" aria-label="Elegí una opción para ver una conversación de ejemplo">
+          <li class="svc-option"><span class="material-icons-round svc-option__icon" aria-hidden="true">quiz</span><div><h3><button type="button" class="svc-option__btn is-active" data-demo-tab="faq" aria-pressed="true">Responder preguntas frecuentes</button></h3><p>Precios, horarios, envíos: respuestas precisas con la información de tu empresa.</p></div></li>
+          <li class="svc-option"><span class="material-icons-round svc-option__icon" aria-hidden="true">how_to_reg</span><div><h3><button type="button" class="svc-option__btn" data-demo-tab="leads" aria-pressed="false">Calificar leads</button></h3><p>Hace las preguntas correctas y prioriza a quien está listo para comprar.</p></div></li>
+          <li class="svc-option"><span class="material-icons-round svc-option__icon" aria-hidden="true">event</span><div><h3><button type="button" class="svc-option__btn" data-demo-tab="turnos" aria-pressed="false">Agendar turnos</button></h3><p>Ofrece horarios y confirma la cita sin intervención humana.</p></div></li>
+          <li class="svc-option"><span class="material-icons-round svc-option__icon" aria-hidden="true">support_agent</span><div><h3><button type="button" class="svc-option__btn" data-demo-tab="derivar" aria-pressed="false">Derivar a una persona</button></h3><p>Cuando hace falta, el bot deja de responder y pasa la charla a tu equipo.</p></div></li>
+        </ul>
+
+        <div class="svc-feature__demo">
+          <div class="svc-demo" data-svc-demo="chat">
+            <div class="svc-demo__screen">
+              <div class="chat-head"><span class="chat-head__avatar"><span class="material-icons-round" aria-hidden="true">smart_toy</span></span><span class="chat-head__name"><strong>Tu marca</strong><small>en línea</small></span><span class="svc-demo__tag">Conversación de ejemplo</span></div>
+              <!-- El HTML ES el estado final: sin JS se ve la conversación completa. -->
+              <div class="chat-body">
+                <ol class="chat-thread" data-demo-panel="faq">
+                  <li class="chat-msg chat-msg--user"><span>Hola, ¿hacen envíos a Córdoba?</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>¡Hola! Sí, enviamos a todo el país. A Córdoba llega en 48 a 72 horas hábiles.</span></li>
+                  <li class="chat-msg chat-msg--user"><span>Genial. ¿Y puedo pagar en cuotas?</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>Sí, con todas las tarjetas. ¿Querés que te pase el link de la tienda?</span></li>
+                </ol>
+                <ol class="chat-thread" data-demo-panel="leads" hidden>
+                  <li class="chat-msg chat-msg--bot"><span>¡Hola! Para recomendarte un plan: ¿cuántas personas lo van a usar?</span><span class="chat-options"><span>1 a 10</span><span>11 a 50</span><span class="is-picked">Más de 50</span></span></li>
+                  <li class="chat-msg chat-msg--user"><span>Más de 50</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>¿Y para cuándo lo necesitás?</span><span class="chat-options"><span class="is-picked">Este mes</span><span>Más adelante</span></span></li>
+                  <li class="chat-msg chat-msg--user"><span>Este mes</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>Perfecto, un asesor te contacta hoy con una propuesta a medida.</span></li>
+                </ol>
+                <ol class="chat-thread" data-demo-panel="turnos" hidden>
+                  <li class="chat-msg chat-msg--bot"><span>¡Hola! Elegí una opción o escribime tu consulta.</span><span class="chat-options"><span>Turnos</span><span>Precios</span></span></li>
+                  <li class="chat-msg chat-msg--user"><span>Quiero un turno para el jueves a la tarde</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>Tengo el jueves a las 16 h o a las 17:30 h. ¿Cuál te queda mejor?</span><span class="chat-options"><span>16 h</span><span class="is-picked">17:30 h</span></span></li>
+                  <li class="chat-msg chat-msg--user"><span>17:30 h</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>Listo, tu turno quedó confirmado para el jueves a las 17:30 h.</span></li>
+                </ol>
+                <ol class="chat-thread" data-demo-panel="derivar" hidden>
+                  <li class="chat-msg chat-msg--user"><span>Tuve un problema con mi pedido y quiero hacer un reclamo.</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>Lamento lo que pasó. Te comunico con una persona de nuestro equipo.</span></li>
+                  <li class="chat-msg chat-msg--bot"><span>Hola, soy Ana, de atención al cliente. Ya tengo tu pedido a la vista. ¿Me contás qué pasó?</span></li>
+                </ol>
+                <span class="chat-typing" aria-hidden="true"><i></i><i></i><i></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Chat que se escribe solo</h2></div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · chatbots/index.html</span><span>js/servicios.js → chatDemo · loopingScene · initializeServiceDemos</span><span>GSAP (sin ScrollTrigger)</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>Cada conversación es un <code>&lt;ol&gt;</code> con <code>data-demo-panel</code>. Los paneles se apilan en una celda de grilla (la demo mide lo que el más alto) y el inactivo queda <code>visibility: hidden</code>.</li>
+              <li>Antes de cada respuesta del bot aparece "escribiendo…" <strong>en el lugar</strong> donde va a salir (<code>y: msg.offsetTop</code>).</li>
+              <li>Los mensajes del usuario primero "eligen" la opción del mensaje anterior (<code>.is-picked</code>) y después se envían.</li>
+              <li>Al terminar, la conversación se desvanece y la timeline se rearma desde cero (<code>loopingScene</code>).</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Para agregar una conversación: un botón con <code>data-demo-tab="x"</code> y un <code>&lt;ol class="chat-thread" data-demo-panel="x"&gt;</code>.</li>
+              <li>Corre solo en pantalla (<code>IntersectionObserver</code>, umbral 0.3) y se pausa fuera.</li>
+              <li>Opacidad mínima <code>0.002</code>, no 0: con 0 Chrome descarta la capa y la rasteriza de golpe al aparecer.</li>
+              <li>Sin GSAP o con reduced-motion se ve la conversación final y las pestañas igual cambian de panel.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Chat autoescrito</small></a>
+</body>
+</html>

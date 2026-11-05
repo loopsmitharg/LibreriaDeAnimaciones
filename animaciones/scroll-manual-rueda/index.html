@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rueda con riel · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="intro">
+      <span class="kicker">Scroll manual</span>
+      <h1>Rueda con riel arrastrable</h1>
+      <p>Bajá con la rueda del mouse o agarrá el cabezal verde del riel y arrastralo. También responde a las flechas con el cabezal enfocado.</p>
+      <span class="material-icons-round intro__arrow" aria-hidden="true">south</span>
+    </section>
+
+    <section class="work-wheel" aria-label="Rueda de pasos">
+      <div class="work-wheel__pin">
+        <div class="work-wheel__grid" aria-hidden="true"></div>
+        <!-- El borde de la rueda invisible es la línea de progreso. -->
+        <div class="work-wheel__rail" aria-hidden="true">
+          <svg viewBox="0 0 300 1000" preserveAspectRatio="none">
+            <path class="work-wheel__rail-base" d="M44 968 C214 892 292 716 292 500 C292 284 214 108 44 32" />
+            <path class="work-wheel__rail-progress" d="M44 968 C214 892 292 716 292 500 C292 284 214 108 44 32" />
+          </svg>
+        </div>
+        <span class="work-wheel__rail-head" role="slider" tabindex="0" aria-label="Progreso de la rueda" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></span>
+        <ol class="work-wheel__stages">
+          <li class="work-wheel__stage is-active"><i></i><span>Quiénes somos</span></li>
+          <li class="work-wheel__stage"><i></i><span>Lema</span></li>
+          <li class="work-wheel__stage"><i></i><span>Filosofía</span></li>
+        </ol>
+
+        <div class="work-wheel__panels">
+          <article class="work-wheel__panel work-wheel__panel--about is-active">
+            <div>
+              <span class="kicker">Paso 01</span>
+              <h2 class="about-title">Un equipo con experiencia en automatización e inteligencia de datos.</h2>
+            </div>
+            <div class="about-body">
+              <p class="about-lead"><strong>Tu Marca</strong> desarrolla <em>soluciones integrales</em> a medida: aplicaciones de gestión, sitios web y automatizaciones.</p>
+              <p class="about-note">Ayudamos a crecer y ganar tiempo combinando <em>implementación técnica</em> y visión de negocio.</p>
+            </div>
+          </article>
+
+          <article class="work-wheel__panel work-wheel__panel--motto">
+            <div>
+              <span class="kicker">Paso 02</span>
+              <h2 class="hero-title">Work <span>Smarter.</span></h2>
+              <p class="hero-subtitle">Modernizamos los procesos manuales para que sueltes lo operativo y dediques tu tiempo a hacer crecer tu empresa.</p>
+            </div>
+          </article>
+
+          <article class="work-wheel__panel work-wheel__panel--philosophy">
+            <span class="kicker">Paso 03</span>
+            <h2 class="work-philosophy">"Automatizá lo repetible. Medí lo importante. Escalá lo que funciona."</h2>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="outro"><p>Fin de la rueda: el pin se suelta y la página sigue.</p></section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Scroll manual: rueda con riel arrastrable</h2></div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · index.html (Work Smarter)</span><span>js/main.js → buildWorkWheel · paintPhilosophy</span><span>GSAP + ScrollTrigger</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>Cada panel tiene un <code>t</code> (-1 entrando, 0 al centro, +1 saliendo) y se ubica sobre una elipse: <code>x = (cos(-t·SWEEP) - 1)·rx</code>, <code>y = sin(-t·SWEEP)·ry</code>.</li>
+              <li><code>KNOTS</code> mapea scroll → escena con mesetas: cada paso descansa un rato al centro.</li>
+              <li>El riel es un trazo SVG con <code>stroke-dashoffset</code>. Se muestrea una vez (141 puntos) en coordenadas del pin: el cabezal y el arrastre consultan la tabla, sin medir el path por frame.</li>
+              <li>Arrastrar el cabezal convierte la Y del puntero en progreso (<code>progressAtY</code>) y hace <code>scrollTo</code>: el scroll sigue siendo la fuente de verdad.</li>
+              <li>La frase del paso 3 se "pinta" palabra por palabra interpolando colores con el progreso.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li><code>SWEEP</code> y <code>ROTATION</code> controlan cuánto gira cada panel.</li>
+              <li>El alto de <code>.work-wheel</code> (280svh) es el presupuesto de scroll.</li>
+              <li>Mientras se arrastra se saltea el <code>scrub</code>: el cabezal debe seguir al puntero, no ir 0.68s atrás.</li>
+              <li>Debajo de 901px no hay pin: los paneles entran con un fade al aparecer.</li>
+              <li>El cabezal es un <code>role="slider"</code> con teclado (flechas, Re Pág/Av Pág, Inicio/Fin).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Rueda con riel</small></a>
+</body>
+</html>

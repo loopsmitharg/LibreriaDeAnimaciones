@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flujo por etapas · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="intro">
+      <span class="kicker">Animación de flujo</span>
+      <h1>Scroll por etapas</h1>
+      <p>Dentro del tablero, cada gesto de rueda (o flecha / Av Pág / espacio) reproduce una etapa completa y se detiene. Gestos seguidos aceleran. También podés tocar las etapas de la izquierda.</p>
+      <span class="material-icons-round intro__arrow" aria-hidden="true">south</span>
+    </section>
+
+    <section class="process-story" aria-label="Dinámica de trabajo">
+      <div class="process-story__pin">
+        <div class="process-story__lead">
+          <h2 class="process-title">Nuestra dinámica de trabajo</h2>
+          <ol class="process-index" aria-label="Etapas del proceso">
+            <li><button type="button" class="process-index__step" disabled><b>01</b><span>Análisis</span><i class="material-icons-round" aria-hidden="true">manage_search</i><em aria-hidden="true"></em></button></li>
+            <li><button type="button" class="process-index__step" disabled><b>02</b><span>Diseño</span><i class="material-icons-round" aria-hidden="true">account_tree</i><em aria-hidden="true"></em></button></li>
+            <li><button type="button" class="process-index__step" disabled><b>03</b><span>Implementación</span><i class="material-icons-round" aria-hidden="true">bolt</i><em aria-hidden="true"></em></button></li>
+          </ol>
+        </div>
+
+        <div class="process-board">
+          <div class="process-board__head">
+            <div class="process-board__copies">
+              <article class="process-board__copy is-active"><span>01</span><h3>Análisis</h3><p>Identificamos cuellos de botella y tareas repetitivas.</p></article>
+              <article class="process-board__copy"><span>02</span><h3>Diseño</h3><p>Diseñamos la arquitectura y los flujos de trabajo a medida.</p></article>
+              <article class="process-board__copy"><span>03</span><h3>Implementación</h3><p>Conectamos herramientas y desplegamos agentes de IA.</p></article>
+            </div>
+            <span class="process-board__count" aria-hidden="true"><b>01</b> / 03</span>
+          </div>
+          <!-- Cada nodo descansa en su lugar final (--x/--y, fracción del campo).
+               data-from = "x y giro" donde arranca, disperso. GSAP solo suma un desplazamiento. -->
+          <div class="process-board__field" aria-hidden="true">
+            <span class="process-board__grid"></span>
+            <svg class="process-board__wires"><g class="process-board__links"></g><g class="process-board__pulses"></g></svg>
+            <span class="process-board__scan"></span>
+            <span class="process-node" data-role="in" data-from=".62 .2 18" style="--x:.1;--y:.14"><span class="material-icons-round">mail</span></span>
+            <span class="process-node" data-role="in" data-from=".28 .76 -24" style="--x:.1;--y:.38"><span class="material-icons-round">chat_bubble_outline</span></span>
+            <span class="process-node" data-role="in" data-from=".84 .66 34" style="--x:.1;--y:.62"><span class="material-icons-round">description</span></span>
+            <span class="process-node" data-role="in" data-from=".14 .3 -12" style="--x:.1;--y:.86"><span class="material-icons-round">storage</span></span>
+            <span class="process-node process-node--repeat" data-role="repeat" data-from=".42 .22 28" style="--x:.44;--y:.5"><span class="material-icons-round">content_copy</span></span>
+            <span class="process-node process-node--repeat" data-role="repeat" data-from=".54 .8 -18" style="--x:.44;--y:.5"><span class="material-icons-round">content_copy</span></span>
+            <span class="process-node process-node--repeat" data-role="repeat" data-from=".9 .2 -38" style="--x:.44;--y:.5"><span class="material-icons-round">content_copy</span></span>
+            <span class="process-node process-node--repeat" data-role="repeat" data-from=".24 .54 22" style="--x:.44;--y:.5"><span class="material-icons-round">content_copy</span></span>
+            <span class="process-node" data-role="act" data-from=".7 .44 -30" style="--x:.72;--y:.2"><span class="material-icons-round">analytics</span></span>
+            <span class="process-node" data-role="act" data-from=".08 .84 40" style="--x:.72;--y:.5"><span class="material-icons-round">send</span></span>
+            <span class="process-node" data-role="act" data-from=".38 .5 -8" style="--x:.72;--y:.8"><span class="material-icons-round">groups</span></span>
+            <span class="process-node process-node--core" data-role="core" style="--x:.44;--y:.5"><span class="material-icons-round">smart_toy</span></span>
+            <span class="process-node process-node--out" data-role="out" style="--x:.92;--y:.5"><span class="material-icons-round">check</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="outro"><p>Fin del tablero: a ambos extremos la página vuelve a scrollear normal.</p></section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Scroll por etapas: tablero de flujo</h2></div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · index.html (Proceso)</span><span>js/main.js → buildProcessBoard · createStageStepper · layoutProcessWires · sampleWire</span><span>GSAP + ScrollTrigger</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><strong>Análisis:</strong> una línea de escaneo barre el campo y marca las tareas repetidas (borde punteado que late).</li>
+              <li><strong>Diseño:</strong> las piezas viajan en arco a su lugar del flujo; las repetidas se funden en el núcleo; se dibujan los cables.</li>
+              <li><strong>Implementación:</strong> el flujo se enciende por columnas y corren pulsos por los cables, que siguen vivos en la cola del sticky.</li>
+              <li><code>createStageStepper</code> convierte el pin en etapas: cada gesto desliza el scroll hasta la próxima parada (<code>STOPS = [0, .3, .68, 1]</code>) y descarta la inercia hasta una pausa de 140ms.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li><code>createStageStepper({ gsap, trigger, stops, durations })</code> es genérico: sirve para cualquier escena anclada por etapas. Devuelve <code>release</code> y <code>goTo</code>.</li>
+              <li>Los cables son Bézier conocidas: <code>sampleWire()</code> las muestrea en JS por longitud de arco (nada de <code>getPointAtLength</code> por frame).</li>
+              <li>El <code>viewBox</code> del SVG es el tamaño en px del campo: las fracciones del dash coinciden con lo pintado.</li>
+              <li>Sin GSAP el HTML ya muestra el flujo terminado. En mobile no se ancla: se reproduce sola (9s) al entrar en pantalla.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Flujo por etapas</small></a>
+</body>
+</html>

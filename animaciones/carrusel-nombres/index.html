@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrusel de nombres · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="sync-hero">
+      <div class="sync-scene">
+        <div class="sync-heading">
+          <span class="kicker">Nuestro equipo</span>
+          <h1>Dos perfiles, un mismo ritmo.</h1>
+          <p>Scrolleá: un solo gesto sincroniza los nombres sobre el eje y reparte las tarjetas.</p>
+        </div>
+
+        <div class="sync-stage">
+          <div class="sync-axis" aria-hidden="true"><i></i><b></b></div>
+          <!-- Seis repeticiones idénticas por riel: derivar una repetición entera da la vuelta sin salto. -->
+          <div class="sync-rail sync-rail--a" aria-hidden="true">
+            <span>Ana Torres</span><span>Ana Torres</span><span>Ana Torres</span><span>Ana Torres</span><span>Ana Torres</span><span>Ana Torres</span>
+          </div>
+          <div class="sync-rail sync-rail--b" aria-hidden="true">
+            <span>Bruno Gil</span><span>Bruno Gil</span><span>Bruno Gil</span><span>Bruno Gil</span><span>Bruno Gil</span><span>Bruno Gil</span>
+          </div>
+
+          <article class="sync-card sync-card--a" tabindex="0">
+            <b class="sync-card__mark" aria-hidden="true">A</b>
+            <header class="sync-card__head"><span class="sync-card__tag">CO-FUNDADORA</span><h2>Ana Torres</h2></header>
+            <h3>Desarrollo y automatización</h3>
+            <p>Diseña la arquitectura de cada proyecto y lo lleva a producción: desde el relevamiento hasta la entrega.</p>
+            <div class="sync-card__foot"><div class="sync-card__skills"><span>N8N</span><span>HTML</span><span>REACT</span></div><div class="sync-card__actions"><button type="button" aria-label="Repositorio"><span class="material-icons-round">terminal</span></button><button type="button" aria-label="Email"><span class="material-icons-round">alternate_email</span></button></div></div>
+          </article>
+          <article class="sync-card sync-card--b" tabindex="0">
+            <b class="sync-card__mark" aria-hidden="true">B</b>
+            <header class="sync-card__head"><span class="sync-card__tag">CO-FUNDADOR</span><h2>Bruno Gil</h2></header>
+            <h3>Estrategia y procesos</h3>
+            <p>Traduce los objetivos del negocio en procesos medibles y acompaña a cada cliente después de la entrega.</p>
+            <div class="sync-card__foot"><div class="sync-card__skills"><span>REACT</span><span>MARKETING</span><span>PROCESOS</span></div><div class="sync-card__actions"><button type="button" aria-label="Análisis"><span class="material-icons-round">insights</span></button><button type="button" aria-label="Email"><span class="material-icons-round">alternate_email</span></button></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="outro"><p>Fin de la escena. Los rieles nunca se detienen del todo: un ticker los deja derivando.</p></section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Carrusel de nombres en contrafase</h2></div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · equipo/index.html</span><span>js/main.js → buildTeamScene · initializeTeamRails</span><span>GSAP + ScrollTrigger + stage stepper</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>Dos rieles con 6 repeticiones del nombre. Un <code>gsap.ticker</code> suma una deriva en "repeticiones" (0 → 1) y la envuelve con <code>% 1</code>: el salto cae sobre una copia idéntica.</li>
+              <li>El paso de una repetición se mide del layout (<code>offsetLeft</code> entre hijos), no como 100/6 del ancho: eso quedaba corto un sexto del gap y saltaba.</li>
+              <li><code>phase</code> 0 → 1: los rieles se acercan al eje, frenan su contrafase y se encienden eje y nodo. Después las tarjetas se "reparten" desde lados opuestos.</li>
+              <li>Un solo gesto reproduce toda la secuencia: <code>createStageStepper</code> con paradas <code>[0, 1]</code>.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Velocidad de deriva: primer argumento de <code>startDrift(0.16, …)</code> (repeticiones por segundo).</li>
+              <li>La deriva se basa en tiempo (<code>deltaTime</code>), así 120Hz no duplica la velocidad, y se pausa fuera de pantalla.</li>
+              <li>Los rieles quedan ocultos hasta que cargan SUS fuentes (<code>document.fonts.load</code>): el cambio de fuente movía todo el riel.</li>
+              <li>Mobile (≤900px): cada nombre es una banda cinética sobre su tarjeta, sin pin.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Carrusel de nombres</small></a>
+</body>
+</html>

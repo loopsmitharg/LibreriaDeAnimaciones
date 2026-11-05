@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acordeón horizontal · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <section class="services">
+      <div class="services__inner">
+        <div class="services__heading">
+          <span class="kicker">Qué hacemos</span>
+          <h1>Servicios diseñados para darte eficiencia inmediata</h1>
+          <p>Pasá el mouse por las tarjetas (o navegá con Tab). En pantallas angostas quedan como lista.</p>
+        </div>
+
+        <div class="services-accordion">
+          <article class="service-accordion__item is-active" tabindex="0" aria-expanded="true">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">devices</span><i></i><span class="material-icons-round">code</span></div>
+            <div class="service-accordion__copy"><h3>Páginas web</h3><p>Sitios rápidos, a medida y listos para posicionar. Diseño propio, animaciones y un panel para editar el contenido.</p><a class="service-card__more" href="#">Ver planes <span class="material-icons-round">north_east</span></a></div>
+          </article>
+          <article class="service-accordion__item" tabindex="0" aria-expanded="false">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">mail</span><i></i><span class="material-icons-round">campaign</span></div>
+            <div class="service-accordion__copy"><h3>Email marketing</h3><p>Secuencias automáticas que acompañan a cada cliente desde el primer contacto hasta la recompra.</p><a class="service-card__more" href="#">Conocer más <span class="material-icons-round">north_east</span></a></div>
+          </article>
+          <article class="service-accordion__item" tabindex="0" aria-expanded="false">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">chat_bubble_outline</span><i></i><span class="material-icons-round">smart_toy</span></div>
+            <div class="service-accordion__copy"><h3>Chatbots</h3><p>Respuestas al instante, a toda hora, en los canales donde ya te escriben tus clientes.</p><a class="service-card__more" href="#">Conocer más <span class="material-icons-round">north_east</span></a></div>
+          </article>
+          <article class="service-accordion__item" tabindex="0" aria-expanded="false">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">bolt</span><i></i><span class="material-icons-round">sync</span></div>
+            <div class="service-accordion__copy"><h3>Automatizaciones</h3><p>Conectamos tus herramientas para que las tareas repetitivas se hagan solas y sin errores de carga.</p><a class="service-card__more" href="#">Conocer más <span class="material-icons-round">north_east</span></a></div>
+          </article>
+          <article class="service-accordion__item" tabindex="0" aria-expanded="false">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">storage</span><i></i><span class="material-icons-round">analytics</span></div>
+            <div class="service-accordion__copy"><h3>Tableros de datos</h3><p>Todos tus números en un solo lugar, actualizados y fáciles de leer para decidir rápido.</p><a class="service-card__more" href="#">Conocer más <span class="material-icons-round">north_east</span></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Tarjetas en acordeón horizontal</h2></div>
+        <div class="lib-notes__meta"><span>Origen: Loop Smith · index.html (Servicios)</span><span>js/main.js → initializeServiceAccordion · buildServicesReveal</span><span>GSAP (FLIP)</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>El layout cambia en un solo frame (la tarjeta activa pasa a <code>flex: 5.6</code>). La animación es FLIP: cada tarjeta arranca desde la caja que mostraba (<code>x</code> + <code>scaleX</code>) y llega a la nueva.</li>
+              <li>Lo que no debe estirarse (íconos, divisores, texto) toma la escala inversa por <code>--accordion-counter</code> en la propiedad <code>scale</code>.</li>
+              <li>La columna de texto recorta con su propio par <code>--accordion-copy</code> / <code>--accordion-copy-counter</code>: el texto nunca se aplasta.</li>
+              <li>El hover espera 130ms antes de abrir: un puntero que cruza la fila no dispara cada tarjeta.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Los divisores son pseudo-elementos, no bordes: un borde se escala con la tarjeta.</li>
+              <li>Hover delegado con <code>pointerover/out</code> + <code>relatedTarget</code> (<code>pointerenter</code> no burbujea).</li>
+              <li>El texto entra con <code>@keyframes</code>: una <code>transition</code> no corre desde <code>display: none</code>.</li>
+              <li>Solo desde 901px; debajo es una lista y no expande.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Acordeón horizontal</small></a>
+</body>
+</html>
