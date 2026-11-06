@@ -1,0 +1,128 @@
+:root {
+  --ink: #08031a;
+  --deep: #100731;
+  --accent: #5542ff;
+  --text: #f5f3ff;
+  --muted: #9b95c9;
+  --display: "Anton", Impact, "Haettenschweiler", "Arial Narrow Bold", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.16,1,.3,1);
+  /* Escenario 3D */
+  --card-h: min(68vh, 620px);
+  --stage-tilt: rotateX(6deg) rotateZ(-7deg);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--ink); }
+body { margin: 0; background: var(--ink); color: var(--text); font-family: "Outfit", system-ui, sans-serif; }
+body.pnav-open { overflow: hidden; } /* la página de fondo no scrollea con el menú abierto */
+
+/* Página de fondo ------------------------------------------------------- */
+.site-nav { position: fixed; z-index: 50; top: 24px; left: 36px; right: 36px; display: flex; align-items: center; gap: 14px; }
+.site-nav__brand { margin-right: 10px; font: 400 1.5rem/1 var(--display); letter-spacing: .06em; }
+.site-nav__pill { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border: 0; border-radius: 999px; background: #e9e6ff; color: #0b0720; font: 500 .7rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform .35s var(--ease), background-color .3s; }
+.site-nav__pill .material-icons-round { font-size: .9rem; }
+.site-nav__pill:hover { transform: translateY(-2px) rotate(-2deg); background: #fff; }
+.site-nav__pill--ghost { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1px rgba(255,255,255,.25); }
+.site-nav__pill--ghost:hover { background: rgba(255,255,255,.08); }
+
+.landing { min-height: 100svh; display: grid; align-content: center; gap: 1.6rem; padding: 8rem clamp(1rem, 6vw, 7rem) 5rem; background: radial-gradient(circle at 70% 40%, #1a0b52, transparent 55%), var(--ink); }
+.landing__kicker { margin: 0; color: var(--muted); font: 500 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.landing h1 { margin: 0; font: 400 clamp(3.5rem, 11vw, 10rem)/.86 var(--display); text-transform: uppercase; }
+.landing__text { max-width: 46ch; margin: 0; color: var(--muted); line-height: 1.6; }
+.landing__cta { justify-self: start; padding: 14px 26px; border: 1px solid var(--accent); border-radius: 999px; background: var(--accent); color: #fff; font: 500 .8rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: transform .35s var(--ease), box-shadow .35s; }
+.landing__cta:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -10px var(--accent); }
+
+/* Overlay --------------------------------------------------------------- */
+.pnav { position: fixed; inset: 0; z-index: 1500; opacity: 0; }
+.pnav[hidden] { display: none; }
+/* Scroll propio con una parada por producto. */
+.pnav__scroller { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scroll-snap-type: y mandatory; scrollbar-width: none; outline: none; }
+.pnav__scroller::-webkit-scrollbar { display: none; }
+.pnav__sticky { position: sticky; top: 0; height: 100vh; height: 100dvh; overflow: hidden; }
+.pnav__snaps { margin-top: -100vh; margin-top: -100dvh; pointer-events: none; }
+.pnav__snaps i { display: block; height: 55vh; scroll-snap-align: start; scroll-snap-stop: always; }
+.pnav__snaps i:last-child { height: 100vh; height: 100dvh; }
+.pnav__bg { position: absolute; inset: 0; background: radial-gradient(circle at 65% 50%, var(--deep) 20%, var(--ink) 60%); }
+
+.pnav__close { position: absolute; z-index: 5; top: 26px; right: 44px; width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.4); border-radius: 50%; background: transparent; color: var(--text); cursor: pointer; transition: transform .45s var(--ease), background-color .3s; }
+.pnav__close:hover { transform: rotate(90deg); background: rgba(255,255,255,.08); }
+.pnav__close .material-icons-round { font-size: 1.25rem; }
+.pnav__hint { position: absolute; z-index: 3; top: 20vh; left: 7.5vw; margin: 0; font: 500 .72rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+
+/* Lista de títulos: el JS la desplaza para centrar el activo. */
+.pnav__list { position: absolute; z-index: 3; inset: 0 auto 0 0; width: 48vw; pointer-events: none; }
+.pnav__listInner { position: absolute; top: 0; left: 7.5vw; display: flex; flex-direction: column; align-items: flex-start; gap: 3.2vh; will-change: transform; }
+.pnav__item { display: grid; justify-items: start; gap: 10px; padding: 0; border: 0; background: none; color: var(--accent); text-align: left; cursor: pointer; pointer-events: auto; }
+.pnav__caption { font: 500 .72rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.pnav__title { font: 400 clamp(64px, 10vw, 144px)/.82 var(--display); letter-spacing: -.005em; white-space: nowrap; }
+.pnav__item:focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
+
+/* Escenario 3D ----------------------------------------------------------- */
+.pnav__stage { position: absolute; z-index: 2; top: 0; bottom: 0; left: 40vw; right: 0; perspective: 1400px; perspective-origin: 40% 45%; pointer-events: none; }
+.pnav__ring { position: absolute; left: 46%; top: 47%; width: 0; height: 0; transform-style: preserve-3d; transform: var(--stage-tilt); }
+.pcard { position: absolute; left: 0; top: 0; height: var(--card-h); aspect-ratio: 396 / 616; transform-style: preserve-3d; will-change: transform, opacity; }
+/* Placa oscura detrás de cada tarjeta (la "sombra" con volumen). */
+.pcard::before { content: ""; position: absolute; inset: 14% -4% -8% 8%; border-radius: 8px; background: linear-gradient(160deg, #2a1170, #12062e); transform: translateZ(-70px); }
+.pcard__face { position: absolute; inset: 0; overflow: hidden; border-radius: 8px; background: linear-gradient(172deg, #dedbf3 0%, #c4c0e2 45%, #8f8bb0 80%, #4a4670 100%); box-shadow: 0 40px 80px -30px rgba(0,0,0,.7); backface-visibility: hidden; }
+/* Brillo + oscurecido inferior, como en el original. */
+.pcard__face::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255,255,255,.35), transparent 35%), linear-gradient(to bottom, transparent 55%, rgba(8,3,26,.55)); pointer-events: none; }
+.pcard__art { position: absolute; inset: 0; }
+
+/* Arte 1: esferas que orbitan un núcleo */
+.pcard__art--spheres i { position: absolute; width: 14%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #c4b5fd, #7c3aed 55%, #4c1d95); box-shadow: 0 6px 18px rgba(76,29,149,.35); animation: float 6s ease-in-out infinite; }
+.pcard__art--spheres i:nth-child(1) { left: 22%; top: 28%; }
+.pcard__art--spheres i:nth-child(2) { left: 60%; top: 24%; width: 11%; animation-delay: -1s; }
+.pcard__art--spheres i:nth-child(3) { left: 70%; top: 46%; width: 16%; animation-delay: -2s; }
+.pcard__art--spheres i:nth-child(4) { left: 18%; top: 54%; width: 17%; animation-delay: -3s; }
+.pcard__art--spheres i:nth-child(5) { left: 44%; top: 64%; width: 12%; animation-delay: -4s; background: radial-gradient(circle at 35% 30%, #a5b4fc, #4338ca 60%); }
+.pcard__art--spheres i:nth-child(6) { left: 58%; top: 62%; width: 15%; animation-delay: -5s; }
+.pcard__art--spheres i:nth-child(7) { left: 40%; top: 18%; width: 9%; animation-delay: -2.5s; background: radial-gradient(circle at 35% 30%, #a5b4fc, #4338ca 60%); }
+.pcard__art--spheres b { position: absolute; left: 50%; top: 46%; width: 34%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, #e9d5ff 40%, #c084fc 75%, #9333ea); transform: translate(-50%, -50%); box-shadow: 0 0 40px rgba(233,213,255,.6); }
+/* Arte 2: tejido celular + gota de vidrio */
+.pcard__art--cells { background: radial-gradient(circle at 50% 50%, transparent 58%, rgba(120,113,170,.35) 60%, transparent 63%) 0 0 / 22% 16%, radial-gradient(circle at 50% 50%, transparent 58%, rgba(120,113,170,.25) 60%, transparent 63%) 11% 8% / 22% 16%; }
+.pcard__art--cells b { position: absolute; left: 50%; top: 46%; width: 34%; aspect-ratio: 1; border-radius: 46% 54% 52% 48%; background: radial-gradient(circle at 60% 55%, #c026d3, #7c3aed 45%, #a5b4fc 80%); opacity: .85; transform: translate(-50%, -50%); filter: blur(.5px); animation: morph 7s ease-in-out infinite; }
+/* Arte 3: terreno de puntos */
+.pcard__art--terrain span { position: absolute; left: 8%; right: 8%; top: 22%; height: 50%; background: radial-gradient(circle, rgba(255,255,255,.9) 1px, transparent 1.6px) 0 0 / 9px 9px, linear-gradient(to top, #6d28d9, #a78bfa 55%, transparent 90%); clip-path: polygon(0 70%, 12% 45%, 22% 55%, 34% 20%, 46% 40%, 58% 10%, 70% 38%, 82% 25%, 100% 55%, 100% 100%, 0 100%); animation: drift 9s ease-in-out infinite alternate; }
+/* Arte 4: anillos concéntricos */
+.pcard__art--rings i { position: absolute; left: 50%; top: 46%; aspect-ratio: 1; border: 2px solid rgba(91,33,182,.55); border-radius: 50%; transform: translate(-50%, -50%) rotateX(65deg); animation: spin 10s linear infinite; }
+.pcard__art--rings i:nth-child(1) { width: 78%; }
+.pcard__art--rings i:nth-child(2) { width: 58%; animation-duration: 7s; animation-direction: reverse; }
+.pcard__art--rings i:nth-child(3) { width: 38%; animation-duration: 5s; }
+.pcard__art--rings b { position: absolute; left: 50%; top: 46%; width: 18%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #8b5cf6 60%, #4c1d95); transform: translate(-50%, -50%); }
+/* Arte 5: vórtice cónico */
+.pcard__art--vortex i { position: absolute; left: 50%; top: 46%; width: 70%; aspect-ratio: 1; border-radius: 50%; background: repeating-conic-gradient(from 0deg, #7c3aed 0 8deg, #c4b5fd 8deg 16deg, transparent 16deg 30deg); -webkit-mask: radial-gradient(circle, transparent 18%, #000 20%, #000 68%, transparent 70%); mask: radial-gradient(circle, transparent 18%, #000 20%, #000 68%, transparent 70%); transform: translate(-50%, -50%); animation: spinFlat 14s linear infinite; }
+.pcard__art--vortex b { position: absolute; left: 50%; top: 46%; width: 16%; aspect-ratio: 1; border-radius: 50%; background: #1e0b4b; box-shadow: 0 0 30px 8px rgba(124,58,237,.6); transform: translate(-50%, -50%); }
+
+@keyframes float { 50% { transform: translate3d(0, -10%, 0); } }
+@keyframes morph { 50% { border-radius: 55% 45% 40% 60%; transform: translate(-50%, -50%) scale(1.06); } }
+@keyframes drift { to { background-position: 18px 0, 0 0; transform: translateY(-4%); } }
+@keyframes spin { to { transform: translate(-50%, -50%) rotateX(65deg) rotateZ(360deg); } }
+@keyframes spinFlat { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+/* Texto del producto activo */
+.pnav__info { position: absolute; z-index: 4; left: 71.3vw; top: 76vh; width: min(20rem, 24vw); font: 400 1rem/1.25 var(--mono); }
+.pnav__infoTitle { margin: 0; color: var(--text); font-weight: 500; }
+.pnav__infoDesc { margin: .1rem 0 0; color: var(--muted); }
+.pnav__launch { display: inline-flex; align-items: center; gap: 8px; margin-top: 1.6rem; padding: 10px 22px; border: 1px solid var(--accent); border-radius: 999px; color: #8b7dff; font: 500 .72rem/1 var(--mono); letter-spacing: .06em; text-decoration: none; text-transform: uppercase; transition: background-color .3s, color .3s; }
+.pnav__launch:hover { background: var(--accent); color: #fff; }
+.pnav__launch .material-icons-round { font-size: .95rem; }
+.pnav__progress { position: absolute; z-index: 4; left: 7.5vw; bottom: 4vh; color: var(--muted); font: 500 .72rem/1 var(--mono); letter-spacing: .1em; }
+.pnav__progress b { color: var(--text); font-weight: 500; }
+
+/* Teléfono: tarjetas arriba, lista abajo ------------------------------- */
+@media (max-width: 900px) {
+  :root { --card-h: 40vh; --stage-tilt: rotateX(4deg) rotateZ(-5deg); }
+  .pnav__stage { left: 0; bottom: 46vh; }
+  .pnav__ring { left: 50%; top: 56%; }
+  .pnav__list { width: 100%; }
+  .pnav__listInner { left: 6vw; gap: 2vh; }
+  .pnav__title { font-size: clamp(52px, 17vw, 96px); }
+  .pnav__hint { top: auto; bottom: 3vh; left: auto; right: 6vw; }
+  .pnav__info { display: none; }
+  .pnav__close { top: 18px; right: 18px; }
+  .pnav__progress { bottom: 3vh; left: 6vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard__art *, .pcard__art span { animation: none !important; }
+}

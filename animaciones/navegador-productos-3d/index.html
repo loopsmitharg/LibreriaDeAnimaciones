@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Navegador de productos 3D · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <!-- Display condensada para los títulos. Si no carga, cae a Impact (Windows) / Arial Narrow. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-nav">
+    <span class="site-nav__brand">ESTUDIO</span>
+    <button type="button" class="site-nav__pill" data-pnav-open aria-haspopup="dialog" aria-expanded="false" aria-controls="pnav">Productos <span class="material-icons-round" aria-hidden="true">north</span></button>
+    <a class="site-nav__pill site-nav__pill--ghost" href="#">Documentos</a>
+  </header>
+
+  <main>
+    <section class="landing">
+      <p class="landing__kicker">Inspirado en el menú de productos de zentry.com</p>
+      <h1>Navegador de<br />productos 3D</h1>
+      <p class="landing__text">Abrí "Productos" arriba. Dentro del menú: rueda del mouse, flechas, swipe o clic en un nombre para elegir. Escape cierra.</p>
+      <button type="button" class="landing__cta" data-pnav-open>Abrir productos</button>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Navegador de productos 3D (overlay)</h2></div>
+        <div class="lib-notes__meta"><span>Referencia: zentry.com → menú "Products"</span><span>Reconstrucción propia: ni código ni arte del sitio</span><span>GSAP + CSS 3D + scroll-snap</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>El overlay es un contenedor con <strong>scroll propio</strong> y <code>scroll-snap</code>: cada producto es una parada. Adentro, un pin <code>sticky</code> de 100vh muestra la escena (igual que el original, que usa un scroller con <code>position: sticky</code>).</li>
+              <li><code>t = scrollTop / paso</code> es un índice <strong>continuo</strong> (1.37 = entre el 2 y el 3). Un <code>gsap.quickTo</code> lo suaviza y todo se dibuja desde ese único valor: lista, tarjetas y textos van siempre sincronizados.</li>
+              <li><strong>Tarjetas:</strong> para cada una, <code>d = índice − t</code>. Si <code>d ≥ 0</code> espera a la derecha (<code>x = d·1.08 anchos</code>, hacia atrás en <code>z</code>, <code>rotateY(d·26°)</code>); si <code>d &lt; 0</code> sale por la izquierda casi de canto (<code>rotateY(d·78°)</code>). Todo dentro de un escenario con <code>perspective</code> e inclinado.</li>
+              <li><strong>Lista:</strong> se desplaza para centrar el título activo (interpolando entre las posiciones medidas de cada ítem) y su color pasa de violeta a blanco según la cercanía.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Los productos son el HTML: un <code>.pnav__item</code> y una <code>.pcard</code> por producto, en el mismo orden. La descripción sale de <code>data-*</code> de cada ítem.</li>
+              <li><code>NEXT</code> y <code>PREV</code> (en <code>script.js</code>) y la inclinación del escenario (<code>--stage-tilt</code>) definen el recorrido de las tarjetas.</li>
+              <li>Abrir: el fondo funde, la lista sube en cascada y las tarjetas llegan desde abajo girando. Mientras está abierto se bloquea el scroll de la página y el foco queda en el diálogo.</li>
+              <li>El arte de las tarjetas es solo CSS (esferas y tramas). En un proyecto real va una imagen, un video o un canvas dentro de <code>.pcard__art</code>.</li>
+              <li>La fuente Anton viene de Google Fonts: es la única pieza de la librería que no es 100% local.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== OVERLAY ===================== -->
+  <div class="pnav" id="pnav" role="dialog" aria-modal="true" aria-label="Productos" hidden>
+    <div class="pnav__scroller" tabindex="-1">
+      <div class="pnav__sticky">
+        <div class="pnav__bg" aria-hidden="true"></div>
+        <button type="button" class="pnav__close" data-pnav-close aria-label="Cerrar productos"><span class="material-icons-round">close</span></button>
+        <p class="pnav__hint">Scrolleá para elegir</p>
+
+        <!-- Lista: título gigante + leyenda. data-* alimenta el texto de la derecha. -->
+        <nav class="pnav__list" aria-label="Lista de productos">
+          <div class="pnav__listInner">
+            <button type="button" class="pnav__item" data-index="0" data-name="Orbis" data-layer="Capa de apps" data-desc="Terminal para la web abierta. Copiloto, análisis y ejecución en un mismo lugar.">
+              <span class="pnav__caption">Capa de apps</span><span class="pnav__title">ORBIS</span>
+            </button>
+            <button type="button" class="pnav__item" data-index="1" data-name="Nexo" data-layer="Capa de agentes" data-desc="Una sociedad de agentes que aprende sola y con las personas, a escala.">
+              <span class="pnav__caption">Capa de agentes</span><span class="pnav__title">NEXO</span>
+            </button>
+            <button type="button" class="pnav__item" data-index="2" data-name="Pulso" data-layer="Capa de datos" data-desc="Convierte datos de uso en conocimiento propio, con contexto y bajo tu control.">
+              <span class="pnav__caption">Capa de datos</span><span class="pnav__title">PULSO</span>
+            </button>
+            <button type="button" class="pnav__item" data-index="3" data-name="Prisma" data-layer="App integrada" data-desc="Un portal de juegos donde cada partida suma recompensas y datos de valor.">
+              <span class="pnav__caption">App integrada</span><span class="pnav__title">PRISMA</span>
+            </button>
+            <button type="button" class="pnav__item" data-index="4" data-name="Vortex" data-layer="Laboratorio" data-desc="Experimentos que mezclan coleccionables, agentes y cultura digital.">
+              <span class="pnav__caption">Laboratorio</span><span class="pnav__title">VORTEX</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- Escenario 3D: una tarjeta por producto, mismo orden que la lista. -->
+        <div class="pnav__stage" aria-hidden="true">
+          <div class="pnav__ring">
+            <div class="pcard"><div class="pcard__face"><div class="pcard__art pcard__art--spheres"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div></div></div>
+            <div class="pcard"><div class="pcard__face"><div class="pcard__art pcard__art--cells"><b></b></div></div></div>
+            <div class="pcard"><div class="pcard__face"><div class="pcard__art pcard__art--terrain"><span></span></div></div></div>
+            <div class="pcard"><div class="pcard__face"><div class="pcard__art pcard__art--rings"><i></i><i></i><i></i><b></b></div></div></div>
+            <div class="pcard"><div class="pcard__face"><div class="pcard__art pcard__art--vortex"><i></i><b></b></div></div></div>
+          </div>
+        </div>
+
+        <!-- Texto del producto activo (abajo a la derecha). -->
+        <div class="pnav__info" aria-live="polite">
+          <p class="pnav__infoTitle"><span data-info-name>Orbis</span> — <span data-info-layer>Capa de apps</span></p>
+          <p class="pnav__infoDesc" data-info-desc>Terminal para la web abierta. Copiloto, análisis y ejecución en un mismo lugar.</p>
+          <a class="pnav__launch" href="#">Abrir sitio <span class="material-icons-round" aria-hidden="true">north_east</span></a>
+        </div>
+
+        <div class="pnav__progress" aria-hidden="true"><b>01</b> / 05</div>
+      </div>
+      <!-- Paradas de scroll-snap: una por producto. La última mide 100vh para completar el recorrido. -->
+      <div class="pnav__snaps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Productos 3D</small></a>
+</body>
+</html>
