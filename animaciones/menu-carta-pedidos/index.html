@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carta con pedido · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Header fijo de muestra: los filtros se pegan justo debajo. -->
+  <header class="demo-header" id="site-header"><span>Tu <b>Confitería</b></span></header>
+
+  <main class="menu-page">
+    <div class="menu-hero">
+      <span class="menu-kicker">Nuestra carta</span>
+      <h1>Menú</h1>
+      <p class="menu-subtitle">Filtrá por categoría, entrá a una subcategoría y armá tu pedido. Los productos con varios tamaños abren un modal de opciones.</p>
+    </div>
+
+    <!-- Filtros sticky de dos niveles: principales y submenús (se muestran/ocultan con .hidden). -->
+    <div class="filter-sticky-container">
+      <div class="filter-pills">
+        <button class="filter-pill main-filter active" data-filter-category="all">Todos</button>
+        <button class="filter-pill main-filter" data-filter-category="comidas" data-filter-is-sub="true">🍽️ Comidas</button>
+        <button class="filter-pill main-filter" data-filter-category="desayuno" data-filter-is-sub="true">☕🥐 Desayuno</button>
+        <button class="filter-pill main-filter" data-filter-category="pasteleria" data-filter-is-sub="true">🍰 Pastelería</button>
+        <button class="filter-pill main-filter" data-filter-category="bebidas" data-filter-is-sub="true">🥤 Bebidas</button>
+
+        <button class="filter-pill sub-filter sub-bebidas hidden" data-filter-category="back">⬅️ Volver</button>
+        <button class="filter-pill sub-filter sub-bebidas hidden" data-filter-category="bebidas">🥤 Todas</button>
+        <button class="filter-pill sub-filter sub-bebidas hidden" data-filter-category="bebidas-calientes">☕ Calientes</button>
+        <button class="filter-pill sub-filter sub-bebidas hidden" data-filter-category="bebidas-frias">❄️ Frías</button>
+
+        <button class="filter-pill sub-filter sub-comidas hidden" data-filter-category="back">⬅️ Volver</button>
+        <button class="filter-pill sub-filter sub-comidas hidden" data-filter-category="comidas">🍽️ Todas</button>
+        <button class="filter-pill sub-filter sub-comidas hidden" data-filter-category="burgers">🍔 Burgers</button>
+        <button class="filter-pill sub-filter sub-comidas hidden" data-filter-category="pastas">🍝 Pastas</button>
+        <button class="filter-pill sub-filter sub-comidas hidden" data-filter-category="ensaladas">🥗 Ensaladas</button>
+
+        <button class="filter-pill sub-filter sub-desayuno hidden" data-filter-category="back">⬅️ Volver</button>
+        <button class="filter-pill sub-filter sub-desayuno hidden" data-filter-category="desayuno">☕🥐 Todos</button>
+        <button class="filter-pill sub-filter sub-desayuno hidden" data-filter-category="combos">🥐 Combos</button>
+        <button class="filter-pill sub-filter sub-desayuno hidden" data-filter-category="tostados">🥪 Tostados</button>
+
+        <button class="filter-pill sub-filter sub-pasteleria hidden" data-filter-category="back">⬅️ Volver</button>
+        <button class="filter-pill sub-filter sub-pasteleria hidden" data-filter-category="pasteleria">🍰 Todas</button>
+        <button class="filter-pill sub-filter sub-pasteleria hidden" data-filter-category="tortas">🍰 Tortas</button>
+        <button class="filter-pill sub-filter sub-pasteleria hidden" data-filter-category="adicionales">🧀 Adicionales</button>
+      </div>
+    </div>
+
+    <!-- Cada tarjeta lleva sus categorías como clases (category-x). El botón + trae
+         sus opciones y precios en data-options (JSON). Una opción = se agrega directo;
+         varias = abre el modal. -->
+    <div class="masonry-grid">
+      <div class="menu-card-rich category-bebidas category-bebidas-calientes">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">local_cafe</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Café con leche</h3><span class="card-price">$5.500 / $6.500</span></div>
+          <p class="card-desc">En tamaño Doble o XL.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Doble","price":5500},{"name":"XL","price":6500}]' aria-label="Añadir Café con leche al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-bebidas category-bebidas-calientes">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">coffee</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Capuchino</h3><span class="card-price">$5.500 / $5.800</span></div>
+          <p class="card-desc">Espresso con leche vaporizada y abundante espuma.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Chico","price":5500},{"name":"Grande","price":5800}]' aria-label="Añadir Capuchino al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-bebidas category-bebidas-frias">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">local_bar</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Limonada</h3><span class="card-price">$4.800</span></div>
+          <p class="card-desc">Con menta y jengibre.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Única","price":4800}]' aria-label="Añadir Limonada al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-comidas category-burgers">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">lunch_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Burger clásica</h3><span class="card-price">$11.900 / $14.500</span></div>
+          <p class="card-desc">Medallón de carne, cheddar, lechuga y tomate. Con papas.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Simple","price":11900},{"name":"Doble","price":14500}]' aria-label="Añadir Burger clásica al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-comidas category-pastas">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">ramen_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Sorrentinos</h3><span class="card-price">$12.800</span></div>
+          <p class="card-desc">De jamón y queso, con salsa a elección.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Fileto","price":12800},{"name":"Crema","price":12800},{"name":"Mixta","price":13300}]' aria-label="Añadir Sorrentinos al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-comidas category-ensaladas">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">eco</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Ensalada César</h3><span class="card-price">$10.500</span></div>
+          <p class="card-desc">Pollo grillado, croutons, parmesano y aderezo césar.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Única","price":10500}]' aria-label="Añadir Ensalada César al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-desayuno category-combos">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">bakery_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Combo medialunas</h3><span class="card-price">$7.200</span></div>
+          <p class="card-desc">Infusión + 2 medialunas de manteca.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Única","price":7200}]' aria-label="Añadir Combo medialunas al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-desayuno category-tostados">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">breakfast_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Tostado</h3><span class="card-price">$6.900 / $8.400</span></div>
+          <p class="card-desc">Jamón y queso en pan de miga o árabe.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Miga","price":6900},{"name":"Árabe","price":8400}]' aria-label="Añadir Tostado al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-pasteleria category-tortas">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">cake</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Lemon pie</h3><span class="card-price">$5.900</span></div>
+          <p class="card-desc">Porción con merengue italiano.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Única","price":5900}]' aria-label="Añadir Lemon pie al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-pasteleria category-tortas">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">icecream</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Brownie</h3><span class="card-price">$4.900 / $7.400</span></div>
+          <p class="card-desc">Solo o con una bocha de helado.</p>
+          <button class="btn-icon-only" data-options='[{"name":"Solo","price":4900},{"name":"Con helado","price":7400}]' aria-label="Añadir Brownie al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-pasteleria category-adicionales">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">egg</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Huevo extra</h3><span class="card-price">$1.200</span></div>
+          <p class="card-desc"></p>
+          <button class="btn-icon-only" data-options='[{"name":"Única","price":1200}]' aria-label="Añadir Huevo extra al pedido"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+    </div>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Carta con filtros, opciones y pedido</h2></div>
+        <div class="lib-notes__meta"><span>Origen: María Paula Confitería · menu/index.html</span><span>js/main.js → secciones 5, 6, 7 y 8</span><span>Vanilla JS, sin dependencias</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><strong>Filtros de dos niveles:</strong> un filtro principal con <code>data-filter-is-sub="true"</code> esconde los principales y muestra su submenú (<code>.sub-bebidas</code>, …) con su "⬅️ Volver".</li>
+              <li><code>filterItems()</code> agrupa el filtrado en un <code>requestAnimationFrame</code> y alterna <code>.hidden</code> según las clases <code>category-*</code> de cada tarjeta.</li>
+              <li><strong>Opciones:</strong> el botón + lee <code>data-options</code>. Con una opción agrega directo; con varias abre el modal de radios y el nombre final queda "Producto (Opción)".</li>
+              <li><strong>Pedido:</strong> el estado vive en un array en memoria (precios numéricos, nunca leídos del DOM), se guarda en <code>localStorage</code> y se re-dibuja el panel lateral con total, +/− y eliminar.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Toda la interacción está delegada en <code>document</code> con <code>data-action</code>: los ítems del pedido creados por JS no necesitan listeners propios.</li>
+              <li>Cambiá la clave de <code>localStorage</code> (<code>STORAGE_KEY</code>) por proyecto para no mezclar pedidos.</li>
+              <li>Animaciones solo con <code>transform</code>/<code>opacity</code>: panel que entra desde la derecha, modal que sube, toast, tarjetas que se elevan en hover.</li>
+              <li>Escape cierra modal y panel. Los nombres de producto se insertan con <code>textContent</code> en esta versión (el original usaba <code>innerHTML</code>).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de opciones -->
+  <div class="modal-overlay" id="optionsModal" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
+    <div class="modal-content">
+      <button class="modal-close" data-action="close-options-modal" aria-label="Cerrar">&times;</button>
+      <h3 class="modal-title" id="modalProductTitle">Producto</h3>
+      <div class="modal-options-list" id="modalOptionsContainer"></div>
+      <button class="btn-modal-add" data-action="confirm-options">Añadir al pedido</button>
+    </div>
+  </div>
+
+  <!-- Botón flotante + panel de pedido -->
+  <button class="fab-order" data-action="toggle-order" aria-label="Ver pedido" aria-expanded="false" aria-controls="orderPanel">
+    <span class="material-icons-round">shopping_bag</span>
+    <span class="fab-badge hidden" id="orderBadge">0</span>
+  </button>
+  <section class="order-panel" id="orderPanel" aria-label="Panel de pedido">
+    <div class="order-header">
+      <h2>Tu pedido</h2>
+      <button class="close-order-btn" data-action="toggle-order" aria-label="Cerrar panel de pedido">&times;</button>
+    </div>
+    <div class="order-items" id="orderItemsContainer"><div class="empty-state">Tu pedido está vacío.<br>¡Agregá algo delicioso!</div></div>
+    <div class="order-footer">
+      <div class="order-total"><span>Total</span><span id="orderTotal">$0</span></div>
+      <p class="order-notice">Cuando termines, avisale a una de las meseras para que registre tu pedido.</p>
+    </div>
+  </section>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Carta con pedido</small></a>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrusel hero · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <!-- Slides apilados (position: absolute). Solo el .active es visible; el cambio es un fundido de opacidad. -->
+    <section class="hero" aria-roledescription="carrusel" aria-label="Novedades">
+      <div class="hero-slide active">
+        <div class="slide-bg slide-bg--1" aria-hidden="true"></div>
+        <div class="hero-content">
+          <h2>Tu espacio gamer favorito</h2>
+          <p>Más que un cyber: tu comunidad, tu familia, tu lugar de encuentro.</p>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <div class="slide-bg slide-bg--2" aria-hidden="true"></div>
+        <div class="hero-content">
+          <h2>Gastronomía de calidad</h2>
+          <p>Cafetería y servicio de comida. Pedí tu bebida favorita entre partida y partida.</p>
+        </div>
+      </div>
+      <div class="hero-slide">
+        <div class="slide-bg slide-bg--3" aria-hidden="true"></div>
+        <div class="hero-content">
+          <h2>Todo el gaming</h2>
+          <p>PCs, consolas, TCG, juegos de mesa, arcade, ping pong y metegol.</p>
+        </div>
+      </div>
+
+      <div class="carousel-dots" role="tablist" aria-label="Controles del carrusel">
+        <button type="button" class="dot active" role="tab" aria-selected="true" aria-label="Ver: Tu espacio gamer favorito"></button>
+        <button type="button" class="dot" role="tab" aria-selected="false" aria-label="Ver: Gastronomía de calidad"></button>
+        <button type="button" class="dot" role="tab" aria-selected="false" aria-label="Ver: Todo el gaming"></button>
+      </div>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Carrusel hero con fundido</h2></div>
+        <div class="lib-notes__meta"><span>Origen: GameOver · index.html (.hero)</span><span>js/main.js → initializeCarousel · delegación de .dot</span><span>Vanilla JS + CSS</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>Todos los slides ocupan el hero entero (<code>position: absolute; inset: 0</code>) y están apilados.</li>
+              <li>El cambio es solo de clase: <code>.active</code> pasa a <code>opacity: 1; visibility: visible</code> con una transición de 1s. El anterior se funde a la vez: es un crossfade.</li>
+              <li>Avanza solo cada 5s (<code>setInterval</code>). Tocar un punto lleva a ese slide y reinicia el temporizador.</li>
+              <li>Los puntos se manejan por delegación en <code>document</code>, no con un listener por punto.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Duración en <code>SLIDE_DURATION</code>; velocidad del fundido en la <code>transition</code> de <code>.hero-slide</code>.</li>
+              <li><code>visibility</code> en la transición evita que los slides ocultos reciban clics o foco.</li>
+              <li>En el original, el fondo es un <code>&lt;picture&gt;</code> con imagen mobile/desktop y <code>filter: brightness(.4)</code>; el primero lleva <code>fetchpriority="high"</code> (es el LCP) y el resto <code>loading="lazy"</code>.</li>
+              <li>Agregado de la librería: se pausa con la pestaña oculta y con <code>prefers-reduced-motion</code> no avanza solo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Carrusel hero</small></a>
+</body>
+</html>

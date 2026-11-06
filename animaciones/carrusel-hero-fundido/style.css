@@ -1,0 +1,33 @@
+:root {
+  --black: #050505;
+  --gold: #d4af37;
+  --white: #fff;
+  --font-size-hero-title: clamp(1.6rem, 3.5vw + .8rem, 3rem);
+  --font-size-body: clamp(.9rem, .8vw + .6rem, 1.05rem);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--black); }
+body { margin: 0; background: var(--black); color: var(--white); font-family: "Orbitron", system-ui, sans-serif; }
+
+/* El hero es el contenedor; los slides se apilan adentro. */
+.hero { position: relative; min-height: 90vh; overflow: hidden; }
+.hero-slide { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 clamp(16px, 4vw, 50px); text-align: center; opacity: 0; visibility: hidden; transition: opacity 1s ease-in-out, visibility 1s ease-in-out; will-change: opacity; }
+.hero-slide.active { z-index: 2; opacity: 1; visibility: visible; }
+
+/* Fondo oscurecido (en GameOver es una foto con brightness(.4)). */
+.slide-bg { position: absolute; inset: 0; z-index: -1; filter: brightness(.4); }
+.slide-bg--1 { background: radial-gradient(circle at 30% 30%, #4f46e5, transparent 45%), radial-gradient(circle at 75% 70%, #d4af37, transparent 40%), linear-gradient(135deg, #0f172a, #020617); }
+.slide-bg--2 { background: radial-gradient(circle at 60% 40%, #f97316, transparent 45%), radial-gradient(circle at 20% 80%, #d4af37, transparent 35%), linear-gradient(160deg, #1c1917, #0c0a09); }
+.slide-bg--3 { background: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 2px, transparent 2px 26px), radial-gradient(circle at 50% 50%, #10b981, transparent 50%), linear-gradient(135deg, #022c22, #050505); }
+
+.hero-content { z-index: 2; margin-top: 60px; }
+.hero-content h2 { margin: 0 0 10px; font-size: var(--font-size-hero-title); font-weight: 800; text-transform: uppercase; }
+.hero-content p { max-width: 46ch; margin: 0 auto; font-size: var(--font-size-body); line-height: 1.6; }
+
+/* Puntos */
+.carousel-dots { position: absolute; z-index: 20; left: 50%; bottom: 30px; display: flex; gap: 15px; transform: translate3d(-50%, 0, 0); }
+.dot { width: 12px; height: 12px; padding: 0; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; background: rgba(255,255,255,.3); cursor: pointer; transition: transform .3s ease, background-color .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.dot:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.dot.active, .dot:hover { border-color: var(--gold); background: var(--gold); box-shadow: 0 0 10px rgba(212,175,55,.5); transform: scale3d(1.2, 1.2, 1); }
+
+@media (prefers-reduced-motion: reduce) { .hero-slide { transition-duration: .01ms; } }

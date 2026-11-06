@@ -1,0 +1,63 @@
+:root {
+  --navy: #0f172a;
+  --black: #050505;
+  --gold: #d4af37;
+  --white: #fff;
+  --muted: #888;
+  --line: #222;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--black); }
+body { margin: 0; background: var(--black); color: var(--white); font-family: "Orbitron", system-ui, sans-serif; }
+
+.page-head, .layout { width: min(100% - 2 * clamp(16px, 4vw, 50px), 1100px); margin-inline: auto; }
+.page-head { padding: clamp(3rem, 7vw, 5rem) 0 2rem; }
+.kicker { color: var(--gold); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; }
+.page-head h1 { margin: .8rem 0 0; font-size: clamp(1.6rem, 3vw + 1rem, 2.6rem); line-height: 1.1; text-transform: uppercase; }
+.page-head p { max-width: 62ch; margin: 1rem 0 0; color: #bbb; font: 400 .95rem/1.7 system-ui, sans-serif; }
+.mode { display: inline-block; margin-left: .4rem; padding: .2rem .6rem; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold); font: 700 .68rem "Orbitron", sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+.mode.is-live { border-color: #22c55e; color: #22c55e; }
+
+.layout { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); padding-bottom: 5rem; }
+@media (min-width: 861px) { .layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: start; } }
+
+/* Tarjetas de torneo */
+.cards { display: grid; gap: 1rem; }
+.tournament-card { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: rgba(15,15,15,.8); transition: border-color .3s ease, transform .3s ease; }
+.tournament-card:hover { border-color: var(--gold); transform: translate3d(0, -3px, 0); }
+.card-img { position: relative; height: 110px; }
+.img-lol { background: radial-gradient(circle at 70% 40%, #d4af37, transparent 45%), linear-gradient(135deg, #1e3a8a, #020617); }
+.img-valorant { background: radial-gradient(circle at 30% 60%, #ef4444, transparent 45%), linear-gradient(135deg, #3f0d12, #050505); }
+.game-tag { position: absolute; top: 12px; left: 12px; padding: .25rem .6rem; border-radius: 4px; background: var(--gold); color: var(--black); font-size: .65rem; font-weight: 800; }
+.card-content { padding: 1rem 1.2rem 1.2rem; }
+.card-content h3 { margin: 0 0 .4rem; font-size: 1.15rem; }
+.card-content p { margin: .25rem 0 0; color: #aaa; font: 400 .85rem/1.5 system-ui, sans-serif; }
+.game-name { color: var(--white) !important; font: 700 .75rem "Orbitron", sans-serif !important; text-transform: uppercase; }
+.tourney-slots { margin-top: .6rem !important; color: var(--gold) !important; font: 700 .85rem "Orbitron", sans-serif !important; }
+.tourney-slots.is-full { color: #ff4a4a !important; }
+.poll-status { margin: 0; color: var(--muted); font: 400 .75rem "IBM Plex Mono", monospace; }
+.btn-ghost { justify-self: start; padding: .65rem 1.1rem; border: 1px solid #333; border-radius: 999px; background: transparent; color: var(--white); font: 600 .72rem "Orbitron", sans-serif; cursor: pointer; transition: border-color .3s ease, color .3s ease; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Formulario */
+.form-card { padding: clamp(16px, 2.5vw, 30px); border: 1px solid var(--line); border-radius: 10px; background: #0a0a0a; }
+.form-card h2 { margin: 0 0 1rem; font-size: 1.3rem; text-transform: uppercase; }
+.game-switch { display: flex; gap: .5rem; margin-bottom: 1.4rem; }
+.game-switch button { flex: 1; padding: .65rem; border: 1px solid #333; border-radius: 6px; background: transparent; color: var(--muted); font: 700 .72rem "Orbitron", sans-serif; cursor: pointer; transition: border-color .3s, color .3s, background-color .3s; }
+.game-switch button.is-active { border-color: var(--gold); background: rgba(212,175,55,.1); color: var(--gold); }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; margin-bottom: 8px; color: var(--muted); font-size: .75rem; }
+.form-group input { width: 100%; padding: 12px; border: 1px solid #333; border-radius: 5px; outline: none; background: #050505; color: var(--white); font: 400 .9rem "Orbitron", sans-serif; transition: border-color .3s ease, box-shadow .3s ease; }
+.form-group input:focus { border-color: var(--gold); box-shadow: 0 0 10px rgba(212,175,55,.1); }
+.subtotal-box { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding: 12px 18px; border: 1px solid var(--line); border-radius: 6px; background: rgba(255,255,255,.03); font-size: .9rem; }
+.subtotal-box span { color: var(--muted); font-size: .75rem; letter-spacing: 1px; text-transform: uppercase; }
+.subtotal-box strong { color: var(--gold); font-size: 1.05rem; text-shadow: 0 0 8px rgba(212,175,55,.3); }
+.btn-submit-gamer { width: 100%; padding: 15px; border: 1px solid var(--gold); border-radius: 6px; background: var(--navy); color: var(--white); font: 700 .9rem "Orbitron", sans-serif; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background-color .3s ease, color .3s ease; }
+.btn-submit-gamer:hover:not(:disabled) { background: var(--gold); color: var(--black); }
+.btn-submit-gamer:disabled { opacity: .6; cursor: wait; }
+
+/* Alerta dentro del formulario */
+.form-alert { margin-top: 15px; padding: 12px 18px; border: 1px solid transparent; border-radius: 6px; font-size: .8rem; line-height: 1.5; text-align: center; animation: alertIn .3s ease both; }
+.form-alert.alert-success { border-color: var(--gold); background: rgba(212,175,55,.1); color: var(--gold); box-shadow: 0 0 10px rgba(212,175,55,.2); }
+.form-alert.alert-error { border-color: #dc2626; background: rgba(220,38,38,.1); color: #ff4a4a; box-shadow: 0 0 10px rgba(220,38,38,.2); }
+@keyframes alertIn { from { opacity: 0; transform: translate3d(0, 6px, 0); } }

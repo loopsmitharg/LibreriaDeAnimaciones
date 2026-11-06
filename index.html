@@ -48,6 +48,9 @@
 
     .anim { --accent: var(--lime); position: relative; display: grid; grid-template-rows: auto 1fr auto; gap: 1.1rem; min-height: 15.5rem; padding: 1.4rem 1.4rem 1.25rem; border: 1px solid var(--line); border-radius: 1.1rem; background: linear-gradient(160deg, var(--surface-2), var(--surface)); text-decoration: none; overflow: hidden; isolation: isolate; transition: border-color .35s ease, transform .5s var(--ease), box-shadow .5s var(--ease); }
     .anim[data-origin="cv"] { --accent: var(--acid); }
+    .anim[data-origin="mariapaula"] { --accent: #c5a059; }
+    .anim[data-origin="gameover"] { --accent: #d4af37; }
+    .anim p code { padding: .05rem .3rem; border-radius: .25rem; background: rgba(255,255,255,.07); font: .85em "IBM Plex Mono", monospace; }
     .anim::before { content: ""; position: absolute; z-index: -1; inset: auto -30% -60% auto; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent); opacity: 0; transition: opacity .5s ease, transform .7s var(--ease); transform: scale(.7); }
     .anim:hover, .anim:focus-visible { border-color: color-mix(in srgb, var(--accent) 55%, transparent); transform: translateY(-4px); box-shadow: 0 1.5rem 3rem -1.75rem color-mix(in srgb, var(--accent) 60%, transparent); outline: none; }
     .anim:hover::before, .anim:focus-visible::before { opacity: 1; transform: none; }
@@ -74,8 +77,8 @@
       <h1>Librería de <em>animaciones</em></h1>
       <p class="lead">La base de las animaciones dinámicas que usamos en nuestros proyectos, aisladas y listas para copiar. Cada botón abre una demo funcionando con su ficha técnica al final.</p>
       <div class="stats" aria-label="Resumen">
-        <div><b>11</b>animaciones</div>
-        <div><b>2</b>proyectos de origen</div>
+        <div><b>14</b>piezas</div>
+        <div><b>4</b>proyectos de origen</div>
         <div><b>GSAP 3.12.5</b>+ ScrollTrigger, local</div>
       </div>
     </div>
@@ -89,6 +92,8 @@
       <button class="chip" type="button" data-filter="carrusel" aria-pressed="false">Carruseles y rieles</button>
       <button class="chip" type="button" data-filter="interaccion" aria-pressed="false">Hover y cursor</button>
       <button class="chip" type="button" data-filter="loop" aria-pressed="false">Demos en loop</button>
+      <button class="chip" type="button" data-filter="componentes" aria-pressed="false">Componentes</button>
+      <button class="chip" type="button" data-filter="integraciones" aria-pressed="false">Integraciones</button>
     </div>
   </nav>
 
@@ -137,6 +142,11 @@
           <div><h3>Carrusel de nombres en contrafase</h3><p>Dos rieles infinitos de nombres corren en sentidos opuestos. El scroll los sincroniza sobre un eje y después reparte las tarjetas de perfil.</p></div>
           <div class="anim__foot"><span>Ticker · wrap sin saltos</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
+        <a class="anim" data-origin="gameover" href="animaciones/carrusel-hero-fundido/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">slideshow</span><span class="anim__origin">GameOver · Inicio</span></div>
+          <div><h3>Carrusel hero con fundido</h3><p>Slides apilados que se funden entre sí cada 5 segundos, con puntos para saltar a uno y reiniciar el temporizador.</p></div>
+          <div class="anim__foot"><span>Crossfade por clase · CSS</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
       </div>
     </section>
 
@@ -168,6 +178,28 @@
           <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">leaderboard</span><span class="anim__origin">Loop Smith · Tableros</span></div>
           <div><h3>Tablero de datos con barras animadas</h3><p>Ranking, columnas y barra apilada que crecen hasta su valor al mostrar cada pestaña. El valor final vive en el HTML.</p></div>
           <div class="anim__foot"><span>scaleX / scaleY · stagger</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="group" data-group="componentes">
+      <div class="group__head"><h2>Componentes</h2><p>Piezas de interfaz completas</p></div>
+      <div class="grid">
+        <a class="anim" data-origin="mariapaula" href="animaciones/menu-carta-pedidos/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">restaurant_menu</span><span class="anim__origin">María Paula · Menú</span></div>
+          <div><h3>Carta con filtros, opciones y pedido</h3><p>Filtros sticky de dos niveles, modal para elegir tamaño y panel lateral de pedido con cantidades, total y guardado en el navegador.</p></div>
+          <div class="anim__foot"><span>Delegación · localStorage</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="group" data-group="integraciones">
+      <div class="group__head"><h2>Integraciones</h2><p>Conexión con servicios externos</p></div>
+      <div class="grid">
+        <a class="anim" data-origin="gameover" href="animaciones/conector-apps-script/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">table_view</span><span class="anim__origin">GameOver · Torneos</span></div>
+          <div><h3>Conector a Google Apps Script</h3><p>Lee cupos de una planilla de Google cada 40s y envía inscripciones por POST. Incluye servidor simulado y plantilla <code>Code.gs</code>.</p></div>
+          <div class="anim__foot"><span>fetch · polling · sin preflight</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
       </div>
     </section>

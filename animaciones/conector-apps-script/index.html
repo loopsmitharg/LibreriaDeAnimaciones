@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conector Apps Script · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Orden: el servidor simulado primero (solo se usa si API_URL está vacío), después el conector. -->
+  <script defer src="mock-servidor.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="page-head">
+      <span class="kicker">GameOver · Torneos</span>
+      <h1>Conector a Google Apps Script</h1>
+      <p>Los cupos se leen de una planilla de Google (GET, cada 40s) y la inscripción se escribe en ella (POST). <span class="mode" id="api-mode">Modo simulado</span></p>
+    </header>
+
+    <div class="layout">
+      <!-- Tarjetas: el texto de cupos lo reemplaza actualizarDOM() con lo que devuelve el servidor. -->
+      <section class="cards" aria-label="Torneos">
+        <article class="tournament-card">
+          <div class="card-img img-lol"><span class="game-tag">MOBA</span></div>
+          <div class="card-content">
+            <h3>ARAM 2vs2</h3>
+            <p class="game-name">League of Legends</p>
+            <p>Inscripción: $10.000 por jugador · máx. 2</p>
+            <p class="tourney-slots" id="slots-lol">Cargando plazas...</p>
+          </div>
+        </article>
+        <article class="tournament-card">
+          <div class="card-img img-valorant"><span class="game-tag">FPS</span></div>
+          <div class="card-content">
+            <h3>Protocolo Omega</h3>
+            <p class="game-name">Valorant</p>
+            <p>Inscripción gratuita · equipos de 5</p>
+            <p class="tourney-slots" id="slots-valorant">Cargando plazas...</p>
+          </div>
+        </article>
+        <p class="poll-status" id="poll-status" aria-live="polite">—</p>
+        <button type="button" class="btn-ghost" data-action="refresh-slots">Actualizar cupos ahora</button>
+      </section>
+
+      <!-- data-game identifica el torneo. El subtotal se calcula en JS con precios congelados, nunca leídos del DOM. -->
+      <section class="form-card" aria-labelledby="form-title">
+        <h2 id="form-title">Inscripción</h2>
+        <div class="game-switch" role="group" aria-label="Torneo">
+          <button type="button" class="is-active" data-switch-game="lol" aria-pressed="true">ARAM 2vs2</button>
+          <button type="button" data-switch-game="valorant" aria-pressed="false">Valorant</button>
+        </div>
+        <form class="gamer-form embedded-reg-form" data-game="lol">
+          <div class="form-group"><label for="f-nombre">Nombre completo</label><input type="text" id="f-nombre" name="nombre" placeholder="Tu nombre" required /></div>
+          <div class="form-group"><label for="f-duo">Nombre del equipo</label><input type="text" id="f-duo" name="nombreDuo" placeholder="Ej: Nexo Roto" required /></div>
+          <div class="form-group"><label for="f-email">Email</label><input type="email" id="f-email" name="email" placeholder="email@ejemplo.com" required /></div>
+          <div class="form-group"><label for="f-cel">Teléfono</label><input type="tel" id="f-cel" name="celular" placeholder="Tu número" required /></div>
+          <div class="form-group">
+            <label for="f-cantidad">Cantidad de jugadores</label>
+            <input type="number" id="f-cantidad" name="cantidad" min="1" max="2" value="1" required />
+            <div class="subtotal-box"><span>Monto total:</span><strong>$10.000 ARS</strong></div>
+          </div>
+          <button type="submit" class="btn-submit-gamer">Inscribirse</button>
+        </form>
+      </section>
+    </div>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Conector a Google Apps Script</h2></div>
+        <div class="lib-notes__meta"><span>Origen: GameOver · torneos/index.html</span><span>js/main.js → cargarCupos · actualizarDOM · submit de .embedded-reg-form · calcularSubtotal</span><span>fetch, sin dependencias</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><strong>Leer (GET):</strong> <code>fetch(API_URL + "?t=" + Date.now())</code>. El <code>?t=</code> evita la caché. El servidor responde <code>{ lol: { restantes: 12 }, … }</code> y <code>actualizarDOM()</code> reescribe solo el texto que cambió.</li>
+              <li><strong>Polling:</strong> cada 40s y solo con la pestaña visible; al volver a la pestaña se refresca enseguida.</li>
+              <li><strong>Escribir (POST):</strong> el cuerpo es JSON pero con <code>Content-Type: text/plain</code>. Así es un "simple request" y el navegador no manda el preflight OPTIONS, que Apps Script no sabe responder. <code>redirect: "follow"</code> sigue el salto a googleusercontent.com.</li>
+              <li>El servidor responde <code>{ status: "success", nuevos_cupos }</code> y los cupos se actualizan sin esperar al próximo polling.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para usarlo con tu planilla</h3>
+            <ul>
+              <li>En <code>script.js</code> poné tu URL en <code>API_URL</code> (la de "Implementar → Aplicación web", termina en <code>/exec</code>). Vacía, la demo usa <code>mock-servidor.js</code> y no envía nada.</li>
+              <li><code>Code.gs</code> es una plantilla del lado servidor (<code>doGet</code> / <code>doPost</code>) con el mismo contrato. <strong>Es una reconstrucción</strong>: el .gs real de GameOver no está en el repositorio.</li>
+              <li>Los precios viven en <code>BASE_PRICES</code> (<code>Object.freeze</code>) y la cantidad se sanea con un máximo por torneo. Igual el servidor tiene que recalcular el monto: el cliente se puede manipular.</li>
+              <li>Feedback: alerta dentro del form, botón deshabilitado con "Enviando..." y reset a los 5s.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Conector Apps Script</small></a>
+</body>
+</html>

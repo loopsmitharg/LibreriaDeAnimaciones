@@ -1,6 +1,6 @@
 # Librería de Animaciones
 
-Repositorio interno con la **base** de las animaciones dinámicas que usamos en nuestros proyectos (Loop Smith y CosmeCV), aisladas en demos que funcionan solas.
+Repositorio interno con la **base** de las animaciones dinámicas y piezas reutilizables que usamos en nuestros proyectos (Loop Smith, CosmeCV, María Paula Confitería y GameOver), aisladas en demos que funcionan solas.
 
 Abrí `index.html`: cada botón lleva a una demo y cada demo termina con una ficha técnica (cómo funciona, de dónde sale y qué tocar para reutilizarla).
 
@@ -36,6 +36,11 @@ Cada carpeta de `animaciones/` es autocontenida: para usar una animación en otr
 | `scroll-experiencia` | Lista con foco por scroll + medidor + detalle por hover | CosmeCV · Experiencia |
 | `cursor-invertido` | Cursor con `mix-blend-mode` que invierte colores | CosmeCV · Global |
 | `scroll-horizontal` | Sección anclada con scroll lateral de paneles | CosmeCV · Proyectos |
+| `menu-carta-pedidos` | Carta con filtros de dos niveles, modal de opciones y panel de pedido | María Paula Confitería · Menú |
+| `carrusel-hero-fundido` | Carrusel hero con crossfade y puntos | GameOver · Inicio |
+| `conector-apps-script` | Lectura de cupos (GET + polling) e inscripción (POST) contra Google Apps Script, con servidor simulado y plantilla `Code.gs` | GameOver · Torneos |
+
+> `conector-apps-script` arranca en **modo simulado** (`API_URL` vacío en su `script.js`): no envía datos a ninguna planilla. Para conectarlo a una real, pegá la URL `/exec` de tu implementación.
 
 ## Ver las demos
 
