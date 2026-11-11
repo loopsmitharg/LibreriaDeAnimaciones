@@ -40,6 +40,9 @@ Cada carpeta de `animaciones/` es autocontenida: para usar una animación en otr
 | `carrusel-hero-fundido` | Carrusel hero con crossfade y puntos | GameOver · Inicio |
 | `navegador-productos-3d` | Menú de productos a pantalla completa: títulos gigantes + tarjetas en CSS 3D, un producto por gesto | Inspirado en zentry.com (reconstrucción propia, sin su código ni su arte) |
 | `conector-apps-script` | Lectura de cupos (GET + polling) e inscripción (POST) contra Google Apps Script, con servidor simulado y plantilla `Code.gs` | GameOver · Torneos |
+| [`lusion`](animaciones/lusion/index.html) | Once demos con controles, reinicio y código para copiar. Incluye partículas SVG y objetos con caras CSS 3D | Estudio de movimiento · Inspirado en Lusion |
+
+La colección `lusion` comparte un showcase. Cada efecto de `animaciones/lusion/effects/` tiene su propio CSS, JavaScript y ejemplo copiable. El [registro de investigación y uso](docs/LUSION_ANIMATION_RESEARCH.md) detalla los módulos y cómo integrarlos.
 
 > `conector-apps-script` arranca en **modo simulado** (`API_URL` vacío en su `script.js`): no envía datos a ninguna planilla. Para conectarlo a una real, pegá la URL `/exec` de tu implementación.
 

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Colección de animaciones HTML, CSS y GSAP de Loop Smiths, con demos y código de integración.">
+  <title>Estudio de movimiento · Loop Smiths</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ctext x='4' y='32' fill='%2399b442' font-size='35'%3E%E2%9C%B3%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="../../assets/css/shell.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="showcase.js"></script>
+</head>
+<body>
+  <header class="lab-bar lab-wrap">
+    <a href="index.html" class="lab-brand"><span aria-hidden="true">✳</span> LOOP SMITHS</a>
+    <a href="../../index.html">Librería <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="lab-wrap">
+    <div id="collection">
+      <header class="lab-intro">
+        <div>
+          <p class="lab-kicker">Colección 01 <span> / </span> Inspirada en Lusion</p>
+          <h1>Estudio de<br><em>movimiento.</em></h1>
+        </div>
+        <p class="lab-lead">Once piezas para diseñar cómo entra, responde y cambia una página. Probá cada efecto y llevate el código.</p>
+      </header>
+      <nav aria-label="Demos de la colección" class="lab-index">
+        <a href="?demo=hero"><span class="lab-number">01</span><span>Hero de órbitas <small>Perspectiva · parallax</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=cursor"><span class="lab-number">02</span><span>Campo magnético <small>Cursor · inercia</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=type"><span class="lab-number">03</span><span>Tipografía en escena <small>Máscaras · stagger</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=story"><span class="lab-number">04</span><span>Umbral de profundidad <small>Pin · zoom · scrub</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=gallery"><span class="lab-number">05</span><span>Galería cinética <small>Video · tilt · FLIP</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=menu"><span class="lab-number">06</span><span>Menú en cascada <small>Diálogo · navegación</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=ribbon"><span class="lab-number">07</span><span>Trazo en recorrido <small>SVG · scroll</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=loader"><span class="lab-number">08</span><span>Precarga numérica <small>Progreso · cortina</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=transition"><span class="lab-number">09</span><span>Cortina entre páginas <small>Navegación · fundido</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=particles"><span class="lab-number">10</span><span>Retrato de partículas <small>SVG · dispersión</small></span><span aria-hidden="true">↗</span></a>
+        <a href="?demo=solids"><span class="lab-number">11</span><span>Piezas volumétricas <small>Caras · CSS 3D</small></span><span aria-hidden="true">↗</span></a>
+      </nav>
+      <noscript><p>Activá JavaScript para abrir las demos interactivas.</p></noscript>
+    </div>
+
+    <div class="lab-detail" id="detail" hidden>
+      <header class="lab-intro lab-intro--detail">
+        <div>
+          <a class="lab-kicker lab-up" href="index.html">← Colección 01</a>
+          <p class="lab-kicker" id="demo-kicker"></p>
+          <h1 id="demo-name"></h1>
+        </div>
+        <p class="lab-lead" id="demo-lead"></p>
+      </header>
+      <div class="lab-workbench">
+        <section aria-labelledby="preview-title" class="lab-preview">
+          <h2 class="lab-strip" id="preview-title"><span aria-hidden="true"></span> Vista previa</h2>
+          <div id="preview"></div>
+        </section>
+        <form class="lab-controls" id="controls" aria-labelledby="controls-title">
+          <h2 class="lab-strip" id="controls-title">Parámetros</h2>
+          <div id="fields" class="lab-fields"></div>
+          <div class="lab-actions">
+            <button type="button" id="replay" class="lab-primary">Reiniciar <span aria-hidden="true">↻</span></button>
+            <button type="reset">Valores iniciales</button>
+          </div>
+        </form>
+      </div>
+
+      <section class="lib-notes lab-notes" aria-labelledby="integration-title">
+        <div class="lib-notes__inner">
+          <div><span class="lib-notes__kicker">Ficha técnica</span><h2 id="integration-title" tabindex="-1">Integración</h2></div>
+          <div class="lib-notes__grid" id="demo-notes"></div>
+          <div>
+            <div class="lab-copy"><h3>Ejemplo con estos parámetros</h3><button type="button" id="copy">Copiar código</button></div>
+            <pre tabindex="0" aria-label="Código de integración"><code id="snippet"></code></pre>
+          </div>
+          <p id="status" role="status" class="lab-status"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="lab-footer lab-wrap"><span>LOOP SMITHS / MOTION LIBRARY</span><a href="../../index.html">Volver a la librería ↑</a></footer>
+
+  <template id="hero">
+    <section class="ls-hero" data-ls-hero aria-label="Estudio de órbitas">
+      <div class="ls-hero__space" aria-hidden="true">
+        <div class="ls-hero__planet" data-depth=".35" style="--x:73%;--y:25%;--size:43%;--angle:-36deg;--z:-120px;--tone:#704c26"></div>
+        <div class="ls-hero__planet" data-depth=".72" style="--x:40%;--y:86%;--size:46%;--angle:26deg;--z:8px;--tone:#a08042"></div>
+        <div class="ls-hero__planet" data-depth="1" style="--x:72%;--y:59%;--size:58%;--angle:-28deg;--z:65px"></div>
+        <div class="ls-hero__planet" data-depth=".63" style="--x:98%;--y:28%;--size:26%;--angle:34deg;--z:20px"></div>
+        <div class="ls-hero__planet" data-depth=".9" style="--x:104%;--y:92%;--size:34%;--angle:20deg;--z:95px;--tone:#cf9562"></div>
+      </div>
+      <div class="ls-hero__copy" data-ls-hero-copy><p>01 / ENSAYO DE PROFUNDIDAD</p><h2>Materia<br>en órbita.</h2><p>Un sistema de planos suspendidos.</p></div>
+    </section>
+  </template>
+
+  <template id="cursor">
+    <div class="ls-field" data-ls-cursor>
+      <p class="ls-field__hint--pointer">ACERCÁ EL PUNTERO A LOS TRES BOTONES</p>
+      <p class="ls-field__hint--touch">TOCÁ UN BOTÓN PARA SELECCIONARLO</p>
+      <div class="ls-field__targets">
+        <div data-ls-magnet><button type="button" aria-label="Seleccionar A" aria-pressed="false" data-ls-target>A</button></div>
+        <div data-ls-magnet data-polarity="-1"><button type="button" aria-label="Seleccionar B" aria-pressed="false" data-ls-target>B</button></div>
+        <div data-ls-magnet><button type="button" aria-label="Seleccionar C" aria-pressed="false" data-ls-target>C</button></div>
+      </div>
+      <p>A / ATRACCIÓN &nbsp; B / REPULSIÓN &nbsp; C / ATRACCIÓN</p>
+      <span class="ls-field__halo" data-ls-halo aria-hidden="true"></span>
+    </div>
+  </template>
+
+  <template id="type">
+    <div class="ls-type" data-ls-type>
+      <p>TIPOGRAFÍA / PRUEBA 03</p>
+      <h2><span data-ls-line>El pulso</span> <span data-ls-line>de las formas.</span></h2>
+      <p>Una entrada escalonada cambia la forma de leer.</p>
+    </div>
+  </template>
+
+  <template id="story">
+    <div class="lab-scrollport" data-lab-scroll tabindex="0" role="region" aria-label="Escena desplazable. Usá la rueda, el gesto táctil o las flechas.">
+      <section class="ls-story" data-ls-story aria-label="Umbral de profundidad">
+        <div class="ls-story__stage" data-ls-stage>
+          <div class="ls-story__wash" data-ls-wash aria-hidden="true"></div>
+          <div class="ls-story__scene" data-ls-scene aria-hidden="true">
+            <i data-ls-depth style="--step:0"></i><i data-ls-depth style="--step:1"></i><i data-ls-depth style="--step:2"></i><i data-ls-depth style="--step:3"></i><i data-ls-depth style="--step:4"></i><i data-ls-depth style="--step:5"></i><i data-ls-depth style="--step:6"></i><i data-ls-depth style="--step:7"></i>
+          </div>
+          <div class="ls-story__text">
+            <p data-ls-caption><small>01 / SUPERFICIE</small>Umbral</p>
+            <p data-ls-caption><small>02 / TRAVESÍA</small>Profundidad</p>
+            <p data-ls-caption><small>03 / SALIDA</small>Otra luz</p>
+          </div>
+          <span class="ls-story__meter" aria-hidden="true"><i data-ls-progress></i></span>
+        </div>
+      </section>
+      <p class="lab-scroll-end">Fin de la escena · Volvé hacia arriba para invertir el recorrido.</p>
+    </div>
+  </template>
+
+  <template id="gallery">
+    <section class="ls-gallery" data-ls-gallery aria-label="Galería de estudios visuales">
+      <div class="ls-gallery__bar"><p>ARCHIVO / 03 ESTUDIOS</p><button type="button" data-ls-layout aria-pressed="false">Vista en lista</button></div>
+      <div class="ls-gallery__grid">
+        <article data-ls-card>
+          <button type="button" aria-controls="estudio-01" aria-expanded="false" data-ls-card-link>
+            <span class="ls-gallery__frame" data-ls-frame>
+              <video data-ls-media data-ls-video aria-hidden="true" muted loop playsinline preload="none" poster="media/prisma.jpg" src="media/prisma.mp4"></video>
+            </span>
+            <span class="ls-gallery__tag">01 / SEÑAL</span><strong><i aria-hidden="true">↗</i> Prisma</strong>
+          </button>
+          <button type="button" data-ls-play aria-pressed="false" aria-label="Reproducir o pausar Prisma" hidden>Video</button>
+          <p id="estudio-01" class="ls-gallery__description" hidden>Un estudio de luz en rotación, en un clip sin sonido.</p>
+        </article>
+        <article data-ls-card>
+          <button type="button" aria-controls="estudio-02" aria-expanded="false" data-ls-card-link>
+            <span class="ls-gallery__frame ls-gallery__frame--duna" data-ls-frame><span data-ls-media aria-hidden="true"></span></span>
+            <span class="ls-gallery__tag">02 / RELIEVE</span><strong><i aria-hidden="true">↗</i> Duna</strong>
+          </button>
+          <p id="estudio-02" class="ls-gallery__description" hidden>Planos de arena y cobre superpuestos en CSS.</p>
+        </article>
+        <article data-ls-card>
+          <button type="button" aria-controls="estudio-03" aria-expanded="false" data-ls-card-link>
+            <span class="ls-gallery__frame ls-gallery__frame--eco" data-ls-frame><span data-ls-media aria-hidden="true"></span></span>
+            <span class="ls-gallery__tag">03 / FRECUENCIA</span><strong><i aria-hidden="true">↗</i> Eco</strong>
+          </button>
+          <p id="estudio-03" class="ls-gallery__description" hidden>Una interferencia de líneas y reflejos construida con gradientes.</p>
+        </article>
+      </div>
+    </section>
+  </template>
+
+  <template id="menu">
+    <section class="ls-menu-demo" data-ls-menu-root>
+      <div><p>NAVEGACIÓN / 06</p><h2>Entrá por<br>otra puerta.</h2><button type="button" data-ls-menu-open aria-controls="motion-menu" aria-expanded="false" hidden>Abrir menú <span aria-hidden="true">↗</span></button></div>
+      <dialog class="ls-menu" id="motion-menu" aria-label="Menú de la colección">
+        <div class="ls-menu__wash" data-ls-menu-wash aria-hidden="true"></div>
+        <div class="ls-menu__surface" data-ls-menu-surface>
+          <div class="ls-menu__bar"><span>ÍNDICE / MOVIMIENTO</span><button type="button" data-ls-menu-close autofocus>Cerrar <span aria-hidden="true">×</span></button></div>
+          <nav aria-label="Animaciones" class="ls-menu__links">
+            <a data-ls-menu-item href="?demo=hero">Hero de órbitas <span aria-hidden="true">01 ↗</span></a>
+            <a data-ls-menu-item href="?demo=type">Tipografía <span aria-hidden="true">03 ↗</span></a>
+            <a data-ls-menu-item href="?demo=gallery">Galería <span aria-hidden="true">05 ↗</span></a>
+            <a data-ls-menu-item href="#integration-title">Ficha técnica <span aria-hidden="true">↓</span></a>
+          </nav>
+          <a class="ls-menu__extra" data-ls-menu-item href="index.html">Toda la colección <span aria-hidden="true">↗</span></a>
+        </div>
+      </dialog>
+    </section>
+  </template>
+
+  <template id="ribbon">
+    <div class="lab-scrollport" data-lab-scroll tabindex="0" role="region" aria-label="Trazo desplazable. Usá la rueda, el gesto táctil o las flechas.">
+      <section class="ls-ribbon" data-ls-ribbon>
+        <svg class="ls-ribbon__art" viewBox="0 0 720 1000" preserveAspectRatio="none" aria-hidden="true">
+          <path data-ls-path pathLength="1" d="M -34 90 C 343 20 735 125 577 333 S 86 483 89 316 S 708 377 627 606 S 62 801 111 684 S 543 750 754 943"/>
+        </svg>
+        <div><p>01 / LÍNEA CONTINUA</p><h2>El trazo<br>encuentra</h2></div>
+        <div><p>02 / CAMBIO DE RITMO</p><h2>su propio<br>recorrido.</h2></div>
+      </section>
+    </div>
+  </template>
+
+  <template id="loader">
+    <section class="ls-loader-demo" data-ls-loader-root aria-label="Demostración de precarga">
+      <div><p>08 / SECUENCIA DE ENTRADA</p><h2>Señal lista.</h2><p>Reiniciá para ver el contador y la cortina.</p></div>
+      <div class="ls-loader" data-ls-loader hidden aria-hidden="true">
+        <span class="ls-loader__mark" data-ls-loader-mark>✳</span>
+        <span class="ls-loader__count" data-ls-count>000</span>
+      </div>
+    </section>
+  </template>
+
+  <template id="transition">
+    <section class="ls-change" data-ls-transition aria-label="Escenas enlazadas">
+      <div class="ls-change__scene" data-lab-scene="1"><p>ESCENA / 01</p><h2>Materia.</h2><a data-ls-transition-link href="?demo=transition&amp;scene=2">Ir a Luz <span aria-hidden="true">↗</span></a></div>
+      <div class="ls-change__scene ls-change__scene--light" data-lab-scene="2" hidden><p>ESCENA / 02</p><h2>Luz.</h2><a data-ls-transition-link href="?demo=transition&amp;scene=1">Volver a Materia <span aria-hidden="true">↗</span></a></div>
+      <div class="ls-change__curtain" data-ls-curtain hidden aria-hidden="true"></div>
+    </section>
+  </template>
+
+  <template id="particles">
+    <section class="ls-cloud" data-ls-particles aria-label="Retrato de partículas">
+      <svg class="ls-cloud__art" data-ls-cloud-art viewBox="0 0 640 600" aria-hidden="true">
+        <g class="ls-cloud__stencil">
+          <path data-ls-cloud-shape d="M260 72 C318 43 385 52 422 90 C451 120 461 156 464 183 L463 208 C471 229 483 245 497 262 Q509 277 493 283 L470 289 L475 311 Q480 323 463 330 Q475 340 463 352 L455 367 Q451 394 424 402 Q399 411 365 398 L355 443 Q382 480 447 513 L469 545 Q366 575 244 557 L184 528 Q215 497 256 469 Q282 446 275 407 Q269 372 244 338 Q210 298 204 250 Q194 165 220 115 Q237 83 260 72Z"/>
+          <path data-ls-cloud-shadow d="M210 126 C240 77 290 80 322 114 Q272 158 268 238 Q265 276 307 324 Q332 359 316 393 L357 441 Q372 462 417 489 Q325 478 286 508 L235 550 L186 528 Q213 494 257 468 Q281 447 275 406 Q267 369 242 337 Q205 295 204 245 Q198 174 210 126Z M370 218 Q398 192 447 209 L452 226 Q420 216 405 236 Q383 241 370 218Z M447 282 Q450 269 474 271 L485 279 L470 289Z M425 325 Q447 319 467 325 L460 333 Q447 329 426 334Z"/>
+        </g>
+        <g data-ls-cloud-dots></g>
+      </svg>
+      <div class="ls-cloud__copy">
+        <p>10 / CAMPO DE PUNTOS</p>
+        <h2>Materia<br>dispersa.</h2>
+        <button type="button" data-ls-cloud-toggle hidden>Dispersar partículas</button>
+      </div>
+    </section>
+  </template>
+
+  <template id="solids">
+    <section class="ls-solids" data-ls-solids aria-label="Escena de piezas volumétricas">
+      <div class="ls-solids__world" data-ls-world aria-hidden="true">
+        <div class="ls-solids__object" data-ls-solid style="--x:74%;--y:54%;--z:55px;--size:clamp(8rem,29cqw,20rem);--length:.66;--rx:22deg;--ry:-34deg;--rz:10deg">
+          <div class="ls-solids__pivot" data-ls-solid-pivot><div class="ls-solids__rotor" data-ls-solid-rotor>
+            <i class="ls-solids__cap"></i><i class="ls-solids__cap ls-solids__cap--back"></i>
+          </div></div>
+        </div>
+        <div class="ls-solids__object" data-ls-solid style="--x:54%;--y:23%;--z:-165px;--size:clamp(6rem,21cqw,13rem);--length:1.02;--rx:-36deg;--ry:38deg;--rz:52deg;--metal:#c3c9b8">
+          <div class="ls-solids__pivot" data-ls-solid-pivot><div class="ls-solids__rotor" data-ls-solid-rotor>
+            <i class="ls-solids__cap"></i><i class="ls-solids__cap ls-solids__cap--back"></i>
+          </div></div>
+        </div>
+        <div class="ls-solids__object" data-ls-solid style="--x:94%;--y:13%;--z:-90px;--size:clamp(6rem,23cqw,15rem);--length:.58;--rx:-30deg;--ry:-48deg;--rz:35deg;--metal:#8eae9c">
+          <div class="ls-solids__pivot" data-ls-solid-pivot><div class="ls-solids__rotor" data-ls-solid-rotor>
+            <i class="ls-solids__cap"></i><i class="ls-solids__cap ls-solids__cap--back"></i>
+          </div></div>
+        </div>
+        <div class="ls-solids__object" data-ls-solid style="--x:57%;--y:90%;--z:-12px;--size:clamp(6.5rem,23cqw,16rem);--length:.85;--rx:57deg;--ry:24deg;--rz:-32deg;--metal:#a37257">
+          <div class="ls-solids__pivot" data-ls-solid-pivot><div class="ls-solids__rotor" data-ls-solid-rotor>
+            <i class="ls-solids__cap"></i><i class="ls-solids__cap ls-solids__cap--back"></i>
+          </div></div>
+        </div>
+      </div>
+      <div class="ls-solids__copy" data-ls-solid-copy>
+        <p>11 / ESTUDIO DE VOLUMEN</p>
+        <h2>Piezas<br>en rotación.</h2>
+        <p>Superficies, cantos y perforaciones.</p>
+      </div>
+    </section>
+  </template>
+</body>
+</html>

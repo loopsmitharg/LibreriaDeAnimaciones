@@ -1,0 +1,90 @@
+.ls-solids {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: clamp(29rem, 53vw, 42rem);
+  overflow: hidden;
+  container-type: inline-size;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 72% 45%, #3d493d, #1c261f 46%, #111914 80%);
+  color: #f0f2e5;
+}
+
+.ls-solids::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, #101812ee, transparent 64%), linear-gradient(0deg, #121914bd, transparent 45%);
+  pointer-events: none;
+}
+
+.ls-solids__world {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  perspective: var(--ls-solid-perspective, 820px);
+  perspective-origin: 73% 45%;
+  pointer-events: none;
+}
+
+.ls-solids__object {
+  --depth: calc(var(--size) * var(--length, .65));
+  --tone: var(--metal, var(--ls-solid-color, #d4e999));
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  aspect-ratio: 1;
+  transform: translate3d(-50%, -50%, var(--z, 0px));
+  transform-style: preserve-3d;
+}
+.ls-solids__object[hidden] { display: none; }
+.ls-solids__pivot, .ls-solids__rotor { position: absolute; inset: 0; transform-style: preserve-3d; }
+.ls-solids__rotor { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg)); }
+
+.ls-solids__face, .ls-solids__cap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  backface-visibility: hidden;
+}
+.ls-solids__face {
+  width: calc(var(--size) * .271);
+  height: var(--depth);
+  transform: rotateZ(var(--ls-facet-angle)) translateY(calc(var(--size) * -.5)) rotateX(90deg);
+  background:
+    linear-gradient(180deg, #f9f4d648, #ffffff12 8%, #09171265 15%, transparent 23% 75%, #0a130f64 84%, #f5f8df26 94%, #0b15105e),
+    color-mix(in srgb, #14221b var(--ls-facet-shade), var(--tone));
+}
+.ls-solids__face--inner {
+  width: calc(var(--size) * .102);
+  transform: rotateZ(var(--ls-facet-angle)) translateY(calc(var(--size) * -.186)) rotateX(-90deg);
+  background:
+    linear-gradient(180deg, #090e0cea, transparent 28% 58%, #0b140ee0),
+    color-mix(in srgb, #07120d 70%, var(--tone));
+}
+.ls-solids__cap {
+  width: calc(var(--size) * 1.036);
+  aspect-ratio: 1;
+  transform: translateZ(calc(var(--depth) * .5));
+  clip-path: polygon(37.06% 1.7%, 62.94% 1.7%, 85.36% 14.64%, 98.3% 37.06%, 98.3% 62.94%, 85.36% 85.36%, 62.94% 98.3%, 37.06% 98.3%, 14.64% 85.36%, 1.7% 62.94%, 1.7% 37.06%, 14.64% 14.64%);
+  mask-image: radial-gradient(circle closest-side, transparent 0 35%, #000 36%);
+  background:
+    radial-gradient(circle closest-side, transparent 33%, #0b1512db 35% 39%, #f6f8de67 40% 42%, transparent 44% 90%, #101c177a 98%),
+    repeating-radial-gradient(circle closest-side, #10231a20 0 1px, transparent 1px 4px),
+    conic-gradient(from -30deg, #f2f5de, var(--tone) 19%, color-mix(in srgb, #273829 66%, var(--tone)) 45%, var(--tone) 71%, #f2f5de);
+}
+.ls-solids__cap--back { transform: translateZ(calc(var(--depth) * -.5)) rotateY(180deg); }
+
+.ls-solids__copy { padding: clamp(1.5rem, 5vw, 4rem); }
+.ls-solids__copy h2 { margin: .5rem 0 .9rem; font: 600 clamp(3.4rem, 8vw, 8rem)/.86 "Space Grotesk", system-ui, sans-serif; letter-spacing: -.085em; }
+.ls-solids__copy p { margin: 0; color: #e1e8ce; font: 500 .77rem/1.5 "IBM Plex Mono", monospace; letter-spacing: .07em; }
+
+@media (max-width: 650px) {
+  .ls-solids { min-height: clamp(28rem, 123vw, 37rem); }
+  .ls-solids__world { inset: 1% 1% 29% -18%; perspective-origin: 63% 51%; }
+  .ls-solids__object { left: calc(var(--x) - 9%); }
+  .ls-solids::after { background: linear-gradient(0deg, #121914 6%, #1219149c 35%, transparent 69%); }
+}

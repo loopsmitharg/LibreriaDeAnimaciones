@@ -1,0 +1,28 @@
+.ls-menu-demo { display: grid; min-height: clamp(24rem, 44vw, 35rem); align-items: center; padding: clamp(1.25rem, 6vw, 4.7rem); background: repeating-linear-gradient(130deg, #dfe4be 0 1px, transparent 1px 7rem), #e9ebd5; color: #292e1d; }
+.ls-menu-demo p, .ls-menu__bar { margin: 0; font: 500 .75rem/1.4 "IBM Plex Mono", monospace; letter-spacing: .09em; }
+.ls-menu-demo h2 { margin: .65rem 0 1.25rem; font: 600 clamp(3.2rem, 8vw, 7.8rem)/.87 "Space Grotesk", sans-serif; letter-spacing: -.09em; }
+.ls-menu-demo button { padding: .6rem .85rem; border: 1px solid #33392c; background: #2a3023; color: #f5f2e4; font: inherit; cursor: pointer; }
+.ls-menu-demo button[hidden] { display: none; }
+.ls-menu-demo :is(button, a):focus-visible { outline: 2px solid #4e6b08; outline-offset: 3px; }
+html:has(.ls-menu[open]) { overflow: hidden; }
+.ls-menu { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: clamp(1rem, 5vw, 4rem); border: 0; background: transparent; color: #24271b; isolation: isolate; }
+.ls-menu[open] { display: grid; justify-items: end; align-content: start; }
+.ls-menu::backdrop { background: #090b0866; }
+.ls-menu__wash { position: fixed; z-index: -1; inset: 0; background: linear-gradient(90deg, transparent 10%, color-mix(in srgb, var(--ls-menu-bg, #d9f678) 68%, transparent)); }
+.ls-menu--wide .ls-menu__wash { background: var(--ls-menu-bg, #d9f678); }
+.ls-menu__surface { width: min(100%, 28rem); padding: clamp(1rem, 4vw, 2.6rem); border: 1px solid #79875b; background: #ecefd9; transform-origin: top right; }
+.ls-menu--wide .ls-menu__surface { width: min(100%, 80rem); }
+.ls-menu__bar { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: 1.5rem; }
+.ls-menu__links { border-top: 1px solid #89916f; }
+.ls-menu__links a, .ls-menu__extra { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: .68rem .25rem; border-bottom: 1px solid #89916f; color: inherit; text-decoration: none; }
+.ls-menu__links a { font: 600 clamp(1.5rem, 6vw, 5.7rem)/1 "Space Grotesk", sans-serif; letter-spacing: -.07em; }
+.ls-menu:not(.ls-menu--wide) .ls-menu__links a { font-size: clamp(1.35rem, 3vw, 2.2rem); }
+.ls-menu a span { font: 500 .75rem/1 "IBM Plex Mono", monospace; white-space: nowrap; }
+.ls-menu a:hover, .ls-menu a:focus-visible { background: #d4ddaa; }
+.ls-menu__extra { margin-top: 1rem; border: 0; background: #293120; color: #f6f7e6; padding-inline: .7rem; }
+.ls-menu__extra:hover, .ls-menu__extra:focus-visible { color: #24271b; }
+@media (max-width: 640px) {
+  .ls-menu[open] { justify-items: stretch; }
+  .ls-menu__surface { width: 100%; }
+  .ls-menu__wash { background: var(--ls-menu-bg, #d9f678); }
+}

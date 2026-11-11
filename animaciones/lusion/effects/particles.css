@@ -1,0 +1,55 @@
+.ls-cloud {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: clamp(28rem, 54vw, 42rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 72% 46%, #253c43, #101d22 47%, #0d1519 77%);
+  color: #eff7f5;
+}
+
+.ls-cloud::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, #0c161bdf, transparent 54%), linear-gradient(0deg, #0c1519c9, transparent 40%);
+}
+
+.ls-cloud__art { position: absolute; z-index: -2; right: 0; top: 0; width: 80%; height: 100%; }
+.ls-cloud__stencil { fill: color-mix(in srgb, var(--ls-cloud-color, #a9d8e4) 32%, #11252a); }
+.ls-cloud__stencil [data-ls-cloud-shadow] { fill: #172e35; }
+.ls-cloud--ready .ls-cloud__stencil { opacity: .22; }
+.ls-cloud--scattered .ls-cloud__stencil { opacity: 0; }
+.ls-cloud__dot {
+  fill: color-mix(in srgb, var(--ls-cloud-color, #a9d8e4) var(--ls-dot-tint), #162b32);
+  opacity: var(--ls-dot-alpha);
+}
+.ls-cloud--scattered .ls-cloud__dot { transform: translate(var(--ls-dot-x), var(--ls-dot-y)); opacity: .56; }
+
+.ls-cloud__copy { padding: clamp(1.5rem, 5vw, 4rem); }
+.ls-cloud__copy p { margin: 0; color: #c2e0df; font: 500 .77rem/1.5 "IBM Plex Mono", monospace; letter-spacing: .09em; }
+.ls-cloud__copy h2 { margin: .5rem 0 1.25rem; font: 600 clamp(3.4rem, 8vw, 8rem)/.86 "Space Grotesk", system-ui, sans-serif; letter-spacing: -.085em; }
+.ls-cloud__copy button {
+  padding: .62rem .8rem;
+  border: 1px solid #78a0a4;
+  background: #182b2f;
+  color: #eff7f5;
+  font: 500 .82rem/1.25 "IBM Plex Mono", monospace;
+  cursor: pointer;
+}
+.ls-cloud__copy button[hidden] { display: none; }
+.ls-cloud__copy button:is(:hover, :focus-visible), .ls-cloud--scattered .ls-cloud__copy button { background: #a9d8e4; color: #102329; }
+.ls-cloud__copy button:focus-visible { outline: 2px solid #b2e4eb; outline-offset: 4px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .ls-cloud--motion .ls-cloud__dot { transition: transform var(--ls-cloud-duration, .8s) cubic-bezier(.22, 1, .36, 1) var(--ls-dot-delay), opacity var(--ls-cloud-duration, .8s) ease var(--ls-dot-delay); }
+  .ls-cloud--motion .ls-cloud__stencil { transition: opacity var(--ls-cloud-duration, .8s) ease; }
+}
+@media (max-width: 650px) {
+  .ls-cloud { min-height: clamp(28rem, 123vw, 36rem); }
+  .ls-cloud__art { right: -1%; width: 105%; height: 84%; }
+  .ls-cloud::after { background: linear-gradient(0deg, #0c1519 5%, #0c151990 34%, transparent 69%); }
+}

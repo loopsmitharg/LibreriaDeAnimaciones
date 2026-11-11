@@ -1,0 +1,9 @@
+.ls-type { display: flex; min-height: clamp(24rem, 44vw, 35rem); flex-direction: column; justify-content: center; padding: clamp(1.1rem, 6vw, 5rem); overflow: hidden; background: #e9ebd5; color: #24291b; }
+.ls-type h2 { margin: 1rem 0; font: 600 clamp(3.1rem, 8vw, 8.5rem)/.92 "Space Grotesk", system-ui, sans-serif; letter-spacing: -.09em; }
+.ls-type p { margin: 0; color: #454e2f; font: 500 .78rem/1.5 "IBM Plex Mono", monospace; }
+.ls-type [data-ls-line], .ls-type__visual { display: block; }
+.ls-type [data-ls-line] + [data-ls-line] { color: #53631d; }
+.ls-type__mask { display: inline-block; overflow: hidden; vertical-align: bottom; padding: .08em 0 .14em; margin: -.08em 0 -.14em; }
+.ls-type__piece, .ls-type__word { display: inline-block; }
+.ls-type__spoken { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 420px) { .ls-type h2 { font-size: clamp(2rem, 12vw, 3.05rem); } }

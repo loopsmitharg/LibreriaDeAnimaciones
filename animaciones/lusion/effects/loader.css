@@ -1,0 +1,8 @@
+.ls-loader-demo { position: relative; display: grid; min-height: clamp(24rem, 44vw, 35rem); align-items: end; overflow: hidden; padding: clamp(1.5rem, 6vw, 4rem); background: #202719; color: #ecf3d4; }
+.ls-loader-demo p { margin: 0; font: 500 .74rem/1.5 "IBM Plex Mono", monospace; letter-spacing: .07em; }
+.ls-loader-demo h2 { margin: .5rem 0 .9rem; font: 600 clamp(3rem, 9vw, 8rem)/.9 "Space Grotesk", sans-serif; letter-spacing: -.09em; }
+.ls-loader { position: absolute; z-index: 1; inset: 0; display: grid; place-items: center; background: var(--ls-loader-color, #e4eea2); color: #262c17; pointer-events: none; }
+.ls-loader[hidden] { display: none; }
+.ls-loader__mark { font: 400 clamp(4rem, 12vw, 9rem)/1 system-ui, sans-serif; }
+.ls-loader__count { position: absolute; right: clamp(.85rem, 4vw, 2.5rem); bottom: clamp(.85rem, 4vw, 2.5rem); font: 500 clamp(3rem, 9vw, 8rem)/.85 "IBM Plex Mono", monospace; letter-spacing: -.07em; }
+@media (prefers-reduced-motion: reduce) { .ls-loader { display: none; } }
