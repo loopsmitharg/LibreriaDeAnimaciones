@@ -52,6 +52,8 @@
     .anim[data-origin="gameover"] { --accent: #d4af37; }
     .anim[data-origin="zentry"] { --accent: #7c6bff; }
     .anim[data-origin="lusion"] { --accent: #d9f678; }
+    .anim[data-origin="codrops"] { --accent: #f6a35c; }
+    .anim[data-origin="aida"] { --accent: #74acdf; }
     .anim p code { padding: .05rem .3rem; border-radius: .25rem; background: rgba(255,255,255,.07); font: .85em "IBM Plex Mono", monospace; }
     .anim::before { content: ""; position: absolute; z-index: -1; inset: auto -30% -60% auto; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent); opacity: 0; transition: opacity .5s ease, transform .7s var(--ease); transform: scale(.7); }
     .anim:hover, .anim:focus-visible { border-color: color-mix(in srgb, var(--accent) 55%, transparent); transform: translateY(-4px); box-shadow: 0 1.5rem 3rem -1.75rem color-mix(in srgb, var(--accent) 60%, transparent); outline: none; }
@@ -79,8 +81,8 @@
       <h1>Librería de <em>animaciones</em></h1>
       <p class="lead">La base de las animaciones dinámicas que usamos en nuestros proyectos, aisladas y listas para copiar. Cada botón abre una demo funcionando con su ficha técnica al final.</p>
       <div class="stats" aria-label="Resumen">
-        <div><b>26</b>piezas</div>
-        <div><b>6</b>fuentes de origen</div>
+        <div><b>31</b>piezas</div>
+        <div><b>8</b>fuentes de origen</div>
         <div><b>GSAP 3.12.5</b>+ ScrollTrigger, local</div>
       </div>
     </div>
@@ -145,6 +147,21 @@
           <div><h3>Scroll horizontal anclado</h3><p>Scroll lateral de proyectos. La sección se ancla y el scroll vertical mueve una pista de paneles hacia la izquierda, con barra de progreso.</p></div>
           <div class="anim__foot"><span>ScrollTrigger pin · scrub</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
+        <a class="anim" data-origin="codrops" href="animaciones/scroll-mascara-svg/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">blinds</span><span class="anim__origin">Inspirado en Codrops</span></div>
+          <div><h3>Transiciones de scroll con máscara SVG</h3><p>Escenas ancladas que se destapan con una máscara de rectángulos SVG: persianas horizontales o verticales y grilla aleatoria o por columnas.</p></div>
+          <div class="anim__foot"><span>SVG mask · ScrollTrigger scrub</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="codrops" href="animaciones/grilla-sticky-scroll/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">grid_view</span><span class="anim__origin">Inspirado en Codrops</span></div>
+          <div><h3>Grilla sticky con scroll</h3><p>Escena fija de 12 imágenes en 3 columnas: entran desde arriba y abajo, la grilla hace zoom y se abre, y aparece el contenido en el centro.</p></div>
+          <div class="anim__foot"><span>Sticky · timeline maestro · scrub</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="aida" href="animaciones/aida-relieve-scroll/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">terrain</span><span class="anim__origin">AIDA · Argentina</span></div>
+          <div><h3>Logo + relieve de Argentina</h3><p>Escena sticky en canvas: el logo hecho de líneas de relieve viaja fila por fila hasta posarse sobre el mapa en crestas de Argentina, Malvinas y la Antártida.</p></div>
+          <div class="anim__foot"><span>Canvas 2D · sticky · ruido fbm</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
       </div>
     </section>
 
@@ -176,6 +193,16 @@
           <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">invert_colors</span><span class="anim__origin">CosmeCV · Global</span></div>
           <div><h3>Cursor con inversión de color</h3><p>Anillo que sigue al puntero con inercia e invierte los colores de lo que tiene debajo. Sobre links crece, se rellena y muestra una etiqueta.</p></div>
           <div class="anim__foot"><span>mix-blend-mode · quickTo</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="codrops" href="animaciones/lente-cuadrado-cursor/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">center_focus_strong</span><span class="anim__origin">Inspirado en Codrops</span></div>
+          <div><h3>Lente cuadrado que sigue al cursor</h3><p>Imagen en grises con ondas y ruido; un cuadrado que sigue al mouse la muestra en color, con distorsión de lente y corrimiento RGB. Panel de parámetros en vivo.</p></div>
+          <div class="anim__foot"><span>WebGL · GLSL · sin Three.js</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="codrops" href="animaciones/atelier-webgl-dom/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">layers</span><span class="anim__origin">Inspirado en Codrops</span></div>
+          <div><h3>WebGL + DOM: portada y galería esférica</h3><p>Dos páginas. Portada con texto e imágenes WebGL pegados al scroll, distorsión fluida, efectos liquid/pixel/lens y letras que ruedan. Galería esférica arrastrable con zoom. Transición de píxeles entre ambas.</p></div>
+          <div class="anim__foot"><span>WebGL · flowmap · scroll suave</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
       </div>
     </section>

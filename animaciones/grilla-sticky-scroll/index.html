@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grilla sticky con scroll · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <!-- Bloque previo: da recorrido antes de la escena. -->
+    <section class="sg-intro">
+      <div class="sg-intro__art" aria-hidden="true"></div>
+      <p class="sg-intro__kicker">Inspirado en Codrops · Sticky Grid Scroll</p>
+      <p class="sg-intro__text">Experimento de layout guiado por scroll</p>
+      <span class="sg-intro__scroll">Scrolleá</span>
+    </section>
+
+    <!-- Escena: bloque alto (425vh) con un wrapper sticky de 100vh. -->
+    <section class="sg" data-sg>
+      <div class="sg__wrapper">
+        <div class="sg__content">
+          <h2 class="sg__title">Grilla sticky</h2>
+          <p class="sg__desc">Una grilla de imágenes que se arma, se abre y deja lugar al contenido, todo guiado por el scroll dentro de una escena fija.</p>
+          <a class="sg__button" href="#ficha">Ver la ficha técnica</a>
+        </div>
+        <div class="sg__gallery">
+          <ul class="sg__grid">
+            <li class="sg__item"><div class="sg__art" style="--h:300;--h2:40;--x:55%;--y:38%" role="img" aria-label="Ilustración abstracta 1"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:8;--h2:20;--x:36%;--y:58%" role="img" aria-label="Ilustración abstracta 2"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:340;--h2:30;--x:62%;--y:48%" role="img" aria-label="Ilustración abstracta 3"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:350;--h2:30;--x:57%;--y:61%" role="img" aria-label="Ilustración abstracta 4"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:8;--h2:40;--x:35%;--y:70%" role="img" aria-label="Ilustración abstracta 5"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:15;--h2:30;--x:66%;--y:42%" role="img" aria-label="Ilustración abstracta 6"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:40;--h2:35;--x:70%;--y:38%" role="img" aria-label="Ilustración abstracta 7"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:340;--h2:20;--x:55%;--y:38%" role="img" aria-label="Ilustración abstracta 8"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:40;--h2:30;--x:65%;--y:43%" role="img" aria-label="Ilustración abstracta 9"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:330;--h2:210;--x:39%;--y:69%" role="img" aria-label="Ilustración abstracta 10"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:8;--h2:20;--x:49%;--y:70%" role="img" aria-label="Ilustración abstracta 11"></div></li>
+            <li class="sg__item"><div class="sg__art" style="--h:25;--h2:40;--x:36%;--y:47%" role="img" aria-label="Ilustración abstracta 12"></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sg-outro">
+      <p>Fin de la escena. Volvé a subir para ver la secuencia al revés.</p>
+    </section>
+
+    <section class="lib-notes" id="ficha">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Grilla sticky con scroll</h2></div>
+        <div class="lib-notes__meta"><span>Referencia: Codrops · Sticky Grid Scroll (Theo Plawinski)</span><span>Reconstrucción propia, arte en CSS</span><span>GSAP + ScrollTrigger · sticky · scrub</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><code>.sg</code> mide 425vh y adentro <code>.sg__wrapper</code> es <code>position: sticky</code> de 100vh: el scroll no mueve la escena, avanza el tiempo dentro de ella.</li>
+              <li>Las 12 imágenes se agrupan en 3 columnas (<code>índice % 3</code>). Un timeline maestro con <code>scrub</code> encadena: <strong>entrada</strong> (columnas 1 y 3 desde arriba, la del medio desde abajo, con stagger) → <strong>zoom</strong> (<code>scale: 2.05</code>, columnas laterales ±40% en x, la central se abre en y) → <strong>contenido</strong>.</li>
+              <li>El contenido no se scrubea: una función dentro del timeline lo muestra o lo oculta según la dirección del scroll (el título sube a su lugar y aparecen la descripción y el botón).</li>
+              <li>El título arranca centrado con un <code>yPercent</code> calculado, y el wrapper entra con un parallax de −100% mientras el bloque sube, como si ya estuviera fijo.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Cambiá cada <code>.sg__art</code> por un <code>&lt;img&gt;</code> con <code>object-fit: cover</code>. Las ilustraciones son gradientes CSS con variables <code>--h</code>, <code>--x</code>, <code>--y</code>.</li>
+              <li>Ritmo: <code>height</code> de <code>.sg</code> (425vh), <code>start: "top 25%"</code> del timeline y los solapes <code>"-=0.6"</code> / <code>"-=0.32"</code> en <code>script.js</code>.</li>
+              <li>Tamaños con la unidad <code>--u</code> (1px a 1440px de ancho, escala con la pantalla); en ≤900px la galería se agranda para que se vea en el teléfono.</li>
+              <li>El original usa Lenis para el scroll suave; acá alcanza con scroll nativo y <code>scrub: true</code>.</li>
+              <li>Sin GSAP o con <code>prefers-reduced-motion</code>: la escena queda en flujo, con el texto completo y la grilla quieta debajo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Grilla sticky</small></a>
+</body>
+</html>

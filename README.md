@@ -35,7 +35,12 @@ Cada carpeta de `animaciones/` es autocontenida: para usar una animación en otr
 | `tablero-barras` | Tablero con barras que crecen al cambiar de pestaña | Loop Smith · Servicios (tableros de datos) |
 | `scroll-experiencia` | Lista con foco por scroll + medidor + detalle por hover | CosmeCV · Experiencia |
 | `cursor-invertido` | Cursor con `mix-blend-mode` que invierte colores | CosmeCV · Global |
+| `lente-cuadrado-cursor` | Lente cuadrado que sigue al cursor: color + distorsión + RGB adentro, grises con onda y ruido afuera (WebGL puro) | Inspirado en Codrops · Square Lens Effect (reconstrucción propia) |
+| `atelier-webgl-dom` | Dos páginas: portada con texto/imágenes WebGL sincronizados al scroll (flowmap, liquid/pixel/lens, letras que ruedan, footer parallax) y galería esférica arrastrable; transición de píxeles entre ambas | Inspirado en Codrops · Atelier UI: Mixing WebGL and the DOM (reconstrucción propia, sin React ni Three.js) |
 | `scroll-horizontal` | Sección anclada con scroll lateral de paneles | CosmeCV · Proyectos |
+| `scroll-mascara-svg` | Escenas ancladas que se revelan con máscaras SVG (persianas H/V, grilla aleatoria, grilla por columnas) | Inspirado en Codrops · On-Scroll SVG Mask Transitions (reconstrucción propia) |
+| `grilla-sticky-scroll` | Escena sticky: grilla de 12 imágenes que entra por columnas, hace zoom y se abre para revelar el contenido | Inspirado en Codrops · Sticky Grid Scroll (reconstrucción propia) |
+| `aida-relieve-scroll` | Escena sticky en canvas: el logo en líneas de relieve se une, fila por fila, con el relieve de Argentina, Malvinas y la Antártida | AIDA · aida-argentina.html |
 | `menu-carta-pedidos` | Carta con filtros de dos niveles, modal de opciones y panel de pedido | María Paula Confitería · Menú |
 | `carrusel-hero-fundido` | Carrusel hero con crossfade y puntos | GameOver · Inicio |
 | `navegador-productos-3d` | Menú de productos a pantalla completa: títulos gigantes + tarjetas en CSS 3D, un producto por gesto | Inspirado en zentry.com (reconstrucción propia, sin su código ni su arte) |

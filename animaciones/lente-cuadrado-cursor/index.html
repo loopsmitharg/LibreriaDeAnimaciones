@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lente cuadrado que sigue al cursor · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main>
+    <!--
+      Escena del lente. Sin data-texture se genera un arte propio en canvas.
+      Para usar una foto: data-texture="foto.jpg" (misma carpeta u otra ruta del mismo dominio).
+    -->
+    <section class="lens" data-lens aria-label="Demo del lente cuadrado">
+      <canvas class="lens__canvas" aria-hidden="true"></canvas>
+      <div class="lens__hud">
+        <p class="lens__kicker">Inspirado en Codrops · Square Lens Effect</p>
+        <h1>Lente cuadrado<br />que sigue al cursor</h1>
+        <p class="lens__hint">Mové el mouse (o arrastrá el dedo) sobre la imagen.</p>
+      </div>
+      <p class="lens__fallback" hidden>Tu navegador no tiene WebGL: se muestra la imagen sin efecto.</p>
+
+      <!-- Panel de parámetros: equivale al lil-gui del tutorial, hecho con <input type="range">. -->
+      <details class="lens__panel">
+        <summary><span class="material-icons-round" aria-hidden="true">tune</span> Parámetros</summary>
+        <form class="lens__form" data-lens-form>
+          <fieldset>
+            <legend>Cuadrado</legend>
+            <label>Tamaño <input type="range" name="squareSize" min="0.05" max="1.5" step="0.01" /><output></output></label>
+            <label>Distorsión <input type="range" name="lensDistortion" min="-5" max="5" step="0.01" /><output></output></label>
+          </fieldset>
+          <fieldset>
+            <legend>Corrimiento RGB</legend>
+            <label>Rojo <input type="range" name="rgbShiftR" min="-0.05" max="0.05" step="0.001" /><output></output></label>
+            <label>Verde <input type="range" name="rgbShiftG" min="-0.05" max="0.05" step="0.001" /><output></output></label>
+            <label>Azul <input type="range" name="rgbShiftB" min="-0.05" max="0.05" step="0.001" /><output></output></label>
+          </fieldset>
+          <fieldset>
+            <legend>Onda (afuera)</legend>
+            <label>Frecuencia <input type="range" name="waveFrequency" min="0" max="200" step="1" /><output></output></label>
+            <label>Fuerza <input type="range" name="waveStrength" min="0" max="0.1" step="0.001" /><output></output></label>
+            <label>Velocidad <input type="range" name="waveSpeed" min="0" max="5" step="0.01" /><output></output></label>
+          </fieldset>
+          <fieldset>
+            <legend>Ruido (afuera)</legend>
+            <label>Frecuencia <input type="range" name="randomFrequency" min="0.1" max="20" step="0.1" /><output></output></label>
+            <label>Fuerza <input type="range" name="randomStrength" min="0" max="0.1" step="0.001" /><output></output></label>
+            <label>Velocidad <input type="range" name="randomSpeed" min="0" max="2" step="0.01" /><output></output></label>
+          </fieldset>
+          <fieldset>
+            <legend>Puntero</legend>
+            <label>Suavizado <input type="range" name="pointerEase" min="0.01" max="1" step="0.01" /><output></output></label>
+          </fieldset>
+          <button type="reset" class="lens__reset">Restablecer</button>
+        </form>
+      </details>
+    </section>
+
+    <section class="lib-notes">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Lente cuadrado que sigue al cursor</h2></div>
+        <div class="lib-notes__meta"><span>Referencia: Codrops · Building a Mouse-Following Square Lens Effect (T. Nakata)</span><span>Reconstrucción propia en WebGL puro</span><span>GLSL · sin Three.js · sin dependencias</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li>Todo pasa en <strong>un solo fragment shader</strong> sobre un plano a pantalla completa: sin post-procesado ni modelos 3D.</li>
+              <li><code>getCoverUv()</code> recorta la textura como <code>background-size: cover</code>. Afuera se muestra en grises (luminancia), adentro del cuadrado en color.</li>
+              <li><strong>Máscara:</strong> <code>uv * 2 − 1</code> centra el sistema, se resta <code>u_mouse</code> y se divide por la corrección de aspecto para que el cuadrado siga cuadrado. Cuatro <code>step()</code> multiplicados dan 1 adentro y 0 afuera.</li>
+              <li><strong>Lente estilo CC Lens:</strong> dentro del cuadrado, la UV local se escala según la distancia al centro al cuadrado (<code>1 + d·r²</code>). El desplazamiento se convierte a UV de pantalla para que color y grises sigan alineados.</li>
+              <li><strong>RGB radial:</strong> cada canal se muestrea corrido en la dirección centro → borde; en el centro no hay corrimiento, en los bordes es máximo.</li>
+              <li>Afuera, una onda <code>sin()</code> y un ruido <code>random3()</code> animados con <code>u_time</code> mueven la imagen en grises.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Copiá <code>script.js</code>, <code>style.css</code> y el markup de <code>.lens</code>. Poné tu foto con <code>data-texture="foto.jpg"</code>; sin ese atributo se genera el arte de ejemplo en canvas.</li>
+              <li>Los valores por defecto están en <code>DEFAULTS</code> (iguales al tutorial: tamaño 0.3, distorsión 1.5, RGB ±0.01…). El panel los cambia en vivo.</li>
+              <li><code>pointerEase</code> es el factor del lerp del mouse por cuadro: 0.1 = sigue con retardo, 1 = pegado al cursor.</li>
+              <li>El render se pausa cuando la sección sale de pantalla o la pestaña queda oculta. Con <code>prefers-reduced-motion</code> se congela la onda y el ruido (el lente sigue funcionando).</li>
+              <li>El original usa Three.js; acá son ~40 líneas de WebGL para un plano, sin librería. Si tu proyecto ya usa Three.js, el shader se pasa tal cual a un <code>RawShaderMaterial</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Lente cuadrado</small></a>
+</body>
+</html>

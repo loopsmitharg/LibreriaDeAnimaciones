@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebGL + DOM: galería esférica · Librería de Animaciones</title>
+  <script>try { if (sessionStorage.getItem('atelier-transicion')) document.documentElement.classList.add('is-arriving'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="comun.js"></script>
+  <script defer src="galeria.js"></script>
+</head>
+<body class="apage apage--galeria">
+  <header class="anav">
+    <div class="anav__col">
+      <span>Librería de animaciones</span>
+      <a href="index.html#ficha" data-transition>Ficha técnica</a>
+      <i class="anav__plus" aria-hidden="true"></i>
+    </div>
+    <nav class="anav__col" aria-label="Páginas de la demo">
+      <a href="index.html" data-transition data-preload="media/foto.png"><span class="anav__arrow" aria-hidden="true">→</span>Portada</a>
+      <a href="galeria.html" aria-current="page"><span class="anav__arrow" aria-hidden="true">→</span>Galería esférica</a>
+      <i class="anav__plus" aria-hidden="true"></i>
+    </nav>
+  </header>
+
+  <main>
+    <!-- La escena: una grilla infinita de imágenes vista como desde dentro de una esfera.
+         Arrastrar (o rueda) para moverla; clic en una imagen para ampliarla. -->
+    <div class="gsphere" data-sphere aria-hidden="true"><canvas></canvas></div>
+
+    <p class="gsphere__logo" aria-hidden="true">
+      <svg viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.2"><ellipse cx="22" cy="12" rx="20" ry="10.5" /><ellipse cx="22" cy="12" rx="8" ry="10.5" /><path d="M2 12h40" /></svg>
+      Estudio.
+    </p>
+
+    <h1 class="gsr">Galería esférica</h1>
+    <!-- Lista real de imágenes: para lectores de pantalla, buscadores y teclado. -->
+    <ul class="glist" data-list aria-label="Imágenes de la galería">
+      <li><button type="button" data-variant="0"><img src="media/foto.png" alt="Retrato con colores naturales." /> Ver imagen 1</button></li>
+      <li><button type="button" data-variant="1"><img src="media/foto.png" alt="Retrato con colores invertidos." /> Ver imagen 2</button></li>
+      <li><button type="button" data-variant="2"><img src="media/foto.png" alt="Retrato en blanco y negro." /> Ver imagen 3</button></li>
+    </ul>
+
+    <p class="gquote">Arrastrá la esfera para recorrerla. Hacé clic en una imagen para ampliarla; clic de nuevo o Escape para volver.</p>
+  </main>
+
+  <div class="ptrans" aria-hidden="true"></div>
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Galería esférica</small></a>
+</body>
+</html>

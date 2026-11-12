@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Grilla sticky con scroll
+   Estado base (sin GSAP / reduced motion): contenido y grilla en flujo.
+   Con animación, script.js agrega html.is-sg: bloque alto + wrapper sticky.
+   ========================================================================== */
+:root {
+  /* Unidad fluida: 1px a 1440px de ancho (equivale al "fluid rem" del original,
+     pero sin tocar el font-size del html, así no afecta al resto de la página). */
+  --u: calc(100vw / 1440);
+  --sg-bg: #f4f1ec;
+  --sg-ink: #141414;
+  --sg-muted: #6f6a63;
+  --sg-serif: "Playfair Display", Georgia, serif;
+  --sg-sans: "Outfit", system-ui, sans-serif;
+}
+@media (max-width: 900px) { :root { --u: calc(100vw / 820); } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--sg-bg); color: var(--sg-ink); font-family: var(--sg-sans); -webkit-font-smoothing: antialiased; }
+
+/* ---------- Intro ---------- */
+.sg-intro {
+  position: relative; height: 100vh; overflow: hidden;
+  display: grid; place-content: center; justify-items: center; gap: 1rem; text-align: center;
+}
+.sg-intro__art {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(circle at 58% 52%, hsl(352 75% 42% / .85) 0 5%, transparent 16%),
+    radial-gradient(ellipse 38% 22% at 40% 38%, hsl(20 60% 92% / .95), transparent 70%),
+    radial-gradient(ellipse 30% 40% at 72% 30%, hsl(15 55% 88% / .9), transparent 70%),
+    radial-gradient(ellipse 34% 26% at 34% 66%, hsl(30 50% 90% / .9), transparent 70%),
+    linear-gradient(115deg, transparent 49.6%, hsl(80 18% 40% / .55) 50%, transparent 50.6%),
+    linear-gradient(160deg, #f6efe6, #e7ddd2);
+  filter: blur(6px); transform: scale(1.06);
+}
+.sg-intro > :not(.sg-intro__art) { position: relative; z-index: 1; }
+.sg-intro__kicker { margin: 0; color: var(--sg-muted); font: 500 .75rem/1.4 "IBM Plex Mono", monospace; letter-spacing: .16em; text-transform: uppercase; }
+.sg-intro__text { margin: 0; max-width: 16ch; font: 700 clamp(2.4rem, 6vw, 5.5rem)/.95 var(--sg-serif); letter-spacing: -.02em; }
+.sg-intro__scroll { margin-top: 1.5rem; color: var(--sg-muted); font: 500 .75rem/1 "IBM Plex Mono", monospace; letter-spacing: .14em; text-transform: uppercase; }
+
+/* ---------- Escena (estado base: en flujo) ---------- */
+.sg { position: relative; }
+.sg__wrapper { position: relative; padding: 0 calc(24 * var(--u)); }
+.sg__content {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  min-height: 60vh; padding: 4rem 0; text-align: center;
+}
+.sg__title { margin: 0; font: 700 clamp(2.6rem, calc(96 * var(--u)), 8rem)/1 var(--sg-serif); letter-spacing: -.02em; }
+.sg__desc {
+  max-width: 34ch; margin: 1.25rem 0 0;
+  font: 500 clamp(.72rem, calc(14 * var(--u)), .95rem)/1.4 var(--sg-sans); letter-spacing: .04em; text-transform: uppercase;
+}
+.sg__button {
+  margin-top: 1.25rem; padding: .7rem 1.2rem; border: 1px solid currentColor; border-radius: 999px;
+  color: inherit; text-decoration: none; font: 600 .78rem/1 var(--sg-sans); letter-spacing: .06em; text-transform: uppercase;
+  transition: background-color .25s ease, color .25s ease;
+}
+.sg__button:hover, .sg__button:focus-visible { background: var(--sg-ink); color: var(--sg-bg); }
+.sg__button:focus-visible { outline: 2px solid var(--sg-ink); outline-offset: 3px; }
+
+.sg__gallery { width: min(100%, calc(736 * var(--u))); margin: 0 auto 6rem; }
+@media (max-width: 900px) { .sg__gallery { width: min(100%, calc(736 * var(--u))); } }
+.sg__grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  column-gap: calc(32 * var(--u)); row-gap: calc(40 * var(--u));
+  margin: 0; padding: 0; list-style: none;
+}
+.sg__item { width: 100%; aspect-ratio: 1; overflow: hidden; }
+
+/* Arte de cada celda: una "flor" difusa hecha con gradientes. Reemplazable por <img>. */
+.sg__art {
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(circle at var(--x) var(--y), hsl(var(--h) 75% 45% / .9) 0 6%, transparent 18%),
+    radial-gradient(ellipse 48% 26% at calc(var(--x) + 12%) calc(var(--y) - 14%), hsl(var(--h) 70% 88% / .95), transparent 72%),
+    radial-gradient(ellipse 26% 48% at calc(var(--x) - 16%) calc(var(--y) + 4%), hsl(calc(var(--h) + 18) 60% 90% / .9), transparent 72%),
+    radial-gradient(ellipse 40% 22% at calc(var(--x) + 2%) calc(var(--y) + 20%), hsl(calc(var(--h) - 12) 55% 86% / .85), transparent 72%),
+    linear-gradient(100deg, transparent calc(var(--x) - .6%), hsl(90 20% 38% / .45) var(--x), transparent calc(var(--x) + .6%)),
+    linear-gradient(165deg, hsl(var(--h2) 35% 95%), hsl(var(--h2) 22% 84%));
+  filter: blur(calc(2.5 * var(--u))) saturate(1.05);
+}
+
+.sg-outro { display: grid; place-items: center; min-height: 60vh; padding: 0 1.5rem; text-align: center; color: var(--sg-muted); font: 500 1rem/1.5 var(--sg-sans); }
+
+/* ---------- Con animación ---------- */
+.is-sg .sg { height: 425vh; }
+/* overflow: hidden en el propio sticky (no en un ancestro, que mataría el sticky). */
+.is-sg .sg__wrapper { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.is-sg .sg__content { height: 100vh; min-height: 0; padding: 0; }
+.is-sg .sg__gallery {
+  position: absolute; top: 50%; left: 50%; margin: 0;
+  width: calc(736 * var(--u)); transform: translate3d(-50%, -50%, 0);
+}
+.is-sg .sg__grid { will-change: transform; }

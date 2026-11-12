@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Lente cuadrado que sigue al cursor (WebGL)
+   ========================================================================== */
+:root {
+  --l-bg: #07080b;
+  --l-ink: #f4f4f5;
+  --l-muted: rgba(244, 244, 245, .66);
+  --l-accent: #ff5a3c;
+  --l-panel: rgba(10, 12, 18, .82);
+  --l-sans: "Outfit", system-ui, sans-serif;
+  --l-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --l-pad: clamp(1.25rem, 3vw, 3rem);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--l-bg); color: var(--l-ink); font-family: var(--l-sans); -webkit-font-smoothing: antialiased; }
+
+/* ---------- Escena ---------- */
+.lens {
+  position: relative; height: 100vh; height: 100svh; min-height: 32rem; overflow: hidden;
+  /* Evita que el gesto de arrastre en pantallas táctiles haga scroll horizontal o zoom. */
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+.lens__canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+
+.lens__hud {
+  position: absolute; z-index: 2; left: var(--l-pad); bottom: var(--l-pad);
+  max-width: 34rem; pointer-events: none;
+  text-shadow: 0 2px 24px rgba(0,0,0,.55);
+}
+.lens__kicker { margin: 0 0 1rem; color: var(--l-accent); font: 500 .72rem/1.4 var(--l-mono); letter-spacing: .16em; text-transform: uppercase; }
+.lens__hud h1 { margin: 0; font: 600 clamp(2.4rem, 5.5vw, 5rem)/.92 var(--l-sans); letter-spacing: -.04em; }
+.lens__hint { margin: 1.1rem 0 0; color: var(--l-muted); font-size: 1rem; line-height: 1.55; }
+
+.lens__fallback {
+  position: absolute; z-index: 2; top: var(--l-pad); left: var(--l-pad); margin: 0;
+  padding: .55rem .8rem; border-radius: .5rem; background: var(--l-panel); color: var(--l-muted); font: 500 .8rem/1.3 var(--l-mono);
+}
+.lens__fallback[hidden] { display: none; }
+
+/* ---------- Panel de parámetros ---------- */
+.lens__panel {
+  position: absolute; z-index: 3; top: 1rem; right: 1rem;
+  width: min(19rem, calc(100vw - 2rem)); max-height: calc(100% - 2rem); overflow: auto;
+  border: 1px solid rgba(255,255,255,.14); border-radius: .9rem;
+  background: var(--l-panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  cursor: auto;
+}
+.lens__panel summary {
+  display: flex; align-items: center; gap: .5rem; padding: .7rem .9rem; cursor: pointer; list-style: none;
+  font: 500 .8rem/1 var(--l-sans);
+}
+.lens__panel summary::-webkit-details-marker { display: none; }
+.lens__panel summary .material-icons-round { font-size: 1.05rem; color: var(--l-accent); }
+.lens__panel summary:focus-visible { outline: 2px solid var(--l-accent); outline-offset: -2px; border-radius: .9rem; }
+
+.lens__form { display: grid; gap: .9rem; padding: 0 .9rem .9rem; }
+.lens__form fieldset { margin: 0; padding: 0; border: 0; display: grid; gap: .45rem; }
+.lens__form legend { margin-bottom: .35rem; padding: 0; color: var(--l-accent); font: 500 .66rem/1 var(--l-mono); letter-spacing: .14em; text-transform: uppercase; }
+.lens__form label {
+  display: grid; grid-template-columns: 5.5rem 1fr 3.4rem; align-items: center; gap: .5rem;
+  color: var(--l-muted); font: 400 .78rem/1.2 var(--l-sans);
+}
+.lens__form output { color: var(--l-ink); font: 500 .7rem/1 var(--l-mono); text-align: right; }
+.lens__form input[type="range"] { width: 100%; margin: 0; accent-color: var(--l-accent); }
+.lens__reset {
+  justify-self: start; padding: .45rem .8rem; border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
+  background: transparent; color: var(--l-ink); font: 500 .75rem/1 var(--l-sans); cursor: pointer;
+}
+.lens__reset:hover, .lens__reset:focus-visible { border-color: var(--l-accent); }
+
+@media (max-width: 640px) {
+  .lens__hud { bottom: 5rem; }
+  .lens__hint { font-size: .9rem; }
+}

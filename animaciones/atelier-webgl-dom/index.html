@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebGL + DOM: portada · Librería de Animaciones</title>
+  <!-- Si venimos de la transición de píxeles, la página arranca cubierta (sin parpadeo). -->
+  <script>try { if (sessionStorage.getItem('atelier-transicion')) document.documentElement.classList.add('is-arriving'); } catch (e) {}</script>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="comun.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body class="apage apage--index">
+  <!-- Canvas global: un solo contexto WebGL, fijo detrás de la página. -->
+  <canvas class="agl" aria-hidden="true"></canvas>
+
+  <header class="anav">
+    <div class="anav__col">
+      <span>Librería de animaciones</span>
+      <a href="#ficha">Ficha técnica</a>
+      <i class="anav__plus" aria-hidden="true"></i>
+    </div>
+    <nav class="anav__col" aria-label="Páginas de la demo">
+      <a href="index.html" aria-current="page"><span class="anav__arrow" aria-hidden="true">→</span>Portada</a>
+      <a href="galeria.html" data-transition data-preload="media/foto.png"><span class="anav__arrow" aria-hidden="true">→</span>Galería esférica</a>
+      <i class="anav__plus" aria-hidden="true"></i>
+    </nav>
+  </header>
+
+  <!-- Todo el contenido vive en este contenedor: el scroll suave lo traslada y
+       el canvas usa el mismo valor en el mismo cuadro, así nada tiembla. -->
+  <div class="ascroll" data-scroll>
+    <main>
+      <section class="ahero">
+        <h1 class="ahero__title">
+          <span class="ahero__e" data-gl="text" data-z="2" data-fluid>E</span>
+          <span class="ahero__rest" data-gl="text" data-z="2" data-fluid>STUDIO</span>
+        </h1>
+        <div class="ahero__media">
+          <img data-gl="image" data-effect="hero" data-fluid src="media/foto.png" alt="Retrato en primer plano con luz de discoteca." />
+          <div class="ahero__bar"><span>Demo WebGL + DOM</span><span>©2026</span></div>
+        </div>
+      </section>
+
+      <section class="aquote">
+        <p class="aquote__label">Ejemplo <span>( tres perspectivas )</span></p>
+        <p class="aquote__text">El texto y las imágenes siguen siendo HTML real, invisible. Lo que ves es su copia en WebGL, pegada a la misma posición mientras scrolleás, y por eso se pueden deformar, pixelar o mirar a través de una lente.</p>
+      </section>
+
+      <section class="amedia">
+        <figure>
+          <img data-gl="image" data-effect="liquid" data-variant="0" src="media/foto.png" alt="Retrato con colores naturales." />
+          <figcaption><span>Imagen 1</span> Liquid media</figcaption>
+        </figure>
+        <figure>
+          <img data-gl="image" data-effect="pixel" data-variant="1" src="media/foto.png" alt="Retrato con colores invertidos." />
+          <figcaption><span>Imagen 2</span> Pixel media</figcaption>
+        </figure>
+        <figure>
+          <img data-gl="image" data-effect="lens" data-variant="2" src="media/foto.png" alt="Retrato en blanco y negro." />
+          <figcaption><span>Imagen 3</span> Lens media</figcaption>
+        </figure>
+      </section>
+
+      <section class="aroll" aria-label="Estudio">
+        <span class="aroll__word" data-roll>ESTU</span>
+        <span class="aroll__word" data-roll>DIO</span>
+      </section>
+
+      <footer class="afoot" data-foot data-gl-clip>
+        <div class="afoot__inner" data-foot-inner>
+          <img data-gl="image" data-effect="lens" data-reflow src="media/foto.png" alt="" />
+          <p class="afoot__credit">Reconstrucción propia · WebGL puro</p>
+        </div>
+      </footer>
+
+      <section class="lib-notes" id="ficha">
+        <div class="lib-notes__inner">
+          <div><span class="lib-notes__kicker">Ficha técnica</span><h2>WebGL + DOM: portada y galería esférica</h2></div>
+          <div class="lib-notes__meta"><span>Referencia: Codrops · Atelier UI: Mixing WebGL and the DOM (J. Nallet)</span><span>Reconstrucción propia, sin React ni Three.js</span><span>WebGL · scroll suave · flowmap · transición de píxeles</span></div>
+          <div class="lib-notes__grid">
+            <div>
+              <h3>Cómo funciona</h3>
+              <ul>
+                <li><strong>Un solo canvas global</strong> fijo detrás de la página. Cada elemento con <code>data-gl</code> (texto o imagen) queda en el DOM con <code>opacity: 0</code> —accesible y seleccionable— y se dibuja como un plano WebGL en su lugar.</li>
+                <li><strong>Texto en WebGL:</strong> se leen los estilos calculados (fuente, tamaño, tracking, color) y se pinta en un canvas 2D del tamaño del elemento; ese canvas es la textura del plano.</li>
+                <li><strong>Sincronía con el scroll:</strong> las posiciones se miden una vez (y al redimensionar) en coordenadas de página; en cada cuadro solo se resta el scroll. El scroll suave mueve el contenido con <code>transform</code> y el canvas usa el mismo valor en el mismo cuadro. <code>data-reflow</code> mide en cada cuadro (el footer con parallax).</li>
+                <li><strong>Distorsión fluida:</strong> un <em>flowmap</em> de 128×128 en ping-pong guarda la velocidad del mouse y se disipa. El título y la portada (<code>data-fluid</code>) desplazan su UV con él.</li>
+                <li><strong>Efectos por imagen:</strong> el mismo plano con distinto shader: <em>liquid</em> (ondas bajo el cursor), <em>pixel</em> (bloques que crecen cerca del cursor) y <em>lens</em> (lupa con dispersión RGB).</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Para reutilizar</h3>
+              <ul>
+                <li>Marcá un <code>&lt;img&gt;</code> con <code>data-gl="image"</code> y <code>data-effect="liquid|pixel|lens|hero"</code>; <code>data-variant</code> 0/1/2 = color, invertido, grises. Un <code>&lt;span&gt;</code> con <code>data-gl="text"</code> se vuelve WebGL.</li>
+                <li>Las letras que ruedan (<code>data-roll</code>) son solo DOM + CSS: cada letra entra desde arriba o abajo al azar cuando la palabra aparece.</li>
+                <li>Los links con <code>data-transition</code> cubren la página con píxeles, navegan y la página nueva se destapa cuando cargó sus texturas. <code>data-preload</code> adelanta la carga.</li>
+                <li>Sin WebGL o con <code>prefers-reduced-motion</code>: el DOM queda visible tal cual, sin scroll suave ni efectos, y la transición es un fundido.</li>
+                <li>La foto es <code>media/foto.png</code> (144×200): para más nitidez, reemplazala por una más grande.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="ptrans" aria-hidden="true"></div>
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>WebGL + DOM</small></a>
+</body>
+</html>

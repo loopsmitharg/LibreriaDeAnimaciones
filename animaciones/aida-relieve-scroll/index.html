@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AIDA · Logo + relieve de Argentina · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="datos.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <section class="stage" id="stage">
+    <div class="sticky">
+      <canvas id="c" aria-label="Animación: el logo de AIDA y el relieve de Argentina se unen hasta quedar el logo encima del terreno"></canvas>
+
+      <header class="top"><b>AIDA</b><span id="phase">Logo + Terreno</span></header>
+
+      <div class="meter" aria-hidden="true">
+        <div class="rail"></div><div class="fill" id="mFill"></div><div class="dot" id="mDot"></div>
+        <span class="a">Separados</span><span class="b">Fusión</span>
+      </div>
+
+      <div class="hint" id="hint">Scroll<i></i></div>
+
+      <div class="caption" id="cap">
+        <small>Fusión completa</small>
+        <h2>AIDA <br /><em>Argentina</em></h2>
+        <p>El logo se posa sobre el relieve, línea por línea: de la Puna a la Patagonia, las Islas Malvinas y la Antártida.</p>
+      </div>
+      <div class="coords" id="coords">21°47′ S — 90° S<br />25° O — 73°34′ O</div>
+    </div>
+  </section>
+
+  <section class="outro">
+    <div>
+      <img id="outroLogo" src="media/aida-logo.webp" alt="AIDA" />
+      <p>Del logo al territorio</p>
+    </div>
+  </section>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>AIDA: logo + relieve de Argentina</h2></div>
+      <div class="lib-notes__meta"><span>Origen: AIDA · aida-argentina.html</span><span>Canvas 2D · sin librerías</span><span>Scroll sticky · líneas de relieve</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Cómo funciona</h3>
+          <ul>
+            <li><code>.stage</code> mide 520vh con un pin sticky de 100vh. El scroll se lee como <code>p</code> (0 a 1) y se suaviza en cada cuadro, independiente de los fps.</li>
+            <li><strong>Relieve:</strong> el mapa se corta en filas horizontales. Cada fila interseca los polígonos de Argentina, Malvinas y el sector antártico (proyectado como un abanico polar al este de la Patagonia) y toma la altura de una elevación estilizada: Andes por latitud, Puna, Aconquija, Famatina, sierras, mesetas, todo con ruido fbm/ridged.</li>
+            <li><strong>Logo en líneas:</strong> se lee el canal alfa del logo, se suaviza con dos pasadas de blur (bisel) y se muestrea sobre las mismas filas del terreno, así al final encajan línea por línea.</li>
+            <li><strong>Viaje:</strong> cada fila tiene su propio retardo (<code>STAG</code>), así el logo y el terreno se unen de arriba hacia abajo. Mientras viajan, ondulan con un seno (<code>wob</code>) que se apaga al llegar.</li>
+            <li>Cada línea rellena por debajo con el color de fondo: las filas de adelante tapan a las de atrás (efecto "Unknown Pleasures").</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Para reutilizar</h3>
+          <ul>
+            <li>Logo: <code>LOGO_SRC</code> en <code>script.js</code> (cualquier PNG/WebP con transparencia). El original lo tenía embebido en base64; acá es <code>media/aida-logo.webp</code>.</li>
+            <li>Territorio: <code>datos.js</code> (contorno continental) y <code>MAL</code> / <code>ANT</code> en <code>script.js</code>. Densidad de filas: <code>D</code>; altura del relieve: <code>HS</code>; relieve del logo: <code>LOGO_RELIEF</code>.</li>
+            <li>Duración del recorrido: <code>height</code> de <code>.stage</code>. Fases: el logo nítido se funde a líneas entre 1.5% y 8%, la unión va del 5% al 83% y el texto final aparece desde el 86%.</li>
+            <li>Con <code>prefers-reduced-motion</code> no hay ondulación ni suavizado: el dibujo sigue al scroll directamente.</li>
+            <li>Cambios respecto del HTML original: fuentes locales (IBM Plex Mono en lugar de JetBrains Mono) y logo como archivo aparte. La animación es la misma.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>AIDA relieve</small></a>
+</body>
+</html>

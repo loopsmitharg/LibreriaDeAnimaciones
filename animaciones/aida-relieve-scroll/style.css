@@ -1,0 +1,90 @@
+/* ==========================================================================
+   AIDA · Logo + relieve de Argentina (scroll)
+   Estilos traídos de aida-argentina.html. Cambios: fuentes locales de la
+   librería (Space Grotesk + IBM Plex Mono en lugar de JetBrains Mono).
+   ========================================================================== */
+:root {
+  --bg: #05080f;
+  --fg: #eef3fb;
+  --muted: #6f7d96;
+  --line: rgba(116, 172, 223, .25);
+  --cel: #74acdf;   /* celeste */
+  --sun: #f6b40e;   /* sol de mayo */
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--fg); }
+body { font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+/* Escena: 520vh de recorrido con un pin sticky de 100vh. */
+.stage { position: relative; height: 520vh; }
+.sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+#c { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* Viñeta */
+.sticky::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(0, 0, 0, .55) 100%);
+}
+
+.top {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px clamp(16px, 4vw, 48px);
+  font: 400 11px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+}
+.top b { color: var(--fg); font-weight: 400; }
+
+.hint {
+  position: absolute; left: 50%; bottom: clamp(20px, 4vh, 40px); transform: translateX(-50%); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  font: 400 10px/1 var(--mono); letter-spacing: .32em; text-transform: uppercase; color: var(--muted);
+  transition: opacity .4s;
+}
+.hint i { display: block; width: 1px; height: 46px; background: linear-gradient(var(--cel), transparent); animation: drip 2s cubic-bezier(.7, 0, .3, 1) infinite; }
+@keyframes drip {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* Medidor lateral: Separados → Fusión */
+.meter {
+  position: absolute; right: clamp(16px, 3vw, 40px); top: 50%; transform: translateY(-50%); z-index: 2;
+  height: 38vh; width: 60px;
+  font: 400 10px/1 var(--mono); letter-spacing: .2em; color: var(--muted); text-transform: uppercase;
+}
+.meter .rail { position: absolute; right: 0; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.meter .fill { position: absolute; right: 0; top: 0; width: 1px; background: var(--cel); height: 0; }
+.meter .dot { position: absolute; right: -3px; top: 0; width: 7px; height: 7px; margin-top: -3px; border-radius: 50%; background: var(--fg); box-shadow: 0 0 12px var(--cel); }
+.meter span { position: absolute; right: 14px; white-space: nowrap; }
+.meter .a { top: -4px; }
+.meter .b { bottom: -4px; }
+
+.caption { position: absolute; left: clamp(16px, 5vw, 72px); bottom: clamp(28px, 10vh, 110px); z-index: 2; max-width: 360px; opacity: 0; transform: translateY(16px); }
+.caption small { display: block; margin-bottom: 14px; font: 400 10px/1.6 var(--mono); letter-spacing: .28em; text-transform: uppercase; color: var(--cel); }
+.caption h2 { margin: 0; font-weight: 300; font-size: clamp(34px, 5.2vw, 72px); letter-spacing: -.03em; line-height: .95; }
+.caption h2 em { font-style: normal; color: var(--cel); }
+.caption p { margin: 16px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+.coords {
+  position: absolute; right: clamp(16px, 5vw, 72px); bottom: clamp(28px, 10vh, 110px); z-index: 2; opacity: 0;
+  text-align: right; font: 400 10px/1.9 var(--mono); letter-spacing: .2em; color: var(--muted);
+}
+
+.outro { min-height: 90vh; display: grid; place-items: center; padding: 80px 16px; text-align: center; border-top: 1px solid rgba(116, 172, 223, .12); }
+.outro img { width: min(320px, 70vw); height: auto; opacity: .9; }
+.outro p { margin: 28px 0 0; font: 400 11px/1.8 var(--mono); letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
+
+@media (max-width: 1000px) {
+  .caption { max-width: 200px; }
+  .caption h2 { font-size: 32px; }
+  .caption p { display: none; }
+}
+@media (max-width: 700px) {
+  .meter, .coords { display: none; }
+  .caption { top: 64px; bottom: auto; max-width: none; }
+  .caption small { margin-bottom: 8px; }
+  .caption h2 { font-size: 26px; }
+  .caption h2 br { display: none; }
+}
