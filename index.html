@@ -54,6 +54,9 @@
     .anim[data-origin="lusion"] { --accent: #d9f678; }
     .anim[data-origin="codrops"] { --accent: #f6a35c; }
     .anim[data-origin="aida"] { --accent: #74acdf; }
+    .anim[data-origin="eszter"] { --accent: #a199ff; }
+    .anim[data-origin="cuberto"] { --accent: #7c5cff; }
+    .anim[data-origin="unseen"] { --accent: #f2efe9; }
     .anim p code { padding: .05rem .3rem; border-radius: .25rem; background: rgba(255,255,255,.07); font: .85em "IBM Plex Mono", monospace; }
     .anim::before { content: ""; position: absolute; z-index: -1; inset: auto -30% -60% auto; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent); opacity: 0; transition: opacity .5s ease, transform .7s var(--ease); transform: scale(.7); }
     .anim:hover, .anim:focus-visible { border-color: color-mix(in srgb, var(--accent) 55%, transparent); transform: translateY(-4px); box-shadow: 0 1.5rem 3rem -1.75rem color-mix(in srgb, var(--accent) 60%, transparent); outline: none; }
@@ -81,8 +84,8 @@
       <h1>Librería de <em>animaciones</em></h1>
       <p class="lead">La base de las animaciones dinámicas que usamos en nuestros proyectos, aisladas y listas para copiar. Cada botón abre una demo funcionando con su ficha técnica al final.</p>
       <div class="stats" aria-label="Resumen">
-        <div><b>31</b>piezas</div>
-        <div><b>8</b>fuentes de origen</div>
+        <div><b>34</b>piezas</div>
+        <div><b>11</b>fuentes de origen</div>
         <div><b>GSAP 3.12.5</b>+ ScrollTrigger, local</div>
       </div>
     </div>
@@ -162,6 +165,11 @@
           <div><h3>Logo + relieve de Argentina</h3><p>Escena sticky en canvas: el logo hecho de líneas de relieve viaja fila por fila hasta posarse sobre el mapa en crestas de Argentina, Malvinas y la Antártida.</p></div>
           <div class="anim__foot"><span>Canvas 2D · sticky · ruido fbm</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
+        <a class="anim" data-origin="cuberto" href="animaciones/scroll-agencia/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">unfold_more</span><span class="anim__origin">Inspirado en cuberto.com</span></div>
+          <div><h3>Scroll de agencia</h3><p>Títulos que suben palabra por palabra, portada que se abre con clip-path y parallax, párrafo por líneas, acordeón de servicios que se abre con el scroll y proyectos en dos columnas desfasadas.</p></div>
+          <div class="anim__foot"><span>ScrollTrigger · clip-path · grid 0fr→1fr</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
       </div>
     </section>
 
@@ -203,6 +211,16 @@
           <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">layers</span><span class="anim__origin">Inspirado en Codrops</span></div>
           <div><h3>WebGL + DOM: portada y galería esférica</h3><p>Dos páginas. Portada con texto e imágenes WebGL pegados al scroll, distorsión fluida, efectos liquid/pixel/lens y letras que ruedan. Galería esférica arrastrable con zoom. Transición de píxeles entre ambas.</p></div>
           <div class="anim__foot"><span>WebGL · flowmap · scroll suave</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="eszter" href="animaciones/portfolio-liquido/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">sentiment_satisfied</span><span class="anim__origin">Inspirado en eszterbial.com</span></div>
+          <div><h3>Portfolio líquido</h3><p>Diez animaciones de un portfolio: loader por columnas, letras que se intercambian, carita SVG líquida, cursores propios, menú, tarjetas, insignia magnética, tema por scroll, ondas y puerta con rayos.</p></div>
+          <div class="anim__foot"><span>GSAP · SVG · Canvas 2D</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="unseen" href="animaciones/galeria-mundo/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">public</span><span class="anim__origin">Inspirado en unseen.co/world</span></div>
+          <div><h3>Galería mundo arrastrable</h3><p>Intro con esfera de alambre y un mundo infinito de fotos a distintas profundidades: arrastrás, la cámara sigue con inercia e inclinación, y al hacer clic la foto se abre con FLIP.</p></div>
+          <div class="anim__foot"><span>CSS 3D · grilla infinita · GSAP</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
       </div>
     </section>

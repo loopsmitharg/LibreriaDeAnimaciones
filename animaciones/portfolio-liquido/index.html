@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio líquido · Librería de Animaciones</title>
+  <!-- Estado inicial animado (máscaras abajo, loader). script.js lo quita si no hay GSAP o con movimiento reducido. -->
+  <script>document.documentElement.classList.add('pl-js');</script>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <!-- Display condensada para los títulos (única pieza no local, igual que en navegador-productos-3d). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- 1 · Loader: contador + columnas que se recogen -->
+  <div class="pl-loader" data-loader aria-hidden="true">
+    <div class="pl-loader__cols"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <span class="pl-loader__count" data-count>0%</span>
+  </div>
+
+  <!-- Grilla de fondo: 7 líneas verticales que crecen al terminar el loader -->
+  <div class="pl-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+  <header class="pl-head">
+    <a class="pl-logo" href="#inicio"><span>Portfolio</span><span>de un</span><span>estudio</span><span>ficticio</span></a>
+    <button type="button" class="pl-menu-btn" data-menu-open aria-haspopup="dialog" aria-expanded="false" aria-controls="pl-menu">Menú</button>
+  </header>
+
+  <!-- 8 · Menú: tarjeta con links que suben y letras que se intercambian al hover -->
+  <div class="pl-menu" id="pl-menu" role="dialog" aria-modal="true" aria-label="Menú" hidden>
+    <button type="button" class="pl-menu__close" data-menu-close aria-label="Cerrar menú"><i></i><i></i></button>
+    <nav class="pl-menu__links">
+      <a class="pl-menu__link" href="#inicio"><span class="pl-menu__inner">Inicio</span></a>
+      <a class="pl-menu__link" href="#sobre"><span class="pl-menu__inner">Sobre</span></a>
+      <a class="pl-menu__link" href="#proyectos"><span class="pl-menu__inner">Proyectos</span></a>
+      <a class="pl-menu__link" href="#contacto"><span class="pl-menu__inner">Contacto</span></a>
+    </nav>
+    <hr class="pl-menu__sep" />
+    <div class="pl-menu__foot"><a href="#ficha">Ficha técnica ↗</a><a href="../../index.html">Librería ↗</a></div>
+  </div>
+
+  <!-- 9 · Interruptor de tema con sol/luna -->
+  <button type="button" class="pl-theme" data-theme-toggle aria-label="Cambiar a tema oscuro" aria-pressed="false">
+    <span class="pl-theme__sun"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" /><g stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></g></svg></span>
+    <span class="pl-theme__moon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></svg></span>
+  </button>
+
+  <main>
+    <!-- 2 · Hero: títulos con máscara, letras que se intercambian, carita líquida -->
+    <section class="pl-hero" id="inicio">
+      <svg class="pl-smiley" data-liquid viewBox="0 0 500 500" aria-hidden="true">
+        <path data-shape="cara" />
+        <path data-shape="ojo-izq" />
+        <path data-shape="ojo-der" />
+        <path data-shape="sonrisa" />
+      </svg>
+      <h1 class="pl-hero__title">
+        <span class="pl-mask"><span class="pl-mask__in" data-swap>MOTION</span></span>
+        <span class="pl-mask pl-hero__serif"><span class="pl-mask__in">&amp; code</span></span>
+        <span class="pl-mask pl-hero__big"><span class="pl-mask__in" data-swap>DESIGNER</span></span>
+      </h1>
+      <p class="pl-hero__services">
+        <span class="pl-mask"><span class="pl-mask__in"><b>Lo que hacemos</b></span></span>
+        <span class="pl-mask"><span class="pl-mask__in">Identidad. Interfaces. Movimiento.</span></span>
+        <span class="pl-mask"><span class="pl-mask__in">Sitios estáticos rápidos.</span></span>
+      </p>
+    </section>
+
+    <section class="pl-about" id="sobre">
+      <p class="pl-kicker">Sobre el estudio</p>
+      <p class="pl-about__text" data-words>Hola. Somos un estudio inventado para esta demo. Diseñamos marcas e interfaces que se mueven con intención. Todavía sin gato.</p>
+    </section>
+
+    <!-- 4–6 · Proyectos: tarjetas con hover, cursor "VER" e insignia magnética -->
+    <section class="pl-projects" id="proyectos">
+      <div class="pl-projects__head">
+        <h2><span class="pl-serif">seleccionados</span><span class="pl-cond">PROYECTOS</span></h2>
+        <a class="pl-badge" href="#proyectos" data-magnetic aria-label="Ver todos los proyectos">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs><path id="pl-circulo" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
+            <circle cx="100" cy="100" r="98" />
+            <text><textPath href="#pl-circulo">VER TODOS LOS PROYECTOS • VER TODOS LOS PROYECTOS •</textPath></text>
+            <g class="pl-badge__face"><circle cx="100" cy="100" r="34" /><circle cx="89" cy="94" r="4" /><circle cx="111" cy="94" r="4" /><path d="M86 108q14 12 28 0" /></g>
+          </svg>
+        </a>
+      </div>
+      <div class="pl-cards">
+        <a class="pl-card" href="#proyectos" data-card>
+          <div class="pl-card__img"><div class="pl-art pl-art--1"></div><span class="pl-card__name" data-card-name>Festival Ruido</span></div>
+          <h3>Festival Ruido 2026</h3><p>Marca, web y app</p>
+        </a>
+        <a class="pl-card" href="#proyectos" data-card>
+          <div class="pl-card__img"><div class="pl-art pl-art--2"></div><span class="pl-card__name" data-card-name>Tasa Viva</span></div>
+          <h3>Tasa Viva</h3><p>Plataforma de valuación</p>
+        </a>
+        <a class="pl-card" href="#proyectos" data-card>
+          <div class="pl-card__img"><div class="pl-art pl-art--3"></div><span class="pl-card__name" data-card-name>Huerta Norte</span></div>
+          <h3>Huerta Norte</h3><p>Identidad visual</p>
+        </a>
+        <a class="pl-card" href="#proyectos" data-card>
+          <div class="pl-card__img"><div class="pl-art pl-art--4"></div><span class="pl-card__name" data-card-name>Óptica Luz</span></div>
+          <h3>Óptica Luz</h3><p>E-commerce y packaging</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- 7 · Contacto: tema oscuro por scroll, líneas de onda, título con seguidor, puerta con rayos -->
+    <section class="pl-contact" id="contacto" data-contact>
+      <canvas class="pl-waves" data-waves aria-hidden="true"></canvas>
+      <h2 class="pl-contact__title" data-contact-title><span data-swap>¿HACEMOS</span><span data-swap>ALGO JUNTOS?</span></h2>
+      <p class="pl-kicker">Escribinos</p>
+      <a class="pl-contact__mail" href="#contacto">hola@estudio-ficticio.test</a>
+      <div class="pl-door">
+        <span class="pl-door__label">Salida dramática en <b data-countdown>00:00:00</b></span>
+        <div class="pl-door__frame"><canvas data-rays width="160" height="220" aria-hidden="true"></canvas></div>
+      </div>
+    </section>
+
+    <section class="lib-notes" id="ficha">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Portfolio líquido: diez animaciones de un portfolio</h2></div>
+        <div class="lib-notes__meta"><span>Referencia: eszterbial.com</span><span>Reconstrucción propia: ni código ni arte del sitio</span><span>GSAP + ScrollTrigger · SVG · Canvas 2D</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><strong>Loader:</strong> el contador sube hasta el progreso real (fuentes cargadas), sale hacia arriba y 8 columnas se recogen (<code>scaleY: 0</code>, stagger 0.1). Al mismo tiempo crecen las 7 líneas de la grilla de fondo.</li>
+              <li><strong>Títulos con máscara:</strong> cada línea está dentro de un <code>overflow: hidden</code> y sube desde <code>y: 110%</code>.</li>
+              <li><strong>Intercambio de letras:</strong> cada letra tiene una copia. Cada 3–4 s, 1 o 2 letras al azar salen hacia la derecha mientras su copia entra desde la izquierda.</li>
+              <li><strong>Carita líquida:</strong> cada trazo SVG es una lista de puntos redibujada como spline Catmull-Rom. Encima se suman tres capas de senos (respiración, ondulación inversa, ruido) y un "arrastre": el mouse empuja los puntos cercanos en la dirección en que se mueve y un resorte los devuelve con rebote.</li>
+              <li><strong>Cursor:</strong> un punto propio que crece sobre links, una insignia "VER" sobre los proyectos y, sobre el título de contacto, una figura que lo sigue con lerp e inclinación según la velocidad.</li>
+              <li><strong>Tema:</strong> el interruptor anima sol y luna (giro + escala elástica). Además, al pasar los proyectos la página cambia sola a oscuro (solo en ≥768px).</li>
+              <li><strong>Ondas:</strong> 40 líneas en canvas. El mouse deja un rastro (historial de 20 posiciones) que las empuja hacia abajo y un resorte las devuelve.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li>Cada efecto es una función independiente en <code>script.js</code> (<code>loader()</code>, <code>intercambioLetras()</code>, <code>caritaLiquida()</code>, <code>cursor()</code>, <code>menu()</code>, <code>tarjetas()</code>, <code>magnetico()</code>, <code>tema()</code>, <code>ondas()</code>, <code>puerta()</code>) y se engancha por <code>data-*</code>.</li>
+              <li><code>data-swap</code> en cualquier texto activa el intercambio de letras; <code>data-magnetic</code> atrae un elemento hacia el cursor.</li>
+              <li>Los trazos de la carita se generan con funciones paramétricas (<code>FORMAS</code>): cambiá círculos y arcos por los puntos de tu propio dibujo.</li>
+              <li>Tema por variables CSS en <code>[data-theme]</code>. Las tarjetas usan arte en CSS; poné tu <code>&lt;img&gt;</code> dentro de <code>.pl-card__img</code>.</li>
+              <li>Con <code>prefers-reduced-motion</code>: sin loader, sin intercambio de letras ni ondulación, y títulos visibles de entrada. En pantallas táctiles no se muestra el cursor propio.</li>
+              <li>El original usa Lenis para el scroll suave; acá es scroll nativo. La fuente Anton viene de Google Fonts.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cursores -->
+  <div class="pl-cursor is-hidden" data-cursor aria-hidden="true"></div>
+  <div class="pl-cursor-view" data-cursor-view aria-hidden="true">VER</div>
+  <div class="pl-cursor-follow" data-cursor-follow aria-hidden="true">
+    <svg viewBox="0 0 120 120"><path d="M60 8c10 0 15 10 22 12s19-3 24 6-3 18-1 26 13 15 7 24-17 5-24 10-8 24-28 24-21-19-28-24-19-1-24-10 5-16 7-24-6-17-1-26 17-4 24-6S50 8 60 8z" /><circle cx="48" cy="54" r="4" /><circle cx="72" cy="54" r="4" /><path class="pl-cursor-follow__smile" d="M45 70q15 13 30 0" /></svg>
+  </div>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Portfolio líquido</small></a>
+</body>
+</html>

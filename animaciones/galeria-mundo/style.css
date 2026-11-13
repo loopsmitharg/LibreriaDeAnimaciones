@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Galería mundo arrastrable (inspirado en unseen.co/world · reconstrucción propia)
+   ========================================================================== */
+:root {
+  --bg: #050505;
+  --ink: #f2efe9;
+  --muted: rgba(242, 239, 233, .55);
+  --sans: "Outfit", system-ui, sans-serif;
+  --serif: "Playfair Display", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+
+/* ---------- Mundo ---------- */
+.gm {
+  /* overflow: clip (no hidden): un contenedor hidden igual se puede desplazar por
+     programa, y al enfocar una foto con Tab el navegador lo "scrollearía". */
+  position: relative; height: 100vh; height: 100svh; overflow: clip; background: var(--bg);
+  touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab;
+}
+.gm.is-dragging { cursor: grabbing; }
+.gm__stage { position: absolute; inset: 0; perspective: 900px; perspective-origin: 50% 50%; }
+.gm__plane { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+
+.gm-item {
+  position: absolute; left: 0; top: 0; margin: 0; padding: 0; border: 0; background: none; color: inherit; cursor: inherit;
+  transform-origin: 50% 50%; will-change: transform, opacity;
+}
+.gm-item__img { display: block; width: 100%; height: 100%; border-radius: 4px; background-size: cover; background-position: center; transition: transform .5s cubic-bezier(.2, .8, .2, 1); }
+.gm-item__label {
+  position: absolute; left: 0; top: calc(100% + .5rem); white-space: nowrap; opacity: 0; transform: translateY(6px);
+  font: 500 .72rem/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; transition: opacity .3s ease, transform .3s ease;
+}
+.gm-item__label b { display: block; font: 600 .95rem/1.2 var(--sans); letter-spacing: -.01em; text-transform: none; }
+.gm-item:hover .gm-item__img, .gm-item:focus-visible .gm-item__img { transform: scale(1.04); }
+.gm-item:hover .gm-item__label, .gm-item:focus-visible .gm-item__label { opacity: 1; transform: none; }
+.gm-item:focus-visible { outline: none; }
+.gm-item:focus-visible .gm-item__img { outline: 2px solid var(--ink); outline-offset: 4px; }
+
+/* Niebla: oscurece los bordes de la pantalla. */
+.gm__fog { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 95% at 50% 50%, transparent 45%, rgba(5, 5, 5, .9) 100%); }
+
+/* ---------- Interfaz ---------- */
+.gm__ui { position: absolute; z-index: 5; inset: 0 0 auto; display: flex; justify-content: space-between; align-items: flex-start; padding: 1.25rem clamp(1rem, 3vw, 2rem); pointer-events: none; }
+.gm__logo { font: 500 1.4rem/1 var(--serif); letter-spacing: -.02em; }
+.gm__logo sup { font-size: .5em; }
+.gm__hint { position: absolute; left: 50%; bottom: auto; top: 1.6rem; margin: 0; transform: translateX(-50%); color: var(--muted); font: 500 .68rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.gm__ficha { pointer-events: auto; padding: .55rem .9rem; border-radius: 999px; background: var(--ink); color: var(--bg); text-decoration: none; font: 600 .75rem/1 var(--sans); }
+.gm__ficha:focus-visible, .gm-intro__enter:focus-visible, .gm-detail__close:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 640px) { .gm__hint { top: auto; bottom: 5rem; } }
+
+/* ---------- Intro ---------- */
+.gm-intro { position: absolute; z-index: 6; inset: 0; display: grid; place-items: center; background: var(--bg); }
+.gm-intro__globe { position: absolute; left: calc(50% - min(35vmin, 280px)); top: calc(50% - min(35vmin, 280px)); width: min(70vmin, 560px); aspect-ratio: 1; }
+.gm-intro__title {
+  position: relative; margin: 0; display: flex; align-items: baseline; gap: .1em; text-transform: uppercase;
+  font: 700 clamp(2.4rem, 7vw, 5rem)/1 var(--sans); letter-spacing: -.04em;
+  text-shadow: -2px 0 rgba(255, 40, 80, .75), 2px 0 rgba(40, 200, 255, .75);   /* separación RGB */
+}
+.gm-intro__title em { font: italic 400 1em/1 var(--serif); text-transform: lowercase; letter-spacing: -.02em; }
+.gm-intro__enter {
+  /* Centrado sin transform: GSAP anima su y al entrar. */
+  position: absolute; left: 0; right: 0; bottom: 10vh; width: max-content; margin: 0 auto; display: grid; justify-items: center; gap: .7rem;
+  border: 0; background: none; color: var(--ink); cursor: pointer; font: 500 .85rem/1 var(--sans);
+}
+.gm-intro__enter svg { width: 3rem; height: 3rem; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.gm-intro__enter:hover svg { animation: gm-gira 1.6s linear infinite; }
+@keyframes gm-gira { to { transform: rotateY(360deg); } }
+.gm-intro[hidden] { display: none; }
+
+/* ---------- Detalle ---------- */
+.gm-detail { position: absolute; z-index: 8; inset: 0; display: grid; place-items: center; background: rgba(5, 5, 5, .82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.gm-detail[hidden] { display: none; }
+.gm-detail__img { position: fixed; left: 0; top: 0; border-radius: 6px; background-size: cover; background-position: center; box-shadow: 0 2rem 6rem rgba(0, 0, 0, .6); }
+/* Abajo a la izquierda, por encima del botón "Librería". */
+.gm-detail__info { position: absolute; left: clamp(1rem, 4vw, 3rem); bottom: 5.5rem; max-width: 22rem; }
+.gm-detail__num { font: 500 .72rem/1 var(--mono); letter-spacing: .14em; color: var(--muted); }
+.gm-detail__info h2 { margin: .6rem 0 .4rem; font: 500 clamp(1.8rem, 4vw, 3rem)/1 var(--serif); letter-spacing: -.02em; }
+.gm-detail__info p { margin: 0; color: var(--muted); font: 500 .8rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.gm-detail__close {
+  position: absolute; top: 1.25rem; right: clamp(1rem, 3vw, 2rem); display: inline-flex; align-items: center; gap: .5rem;
+  padding: .55rem .9rem; border: 1px solid rgba(242, 239, 233, .3); border-radius: 999px; background: none; color: var(--ink); cursor: pointer; font: 600 .75rem/1 var(--sans);
+}
+.gm-detail__close span { font-size: 1.1rem; line-height: .6; }
+
+/* ---------- Cursor ---------- */
+.gm-cursor { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .gm.has-cursor, .gm.has-cursor .gm-item { cursor: none; }
+  .gm.has-cursor .gm-cursor {
+    position: absolute; z-index: 9; left: 0; top: 0; display: grid; place-items: center; width: 5.5rem; height: 5.5rem; margin: -2.75rem 0 0 -2.75rem;
+    border: 1px solid rgba(242, 239, 233, .5); border-radius: 50%; pointer-events: none;
+    font: 500 .62rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; transition: width .3s ease, height .3s ease, margin .3s ease, background-color .3s ease, color .3s ease;
+  }
+  .gm.has-cursor .gm-cursor.is-view { width: 4.5rem; height: 4.5rem; margin: -2.25rem 0 0 -2.25rem; background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .gm.has-cursor .gm-cursor.is-hidden { opacity: 0; }
+}
+
+/* Sin JS: las fotos (si las hubiera) quedan en grilla normal. */
+.lib-notes { position: relative; z-index: 2; }

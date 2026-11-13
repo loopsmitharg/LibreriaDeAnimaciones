@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Scroll de agencia (inspirado en cuberto.com · reconstrucción propia)
+   Estado base: todo visible y el acordeón abierto. html.sa-js prepara los
+   estados iniciales; script.js la quita si no hay GSAP o con movimiento reducido.
+   ========================================================================== */
+:root {
+  --bg: #fff;
+  --ink: #000;
+  --muted: #6b6b6b;
+  --gray: #eee;
+  --sans: "Plus Jakarta Sans", "Outfit", system-ui, sans-serif;
+  --wrap: min(1080px, calc(100vw - 2.5rem));
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+
+/* ---------- Navegación ---------- */
+.sa-nav {
+  position: fixed; z-index: 50; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 2rem;
+  padding: 1rem clamp(1rem, 3vw, 2.5rem); background: rgba(255, 255, 255, .86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.sa-nav__logo { font: 600 1.05rem/1 var(--sans); letter-spacing: -.03em; }
+.sa-nav__logo b { color: #7c5cff; }
+.sa-nav nav { display: flex; gap: 1.5rem; margin-left: auto; font: 500 .82rem/1 var(--sans); }
+.sa-nav nav a, .sa-nav__cta { text-decoration: none; }
+.sa-nav__cta { padding: .6rem 1.1rem; border-radius: 999px; background: var(--ink); color: var(--bg); font: 600 .82rem/1 var(--sans); }
+.sa-nav a:focus-visible { outline: 2px solid #7c5cff; outline-offset: 3px; }
+@media (max-width: 640px) { .sa-nav nav { display: none; } .sa-nav__cta { margin-left: auto; } }
+
+/* ---------- Reveals ---------- */
+.sa-w { display: inline-block; overflow: clip; vertical-align: top; margin: -.2em; }
+.sa-w > span { display: inline-block; padding: .2em; }
+.sa-js [data-words] .sa-w > span { transform: translateY(100%); }
+.sa-line { display: block; overflow: clip; padding-bottom: .06em; }
+.sa-line > span { display: block; }
+.sa-js [data-lines] .sa-line > span { transform: translateY(105%); }
+.sa-js .sa-fade { opacity: 0; transform: translateY(16px); }
+
+/* ---------- Título ---------- */
+.sa-top { width: var(--wrap); margin: 0 auto; padding: clamp(7rem, 16vh, 10rem) 0 3rem; text-align: center; }
+.sa-top h1 { margin: 0 auto; max-width: 14ch; font: 500 clamp(2.6rem, 6.2vw, 5.2rem)/1.05 var(--sans); letter-spacing: -.04em; }
+.sa-top p { max-width: 40ch; margin: 1.5rem auto 0; color: #333; font: 400 1.02rem/1.5 var(--sans); }
+
+/* ---------- Portada ---------- */
+.sa-preview { width: var(--wrap); margin: 0 auto; }
+.sa-preview__frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 2rem; clip-path: inset(0% round 2rem); }
+.sa-js .sa-preview__frame { clip-path: inset(12% 9% round 2rem); }
+.sa-preview__media { position: absolute; inset: -6% 0; }   /* scale 1.05 lo pone GSAP */
+.sa-scene { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 100%, #2a2f6b 0, #12142e 50%, #07080f 100%); overflow: hidden; }
+.sa-scene__orb { position: absolute; left: 50%; top: 52%; width: 22%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 35% 30%, #fff3b0, #ffb21e 40%, #e05a00 75%); box-shadow: 0 0 120px rgba(255, 170, 40, .55); }
+.sa-scene__ring { position: absolute; left: 50%; top: 52%; width: 46%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%) rotateX(70deg); border: 2px solid rgba(160, 170, 255, .45); }
+.sa-scene__card { position: absolute; left: 12%; top: 22%; width: 18%; aspect-ratio: 9 / 16; border-radius: 1rem; background: linear-gradient(160deg, #c8ff5a, #5ae1ff); transform: rotate(-10deg); box-shadow: 0 30px 60px rgba(0,0,0,.4); }
+.sa-scene__card--b { left: auto; right: 12%; top: 30%; width: 24%; aspect-ratio: 16 / 10; background: linear-gradient(140deg, #7c5cff, #ff5ab4); transform: rotate(8deg); }
+
+/* ---------- Presentación ---------- */
+.sa-overview { width: var(--wrap); margin: 0 auto; padding: clamp(5rem, 12vh, 8rem) 0; display: grid; gap: 1.5rem; }
+@media (min-width: 800px) { .sa-overview { grid-template-columns: 1fr 1.25fr; } }
+.sa-label { margin: .5rem 0 0; font: 600 .72rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.sa-overview__text { margin: 0; font: 500 clamp(1.3rem, 2.4vw, 1.9rem)/1.3 var(--sans); letter-spacing: -.02em; }
+
+/* ---------- Acordeón de servicios ---------- */
+.sa-features { width: min(1000px, calc(100vw - 2.5rem)); margin: 0 auto; padding-bottom: clamp(6rem, 14vh, 9rem); }
+.sa-items { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.sa-item {
+  position: relative; overflow: hidden; border-radius: 1.4rem; color: var(--ink);
+  padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1.2rem, 3vw, 2.4rem);
+  transition: color .6s ease;
+}
+.sa-item__fill { position: absolute; inset: 0; background: var(--gray); transition: background-color .6s ease; }
+.sa-item__bg { position: absolute; right: 0; top: -15%; bottom: -15%; width: 45%; opacity: 0; transition: opacity .6s ease;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 45%); mask-image: linear-gradient(90deg, transparent, #000 45%); }
+.sa-item__head, .sa-item__acc { position: relative; }
+.sa-item__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.sa-item h3 { margin: 0; font: 500 clamp(1.3rem, 2.6vw, 2rem)/1.15 var(--sans); letter-spacing: -.02em; }
+.sa-item__num { font: 500 .85rem/1 var(--sans); opacity: .5; }
+/* Apertura en CSS: la fila de la grilla pasa de 0fr a 1fr (alto automático animable). */
+.sa-item__acc { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .7s cubic-bezier(.65, 0, .35, 1); }
+.sa-item__content { overflow: hidden; min-height: 0; }
+.sa-item__content p { max-width: 36ch; margin: 1.25rem 0 0; font: 400 .95rem/1.55 var(--sans); opacity: .85; }
+.sa-more { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.4rem; text-decoration: none; font: 600 .85rem/1 var(--sans); }
+.sa-more span { display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: #fff; color: #000; font-size: .9rem; }
+.sa-more:focus-visible { outline: 2px solid #7c5cff; outline-offset: 3px; }
+
+/* Estado abierto (y estado base sin JS). */
+.sa-item, .sa-item.is-open { color: #fff; }
+.sa-item .sa-item__fill, .sa-item.is-open .sa-item__fill { background: #000; }
+.sa-item .sa-item__bg, .sa-item.is-open .sa-item__bg { opacity: 1; }
+/* Con JS: cerrados hasta que el scroll los abre. */
+.sa-js .sa-item:not(.is-open) { color: var(--ink); }
+.sa-js .sa-item:not(.is-open) .sa-item__fill { background: var(--gray); }
+.sa-js .sa-item:not(.is-open) .sa-item__bg { opacity: 0; }
+.sa-js .sa-item:not(.is-open) .sa-item__acc { grid-template-rows: 0fr; }
+
+/* ---------- Sección oscura ---------- */
+.sa-work { position: relative; background: #000; color: #fff; border-radius: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem) 0 0; }
+.sa-work__inner { width: min(900px, calc(100vw - 2.5rem)); margin: 0 auto; padding: clamp(5rem, 12vh, 8rem) 0 clamp(6rem, 14vh, 10rem); }
+.sa-work h2 { margin: 0 0 clamp(3rem, 7vh, 5rem); font: 500 clamp(2.2rem, 4.6vw, 3.6rem)/1.05 var(--sans); letter-spacing: -.04em; }
+.sa-cards { display: grid; gap: 3rem clamp(1.5rem, 5vw, 4rem); }
+@media (min-width: 720px) {
+  .sa-cards { grid-template-columns: 1fr 1fr; }
+  /* Columna derecha desfasada hacia abajo. */
+  .sa-card:nth-child(even) { margin-top: 30%; margin-bottom: -30%; }
+}
+.sa-card { margin: 0; }
+.sa-card__img { aspect-ratio: 2 / 3; border-radius: 1rem; }
+.sa-card p { max-width: 32ch; margin: 1rem 0 0; color: #d6d6d6; font: 400 .9rem/1.45 var(--sans); }
+.sa-js .sa-card { opacity: 0; transform: translateY(60px); }
+
+/* ---------- Cierre ---------- */
+.sa-outro { background: #000; color: #fff; padding: clamp(6rem, 16vh, 10rem) 1.25rem; text-align: center; }
+.sa-outro h2 { max-width: 16ch; margin: 0 auto; font: 500 clamp(2.2rem, 5vw, 4.2rem)/1.05 var(--sans); letter-spacing: -.04em; }
+.sa-outro p { margin: 1.25rem 0 0; color: #bdbdbd; }
+
+/* ---------- Arte (reemplazable por fotos) ---------- */
+.sa-art--1 { background: radial-gradient(circle at 70% 40%, #7c5cff 0 14%, transparent 40%), repeating-linear-gradient(90deg, #1b1d33 0 14px, #262a4d 14px 28px); }
+.sa-art--2 { background: conic-gradient(from 200deg at 70% 50%, #0f172a, #2563eb, #06b6d4, #0f172a); }
+.sa-art--3 { background: radial-gradient(circle at 75% 50%, #ff5ab4 0 10%, transparent 11%), radial-gradient(circle at 75% 50%, transparent 0 22%, #3a2a4d 23% 24%, transparent 25%), linear-gradient(#1a1324, #0d0912); }
+.sa-art--4 { background: linear-gradient(135deg, #111 0 30%, #ffd400 30% 34%, #111 34% 60%, #ff3d00 60% 64%, #111 64%); }
+.sa-art--5 { background: repeating-radial-gradient(circle at 80% 50%, #181a2c 0 18px, #22253d 18px 36px); }
+.sa-art--w1 { background: radial-gradient(ellipse 50% 35% at 50% 65%, #f2f2f7 0 60%, transparent 62%), linear-gradient(160deg, #5b4bff, #2a1f8f); }
+.sa-art--w2 { background: linear-gradient(180deg, #8fb7e8 0 45%, #f0c9a0 45% 50%, #4b3a2e 50% 100%); }
+.sa-art--w3 { background: radial-gradient(circle at 40% 45%, #cfd6dd 0 30%, transparent 31%), linear-gradient(140deg, #e8ecef, #9aa5ae); }
+.sa-art--w4 { background: radial-gradient(circle at 30% 30%, #ff5a5a 0 12%, transparent 13%), linear-gradient(170deg, #f4f1ea, #d8d2c3); }
+
+.lib-notes { border-top: 0; }

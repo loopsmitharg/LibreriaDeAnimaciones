@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scroll de agencia · Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script>document.documentElement.classList.add('sa-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="sa-nav">
+    <span class="sa-nav__logo">estudio<b>.</b></span>
+    <nav aria-label="Secciones"><a href="#servicios">Servicios</a><a href="#proyectos">Proyectos</a><a href="#ficha">Ficha</a></nav>
+    <a class="sa-nav__cta" href="#contacto">Contacto</a>
+  </header>
+
+  <main>
+    <!-- 1 · Título: cada palabra sube desde su máscara -->
+    <section class="sa-top">
+      <h1 data-words>Diseño digital y desarrollo de producto</h1>
+      <p class="sa-fade">Diseñamos y construimos productos, marcas y sitios para equipos que quieren ir más allá de lo común.</p>
+    </section>
+
+    <!-- 2 · Portada: la tarjeta se abre con clip-path y el contenido hace parallax adentro -->
+    <section class="sa-preview" aria-label="Video de portada">
+      <div class="sa-preview__frame" data-preview>
+        <div class="sa-preview__media" data-preview-media>
+          <div class="sa-scene" aria-hidden="true"><i class="sa-scene__orb"></i><i class="sa-scene__ring"></i><i class="sa-scene__card"></i><i class="sa-scene__card sa-scene__card--b"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · Presentación: líneas que suben al entrar -->
+    <section class="sa-overview">
+      <p class="sa-label">Qué hacemos</p>
+      <p class="sa-overview__text" data-lines>Desde 2010 trabajamos con startups, empresas en crecimiento y marcas globales para diseñar productos, marcas y sitios que combinan buena forma con resultados medibles.</p>
+    </section>
+
+    <!-- 4 · Servicios: acordeón que se abre con el scroll -->
+    <section class="sa-features" id="servicios" aria-label="Servicios">
+      <ol class="sa-items">
+        <li class="sa-item is-open" data-item>
+          <span class="sa-item__fill" aria-hidden="true"></span>
+          <span class="sa-item__bg sa-art sa-art--1" aria-hidden="true" data-item-bg></span>
+          <div class="sa-item__head"><h3>Diseño de producto digital</h3><span class="sa-item__num">01</span></div>
+          <div class="sa-item__acc"><div class="sa-item__content">
+            <p>Del primer concepto a sistemas escalables: estrategia, UX e interfaces para convertir ideas complejas en experiencias claras.</p>
+            <a class="sa-more" href="#servicios">Explorar <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="sa-item" data-item>
+          <span class="sa-item__fill" aria-hidden="true"></span>
+          <span class="sa-item__bg sa-art sa-art--2" aria-hidden="true" data-item-bg></span>
+          <div class="sa-item__head"><h3>Diseño y desarrollo web</h3><span class="sa-item__num">02</span></div>
+          <div class="sa-item__acc"><div class="sa-item__content">
+            <p>Sitios rápidos y editables, con animación que acompaña el contenido en lugar de taparlo.</p>
+            <a class="sa-more" href="#servicios">Explorar <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="sa-item" data-item>
+          <span class="sa-item__fill" aria-hidden="true"></span>
+          <span class="sa-item__bg sa-art sa-art--3" aria-hidden="true" data-item-bg></span>
+          <div class="sa-item__head"><h3>Investigación UX e interfaz</h3><span class="sa-item__num">03</span></div>
+          <div class="sa-item__acc"><div class="sa-item__content">
+            <p>Entrevistas, pruebas y prototipos para decidir con datos antes de construir.</p>
+            <a class="sa-more" href="#servicios">Explorar <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="sa-item" data-item>
+          <span class="sa-item__fill" aria-hidden="true"></span>
+          <span class="sa-item__bg sa-art sa-art--4" aria-hidden="true" data-item-bg></span>
+          <div class="sa-item__head"><h3>Identidad de marca</h3><span class="sa-item__num">04</span></div>
+          <div class="sa-item__acc"><div class="sa-item__content">
+            <p>Tipografía, color y sistemas gráficos pensados para vivir en pantalla, en campañas y en el producto.</p>
+            <a class="sa-more" href="#servicios">Explorar <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="sa-item" data-item>
+          <span class="sa-item__fill" aria-hidden="true"></span>
+          <span class="sa-item__bg sa-art sa-art--5" aria-hidden="true" data-item-bg></span>
+          <div class="sa-item__head"><h3>Desarrollo creativo</h3><span class="sa-item__num">05</span></div>
+          <div class="sa-item__acc"><div class="sa-item__content">
+            <p>Movimiento, 3D e interacción con WebGL y GSAP para experiencias que una plantilla no logra.</p>
+            <a class="sa-more" href="#servicios">Explorar <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 5 · Sección oscura con bordes redondeados: proyectos en dos columnas desfasadas -->
+    <section class="sa-work" id="proyectos">
+      <div class="sa-work__inner">
+        <h2 data-words>Trabajos seleccionados</h2>
+        <div class="sa-cards">
+          <article class="sa-card" data-card><div class="sa-card__img sa-art sa-art--w1" data-card-img></div><p>Un ecosistema para descubrir, aprender y comprar vino sin esfuerzo.</p></article>
+          <article class="sa-card" data-card><div class="sa-card__img sa-art sa-art--w2" data-card-img></div><p>Marca y plataforma digital para un desarrollo inmobiliario desde cero.</p></article>
+          <article class="sa-card" data-card><div class="sa-card__img sa-art sa-art--w3" data-card-img></div><p>La presencia digital de un líder industrial, rediseñada.</p></article>
+          <article class="sa-card" data-card><div class="sa-card__img sa-art sa-art--w4" data-card-img></div><p>Una idea ambiciosa convertida en producto móvil y marca.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sa-outro" id="contacto">
+      <h2 data-words>¿Tenés un producto para construir o repensar?</h2>
+      <p class="sa-fade">Contanos dónde está hoy y adónde querés llevarlo.</p>
+    </section>
+
+    <section class="lib-notes" id="ficha">
+      <div class="lib-notes__inner">
+        <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Scroll de agencia</h2></div>
+        <div class="lib-notes__meta"><span>Referencia: cuberto.com (home)</span><span>Reconstrucción propia: ni código ni arte del sitio</span><span>GSAP + ScrollTrigger</span></div>
+        <div class="lib-notes__grid">
+          <div>
+            <h3>Cómo funciona</h3>
+            <ul>
+              <li><strong>Títulos:</strong> cada palabra va en un contenedor con <code>overflow: clip</code> y sube desde <code>yPercent: 100</code> con stagger cuando el título entra en pantalla.</li>
+              <li><strong>Portada:</strong> la tarjeta arranca recortada (<code>clip-path: inset(…) round</code>) y se abre del todo mientras scrolleás. Adentro, el contenido va de <code>yPercent -10</code> a <code>10</code> con <code>scale 1.05</code>: parallax sin dejar bordes vacíos.</li>
+              <li><strong>Presentación:</strong> el párrafo se parte en líneas reales (por posición de cada palabra) y cada línea sube desde su máscara.</li>
+              <li><strong>Acordeón por scroll:</strong> cada servicio se abre cuando su borde superior cruza el 70% de la pantalla y se cierra al volver. La apertura es CSS: <code>grid-template-rows: 0fr → 1fr</code> y el fondo pasa de gris a negro. La imagen de fondo hace parallax con scrub.</li>
+              <li><strong>Sección oscura:</strong> fondo negro con bordes superiores redondeados; las tarjetas entran con fundido y desplazamiento, y la columna derecha está desfasada y se mueve un poco más lento (parallax).</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Para reutilizar</h3>
+            <ul>
+              <li><code>data-words</code> en un título y <code>data-lines</code> en un párrafo activan los reveals; <code>data-item</code> arma el acordeón; <code>data-card</code> las tarjetas.</li>
+              <li>Umbral del acordeón: <code>start: 'top 70%'</code> en <code>script.js</code>. Velocidad de apertura: la <code>transition</code> de <code>.sa-item</code> en el CSS.</li>
+              <li>Las imágenes son arte en CSS (<code>.sa-art--*</code>); en un proyecto real va un <code>&lt;img&gt;</code> o <code>&lt;video&gt;</code> en el mismo lugar.</li>
+              <li>Sin GSAP o con <code>prefers-reduced-motion</code>: todo visible, acordeón abierto y sin parallax.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Scroll de agencia</small></a>
+</body>
+</html>
