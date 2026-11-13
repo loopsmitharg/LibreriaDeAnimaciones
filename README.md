@@ -50,7 +50,15 @@ Cada carpeta de `animaciones/` es autocontenida: para usar una animación en otr
 | `conector-apps-script` | Lectura de cupos (GET + polling) e inscripción (POST) contra Google Apps Script, con servidor simulado y plantilla `Code.gs` | GameOver · Torneos |
 | [`lusion`](animaciones/lusion/index.html) | Once demos con controles, reinicio y código para copiar. Incluye partículas SVG y objetos con caras CSS 3D | Estudio de movimiento · Inspirado en Lusion |
 
+| [`tipografia-loopsmith`](animaciones/tipografia-loopsmith/index.html) | Typography Playground: 30 animaciones sobre las letras reales del logo (interacción con física, scroll storytelling, reveals y experimentos), con galería, controles y código para copiar | Loop Smith · Logo |
+
+| [`loopsmith-3d`](animaciones/loopsmith-3d/index.html) | 3D Motion Lab: 24 experimentos con el logo como objetos 3D reales (Blender → GLB → Three.js + GSAP), con galería, materiales, controles y código | Loop Smith · Logo 3D |
+
 La colección `lusion` comparte un showcase. Cada efecto de `animaciones/lusion/effects/` tiene su propio CSS, JavaScript y ejemplo copiable. El [registro de investigación y uso](docs/LUSION_ANIMATION_RESEARCH.md) detalla los módulos y cómo integrarlos.
+
+La colección `tipografia-loopsmith` tiene su propio núcleo (`core/`: logo por piezas + kit de física y scroll) y una animación por archivo en `effects/`. La [guía de uso](docs/TYPOGRAPHY_PLAYGROUND.md) explica la reconstrucción del logo, la API, los ejemplos de integración, las pruebas hechas y los pendientes.
+
+`loopsmith-3d` tiene su propio pipeline (`blender/`: scripts, `.blend` y GLB), motor Three.js (`core/`) y un experimento por archivo (`effects/`). Three.js y cannon-es viven en `assets/vendor/`. La [guía](docs/LOOPSMITH_3D.md) documenta el modelado, la exportación, la API, las pruebas y los pendientes.
 
 > `conector-apps-script` arranca en **modo simulado** (`API_URL` vacío en su `script.js`): no envía datos a ninguna planilla. Para conectarlo a una real, pegá la URL `/exec` de tu implementación.
 

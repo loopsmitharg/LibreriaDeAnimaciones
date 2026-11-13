@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harness · Loop Smith 3D</title>
+<style>html,body{margin:0;height:100%;background:radial-gradient(120% 90% at 30% 10%,#15213a,#070a12 70%);color:#fff;font:14px system-ui}#host{position:fixed;inset:0;overflow:auto}.ls-canvas{display:block;width:100%;height:100%}</style>
+<script src="../../assets/vendor/gsap.min.js"></script><script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="core/scene.css">
+<script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+</head><body><div id="host"></div><script type="module">
+/* Herramienta de desarrollo: monta un experimento a pantalla completa. ?id=grab-throw&preset=chrome */
+import { mountExperience } from "./core/experience.js";
+import { EFFECTS } from "./effects/index.js";
+const q = new URLSearchParams(location.search), def = EFFECTS.find((e) => e.id === q.get("id")) || EFFECTS[0];
+const host = document.getElementById("host");
+window.__exp = await mountExperience(def, host, { scroller: def.scroll ? host : null, preset: q.get("preset"), force: true });
+window.__ready = true;
+</script></body></html>

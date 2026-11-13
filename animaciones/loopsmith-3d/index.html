@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Loop Smith — 3D Motion Lab: 24 experimentos 3D sobre el logo real modelado en Blender. Three.js, GSAP y ScrollTrigger.">
+  <title>3D Motion Lab · Loop Smith</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="../../assets/css/shell.css">
+  <link rel="stylesheet" href="core/scene.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../../assets/vendor/gsap.min.js"></script>
+  <script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="gallery.js"></script>
+</head>
+<body>
+  <header class="lab-bar lab-wrap">
+    <a class="lab-brand" href="index.html"><span aria-hidden="true"></span>LOOP SMITH <b>3D MOTION LAB</b></a>
+    <nav>
+      <a href="index.html">Colección</a>
+      <a href="../tipografia-loopsmith/index.html">Typography Playground <span aria-hidden="true">↗</span></a>
+      <a href="../../index.html">Librería <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <!-- Colección ---------------------------------------------------------- -->
+  <main id="collection" class="lab-wrap">
+    <section class="lab-hero">
+      <div class="lab-hero__copy">
+        <p class="lab-kicker">Colección 03 <span>/</span> Blender → GLB → Three.js</p>
+        <h1>3D Motion<br><em>Lab.</em></h1>
+        <p class="lab-lead">El logo de Loop Smith como esculturas digitales: modelado en Blender, exportado a glTF y animado en el navegador con Three.js y GSAP. Agarralo, lanzalo, hacelo caer, atravesalo con la cámara y reconstruilo con el scroll.</p>
+        <dl class="lab-stats"><div><dt id="stat-n">24</dt><dd>experimentos</dd></div><div><dt>10</dt><dd>piezas reales</dd></div><div><dt id="stat-tris">26k</dt><dd>triángulos</dd></div></dl>
+        <p class="lab-hint" id="hero-hint">Acercá el cursor al logo ↘</p>
+      </div>
+      <div class="lab-hero__stage" id="hero-stage" aria-label="Logo 3D interactivo"></div>
+    </section>
+
+    <nav class="lab-filters" id="filters" aria-label="Filtrar experimentos"></nav>
+
+    <section class="lab-best" id="best" aria-labelledby="best-title">
+      <header class="lab-group__head"><h2 id="best-title">Best of</h2><p>Los cinco que más rinden en una web comercial</p></header>
+      <ol id="best-list"></ol>
+    </section>
+
+    <div id="groups"></div>
+    <noscript><p>Activá JavaScript para ver las escenas 3D.</p></noscript>
+  </main>
+
+  <!-- Detalle ------------------------------------------------------------- -->
+  <main id="detail" class="lab-wrap" hidden>
+    <header class="lab-detail__head">
+      <div>
+        <a class="lab-kicker lab-up" href="index.html">← 3D Motion Lab</a>
+        <p class="lab-kicker" id="d-kicker"></p>
+        <h1 id="d-name"></h1>
+      </div>
+      <div><p class="lab-lead" id="d-lead"></p><p class="lab-hints" id="d-hints"></p></div>
+    </header>
+
+    <div class="lab-bench">
+      <section class="lab-preview" aria-label="Escena">
+        <div class="lab-strip">
+          <span id="d-state">Escena</span>
+          <div class="lab-actions">
+            <button type="button" id="b-play"><i class="material-icons-round" aria-hidden="true">replay</i>Replay</button>
+            <button type="button" id="b-pause"><i class="material-icons-round" aria-hidden="true">pause</i>Pausa</button>
+            <button type="button" id="b-reset"><i class="material-icons-round" aria-hidden="true">restart_alt</i>Reset</button>
+            <button type="button" id="b-full"><i class="material-icons-round" aria-hidden="true">fullscreen</i>Pantalla completa</button>
+            <a id="b-page" hidden><i class="material-icons-round" aria-hidden="true">open_in_new</i>Página completa</a>
+          </div>
+        </div>
+        <div class="lab-stage lab-stage--big" id="d-stage"></div>
+        <div class="lab-materials" id="d-materials" role="group" aria-label="Material del logo"></div>
+      </section>
+      <form class="lab-controls" id="d-controls" aria-label="Parámetros">
+        <div class="lab-strip"><span>Parámetros</span><button type="reset">Por defecto</button></div>
+        <div id="d-fields"></div>
+        <div class="lab-stats-box" id="d-stats" aria-live="off"></div>
+      </form>
+    </div>
+
+    <div class="lab-info">
+      <section><h2>Cómo funciona</h2><p id="d-tech"></p></section>
+      <section><h2>Táctil y responsive</h2><p id="d-mobile"></p></section>
+      <section class="lab-code">
+        <div class="lab-strip"><span>Integración</span><button type="button" id="b-copy">Copiar</button></div>
+        <pre><code id="d-code"></code></pre>
+      </section>
+    </div>
+    <nav class="lab-pager" aria-label="Otros experimentos"><a id="d-prev"></a><a id="d-next"></a></nav>
+  </main>
+
+  <section class="lib-notes" id="notes">
+    <div class="lib-notes__inner">
+      <header><span class="lib-notes__kicker">Ficha técnica</span><h2>3D Motion Lab: el logo de Loop Smith en 3D real</h2></header>
+      <div class="lib-notes__meta"><span>Blender 5.3 → glTF 2.0 (Draco)</span><span>Three.js r170</span><span>GSAP 3.12.5 + ScrollTrigger</span><span>cannon-es (colisiones)</span><span>Sin frameworks</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Pipeline</h3>
+          <ul>
+            <li><code>blender/prepare_logo_polys.py</code>: contornos limpios del logo (Outfit 700) desde la colección anterior.</li>
+            <li><code>blender/build_logo.py</code>: modela en Blender (solidify + bisel), asigna materiales PBR, guarda el <code>.blend</code> y exporta los GLB.</li>
+            <li><code>assets/models/loopsmith-logo.glb</code>: jerarquía <code>LoopSmith3D › Symbol · Wordmark › Letter_00…08 · Metadata</code>.</li>
+            <li><code>core/</code>: motor, logo, kit y física. <code>effects/</code>: un experimento por archivo.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Reutilizar</h3>
+          <ul>
+            <li>Cada experimento: <code>mountExperience(def, contenedor, opciones)</code> → <code>play · pause · reset · destroy</code>.</li>
+            <li>Escenas de scroll: pasá <code>{ scroller: window }</code> o un elemento con overflow.</li>
+            <li>El GLB se carga una sola vez por página; los materiales son de cada instancia.</li>
+            <li>Con <code>prefers-reduced-motion</code> se muestra el logo 3D quieto. La guía completa está en <code>docs/LOOPSMITH_3D.md</code>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>3D Motion Lab</small></a>
+</body>
+</html>

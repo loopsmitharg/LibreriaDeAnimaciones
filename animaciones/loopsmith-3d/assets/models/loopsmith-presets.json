@@ -1,0 +1,239 @@
+{
+ "presets": {
+  "original": {
+   "label": "Original 3D",
+   "loop": {
+    "color": "#f1f5f9",
+    "roughness": 0.36,
+    "metallic": 0,
+    "coat": 0.35,
+    "coatRoughness": 0.12,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "smith": {
+    "color": "#a3e635",
+    "roughness": 0.4,
+    "metallic": 0,
+    "coat": 0.35,
+    "coatRoughness": 0.12,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "symbol": {
+    "color": "#ffffff",
+    "roughness": 0.5,
+    "metallic": 0,
+    "coat": 0.1,
+    "coatRoughness": 0.25,
+    "transmission": 0,
+    "ior": 1.5,
+    "texture": "symbol_gradient.png"
+   },
+   "ink": {
+    "color": "#152627",
+    "roughness": 0.5,
+    "metallic": 0,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   }
+  },
+  "black": {
+   "label": "Studio Black",
+   "loop": {
+    "color": "#0a0c11",
+    "roughness": 0.28,
+    "metallic": 0,
+    "coat": 1,
+    "coatRoughness": 0.06,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "smith": {
+    "color": "#0a0c11",
+    "roughness": 0.28,
+    "metallic": 0,
+    "coat": 1,
+    "coatRoughness": 0.06,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "symbol": {
+    "color": "#0a0c11",
+    "roughness": 0.26,
+    "metallic": 0,
+    "coat": 1,
+    "coatRoughness": 0.05,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "ink": {
+    "color": "#a3e635",
+    "roughness": 0.4,
+    "metallic": 0,
+    "coat": 0.3,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   }
+  },
+  "lime": {
+   "label": "Satin Lime",
+   "loop": {
+    "color": "#a3e635",
+    "roughness": 0.46,
+    "metallic": 0,
+    "coat": 0.15,
+    "coatRoughness": 0.2,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "smith": {
+    "color": "#a3e635",
+    "roughness": 0.46,
+    "metallic": 0,
+    "coat": 0.15,
+    "coatRoughness": 0.2,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "symbol": {
+    "color": "#a3e635",
+    "roughness": 0.42,
+    "metallic": 0,
+    "coat": 0.2,
+    "coatRoughness": 0.15,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "ink": {
+    "color": "#152627",
+    "roughness": 0.5,
+    "metallic": 0,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   }
+  },
+  "chrome": {
+   "label": "Chrome",
+   "loop": {
+    "color": "#f2f4f8",
+    "roughness": 0.06,
+    "metallic": 1,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "smith": {
+    "color": "#f2f4f8",
+    "roughness": 0.06,
+    "metallic": 1,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "symbol": {
+    "color": "#f2f4f8",
+    "roughness": 0.05,
+    "metallic": 1,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "ink": {
+    "color": "#1b2026",
+    "roughness": 0.14,
+    "metallic": 1,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   }
+  },
+  "glass": {
+   "label": "Glass",
+   "loop": {
+    "color": "#e4f6ec",
+    "roughness": 0.04,
+    "metallic": 0,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 1,
+    "ior": 1.5
+   },
+   "smith": {
+    "color": "#d9f7a0",
+    "roughness": 0.04,
+    "metallic": 0,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 1,
+    "ior": 1.5
+   },
+   "symbol": {
+    "color": "#e4f6ec",
+    "roughness": 0.04,
+    "metallic": 0,
+    "coat": 0,
+    "coatRoughness": 0.1,
+    "transmission": 1,
+    "ior": 1.5
+   },
+   "ink": {
+    "color": "#a3e635",
+    "roughness": 0.35,
+    "metallic": 0,
+    "coat": 0.3,
+    "coatRoughness": 0.1,
+    "transmission": 0,
+    "ior": 1.5
+   }
+  },
+  "porcelain": {
+   "label": "Porcelain",
+   "loop": {
+    "color": "#f6f4ef",
+    "roughness": 0.17,
+    "metallic": 0,
+    "coat": 1,
+    "coatRoughness": 0.03,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "smith": {
+    "color": "#f6f4ef",
+    "roughness": 0.17,
+    "metallic": 0,
+    "coat": 1,
+    "coatRoughness": 0.03,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "symbol": {
+    "color": "#f6f4ef",
+    "roughness": 0.17,
+    "metallic": 0,
+    "coat": 1,
+    "coatRoughness": 0.03,
+    "transmission": 0,
+    "ior": 1.5
+   },
+   "ink": {
+    "color": "#152627",
+    "roughness": 0.45,
+    "metallic": 0,
+    "coat": 0.6,
+    "coatRoughness": 0.05,
+    "transmission": 0,
+    "ior": 1.5
+   }
+  }
+ }
+}

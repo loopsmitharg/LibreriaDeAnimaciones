@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Prueba del pipeline Blender → GLB → Three.js</title>
+<style>html,body{margin:0;height:100%;background:#0b1120}canvas{display:block;width:100%;height:100%}</style>
+<script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/"}}</script>
+</head><body><script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setSize(innerWidth, innerHeight); document.body.append(r.domElement);
+const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, .1, 50); cam.position.set(1.6, .8, 3);
+scene.environment = new THREE.PMREMGenerator(r).fromScene(new RoomEnvironment(), .04).texture;
+const sun = new THREE.DirectionalLight(0xffffff, 2); sun.position.set(2, 3, 4); scene.add(sun);
+const gltf = await new GLTFLoader().loadAsync("assets/models/pipeline_test.glb");
+const mesh = gltf.scene.getObjectByName("PipelineTest_L"); scene.add(gltf.scene);
+const box = new THREE.Box3().setFromObject(mesh), size = box.getSize(new THREE.Vector3());
+window.__test = { name: mesh.name, size: size.toArray(), tris: mesh.geometry.index.count / 3, material: mesh.material.name, mesh, cam };
+cam.lookAt(0, 0, 0);
+let t = 0; r.setAnimationLoop(() => { t += .01; mesh.rotation.set(Math.sin(t) * .6, t, Math.cos(t * .7) * .4); r.render(scene, cam); });
+window.__ready = true;
+</script></body></html>

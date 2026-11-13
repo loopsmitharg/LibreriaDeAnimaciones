@@ -1,0 +1,17 @@
+/* Logo de Loop Smith por piezas. Todo cuelga de .lsl: no hay reglas globales.
+   La escala la da font-size (1em = lado del símbolo). */
+.lsl {
+  position: relative; display: block; flex: none;
+  width: calc(var(--lsl-w) * 1em); height: 1em;
+  font-size: var(--lsl-size, 4rem); line-height: 1;
+  color: var(--lsl-ink, currentColor);
+  user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.lsl__part { position: absolute; display: block; transform-origin: 50% 50%; }
+/* Área de agarre generosa: la "i" mide .08em de ancho. */
+.lsl__part::before { content: ""; position: absolute; inset: -.07em; }
+.lsl__part svg { display: block; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.lsl__part path { fill: currentColor; }
+.lsl__letter[data-word="1"] { color: var(--lsl-accent, #a3e635); }
+.lsl--drag .lsl__part { cursor: grab; touch-action: none; }
+.lsl--drag .lsl__part.is-held { cursor: grabbing; z-index: 2; }

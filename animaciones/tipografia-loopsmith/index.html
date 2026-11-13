@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Typography Playground: 30 animaciones tipográficas construidas sobre las letras reales del logo de Loop Smith. HTML, CSS, JavaScript y GSAP.">
+  <title>Typography Playground · Loop Smith</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="../../assets/css/shell.css">
+  <link rel="stylesheet" href="core/logo.css">
+  <link rel="stylesheet" href="core/kit.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="core/logo-data.js"></script>
+  <script defer src="core/logo.js"></script>
+  <script defer src="core/kit.js"></script>
+  <script defer src="effects/01-letter-playground.js"></script>
+  <script defer src="effects/02-magnetic-letters.js"></script>
+  <script defer src="effects/03-elastic-typography.js"></script>
+  <script defer src="effects/04-gravity-drop.js"></script>
+  <script defer src="effects/05-cursor-ripple.js"></script>
+  <script defer src="effects/06-letter-swap.js"></script>
+  <script defer src="effects/07-hover-personality.js"></script>
+  <script defer src="effects/08-mouse-constellation.js"></script>
+  <script defer src="effects/09-scroll-assembly.js"></script>
+  <script defer src="effects/10-scroll-explosion.js"></script>
+  <script defer src="effects/11-scroll-tunnel.js"></script>
+  <script defer src="effects/12-sticky-transformation.js"></script>
+  <script defer src="effects/13-horizontal-journey.js"></script>
+  <script defer src="effects/14-scroll-wave.js"></script>
+  <script defer src="effects/15-section-transition.js"></script>
+  <script defer src="effects/16-pinned-cinematic.js"></script>
+  <script defer src="effects/17-precision-reveal.js"></script>
+  <script defer src="effects/18-letter-cascade.js"></script>
+  <script defer src="effects/19-deconstructed-identity.js"></script>
+  <script defer src="effects/20-masked-typography.js"></script>
+  <script defer src="effects/21-liquid-letters.js"></script>
+  <script defer src="effects/22-echo-typography.js"></script>
+  <script defer src="effects/23-physics-lab.js"></script>
+  <script defer src="effects/24-infinite-loop.js"></script>
+  <script defer src="effects/25-kinetic-grid.js"></script>
+  <script defer src="effects/26-velocity-distortion.js"></script>
+  <script defer src="effects/27-perspective-cards.js"></script>
+  <script defer src="effects/28-scramble-identity.js"></script>
+  <script defer src="effects/29-letter-sequencer.js"></script>
+  <script defer src="effects/30-ultimate-experience.js"></script>
+  <script defer src="playground.js"></script>
+</head>
+<body>
+  <header class="tp-bar tp-wrap">
+    <a class="tp-bar__brand" href="index.html" id="bar-logo" aria-label="Typography Playground, inicio"></a>
+    <nav>
+      <a href="index.html">Colección</a>
+      <a href="../../index.html">Librería <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <!-- Colección ------------------------------------------------------------ -->
+  <main id="collection" class="tp-wrap">
+    <section class="tp-hero">
+      <div class="tp-hero__copy">
+        <p class="tp-kicker">Colección 02 <span>/</span> Loop Smith</p>
+        <h1>Typography<br><em>Playground.</em></h1>
+        <p class="tp-lead">Treinta animaciones construidas sobre las letras reales del logo. Cada carácter es una pieza independiente: se arrastra, cae, viaja con el scroll y siempre vuelve a formar la marca.</p>
+        <dl class="tp-stats">
+          <div><dt>30</dt><dd>animaciones</dd></div>
+          <div><dt>10</dt><dd>piezas del logo</dd></div>
+          <div><dt>0</dt><dd>frameworks</dd></div>
+        </dl>
+      </div>
+      <div class="tp-hero__stage" id="hero-stage" aria-label="Logo interactivo: acercá el cursor"></div>
+    </section>
+
+    <nav class="tp-filters" aria-label="Filtrar animaciones" id="filters"></nav>
+
+    <section class="tp-best" id="best" aria-labelledby="best-title">
+      <header class="tp-group__head"><h2 id="best-title">Best of</h2><p>Las cinco que más rinden en una web comercial</p></header>
+      <ol id="best-list"></ol>
+    </section>
+
+    <div id="groups"></div>
+    <noscript><p>Activá JavaScript para ver las animaciones.</p></noscript>
+  </main>
+
+  <!-- Detalle -------------------------------------------------------------- -->
+  <main id="detail" class="tp-wrap" hidden>
+    <header class="tp-detail__head">
+      <div>
+        <a class="tp-kicker tp-up" href="index.html">← Typography Playground</a>
+        <p class="tp-kicker" id="d-kicker"></p>
+        <h1 id="d-name"></h1>
+      </div>
+      <div>
+        <p class="tp-lead" id="d-lead"></p>
+        <p class="tp-hints" id="d-hints"></p>
+      </div>
+    </header>
+
+    <div class="tp-bench">
+      <section class="tp-preview" aria-label="Vista previa">
+        <div class="tp-strip">
+          <span>Vista previa</span>
+          <div class="tp-actions">
+            <button type="button" id="b-play"><span class="material-icons-round" aria-hidden="true">replay</span>Replay</button>
+            <button type="button" id="b-pause"><span class="material-icons-round" aria-hidden="true">pause</span>Pausa</button>
+            <button type="button" id="b-reset"><span class="material-icons-round" aria-hidden="true">restart_alt</span>Reset</button>
+            <a id="b-full" hidden><span class="material-icons-round" aria-hidden="true">open_in_full</span>Página completa</a>
+          </div>
+        </div>
+        <div class="tp-stage tp-stage--big" id="d-stage"></div>
+      </section>
+      <form class="tp-controls" id="d-controls" aria-label="Parámetros">
+        <div class="tp-strip"><span>Parámetros</span><button type="reset">Valores por defecto</button></div>
+        <div id="d-fields"></div>
+      </form>
+    </div>
+
+    <div class="tp-info">
+      <section><h2>Cómo funciona</h2><p id="d-tech"></p></section>
+      <section><h2>Táctil y responsive</h2><p id="d-mobile"></p></section>
+      <section class="tp-code">
+        <div class="tp-strip"><span>Integración</span><button type="button" id="b-copy">Copiar</button></div>
+        <pre><code id="d-code"></code></pre>
+      </section>
+    </div>
+
+    <nav class="tp-pager" aria-label="Otras animaciones"><a id="d-prev"></a><a id="d-next"></a></nav>
+  </main>
+
+  <section class="lib-notes" id="notes">
+    <div class="lib-notes__inner">
+      <header>
+        <span class="lib-notes__kicker">Ficha técnica</span>
+        <h2>Typography Playground: 30 animaciones sobre el logo de Loop Smith</h2>
+      </header>
+      <div class="lib-notes__meta"><span>HTML · CSS · JavaScript</span><span>GSAP 3.12.5 + ScrollTrigger</span><span>Sin frameworks ni WebGL</span><span>Contornos: Outfit 700 (OFL)</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Cómo está armado</h3>
+          <ul>
+            <li><code>core/logo-data.js</code>: geometría del lockup generada desde la fuente (<code>tools/build-logo-data.py</code>). Cada letra es un contorno real de Outfit 700, con el kerning y el espaciado del lockup del sitio.</li>
+            <li><code>core/logo.js</code>: Master Logo. Renderiza el lockup con una pieza por carácter y lo restaura exacto.</li>
+            <li><code>core/kit.js</code>: ciclo de vida, física, puntero, arrastre, poses y escenas de scroll aisladas.</li>
+            <li><code>effects/NN-nombre.js</code>: una animación por archivo, con <code>play / pause / reset / destroy</code>.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Qué tocar para reutilizar</h3>
+          <ul>
+            <li>Copiar <code>core/</code> y los <code>effects/</code> que hagan falta, más GSAP (y ScrollTrigger para las de scroll).</li>
+            <li>El contenedor define el tamaño: la animación ocupa el 100% de su ancho y alto.</li>
+            <li>Colores con <code>--lst-accent</code>, <code>--lsl-ink</code> y <code>--lsl-accent</code> en el contenedor.</li>
+            <li>Las escenas de scroll usan la ventana por defecto; con <code>{ scroller: elemento }</code> quedan encapsuladas.</li>
+            <li>Con <code>prefers-reduced-motion</code> se muestra el logo completo y quieto.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Typography Playground</small></a>
+</body>
+</html>
