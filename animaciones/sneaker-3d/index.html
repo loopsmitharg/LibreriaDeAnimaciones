@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sneaker 3D — Product Motion Experience: una zapatilla de running modelada pieza por pieza en Blender, con despiece por scroll y un par en ciclo de carrera. Three.js + GSAP.">
+  <title>Sneaker 3D — Product Motion Experience · Loop Smith</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="styles/sneaker.css">
+  <link rel="stylesheet" href="styles/page.css">
+  <script src="../../assets/vendor/gsap.min.js"></script>
+  <script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/"}}</script>
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <header class="top">
+    <a href="index.html">Loop Smith <b>Sneaker 3D</b></a>
+    <nav><a href="#exploded">Despiece</a><a href="#running">Carrera</a><a href="../../index.html">Librería ↗</a></nav>
+  </header>
+
+  <main>
+    <section class="exploded" id="exploded" aria-label="Exploded Sneaker: despiece controlado por scroll">
+      <h1 class="hero-title" id="hero-title"><span>LS·01 Runner</span>Exploded Sneaker</h1>
+      <p class="hint" id="hint">Scroll ↓</p>
+      <div class="loading" id="load-exploded">Cargando modelo</div>
+    </section>
+
+    <section class="bridge">
+      <small>Mismo modelo · par completo</small>
+      <h2>Running Pair</h2>
+      <p>La misma zapatilla, ahora izquierda y derecha, en un ciclo de carrera continuo: contacto, carga, impulso, despegue y recuperación. El antepié flexiona y la espuma se comprime; el contrafuerte y la goma no.</p>
+    </section>
+
+    <section class="running" id="running" aria-label="Running Pair: ciclo de carrera">
+      <div class="loading" id="load-running">Cargando modelo</div>
+    </section>
+  </main>
+
+  <footer class="foot"><span>Sneaker 3D — Product Motion Experience</span><span>Blender · glTF · Three.js · GSAP ScrollTrigger</span></footer>
+</body>
+</html>

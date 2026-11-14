@@ -1,0 +1,23 @@
+/* Sneaker 3D — página de la colección (las experiencias solo necesitan sneaker.css). */
+:root { --sn-bg: #e9e8e4; --sn-ink: #17181a; --sn-mute: #6d6f73; --sn-accent: #7fae12; --sn-line: rgba(23, 24, 26, .12); --sn-sans: "Space Grotesk", system-ui, sans-serif; --sn-mono: "IBM Plex Mono", ui-monospace, monospace; }
+* { box-sizing: border-box; }
+html { background: var(--sn-bg); }
+body { margin: 0; color: var(--sn-ink); font: 400 1rem/1.55 var(--sn-sans); -webkit-font-smoothing: antialiased; background: var(--sn-bg); }
+a { color: inherit; }
+.top { position: fixed; z-index: 30; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: clamp(.9rem, 2vw, 1.4rem) clamp(1.25rem, 6vw, 5.5rem); font: 500 .7rem/1 var(--sn-mono); letter-spacing: .14em; text-transform: uppercase; }
+.top a { text-decoration: none; } .top a:hover { color: var(--sn-accent); }
+.top b { font-weight: 500; color: var(--sn-mute); margin-left: .6rem; }
+.top nav { display: flex; gap: 1.4rem; }
+.exploded { position: relative; background: radial-gradient(90% 70% at 50% 46%, #f6f5f2 0%, #e9e8e4 55%, #d9d8d3 100%); }
+.hero-title { position: absolute; z-index: 2; left: clamp(1.25rem, 6vw, 5.5rem); top: clamp(5rem, 16vh, 9rem); margin: 0; max-width: 11ch; font: 600 clamp(2.6rem, 7.2vw, 6.4rem)/.94 var(--sn-sans); letter-spacing: -.045em; pointer-events: none; }
+.hero-title span { display: block; margin-bottom: 1.1rem; font: 500 .7rem/1 var(--sn-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--sn-mute); }
+.hint { position: absolute; z-index: 2; right: clamp(1.25rem, 6vw, 5.5rem); bottom: clamp(3.5rem, 11vh, 7rem); font: 500 .7rem/1 var(--sn-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--sn-mute); pointer-events: none; }
+.bridge { padding: clamp(5rem, 14vh, 9rem) clamp(1.25rem, 6vw, 5.5rem); border-top: 1px solid var(--sn-line); background: #dedcd7; }
+.bridge small { display: block; margin-bottom: 1rem; font: 500 .7rem/1 var(--sn-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--sn-mute); }
+.bridge h2 { margin: 0; max-width: 18ch; font: 600 clamp(2rem, 5vw, 4.2rem)/1 var(--sn-sans); letter-spacing: -.04em; text-wrap: balance; }
+.bridge p { margin: 1.4rem 0 0; max-width: 34rem; color: var(--sn-mute); }
+.running { position: relative; height: 100vh; height: 100svh; min-height: 30rem; background: radial-gradient(100% 75% at 50% 55%, #eeede9 0%, #dedcd7 60%, #cbc9c3 100%); overflow: hidden; }
+.loading { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; font: 500 .7rem/1 var(--sn-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--sn-mute); pointer-events: none; transition: opacity .5s; }
+.loading.done { opacity: 0; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding: 1.6rem clamp(1.25rem, 6vw, 5.5rem); border-top: 1px solid var(--sn-line); background: #dedcd7; font: 500 .7rem/1.5 var(--sn-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--sn-mute); }
+@media (max-width: 640px) { .top nav a:not(:last-child) { display: none; } }

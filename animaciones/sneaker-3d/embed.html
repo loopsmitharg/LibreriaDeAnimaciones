@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sneaker 3D · ejemplo de integración</title>
+  <!-- Ejemplo mínimo: cada experiencia sola en un contenedor, sin la página de la colección.
+       embed.html?exp=exploded | embed.html?exp=running   (+ &quality=low|high) -->
+  <link rel="stylesheet" href="styles/sneaker.css">
+  <style>
+    body { margin: 0; background: #e9e8e4; font: 14px/1.4 system-ui, sans-serif; }
+    #box.running { height: 100vh; }
+    #off { position: fixed; z-index: 9; top: 12px; right: 12px; padding: 8px 14px; border: 1px solid #0003; border-radius: 99px; background: #fff9; cursor: pointer; }
+  </style>
+  <script src="../../assets/vendor/gsap.min.js"></script>
+  <script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/"}}</script>
+</head>
+<body>
+  <button id="off" type="button">Desmontar</button>
+  <div id="box"></div>
+  <script type="module">
+    import { mountExploded, mountRunning } from "./src/index.js";
+    const box = document.querySelector("#box"), running = new URLSearchParams(location.search).get("exp") === "running";
+    box.classList.toggle("running", running);
+    let exp = await (running ? mountRunning(box, { controls: true }) : mountExploded(box));
+    window.__exp = exp; window.__ready = true;
+    document.querySelector("#off").onclick = () => { exp?.destroy(); exp = window.__exp = null; };   // libera GPU, listeners y DOM
+  </script>
+</body>
+</html>

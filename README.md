@@ -53,6 +53,7 @@ Cada carpeta de `animaciones/` es autocontenida: para usar una animación en otr
 | [`tipografia-loopsmith`](animaciones/tipografia-loopsmith/index.html) | Typography Playground: 30 animaciones sobre las letras reales del logo (interacción con física, scroll storytelling, reveals y experimentos), con galería, controles y código para copiar | Loop Smith · Logo |
 
 | [`loopsmith-3d`](animaciones/loopsmith-3d/index.html) | 3D Motion Lab: 24 experimentos con el logo como objetos 3D reales (Blender → GLB → Three.js + GSAP), con galería, materiales, controles y código | Loop Smith · Logo 3D |
+| [`sneaker-3d`](animaciones/sneaker-3d/index.html) | Sneaker 3D — Product Motion Experience: zapatilla de running modelada pieza por pieza en Blender (28 componentes, PBR), con despiece reversible por scroll y el par L + R en ciclo de carrera con rig ([guía](animaciones/sneaker-3d/README.md)) | Loop Smith · Producto 3D |
 
 La colección `lusion` comparte un showcase. Cada efecto de `animaciones/lusion/effects/` tiene su propio CSS, JavaScript y ejemplo copiable. El [registro de investigación y uso](docs/LUSION_ANIMATION_RESEARCH.md) detalla los módulos y cómo integrarlos.
 
