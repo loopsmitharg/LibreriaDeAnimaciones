@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Coffee 3D Motion Lab: 24 experiencias 3D con granos de café modelados en Blender, materiales PBR horneados, Three.js, GSAP y ScrollTrigger.">
+  <title>Coffee 3D Motion Lab · Loop Smith</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="../../assets/css/shell.css">
+  <link rel="stylesheet" href="styles/scene.css">
+  <link rel="stylesheet" href="styles/lab.css">
+  <script src="../../assets/vendor/gsap.min.js"></script>
+  <script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="gallery.js"></script>
+</head>
+<body>
+  <header class="top wrap">
+    <a class="brand" href="index.html">LOOP SMITH <b>COFFEE 3D MOTION LAB</b></a>
+    <nav>
+      <a href="../loopsmith-3d/index.html">3D Motion Lab ↗</a>
+      <a href="../tipografia-loopsmith/index.html">Typography ↗</a>
+      <a href="../../index.html">Librería ↗</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero__copy">
+        <small>Colección 04 · Blender → Three.js</small>
+        <h1>El grano de café, <em>en tres dimensiones</em></h1>
+        <p>Veinticuatro experiencias interactivas con granos modelados en Blender: geometría orgánica con hendidura real, materiales PBR horneados en cuatro tostados, física, scroll cinematográfico e instancing.</p>
+        <div class="hero__meta"><span>9 variantes · 3 LODs</span><span>4 tostados PBR</span><span>Three.js r170</span><span>GSAP ScrollTrigger</span><span>cannon-es</span></div>
+      </div>
+      <div class="hero__stage" id="hero" aria-label="Grano de café 3D: arrastrá para rotarlo">
+        <div class="hero__roasts" id="roasts" role="group" aria-label="Tostado"></div>
+      </div>
+    </section>
+
+    <div class="filters" id="filters" role="group" aria-label="Categorías"></div>
+    <div id="groups"></div>
+
+    <section class="notes">
+      <div><h3>Cómo se usa</h3><p>Cada tarjeta abre una escena a pantalla completa con controles de replay, pausa, reset, tostado e iluminación. Las escenas son módulos independientes: <code>mountScene(def, contenedor)</code> las monta en cualquier página.</p></div>
+      <div><h3>Assets</h3><ul><li><code>.blend</code> maestro editable + scripts de <code>bpy</code></li><li>GLB con Draco: hero (49k tris), standard (6k), crowd (768)</li><li>Mapas horneados: color, normal y ORM por tostado</li></ul></div>
+      <div><h3>Rendimiento</h3><ul><li>Un solo renderer por escena; la galería usa capturas</li><li>Instancing: 9 draw calls para cientos de granos</li><li>Pausa fuera de pantalla y pixel ratio adaptable</li><li><code>?quality=low</code> fuerza el modo liviano</li></ul></div>
+    </section>
+  </main>
+  <a class="lib-back" href="../../index.html"><span class="lib-back__arrow">←</span><b>Librería</b><small>Loop Smith</small></a>
+</body>
+</html>

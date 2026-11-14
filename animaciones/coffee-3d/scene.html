@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Escena · Coffee 3D Motion Lab</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css">
+  <link rel="stylesheet" href="styles/scene.css">
+  <link rel="stylesheet" href="styles/lab.css">
+  <script src="../../assets/vendor/gsap.min.js"></script>
+  <script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="viewer.js"></script>
+</head>
+<body data-bg="dark">
+  <!-- Visor: monta UNA escena (?id=macro-inspection&roast=dark&rig=side). La escena no depende de este visor: ver README. -->
+  <div class="loading" id="loading">Cargando granos…</div>
+  <header class="hud hud--top">
+    <div class="hud__title">
+      <a class="hud__back" href="index.html">← Coffee 3D Motion Lab</a>
+      <h1 id="title"></h1>
+      <p id="desc"></p>
+    </div>
+    <div class="hud__stats" id="stats" aria-label="Información técnica"></div>
+  </header>
+  <main class="view" id="view"></main>
+  <nav class="phase" id="phase" aria-hidden="true"></nav>
+  <footer class="hud hud--bottom">
+    <p class="hud__hint" id="hint"></p>
+    <div class="bar" id="bar"></div>
+  </footer>
+</body>
+</html>

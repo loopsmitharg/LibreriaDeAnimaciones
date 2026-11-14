@@ -1,0 +1,12 @@
+/* Estilos mínimos que necesita una escena montada con mountScene() en cualquier página (prefijo c3-). */
+.c3-host { position: relative; }
+.c3-canvas { display: block; width: 100%; height: 100%; outline: none; }
+.c3-track { position: relative; }
+.c3-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+.c3-caption { position: absolute; z-index: 3; bottom: clamp(5.5rem, 14vh, 9rem); max-width: min(26rem, 78vw); color: var(--c3-ink, #f6ecdf); opacity: 0; pointer-events: none; will-change: opacity, transform; }
+.c3-caption--left { left: clamp(1.25rem, 6vw, 5rem); }
+.c3-caption--right { right: clamp(1.25rem, 6vw, 5rem); text-align: right; }
+.c3-caption--center { left: 50%; translate: -50% 0; text-align: center; }
+.c3-caption small { display: block; margin-bottom: .7rem; color: var(--c3-accent, #d9a066); font: 500 .7rem/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase; }
+.c3-caption strong { display: block; font: 700 clamp(1.9rem, 4.6vw, 3.6rem)/1.02 "Playfair Display", Georgia, serif; letter-spacing: -.02em; text-wrap: balance; }
+.c3-caption p { margin: .9rem 0 0; color: color-mix(in srgb, var(--c3-ink, #f6ecdf) 68%, transparent); font: 400 1rem/1.55 "Outfit", system-ui, sans-serif; text-wrap: pretty; }
