@@ -155,7 +155,13 @@
     <!-- Para llevar: tarjetas en dos columnas desfasadas -->
     <section class="cf-work" id="pedidos">
       <div class="cf-work__inner">
-        <h2>Para tomar acá <em>o llevar</em></h2>
+        <div class="tr-work-head">
+          <div>
+            <span class="cf-kicker">Mostrador</span>
+            <h2>Para tomar acá <em>o llevar</em></h2>
+          </div>
+          <p>Del cucurucho al pote para la sobremesa, y un café para acompañar. Lo armamos en el momento.</p>
+        </div>
         <div class="cf-cards">
           <article class="cf-card" data-card>
             <div class="cf-card__img"><span class="cf-card__tag">Helado</span>
@@ -179,9 +185,32 @@
           <article class="cf-card" data-card>
             <div class="cf-card__img"><span class="cf-card__tag">Café + helado</span>
               <div class="tr-art" aria-hidden="true">
-                <span class="tr-plate"></span>
-                <span class="tr-cup"></span>
-                <span class="tr-scoop f-vainilla" style="--s:24%;left:38%;top:30%"></span>
+                <!-- Affogato: pocillo de espresso con una bocha de vainilla y el café corriendo por encima -->
+                <svg class="tr-svg" viewBox="0 0 400 500">
+                  <defs>
+                    <linearGradient id="af-porc" x1="0" x2="1"><stop offset="0" stop-color="#b9b1a6"/><stop offset=".3" stop-color="#fffdf9"/><stop offset=".62" stop-color="#eee8df"/><stop offset="1" stop-color="#a39b90"/></linearGradient>
+                    <radialGradient id="af-saucer" cx=".5" cy=".35" r=".65"><stop offset="0" stop-color="#fffdf9"/><stop offset=".65" stop-color="#ebe5dc"/><stop offset="1" stop-color="#b8b0a5"/></radialGradient>
+                    <radialGradient id="af-coffee" cx=".45" cy=".4" r=".65"><stop offset="0" stop-color="#b47b44"/><stop offset=".5" stop-color="#6e3c1c"/><stop offset="1" stop-color="#2a1509"/></radialGradient>
+                    <radialGradient id="af-cream" cx=".36" cy=".28" r=".8"><stop offset="0" stop-color="#fffdf7"/><stop offset=".5" stop-color="#f4e8cd"/><stop offset="1" stop-color="#c9ae80"/></radialGradient>
+                    <linearGradient id="af-metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f2f0"/><stop offset=".5" stop-color="#a7a6a2"/><stop offset="1" stop-color="#6d6c69"/></linearGradient>
+                    <filter id="af-blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+                  </defs>
+                  <ellipse cx="200" cy="412" rx="150" ry="20" fill="#000" opacity=".5" filter="url(#af-blur)"/>
+                  <path d="M40 392 a160 38 0 0 0 320 0 v7 a160 38 0 0 1 -320 0z" fill="#9f978c"/>
+                  <ellipse cx="200" cy="392" rx="160" ry="38" fill="url(#af-saucer)"/>
+                  <ellipse cx="200" cy="389" rx="92" ry="19" fill="#ddd6cb"/>
+                  <g transform="rotate(8 70 404)"><rect x="30" y="400" width="76" height="7" rx="3.5" fill="url(#af-metal)"/><ellipse cx="112" cy="403" rx="17" ry="9" fill="url(#af-metal)"/></g>
+                  <ellipse cx="200" cy="384" rx="56" ry="10" fill="#c8c0b5"/>
+                  <path d="M292 292 c50 -8 58 56 2 62" fill="none" stroke="#cfc8be" stroke-width="18" stroke-linecap="round"/>
+                  <path d="M296 296 c38 -4 44 44 2 50" fill="none" stroke="#f6f2ec" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+                  <path d="M104 276 C106 342 142 384 200 384 C258 384 294 342 296 276 Z" fill="url(#af-porc)"/>
+                  <path d="M134 296 C138 336 154 360 174 372" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".55"/>
+                  <ellipse cx="200" cy="276" rx="96" ry="21" fill="#f8f4ee"/>
+                  <ellipse cx="200" cy="278" rx="86" ry="16" fill="url(#af-coffee)"/>
+                  <path d="M134 274 C124 226 152 180 200 178 C248 180 276 226 266 274 C256 282 248 270 236 279 C224 288 214 272 200 281 C186 290 176 272 164 281 C152 288 142 276 134 274 Z" fill="url(#af-cream)"/>
+                  <path d="M212 180 C226 196 220 218 230 236 C238 250 234 262 244 276 L230 279 C224 266 222 252 214 238 C204 220 208 198 202 182 Z" fill="#5e3117" opacity=".9"/>
+                  <ellipse cx="176" cy="206" rx="20" ry="10" fill="#fff" opacity=".65" transform="rotate(-24 176 206)"/>
+                </svg>
               </div>
             </div>
             <h3>Affogato</h3><p>Espresso caliente sobre helado de vainilla o de dulce de leche.</p>
@@ -189,9 +218,39 @@
           <article class="cf-card" data-card>
             <div class="cf-card__img"><span class="cf-card__tag">Cafetería</span>
               <div class="tr-art tr-art--light" aria-hidden="true">
-                <span class="tr-steam"><i></i><i></i><i></i></span>
-                <span class="tr-plate"></span>
-                <span class="tr-cup"></span>
+                <!-- Taza de café con leche: corazón de latte art, vapor animado y medialuna en el plato -->
+                <svg class="tr-svg" viewBox="0 0 400 500">
+                  <defs>
+                    <linearGradient id="cf-porc" x1="0" x2="1"><stop offset="0" stop-color="#c4bcb1"/><stop offset=".3" stop-color="#fffefb"/><stop offset=".62" stop-color="#f0eae2"/><stop offset="1" stop-color="#aaa297"/></linearGradient>
+                    <radialGradient id="cf-saucer" cx=".5" cy=".35" r=".65"><stop offset="0" stop-color="#fffefb"/><stop offset=".65" stop-color="#efe9e1"/><stop offset="1" stop-color="#c3bbb0"/></radialGradient>
+                    <radialGradient id="cf-latte" cx=".5" cy=".5" r=".55"><stop offset="0" stop-color="#c99d6c"/><stop offset=".55" stop-color="#9a6337"/><stop offset="1" stop-color="#4c2a14"/></radialGradient>
+                    <linearGradient id="cf-croissant" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9ad5e"/><stop offset=".6" stop-color="#c47a2f"/><stop offset="1" stop-color="#8c4f1b"/></linearGradient>
+                    <filter id="cf-blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+                  </defs>
+                  <path class="tr-steam-p" d="M170 196 c-16 -24 16 -38 0 -64 c-12 -20 10 -34 2 -52" stroke="#a39b91"/>
+                  <path class="tr-steam-p" d="M202 190 c-16 -24 16 -40 0 -66 c-12 -20 10 -32 2 -50" stroke="#a39b91"/>
+                  <path class="tr-steam-p" d="M234 196 c-16 -24 16 -38 0 -64 c-12 -20 10 -34 2 -52" stroke="#a39b91"/>
+                  <ellipse cx="200" cy="414" rx="150" ry="18" fill="#5a4a3a" opacity=".35" filter="url(#cf-blur)"/>
+                  <path d="M40 394 a160 38 0 0 0 320 0 v7 a160 38 0 0 1 -320 0z" fill="#b7afa4"/>
+                  <ellipse cx="200" cy="394" rx="160" ry="38" fill="url(#cf-saucer)"/>
+                  <ellipse cx="200" cy="391" rx="96" ry="20" fill="#e6e0d7"/>
+                  <!-- Medialuna -->
+                  <g transform="translate(292 404) rotate(-10) scale(1.25)">
+                    <path d="M-44 6 C-40 -20 -14 -30 0 -30 C14 -30 40 -20 44 6 C34 -2 24 -6 14 -4 C8 -14 -8 -14 -14 -4 C-24 -6 -34 -2 -44 6 Z" fill="url(#cf-croissant)"/>
+                    <path d="M-14 -4 C-10 -18 10 -18 14 -4" fill="none" stroke="#8c4f1b" stroke-width="2" opacity=".6"/>
+                    <path d="M-30 -10 C-26 -20 -18 -24 -12 -26 M30 -10 C26 -20 18 -24 12 -26" fill="none" stroke="#8c4f1b" stroke-width="2" opacity=".5"/>
+                    <ellipse cx="-4" cy="-24" rx="10" ry="3" fill="#fff" opacity=".35"/>
+                  </g>
+                  <ellipse cx="190" cy="388" rx="60" ry="11" fill="#cdc6bb"/>
+                  <path d="M296 262 c62 -8 70 72 2 80" fill="none" stroke="#d6cfc5" stroke-width="20" stroke-linecap="round"/>
+                  <path d="M300 268 c48 -4 54 58 2 66" fill="none" stroke="#fbf8f4" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+                  <path d="M80 244 C83 336 128 388 190 388 C252 388 297 336 300 244 Z" fill="url(#cf-porc)"/>
+                  <path d="M112 270 C116 326 136 358 162 374" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".6"/>
+                  <ellipse cx="190" cy="244" rx="110" ry="25" fill="#faf7f2"/>
+                  <ellipse cx="190" cy="247" rx="99" ry="19" fill="url(#cf-latte)"/>
+                  <path transform="translate(190 249) scale(1.35 .46)" d="M0 30 C-40 0 -46 -30 -20 -35 C-8 -37 0 -28 0 -18 C0 -28 8 -37 20 -35 C46 -30 40 0 0 30 Z" fill="#f7ecda"/>
+                  <path transform="translate(190 249) scale(1.35 .46)" d="M0 22 C-26 2 -30 -20 -14 -24" fill="none" stroke="#e2c9a6" stroke-width="3"/>
+                </svg>
               </div>
             </div>
             <h3>Café y algo rico</h3><p>Para la mañana o la merienda, con medialunas o una porción de torta.</p>
