@@ -122,6 +122,8 @@
           onEnter: () => item.classList.add('is-open'),
           // Al volver hacia arriba se cierra, salvo que el usuario la haya abierto o cerrado a mano.
           onLeaveBack: () => { if (!item.dataset.manual) item.classList.remove('is-open'); },
+          // Si la página arranca más abajo (un ancla #sabores o el scroll que recuerda el navegador), las que ya pasaron quedan abiertas.
+          onRefresh: (self) => { if (self.progress > 0 || scrollY > self.start) item.classList.add('is-open'); },
         });
       }
       const bg = item.querySelector('[data-item-bg]');

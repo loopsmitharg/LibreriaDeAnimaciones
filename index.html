@@ -48,6 +48,7 @@
 
     .anim { --accent: var(--lime); position: relative; display: grid; grid-template-rows: auto 1fr auto; gap: 1.1rem; min-height: 15.5rem; padding: 1.4rem 1.4rem 1.25rem; border: 1px solid var(--line); border-radius: 1.1rem; background: linear-gradient(160deg, var(--surface-2), var(--surface)); text-decoration: none; overflow: hidden; isolation: isolate; transition: border-color .35s ease, transform .5s var(--ease), box-shadow .5s var(--ease); }
     .anim[data-origin="cv"] { --accent: var(--acid); }
+    .anim[data-origin="ejemplos"] { --accent: #d9a066; }
     .anim[data-origin="mariapaula"] { --accent: #c5a059; }
     .anim[data-origin="gameover"] { --accent: #d4af37; }
     .anim[data-origin="zentry"] { --accent: #7c6bff; }
@@ -103,6 +104,7 @@
       <button class="chip" type="button" data-filter="lusion" aria-pressed="false">Colección Lusion</button>
       <button class="chip" type="button" data-filter="tipografia" aria-pressed="false">Tipografía Loop Smith</button>
       <button class="chip" type="button" data-filter="loop3d" aria-pressed="false">Loop Smith 3D</button>
+      <button class="chip" type="button" data-filter="ejemplos" aria-pressed="false">Páginas de ejemplo</button>
       <button class="chip" type="button" data-filter="scroll" aria-pressed="false">Scroll</button>
       <button class="chip" type="button" data-filter="carrusel" aria-pressed="false">Carruseles y rieles</button>
       <button class="chip" type="button" data-filter="interaccion" aria-pressed="false">Hover y cursor</button>
@@ -148,20 +150,31 @@
           <div><h3>24 experiencias con granos de café en 3D</h3><p>Granos modelados en Blender con hendidura real y materiales PBR horneados en cuatro tostados: física, lluvia, cuenco, scroll cinematográfico, inspector de materiales e instancing.</p></div>
           <div class="anim__foot"><span>Blender · PBR · Three.js · ScrollTrigger</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
-        <a class="anim" data-origin="loop" href="animaciones/cafeteria-ejemplo/multi-page/index.html">
-          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">local_cafe</span><span class="anim__origin">Sitio de ejemplo · Multi-page</span></div>
-          <div><h3>Cafetería con menú: Inicio, Carta, Nosotros y Visitanos</h3><p>Los granos 3D en el hero, en una portada que se abre con clip-path y en un recorrido macro por scroll, más las tarjetas del Scroll de agencia: acordeón de la carta con precios y granos en dos columnas desfasadas. Menú fijo y panel móvil.</p></div>
-          <div class="anim__foot"><span>Three.js · ScrollTrigger · 4 páginas</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
-        </a>
-        <a class="anim" data-origin="loop" href="animaciones/cafeteria-ejemplo/one-page/index.html">
-          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">coffee_maker</span><span class="anim__origin">Sitio de ejemplo · One-page</span></div>
-          <div><h3>Cafetería en una sola página, sin menú</h3><p>Hero 3D, ola de granos dentro de la portada con clip-path, tarjetas-acordeón que se abren con el scroll, granos que arman una taza al bajar y tarjetas en dos columnas desfasadas.</p></div>
-          <div class="anim__foot"><span>Three.js · ScrollTrigger · one-page</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
-        </a>
         <a class="anim" data-origin="loop" href="animaciones/sneaker-3d/index.html">
           <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">directions_run</span><span class="anim__origin">Sneaker 3D — Product Motion Experience</span></div>
           <div><h3>Zapatilla de running: despiece por scroll y par en carrera</h3><p>Una zapatilla modelada pieza por pieza en Blender (28 componentes, costuras y cordones reales, materiales PBR) en dos experiencias: exploded view reversible con ScrollTrigger y el par izquierda + derecha en un ciclo de carrera con flexión y compresión.</p></div>
           <div class="anim__foot"><span>Blender · glTF + Draco · Three.js · GSAP</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="group" data-group="ejemplos">
+      <div class="group__head"><h2>Páginas de ejemplo</h2><p>Sitios completos armados con la librería</p></div>
+      <div class="grid">
+        <a class="anim" data-origin="ejemplos" href="ejemplos/traiano/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">icecream</span><span class="anim__origin">Traiano · Helados y café</span></div>
+          <div><h3>Traiano: heladería y café en CABA</h3><p>Web one-page para una heladería-cafetería real: madera gris y logo en script, granos 3D en el hero, sabores en tarjetas-acordeón por scroll, vitrina de helados en CSS, granos que arman una taza y sedes con horarios.</p></div>
+          <div class="anim__foot"><span>Three.js · ScrollTrigger · CSS art</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="ejemplos" href="animaciones/cafeteria-ejemplo/multi-page/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">local_cafe</span><span class="anim__origin">Sitio de ejemplo · Multi-page</span></div>
+          <div><h3>Cafetería con menú: Inicio, Carta, Nosotros y Visitanos</h3><p>Los granos 3D en el hero, en una portada que se abre con clip-path y en un recorrido macro por scroll, más las tarjetas del Scroll de agencia: acordeón de la carta con precios y granos en dos columnas desfasadas. Menú fijo y panel móvil.</p></div>
+          <div class="anim__foot"><span>Three.js · ScrollTrigger · 4 páginas</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
+        </a>
+        <a class="anim" data-origin="ejemplos" href="animaciones/cafeteria-ejemplo/one-page/index.html">
+          <div class="anim__top"><span class="anim__icon material-icons-round" aria-hidden="true">coffee_maker</span><span class="anim__origin">Sitio de ejemplo · One-page</span></div>
+          <div><h3>Cafetería en una sola página, sin menú</h3><p>Hero 3D, ola de granos dentro de la portada con clip-path, tarjetas-acordeón que se abren con el scroll, granos que arman una taza al bajar y tarjetas en dos columnas desfasadas.</p></div>
+          <div class="anim__foot"><span>Three.js · ScrollTrigger · one-page</span><span class="anim__go">Abrir <span class="material-icons-round">arrow_forward</span></span></div>
         </a>
       </div>
     </section>

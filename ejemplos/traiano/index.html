@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Traiano · Helados y café — Un lugar exquisito</title>
+  <meta name="description" content="Traiano: helados artesanales y café en CABA. Abrimos todos los días." />
+  <link rel="icon" href="logo-referencia.jpg" />
+  <!-- Script del logo: Yellowtail (Google Fonts). Si no carga, cae en una cursiva del sistema. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="traiano.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../../animaciones/cafeteria-ejemplo/shared/scenes.js"></script>
+</head>
+<body class="tr">
+  <header class="cf-nav" data-nav>
+    <a class="cf-logo tr-logo" href="#inicio">Traiano</a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="#sabores">Helados</a>
+      <a href="#cafe">Café</a>
+      <a href="#pedidos">Para llevar</a>
+      <a href="#sedes">Sedes</a>
+    </nav>
+    <a class="cf-nav__cta" href="#sedes">Cómo llegar</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer tr-wood" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="#sabores">Helados</a></li>
+      <li><a href="#cafe">Café</a></li>
+      <li><a href="#pedidos">Para llevar</a></li>
+      <li><a href="#sedes">Sedes</a></li>
+    </ul></nav>
+    <p>Abrimos todos los días · CABA</p>
+  </div>
+
+  <main id="inicio">
+    <!-- Hero: madera gris como el logo + granos 3D (Coffee Product Hero) alrededor del nombre -->
+    <section class="cf-hero tr-wood">
+      <div class="cf-hero__fallback">
+        <span class="cf-kicker">helados y café</span>
+        <h1>Traiano</h1>
+      </div>
+      <div data-c3="hero" data-roast="dark" data-rig="side" style="position:absolute;inset:0">
+        <template data-c3-html>
+          <small>helados y café</small>
+          <h1>Traiano</h1>
+          <p><b>Un lugar exquisito</b>Helados artesanales y café, todos los días, en CABA.</p>
+          <a href="#sabores">Ver los sabores</a>
+        </template>
+      </div>
+      <span class="cf-scroll-cue">Bajá</span>
+    </section>
+
+    <section class="cf-overview">
+      <span class="cf-kicker" style="color:var(--muted)">La casa</span>
+      <p class="cf-overview__text" data-lines>En Traiano el helado se hace acá y el café se sirve como corresponde. Un lugar para frenar un rato, todos los días del año.</p>
+    </section>
+
+    <!-- Portada con clip-path: la vitrina de helados, en CSS -->
+    <section class="cf-frame-wrap" aria-label="Vitrina de helados">
+      <div class="cf-frame" data-frame>
+        <div class="cf-frame__media" data-frame-media>
+          <div class="tr-vitrina" aria-hidden="true">
+            <div class="tr-vitrina__row">
+              <div class="tr-tub f-ddl"><i></i><span>Dulce de leche</span></div>
+              <div class="tr-tub f-choc"><i></i><span>Chocolate</span></div>
+              <div class="tr-tub f-frutilla"><i></i><span>Frutilla</span></div>
+              <div class="tr-tub f-pista"><i></i><span>Pistacho</span></div>
+            </div>
+            <div class="tr-vitrina__row">
+              <div class="tr-tub f-limon"><i></i><span>Limón</span></div>
+              <div class="tr-tub f-vainilla"><i></i><span>Vainilla</span></div>
+              <div class="tr-tub f-menta"><i></i><span>Menta granizada</span></div>
+              <div class="tr-tub f-banana"><i></i><span>Banana split</span></div>
+            </div>
+          </div>
+        </div>
+        <span class="cf-frame__label">Helado artesanal, hecho acá</span>
+      </div>
+    </section>
+
+    <!-- Sabores: tarjetas-acordeón del Scroll de agencia -->
+    <section class="cf-features" id="sabores" aria-labelledby="t-sabores">
+      <h2 class="cf-features__title" id="t-sabores">Los <em>sabores</em></h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg f-ddl" aria-hidden="true" data-item-bg><i class="tr-swirl"></i></span>
+          <div class="cf-item__head"><h3>Dulces de leche</h3><span class="cf-item__num">01</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Dulce de leche, granizado, con brownie, con nuez y súper dulce de leche. El clásico que no puede faltar.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg f-choc" aria-hidden="true" data-item-bg><i class="tr-swirl"></i></span>
+          <div class="cf-item__head"><h3>Chocolates</h3><span class="cf-item__num">02</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Chocolate, amargo, con almendras, suizo y blanco.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg f-vainilla" aria-hidden="true" data-item-bg><i class="tr-swirl"></i></span>
+          <div class="cf-item__head"><h3>Cremas</h3><span class="cf-item__num">03</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Vainilla, sambayón, crema americana, tramontana, pistacho y menta granizada.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg f-frutilla" aria-hidden="true" data-item-bg><i class="tr-swirl"></i></span>
+          <div class="cf-item__head"><h3>Frutales y al agua</h3><span class="cf-item__num">04</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Frutilla a la crema, frutos del bosque, limón, maracuyá y durazno. Opciones al agua, sin lactosa.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg f-banana" aria-hidden="true" data-item-bg><i class="tr-swirl"></i></span>
+          <div class="cf-item__head"><h3>Especiales de la casa</h3><span class="cf-item__num">05</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Los sabores que van rotando según la temporada. Preguntá en el mostrador cuál está hoy.</p>
+            <a class="cf-more" href="https://www.instagram.com/traianoheladeriacafe/" target="_blank" rel="noopener">Ver novedades en Instagram <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Café: granos 3D que arman una taza con el scroll, sobre madera -->
+    <section class="cf-story cf-story--dark" id="cafe" aria-label="El café">
+      <div class="cf-story__intro">
+        <span class="cf-kicker">☕ Cafetería</span>
+        <h2>Y el café, <span class="tr-script" style="color:var(--c3-accent)">también</span></h2>
+      </div>
+      <div data-c3="assembly" data-c3-scroll data-roast="dark" data-rig="side" data-captions="textos-cafe"></div>
+      <script type="application/json" id="textos-cafe">[
+        { "at": 0.04, "to": 0.3, "kicker": "Espresso y compañía", "title": "Café de verdad", "text": "Espresso, cortado, lágrima, capuccino y latte, como te gusten." },
+        { "at": 0.36, "to": 0.62, "kicker": "Café + helado", "title": "Lo mejor de las dos casas", "text": "Affogato: un espresso caliente sobre una bocha de helado.", "side": "right" },
+        { "at": 0.74, "to": 1.1, "kicker": "Todos los días", "title": "Una taza te espera", "text": "", "side": "center" }
+      ]</script>
+    </section>
+
+    <!-- Para llevar: tarjetas en dos columnas desfasadas -->
+    <section class="cf-work" id="pedidos">
+      <div class="cf-work__inner">
+        <h2>Para tomar acá <em>o llevar</em></h2>
+        <div class="cf-cards">
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Helado</span>
+              <div class="tr-art" aria-hidden="true">
+                <span class="tr-cone"></span>
+                <span class="tr-scoop f-ddl" style="--s:36%;left:32%;top:30%"></span>
+                <span class="tr-scoop f-frutilla" style="--s:32%;left:34%;top:14%"></span>
+              </div>
+            </div>
+            <h3>Cucurucho</h3><p>Una, dos o tres bochas, con baño de chocolate si querés.</p>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Para llevar</span>
+              <div class="tr-art tr-art--light" aria-hidden="true">
+                <span class="tr-pote-top"><span class="tr-scoop f-choc" style="left:6%"></span><span class="tr-scoop f-pista" style="left:48%"></span></span>
+                <span class="tr-pote"></span>
+              </div>
+            </div>
+            <h3>Potes de ¼, ½ y 1 kg</h3><p>Elegí hasta cuatro sabores. Ideal para la sobremesa.</p>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Café + helado</span>
+              <div class="tr-art" aria-hidden="true">
+                <span class="tr-plate"></span>
+                <span class="tr-cup"></span>
+                <span class="tr-scoop f-vainilla" style="--s:24%;left:38%;top:30%"></span>
+              </div>
+            </div>
+            <h3>Affogato</h3><p>Espresso caliente sobre helado de vainilla o de dulce de leche.</p>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Cafetería</span>
+              <div class="tr-art tr-art--light" aria-hidden="true">
+                <span class="tr-steam"><i></i><i></i><i></i></span>
+                <span class="tr-plate"></span>
+                <span class="tr-cup"></span>
+              </div>
+            </div>
+            <h3>Café y algo rico</h3><p>Para la mañana o la merienda, con medialunas o una porción de torta.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2>Te esperamos, <em>todos los días</em></h2>
+      <p>Pasá por la sede que te quede más cerca.</p>
+    </section>
+
+    <section class="cf-visit" id="sedes" aria-label="Sedes y horarios">
+      <div class="cf-fade">
+        <h3>Dónde</h3>
+        <p>Ciudad Autónoma de Buenos Aires</p>
+        <a class="cf-more" href="https://maps.app.goo.gl/8puFFBe6qHiSB6tD9" target="_blank" rel="noopener">Abrir en Google Maps <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cf-fade">
+        <h3>Cuándo</h3>
+        <ul>
+          <li><span>Lunes a domingo</span><span>Abierto</span></li>
+          <li><span>Horarios por sede</span><span>en Instagram</span></li>
+        </ul>
+      </div>
+      <div class="cf-fade">
+        <h3>Seguinos</h3>
+        <p>Novedades, sabores nuevos y horarios de cada sede.</p>
+        <a class="cf-more tr-ig" href="https://www.instagram.com/traianoheladeriacafe/" target="_blank" rel="noopener">@traianoheladeriacafe <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="cf-logo tr-logo">Traiano<small>un lugar exquisito</small></span>
+      <nav aria-label="Pie"><a href="#sabores">Helados</a><a href="#cafe">Café</a><a href="#pedidos">Para llevar</a><a href="#sedes">Sedes</a><a href="https://www.instagram.com/traianoheladeriacafe/" target="_blank" rel="noopener">Instagram</a></nav>
+      <span>Sitio de ejemplo · Librería de Animaciones</span>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Traiano · helados y café</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@traianoheladeriacafe)</span><span>Componentes de la cafetería de ejemplo + Coffee 3D</span><span>Three.js · GSAP + ScrollTrigger · CSS art</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Identidad</h3>
+          <ul>
+            <li><strong>Madera gris</strong> de tablas verticales como el fondo del logo: todo CSS (<code>.tr-wood</code>): ruido SVG para las vetas, juntas con <code>repeating-linear-gradient</code> y viñeta.</li>
+            <li><strong>Logo en texto</strong> con Yellowtail (Google Fonts), parecido al script del logo. Con el archivo vectorial del logo real, va un <code>&lt;svg&gt;</code> en su lugar.</li>
+            <li><strong>Helados en CSS:</strong> vitrina, bochas, cucurucho, pote y taza (<code>.tr-*</code>). Los colores de cada sabor son variables (<code>.f-ddl</code>, <code>.f-choc</code>…).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido a confirmar</h3>
+          <ul>
+            <li>De Instagram salen: "café y helados artesanales", "abrimos todos los días", CABA y el link de Maps. Las direcciones y horarios de cada sede están en sus historias destacadas, que no se ven sin iniciar sesión.</li>
+            <li>Los sabores, los productos y los textos de la casa son de ejemplo: hay que reemplazarlos por la carta real. No hay precios a propósito.</li>
+            <li>Sin fotos del local: con fotos reales, van en las tarjetas (<code>.cf-card__img</code>) y en la portada.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Traiano</small></a>
+</body>
+</html>
