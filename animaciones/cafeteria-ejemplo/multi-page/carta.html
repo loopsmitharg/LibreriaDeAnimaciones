@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alba · Tostadores de café — Carta</title>
+  <link rel="stylesheet" href="../../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../shared/cafe.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../shared/cafe.js"></script>
+</head>
+<body>
+  <header class="cf-nav cf-nav--light" data-nav data-solid-after="top">
+    <a class="cf-logo" href="index.html">Alba<i>.</i><small>tostadores</small></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="carta.html" aria-current="page">Carta</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="visitanos.html">Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="visitanos.html">Cómo llegar</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carta.html" aria-current="page">Carta</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="visitanos.html">Visitanos</a></li>
+    </ul></nav>
+    <p>Calle del Tueste 1234 · Lunes a sábado de 8 a 20 h</p>
+  </div>
+
+  <main>
+    <section class="cf-top">
+      <span class="cf-kicker cf-fade">Nuestra carta</span>
+      <h1 data-words>Para tomar acá o llevar a casa</h1>
+      <p class="cf-fade">Cada sección se abre sola a medida que bajás; tocá el título para abrirla o cerrarla. Precios finales en pesos.</p>
+    </section>
+
+    <!-- Carta: tarjetas-acordeón del Scroll de agencia, con lista de precios adentro -->
+    <section class="cf-features" aria-label="Carta">
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item id="barra">
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/tuestes.webp" alt="" /></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-barra">Cafés de la barra</button></h3><span class="cf-item__num">01</span></div>
+          <div class="cf-item__acc" id="c-barra"><div class="cf-item__content">
+            <ul class="cf-prices">
+              <li><span>Espresso<small>Blend Alba, 30 ml</small></span><b>$ 2.400</b></li>
+              <li><span>Cortado</span><b>$ 2.700</b></li>
+              <li><span>Flat white<small>Doble espresso y leche texturizada</small></span><b>$ 3.600</b></li>
+              <li><span>Capuccino</span><b>$ 3.400</b></li>
+              <li><span>Latte</span><b>$ 3.500</b></li>
+              <li><span>Mocha<small>Con cacao amargo de la casa</small></span><b>$ 3.900</b></li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item id="filtrados">
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/grano-rasante.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-filtrados">Métodos filtrados</button></h3><span class="cf-item__num">02</span></div>
+          <div class="cf-item__acc" id="c-filtrados"><div class="cf-item__content">
+            <ul class="cf-prices">
+              <li><span>V60<small>Origen del día, 300 ml</small></span><b>$ 4.200</b></li>
+              <li><span>Chemex para dos</span><b>$ 7.400</b></li>
+              <li><span>Aeropress</span><b>$ 3.900</b></li>
+              <li><span>Prensa francesa</span><b>$ 3.700</b></li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item id="frios">
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/lluvia.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-frios">Fríos</button></h3><span class="cf-item__num">03</span></div>
+          <div class="cf-item__acc" id="c-frios"><div class="cf-item__content">
+            <ul class="cf-prices">
+              <li><span>Cold brew<small>18 horas de extracción</small></span><b>$ 3.800</b></li>
+              <li><span>Iced latte</span><b>$ 3.700</b></li>
+              <li><span>Espresso tonic</span><b>$ 4.100</b></li>
+              <li><span>Limonada de jengibre</span><b>$ 3.200</b></li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item id="cocina">
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/enjambre.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-cocina">Desayunos y meriendas</button></h3><span class="cf-item__num">04</span></div>
+          <div class="cf-item__acc" id="c-cocina"><div class="cf-item__content">
+            <ul class="cf-prices">
+              <li><span>Clásico<small>Café, jugo exprimido y dos medialunas</small></span><b>$ 6.900</b></li>
+              <li><span>Tostado de masa madre<small>Jamón cocido y queso tybo</small></span><b>$ 5.400</b></li>
+              <li><span>Palta y huevo<small>Pan de semillas, palta y huevo poché</small></span><b>$ 7.800</b></li>
+              <li><span>Yogur con granola de la casa</span><b>$ 4.600</b></li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item id="pasteleria">
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/espiral.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-pasteleria">Pastelería</button></h3><span class="cf-item__num">05</span></div>
+          <div class="cf-item__acc" id="c-pasteleria"><div class="cf-item__content">
+            <ul class="cf-prices">
+              <li><span>Medialuna de manteca</span><b>$ 1.300</b></li>
+              <li><span>Budín de limón y amapola</span><b>$ 2.900</b></li>
+              <li><span>Cookie de chocolate y sal</span><b>$ 2.600</b></li>
+              <li><span>Carrot cake</span><b>$ 4.300</b></li>
+              <li><span>Alfajor de maicena</span><b>$ 1.900</b></li>
+            </ul>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Granos para llevar: tarjetas en dos columnas desfasadas -->
+    <section class="cf-work" id="granos">
+      <div class="cf-work__inner">
+        <h2 data-words>Granos para llevar</h2>
+        <div class="cf-cards">
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Tueste claro</span><img src="../img/grano-rasante.webp" alt="Grano de café bajo luz rasante" loading="lazy" /></div>
+            <h3>Etiopía Yirgacheffe</h3><p>Lavado · 1.900 msnm. Jazmín, bergamota y té negro.</p><span class="cf-card__price">$ 9.800 · 250 g · $ 34.000 · 1 kg</span>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Tueste medio</span><img src="../img/grano-tres-cuartos.webp" alt="Grano de café en vista tres cuartos" loading="lazy" /></div>
+            <h3>Colombia Huila</h3><p>Lavado · 1.700 msnm. Panela, durazno y cacao.</p><span class="cf-card__price">$ 8.900 · 250 g · $ 31.000 · 1 kg</span>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Tueste oscuro</span><img src="../img/grano-frente.webp" alt="Grano de café de frente" loading="lazy" /></div>
+            <h3>Brasil Cerrado</h3><p>Natural · 1.100 msnm. Chocolate amargo y nuez.</p><span class="cf-card__price">$ 7.600 · 250 g · $ 26.500 · 1 kg</span>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Espresso</span><img src="../img/grano-macro.webp" alt="Superficie de un grano de café en macro" loading="lazy" /></div>
+            <h3>Blend Alba</h3><p>Brasil + Colombia. Dulce, redondo y con crema persistente.</p><span class="cf-card__price">$ 8.200 · 250 g · $ 28.500 · 1 kg</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>¿Lo querés molido?</h2>
+      <p class="cf-fade">Decinos tu método y lo molemos en el momento. Pedidos de 1 kg o más, con 24 h de anticipación.</p>
+      <a class="cf-btn cf-fade" href="visitanos.html">Encargar en el local <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <a class="cf-logo" href="index.html">Alba<i>.</i></a>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="nosotros.html">Nosotros</a><a href="visitanos.html">Visitanos</a></nav>
+      <span>Marca y textos ficticios · sitio de ejemplo</span>
+    </div>
+  </footer>
+
+  <a class="lib-back" href="../../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cafetería · Carta</small></a>
+</body>
+</html>

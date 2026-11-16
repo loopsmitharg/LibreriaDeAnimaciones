@@ -1,0 +1,224 @@
+/* ==========================================================================
+   Cafetería de ejemplo · estilos compartidos (multi-page y one-page)
+   Marca inventada: "Alba · tostadores de café".
+   Componentes:
+     .cf-nav      barra con menú (solo multi-page) + menú móvil a pantalla completa
+     .cf-hero     escena 3D "Coffee Product Hero" con el texto de la marca encima
+     .cf-top      título por palabras + bajada
+     .cf-frame    portada que se abre con clip-path (adentro: escena 3D o imagen)
+     .cf-overview párrafo que sube línea por línea
+     .cf-items    tarjetas-acordeón que se abren con el scroll (del "Scroll de agencia")
+     .cf-work     sección oscura con tarjetas en dos columnas desfasadas
+     .cf-story    escena 3D dirigida por scroll
+     .cf-outro / .cf-footer
+   Estado base: todo visible y abierto. html.cf-js prepara los estados iniciales;
+   cafe.js la quita si no hay GSAP o con movimiento reducido.
+   ========================================================================== */
+:root {
+  --cream: #f4ece1;
+  --paper: #fbf7f1;
+  --ink: #1e140d;
+  --espresso: #120b07;
+  --roast: #2a1a10;
+  --caramel: #c8863f;
+  --muted: #7a6657;
+  --closed: #ebe0d1;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Outfit", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --wrap: min(1080px, calc(100vw - 2.5rem));
+  --c3-ink: #f6ecdf;
+  --c3-accent: #d9a066;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--caramel); outline-offset: 3px; }
+.cf-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.cf-kicker { display: block; margin: 0 0 1rem; color: var(--caramel); font: 500 .72rem/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; }
+
+/* ---------- Marca ---------- */
+.cf-logo { display: inline-flex; align-items: baseline; gap: .1rem; text-decoration: none; font: 700 1.35rem/1 var(--serif); letter-spacing: -.02em; }
+.cf-logo i { color: var(--caramel); font-style: normal; }
+.cf-logo small { margin-left: .55rem; font: 500 .62rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; opacity: .6; }
+
+/* ---------- Navegación con menú (multi-page) ---------- */
+.cf-nav {
+  position: fixed; z-index: 60; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 2rem;
+  padding: 1rem clamp(1rem, 3vw, 2.5rem); color: var(--c3-ink);
+  transition: background-color .4s ease, color .4s ease, transform .45s cubic-bezier(.65, 0, .35, 1);
+}
+.cf-nav.is-solid { background: rgba(251, 247, 241, .88); color: var(--ink); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.cf-nav.is-hidden { transform: translateY(-110%); }
+.cf-nav--light { color: var(--ink); }                       /* páginas que no arrancan sobre fondo oscuro */
+.cf-nav__links { display: flex; gap: 1.6rem; margin: 0 0 0 auto; padding: 0; list-style: none; font: 500 .88rem/1 var(--sans); }
+.cf-nav__links a { position: relative; text-decoration: none; padding: .3rem 0; }
+.cf-nav__links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -.1rem; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .45s cubic-bezier(.65, 0, .35, 1); }
+.cf-nav__links a:hover::after, .cf-nav__links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
+.cf-nav__cta { padding: .7rem 1.2rem; border-radius: 999px; background: var(--caramel); color: var(--espresso); text-decoration: none; font: 600 .85rem/1 var(--sans); }
+.cf-burger { display: none; margin-left: auto; width: 2.8rem; height: 2.8rem; border: 0; border-radius: 50%; background: var(--caramel); color: var(--espresso); cursor: pointer; }
+.cf-burger span { display: block; width: 1.1rem; height: 1.5px; margin: 4px auto; background: currentColor; transition: transform .4s ease, opacity .3s ease; }
+.cf-nav.is-open .cf-burger span:first-child { transform: translateY(5.5px) rotate(45deg); }
+.cf-nav.is-open .cf-burger span:nth-child(2) { opacity: 0; }
+.cf-nav.is-open .cf-burger span:last-child { transform: translateY(-5.5px) rotate(-45deg); }
+@media (max-width: 760px) {
+  .cf-nav__links, .cf-nav__cta { display: none; }
+  .cf-burger { display: block; }
+  .cf-nav.is-open { color: var(--c3-ink); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+/* Menú móvil: panel que se abre con clip-path y links que suben desde su máscara. */
+.cf-drawer {
+  position: fixed; z-index: 55; inset: 0; display: grid; align-content: center; gap: 2.5rem; padding: 6rem 1.5rem 3rem;
+  background: var(--espresso); color: var(--c3-ink); clip-path: circle(0% at calc(100% - 2.9rem) 2.4rem); visibility: hidden;
+  transition: clip-path .8s cubic-bezier(.76, 0, .24, 1), visibility 0s linear .8s;
+}
+.cf-drawer.is-open { clip-path: circle(150% at calc(100% - 2.9rem) 2.4rem); visibility: visible; transition: clip-path .8s cubic-bezier(.76, 0, .24, 1), visibility 0s; }
+.cf-drawer ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .3rem; }
+.cf-drawer li { overflow: clip; }
+.cf-drawer li a { display: block; text-decoration: none; font: 700 clamp(2.6rem, 12vw, 4rem)/1.1 var(--serif); letter-spacing: -.02em; transform: translateY(105%); transition: transform .7s cubic-bezier(.22, 1, .36, 1); }
+.cf-drawer li a[aria-current="page"] { color: var(--caramel); }
+.cf-drawer.is-open li a { transform: none; }
+.cf-drawer.is-open li:first-child a { transition-delay: .3s; }
+.cf-drawer.is-open li:nth-child(2) a { transition-delay: .36s; } .cf-drawer.is-open li:nth-child(3) a { transition-delay: .42s; } .cf-drawer.is-open li:nth-child(4) a { transition-delay: .48s; }
+.cf-drawer p { margin: 0; color: rgba(246, 236, 223, .6); font: 400 .95rem/1.6 var(--sans); }
+
+/* Marca suelta (one-page: sin menú) */
+.cf-mark { position: absolute; z-index: 10; top: 1.4rem; left: clamp(1rem, 3vw, 2.5rem); color: var(--c3-ink); }
+
+/* ---------- Reveals ---------- */
+.cf-w { display: inline-block; overflow: clip; vertical-align: top; margin: -.2em; }
+.cf-w > span { display: inline-block; padding: .2em; }
+.cf-js [data-words] .cf-w > span { transform: translateY(100%); }
+.cf-line { display: block; overflow: clip; padding-bottom: .06em; }
+.cf-line > span { display: block; }
+.cf-js [data-lines] .cf-line > span { transform: translateY(105%); }
+.cf-js .cf-fade { opacity: 0; transform: translateY(16px); }
+
+/* ---------- Hero 3D ---------- */
+.cf-hero { position: relative; height: 100vh; height: 100svh; min-height: 34rem; overflow: hidden; background: radial-gradient(110% 90% at 30% 20%, #5a3a24 0%, #26170f 55%, #100a07 100%); }
+.cf-hero__fallback { position: absolute; inset: 0; z-index: 1; display: grid; place-content: center; justify-items: center; gap: 1rem; padding: 2rem; text-align: center; color: var(--c3-ink); transition: opacity .6s ease; }
+/* La escena inserta su propio texto (.c3-hero) antes de terminar de cargar los granos: desde ahí sobra el respaldo. */
+.cf-hero.is-ready .cf-hero__fallback, .cf-hero:has(.c3-hero) .cf-hero__fallback { opacity: 0; pointer-events: none; transition: none; }
+.cf-hero__fallback h1, .c3-hero h1 { margin: 0; max-width: 13ch; font: 700 clamp(2.4rem, 6.4vw, 5.6rem)/.96 var(--serif); letter-spacing: -.03em; text-wrap: balance; }
+.cf-hero__fallback h1 em, .c3-hero h1 em { font-style: italic; color: var(--c3-accent); }
+.cf-scroll-cue { position: absolute; z-index: 4; left: 50%; bottom: 1.6rem; translate: -50% 0; color: rgba(246, 236, 223, .65); font: 500 .66rem/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; }
+.cf-scroll-cue::after { content: ""; display: block; width: 1px; height: 2.4rem; margin: .7rem auto 0; background: linear-gradient(currentColor, transparent); animation: cf-cue 1.8s ease-in-out infinite; transform-origin: top; }
+@keyframes cf-cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* ---------- Encabezado de página interna ---------- */
+.cf-top { width: var(--wrap); margin: 0 auto; padding: clamp(7rem, 16vh, 10rem) 0 3rem; text-align: center; }
+.cf-top h1, .cf-top h2 { margin: 0 auto; max-width: 15ch; font: 700 clamp(2.6rem, 6.2vw, 5.2rem)/1.02 var(--serif); letter-spacing: -.03em; }
+.cf-top p { max-width: 42ch; margin: 1.5rem auto 0; color: #4a3b30; font: 400 1.05rem/1.55 var(--sans); }
+
+/* ---------- Portada con clip-path ---------- */
+.cf-frame-wrap { width: var(--wrap); margin: 0 auto clamp(5rem, 12vh, 8rem); }
+.cf-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 2rem; clip-path: inset(0% round 2rem); background: radial-gradient(120% 100% at 50% 100%, #4a2e1c 0, #1c120c 55%, #0b0705 100%); }
+.cf-js .cf-frame { clip-path: inset(12% 9% round 2rem); }
+.cf-frame__media { position: absolute; inset: -6% 0; }
+.cf-frame__media > img { width: 100%; height: 100%; object-fit: cover; }
+.cf-frame__label { position: absolute; z-index: 4; left: clamp(1rem, 3vw, 2rem); bottom: clamp(1rem, 3vw, 2rem); color: var(--c3-ink); font: 500 .7rem/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; pointer-events: none; }
+@media (max-width: 640px) { .cf-frame { aspect-ratio: 4 / 5; } }
+
+/* ---------- Presentación ---------- */
+.cf-overview { width: var(--wrap); margin: 0 auto; padding: clamp(5rem, 12vh, 8rem) 0; display: grid; gap: 1.5rem; }
+@media (min-width: 800px) { .cf-overview { grid-template-columns: 1fr 1.6fr; } }
+.cf-overview .cf-kicker { margin-top: .6rem; }
+.cf-overview__text { margin: 0; font: 500 clamp(1.35rem, 2.5vw, 2rem)/1.3 var(--sans); letter-spacing: -.02em; }
+
+/* ---------- Tarjetas-acordeón por scroll ---------- */
+.cf-features { width: min(1000px, calc(100vw - 2.5rem)); margin: 0 auto; padding-bottom: clamp(6rem, 14vh, 9rem); }
+.cf-features__title { margin: 0 0 2rem; font: 700 clamp(2rem, 4.4vw, 3.4rem)/1.05 var(--serif); letter-spacing: -.03em; }
+.cf-items { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.cf-item { position: relative; overflow: hidden; border-radius: 1.4rem; padding: clamp(1.4rem, 3vw, 2.2rem) clamp(1.2rem, 3vw, 2.4rem); transition: color .6s ease; }
+.cf-item__fill { position: absolute; inset: 0; background: var(--closed); transition: background-color .6s ease; }
+.cf-item__bg { position: absolute; right: 0; top: -15%; bottom: -15%; width: 48%; opacity: 0; transition: opacity .6s ease;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 50%); mask-image: linear-gradient(90deg, transparent, #000 50%); }
+.cf-item__bg img { width: 100%; height: 100%; object-fit: cover; }
+.cf-item__head, .cf-item__acc { position: relative; }
+.cf-item__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+/* Botón dentro del h3 (carta): su ::after cubre todo el encabezado para que el clic funcione en cualquier parte. */
+.cf-item__toggle { margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; letter-spacing: inherit; text-align: left; cursor: pointer; }
+.cf-item__toggle::after { content: ""; position: absolute; inset: -1rem -1rem; }
+.cf-item__toggle:focus-visible { outline: none; }
+.cf-item__toggle:focus-visible::after { outline: 2px solid var(--caramel); outline-offset: 2px; border-radius: .8rem; }
+.cf-item h3 { margin: 0; font: 600 clamp(1.3rem, 2.6vw, 2rem)/1.15 var(--sans); letter-spacing: -.02em; }
+.cf-item__num { font: 500 .8rem/1 var(--mono); opacity: .55; }
+.cf-item__acc { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .7s cubic-bezier(.65, 0, .35, 1); }
+.cf-item__content { overflow: hidden; min-height: 0; }
+.cf-item__content > p { max-width: 38ch; margin: 1.25rem 0 0; font: 400 .98rem/1.55 var(--sans); opacity: .85; }
+.cf-more { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.4rem; text-decoration: none; font: 600 .85rem/1 var(--sans); }
+.cf-more span { display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--caramel); color: var(--espresso); font-size: .9rem; transition: transform .3s ease; }
+.cf-more:hover span { transform: translateX(4px); }
+.cf-item, .cf-item.is-open { color: var(--c3-ink); }
+.cf-item .cf-item__fill, .cf-item.is-open .cf-item__fill { background: var(--roast); }
+.cf-item .cf-item__bg, .cf-item.is-open .cf-item__bg { opacity: 1; }
+.cf-js .cf-item:not(.is-open) { color: var(--ink); }
+.cf-js .cf-item:not(.is-open) .cf-item__fill { background: var(--closed); }
+.cf-js .cf-item:not(.is-open) .cf-item__bg { opacity: 0; }
+.cf-js .cf-item:not(.is-open) .cf-item__acc { grid-template-rows: 0fr; }
+
+/* Lista de precios dentro de la tarjeta (carta) */
+.cf-prices { display: grid; gap: .1rem 3rem; max-width: 34rem; margin: 1.4rem 0 0; padding: 0; list-style: none; }
+.cf-prices li { display: flex; align-items: baseline; gap: .6rem; padding: .55rem 0; border-bottom: 1px solid rgba(246, 236, 223, .14); font: 400 .98rem/1.35 var(--sans); }
+.cf-prices li::after { content: ""; order: 1; flex: 1; border-bottom: 1px dotted rgba(246, 236, 223, .3); }
+.cf-prices b { order: 2; font: 500 .9rem/1 var(--mono); color: var(--c3-accent); }
+.cf-prices small { display: block; margin-top: .2rem; opacity: .6; font-size: .82rem; }
+.cf-prices span { max-width: 75%; }
+
+/* ---------- Sección oscura con tarjetas ---------- */
+.cf-work { position: relative; background: var(--espresso); color: var(--c3-ink); border-radius: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 4rem) 0 0; }
+.cf-work__inner { width: min(900px, calc(100vw - 2.5rem)); margin: 0 auto; padding: clamp(5rem, 12vh, 8rem) 0 clamp(8rem, 18vh, 12rem); }
+.cf-work h2 { margin: 0 0 clamp(3rem, 7vh, 5rem); font: 700 clamp(2.2rem, 4.6vw, 3.6rem)/1.05 var(--serif); letter-spacing: -.03em; }
+.cf-cards { display: grid; gap: 3rem clamp(1.5rem, 5vw, 4rem); }
+@media (min-width: 720px) {
+  .cf-cards { grid-template-columns: 1fr 1fr; }
+  .cf-card:nth-child(even) { margin-top: 30%; margin-bottom: -30%; }
+}
+.cf-card { margin: 0; text-decoration: none; display: block; }
+.cf-card__img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 1rem; background: #1d130d; }
+.cf-card__img img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; transition: scale .8s cubic-bezier(.22, 1, .36, 1); }
+.cf-card:hover .cf-card__img img { scale: 1.04; }
+.cf-card__tag { position: absolute; z-index: 1; top: 1rem; left: 1rem; padding: .45rem .7rem; border-radius: 999px; background: rgba(18, 11, 7, .7); backdrop-filter: blur(6px); font: 500 .66rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.cf-card h3 { margin: 1.1rem 0 0; font: 700 1.35rem/1.15 var(--serif); }
+.cf-card p { max-width: 34ch; margin: .5rem 0 0; color: #cdbfb0; font: 400 .92rem/1.5 var(--sans); }
+.cf-card__price { display: inline-block; margin-top: .7rem; color: var(--c3-accent); font: 500 .85rem/1 var(--mono); }
+.cf-js .cf-card { opacity: 0; transform: translateY(60px); }
+
+/* ---------- Escena 3D por scroll ---------- */
+.cf-story { position: relative; background: radial-gradient(120% 100% at 50% 30%, #f7efe2 0%, #e6d6bf 70%, #d3bfa2 100%); --c3-ink: #2a1a10; --c3-accent: #9a5a22; }
+.cf-story--dark { background: radial-gradient(120% 90% at 50% 35%, #2a1d15 0%, #130d0a 55%, #0a0706 100%); --c3-ink: #f6ecdf; --c3-accent: #d9a066; }
+.cf-story__intro { position: relative; z-index: 2; width: var(--wrap); margin: 0 auto; padding: clamp(5rem, 12vh, 8rem) 0 0; color: var(--c3-ink); }
+.cf-story__intro h2 { margin: 0; max-width: 16ch; font: 700 clamp(2.2rem, 4.6vw, 3.6rem)/1.05 var(--serif); letter-spacing: -.03em; }
+.cf-story__intro .cf-kicker { color: var(--c3-accent); }
+.cf-story [data-c3] { min-height: 100vh; }
+/* Los textos pasan por encima de los granos: un fondo translúcido los mantiene legibles. */
+.cf-story .c3-caption { padding: 1.1rem 1.3rem 1.2rem; border-radius: 1.2rem; background: rgba(247, 239, 226, .78); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.cf-story--dark .c3-caption { background: rgba(18, 11, 7, .62); }
+.cf-story .c3-caption p:empty { display: none; }
+
+/* ---------- Cierre y pie ---------- */
+.cf-outro { background: var(--espresso); color: var(--c3-ink); padding: clamp(6rem, 16vh, 10rem) 1.25rem; text-align: center; }
+.cf-outro h2 { max-width: 16ch; margin: 0 auto; font: 700 clamp(2.2rem, 5vw, 4.2rem)/1.05 var(--serif); letter-spacing: -.03em; }
+.cf-outro p { margin: 1.25rem auto 0; max-width: 40ch; color: #bdaa98; }
+.cf-btn { display: inline-flex; align-items: center; gap: .6rem; margin-top: 2rem; padding: 1rem 1.6rem; border-radius: 999px; background: var(--caramel); color: var(--espresso); text-decoration: none; font: 600 .95rem/1 var(--sans); transition: transform .3s ease; }
+.cf-btn:hover { transform: translateY(-2px); }
+.cf-btn--ghost { background: transparent; color: inherit; border: 1px solid currentColor; }
+
+.cf-visit { display: grid; gap: 2rem; width: var(--wrap); margin: 0 auto; padding: clamp(5rem, 12vh, 8rem) 0; }
+@media (min-width: 800px) { .cf-visit { grid-template-columns: repeat(3, 1fr); } }
+.cf-frame-wrap + .cf-visit { padding-top: 0; }
+.cf-visit h3 { margin: 0 0 .9rem; font: 500 .72rem/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--caramel); }
+.cf-visit p, .cf-visit li { margin: 0; font: 400 1.05rem/1.6 var(--sans); }
+.cf-visit ul { margin: 0; padding: 0; list-style: none; }
+.cf-visit li { display: flex; justify-content: space-between; gap: 1rem; padding: .4rem 0; border-bottom: 1px solid rgba(30, 20, 13, .1); }
+
+.cf-footer { background: var(--espresso); color: rgba(246, 236, 223, .7); border-top: 1px solid rgba(246, 236, 223, .1); }
+.cf-footer__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; width: var(--wrap); margin: 0 auto; padding: 2.5rem 0 6rem; font: 400 .88rem/1.5 var(--sans); }
+.cf-footer .cf-logo { color: var(--c3-ink); }
+.cf-footer nav { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+.cf-footer nav a { text-decoration: none; }
+.cf-footer nav a:hover { color: var(--caramel); }
+
+.lib-notes { border-top: 0; }

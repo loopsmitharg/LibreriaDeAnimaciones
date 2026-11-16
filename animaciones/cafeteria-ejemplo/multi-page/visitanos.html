@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alba · Tostadores de café — Visitanos</title>
+  <link rel="stylesheet" href="../../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../shared/cafe.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../shared/cafe.js"></script>
+  <script type="importmap">{"imports":{"three":"../../../assets/vendor/three/build/three.module.js","three/addons/":"../../../assets/vendor/three/jsm/","cannon-es":"../../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../shared/scenes.js"></script>
+</head>
+<body>
+  <header class="cf-nav cf-nav--light" data-nav data-solid-after="top">
+    <a class="cf-logo" href="index.html">Alba<i>.</i><small>tostadores</small></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="carta.html">Carta</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="visitanos.html" aria-current="page">Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="carta.html">Ver la carta</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carta.html">Carta</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="visitanos.html" aria-current="page">Visitanos</a></li>
+    </ul></nav>
+    <p>Calle del Tueste 1234 · Lunes a sábado de 8 a 20 h</p>
+  </div>
+
+  <main>
+    <section class="cf-top">
+      <span class="cf-kicker cf-fade">Visitanos</span>
+      <h1 data-words>La barra está a la vuelta</h1>
+      <p class="cf-fade">Seis banquetas, dos mesas largas y la tostadora funcionando a la vista.</p>
+    </section>
+
+    <!-- Portada con clip-path; adentro, escena 18 · Infinite Coffee Flow -->
+    <section class="cf-frame-wrap" aria-label="Corriente de granos">
+      <div class="cf-frame" data-frame>
+        <div class="cf-frame__media" data-frame-media>
+          <div data-c3="flow" data-roast="dark" style="position:absolute;inset:0"></div>
+        </div>
+        <span class="cf-frame__label">Siempre hay café saliendo</span>
+      </div>
+    </section>
+
+    <section class="cf-visit" aria-label="Datos del local">
+      <div class="cf-fade">
+        <h3>Dirección</h3>
+        <p>Calle del Tueste 1234<br />Barrio Ficticio, Ciudad</p>
+        <a class="cf-more" href="#">Abrir en el mapa <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cf-fade">
+        <h3>Horarios</h3>
+        <ul>
+          <li><span>Lunes a viernes</span><span>8 a 20 h</span></li>
+          <li><span>Sábados</span><span>9 a 20 h</span></li>
+          <li><span>Domingos</span><span>Cerrado</span></li>
+        </ul>
+      </div>
+      <div class="cf-fade">
+        <h3>Contacto</h3>
+        <p>hola@alba.example<br />+54 11 0000-0000</p>
+        <p style="margin-top:.8rem;color:var(--muted)">Talleres y pedidos de 1 kg o más, con reserva.</p>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>Talleres de barismo, los sábados</h2>
+      <p class="cf-fade">Espresso, latte art y filtrados. Grupos de seis personas, con café para llevar incluido.</p>
+      <a class="cf-btn cf-fade" href="#">Reservar lugar <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <a class="cf-logo" href="index.html">Alba<i>.</i></a>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="nosotros.html">Nosotros</a><a href="visitanos.html">Visitanos</a></nav>
+      <span>Marca y textos ficticios · sitio de ejemplo</span>
+    </div>
+  </footer>
+
+  <a class="lib-back" href="../../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cafetería · Visitanos</small></a>
+</body>
+</html>

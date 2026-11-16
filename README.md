@@ -54,6 +54,7 @@ Cada carpeta de `animaciones/` es autocontenida: para usar una animación en otr
 
 | [`loopsmith-3d`](animaciones/loopsmith-3d/index.html) | 3D Motion Lab: 24 experimentos con el logo como objetos 3D reales (Blender → GLB → Three.js + GSAP), con galería, materiales, controles y código | Loop Smith · Logo 3D |
 | [`sneaker-3d`](animaciones/sneaker-3d/index.html) | Sneaker 3D — Product Motion Experience: zapatilla de running modelada pieza por pieza en Blender (28 componentes, PBR), con despiece reversible por scroll y el par L + R en ciclo de carrera con rig ([guía](animaciones/sneaker-3d/README.md)) | Loop Smith · Producto 3D |
+| [`cafeteria-ejemplo`](animaciones/cafeteria-ejemplo/multi-page/index.html) | Sitio de ejemplo de una cafetería en dos versiones: [multi-page con menú](animaciones/cafeteria-ejemplo/multi-page/index.html) (Inicio, Carta, Nosotros, Visitanos) y [one-page sin menú](animaciones/cafeteria-ejemplo/one-page/index.html). Combina escenas de `coffee-3d` con las tarjetas del `scroll-agencia` | Marca ficticia · ejemplo |
 
 La colección `lusion` comparte un showcase. Cada efecto de `animaciones/lusion/effects/` tiene su propio CSS, JavaScript y ejemplo copiable. El [registro de investigación y uso](docs/LUSION_ANIMATION_RESEARCH.md) detalla los módulos y cómo integrarlos.
 

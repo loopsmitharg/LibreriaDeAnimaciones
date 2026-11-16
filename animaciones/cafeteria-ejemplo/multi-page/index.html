@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alba · Tostadores de café — Inicio</title>
+  <meta name="description" content="Cafetería y tostaduría de especialidad. Sitio de ejemplo (multi-page) de la Librería de Animaciones." />
+  <link rel="stylesheet" href="../../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../shared/cafe.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../shared/cafe.js"></script>
+  <script type="importmap">{"imports":{"three":"../../../assets/vendor/three/build/three.module.js","three/addons/":"../../../assets/vendor/three/jsm/","cannon-es":"../../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../shared/scenes.js"></script>
+</head>
+<body>
+  <!-- Menú: barra fija + panel a pantalla completa en móvil (cafe.js) -->
+  <header class="cf-nav" data-nav>
+    <a class="cf-logo" href="index.html">Alba<i>.</i><small>tostadores</small></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html" aria-current="page">Inicio</a>
+      <a href="carta.html">Carta</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="visitanos.html">Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="carta.html">Ver la carta</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html" aria-current="page">Inicio</a></li>
+      <li><a href="carta.html">Carta</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="visitanos.html">Visitanos</a></li>
+    </ul></nav>
+    <p>Calle del Tueste 1234 · Lunes a sábado de 8 a 20 h</p>
+  </div>
+
+  <main>
+    <!-- Hero: escena 21 · Coffee Product Hero. El HTML del template se monta sobre los granos. -->
+    <section class="cf-hero">
+      <div class="cf-hero__fallback">
+        <span class="cf-kicker">Tostadores de especialidad · desde 2014</span>
+        <h1>Café recién tostado, <em>grano a grano</em></h1>
+      </div>
+      <div data-c3="hero" data-roast="dark" style="position:absolute;inset:0">
+        <template data-c3-html>
+          <small>Tostadores de especialidad · desde 2014</small>
+          <h1>Café recién tostado, <em>grano a grano</em></h1>
+          <p>Tostamos en el local dos veces por semana y lo servimos en la barra, en filtrado o para llevar a casa.</p>
+          <a href="carta.html">Ver la carta</a>
+        </template>
+      </div>
+      <span class="cf-scroll-cue">Bajá</span>
+    </section>
+
+    <section class="cf-overview">
+      <span class="cf-kicker">La casa</span>
+      <p class="cf-overview__text" data-lines>Alba nació como una tostaduría de barrio con una sola máquina y una barra de seis banquetas. Hoy compramos directo a productores, tostamos lotes chicos y te contamos de dónde viene cada taza.</p>
+    </section>
+
+    <!-- Portada que se abre con clip-path; adentro, escena 17 · Coffee Wave -->
+    <section class="cf-frame-wrap" aria-label="Granos en movimiento">
+      <div class="cf-frame" data-frame>
+        <div class="cf-frame__media" data-frame-media>
+          <div data-c3="wave" data-roast="medium" style="position:absolute;inset:0"></div>
+        </div>
+        <span class="cf-frame__label">Tostamos martes y viernes</span>
+      </div>
+    </section>
+
+    <!-- Tarjetas-acordeón: se abren a medida que bajás -->
+    <section class="cf-features" aria-labelledby="t-casa">
+      <h2 class="cf-features__title" id="t-casa" data-words>Lo que pasa en la barra</h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/tuestes.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Café de especialidad</h3><span class="cf-item__num">01</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Cuatro orígenes rotativos y un blend de la casa. En la pizarra está la finca, la altura y el proceso de cada uno.</p>
+            <a class="cf-more" href="carta.html">Ver la carta <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/grano-macro.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Tueste propio</h3><span class="cf-item__num">02</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Lotes de 5 kg a la vista de todos. Tueste claro para filtrados, medio y oscuro para espresso.</p>
+            <a class="cf-more" href="nosotros.html">Cómo tostamos <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/enjambre.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Desayunos y meriendas</h3><span class="cf-item__num">03</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Medialunas de manteca, tostados en pan de masa madre y pastelería que horneamos cada mañana.</p>
+            <a class="cf-more" href="carta.html#cocina">Ver la cocina <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/espiral.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Talleres de barismo</h3><span class="cf-item__num">04</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Los sábados a la tarde: espresso, latte art y métodos filtrados. Grupos de seis personas.</p>
+            <a class="cf-more" href="visitanos.html">Reservar lugar <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/lluvia.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Café para llevar</h3><span class="cf-item__num">05</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Bolsas de 250 g y 1 kg, en grano o molido para tu método. Te lo molemos en el momento.</p>
+            <a class="cf-more" href="carta.html#granos">Ver los granos <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Sección oscura: tarjetas en dos columnas desfasadas -->
+    <section class="cf-work" id="granos">
+      <div class="cf-work__inner">
+        <h2 data-words>Los granos de esta semana</h2>
+        <div class="cf-cards">
+          <a class="cf-card" href="carta.html#granos" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Tueste claro</span><img src="../img/grano-rasante.webp" alt="Grano de café bajo luz rasante" loading="lazy" /></div>
+            <h3>Etiopía Yirgacheffe</h3><p>Floral y cítrico, con final a té negro. Ideal en V60.</p><span class="cf-card__price">$ 9.800 · 250 g</span>
+          </a>
+          <a class="cf-card" href="carta.html#granos" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Tueste medio</span><img src="../img/grano-tres-cuartos.webp" alt="Grano de café en vista tres cuartos" loading="lazy" /></div>
+            <h3>Colombia Huila</h3><p>Panela, durazno y una acidez amable. Funciona en todo.</p><span class="cf-card__price">$ 8.900 · 250 g</span>
+          </a>
+          <a class="cf-card" href="carta.html#granos" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Tueste oscuro</span><img src="../img/grano-frente.webp" alt="Grano de café de frente" loading="lazy" /></div>
+            <h3>Brasil Cerrado</h3><p>Chocolate amargo y nuez. Cuerpo para el cortado de todos los días.</p><span class="cf-card__price">$ 7.600 · 250 g</span>
+          </a>
+          <a class="cf-card" href="carta.html#granos" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Espresso</span><img src="../img/grano-macro.webp" alt="Superficie de un grano de café en macro" loading="lazy" /></div>
+            <h3>Blend Alba</h3><p>El de la barra: dulce, redondo y con crema persistente.</p><span class="cf-card__price">$ 8.200 · 250 g</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>Te esperamos con la cafetera encendida</h2>
+      <p class="cf-fade">Calle del Tueste 1234 · Lunes a sábado de 8 a 20 h</p>
+      <a class="cf-btn cf-fade" href="visitanos.html">Cómo llegar <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <a class="cf-logo" href="index.html">Alba<i>.</i></a>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="nosotros.html">Nosotros</a><a href="visitanos.html">Visitanos</a></nav>
+      <span>Marca y textos ficticios · sitio de ejemplo</span>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Cafetería de ejemplo · Multi-page</h2></div>
+      <div class="lib-notes__meta"><span>4 páginas con menú (Inicio, Carta, Nosotros, Visitanos)</span><span>Coffee 3D Motion Lab + Scroll de agencia</span><span>Three.js · GSAP + ScrollTrigger</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué se reutiliza</h3>
+          <ul>
+            <li><strong>Escenas 3D:</strong> <code>shared/scenes.js</code> monta efectos de <code>coffee-3d</code> con <code>data-c3="hero|wave|orbit|journey"</code>. Inicio usa el Product Hero (21) y la ola (17) dentro de la portada que se abre con clip-path; Nosotros, el Macro Journey (11) con textos propios; Visitanos, la corriente infinita (18).</li>
+            <li><strong>Tarjetas del Scroll de agencia:</strong> el acordeón que se abre con el scroll (<code>data-items</code>) y las tarjetas en dos columnas desfasadas (<code>data-card</code>). En la Carta el acordeón también se abre con clic y lista los precios.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Menú</h3>
+          <ul>
+            <li>Barra fija transparente sobre el hero, sólida después; se esconde al bajar y vuelve al subir.</li>
+            <li>En móvil, botón hamburguesa: panel a pantalla completa que se abre con <code>clip-path: circle()</code> y links que suben desde su máscara. <kbd>Esc</kbd> lo cierra.</li>
+            <li>Sin GSAP o con <code>prefers-reduced-motion</code>: todo visible y las tarjetas abiertas; las escenas 3D que no son de scroll arrancan en pausa.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cafetería · Multi-page</small></a>
+</body>
+</html>

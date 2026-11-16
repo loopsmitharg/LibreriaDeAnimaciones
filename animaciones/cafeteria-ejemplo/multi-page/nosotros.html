@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alba · Tostadores de café — Nosotros</title>
+  <link rel="stylesheet" href="../../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../shared/cafe.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../shared/cafe.js"></script>
+  <script type="importmap">{"imports":{"three":"../../../assets/vendor/three/build/three.module.js","three/addons/":"../../../assets/vendor/three/jsm/","cannon-es":"../../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../shared/scenes.js"></script>
+</head>
+<body>
+  <header class="cf-nav cf-nav--light" data-nav data-solid-after="top">
+    <a class="cf-logo" href="index.html">Alba<i>.</i><small>tostadores</small></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="carta.html">Carta</a>
+      <a href="nosotros.html" aria-current="page">Nosotros</a>
+      <a href="visitanos.html">Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="carta.html">Ver la carta</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carta.html">Carta</a></li>
+      <li><a href="nosotros.html" aria-current="page">Nosotros</a></li>
+      <li><a href="visitanos.html">Visitanos</a></li>
+    </ul></nav>
+    <p>Calle del Tueste 1234 · Lunes a sábado de 8 a 20 h</p>
+  </div>
+
+  <main>
+    <section class="cf-top">
+      <span class="cf-kicker cf-fade">Nosotros</span>
+      <h1 data-words>Del origen a la taza, sin atajos</h1>
+      <p class="cf-fade">Somos tres baristas y una tostadora de 5 kg. Elegimos pocos cafés y los cuidamos en cada paso.</p>
+    </section>
+
+    <section class="cf-overview">
+      <span class="cf-kicker">Desde 2014</span>
+      <p class="cf-overview__text" data-lines>Empezamos tostando para amigos en un garaje. Diez años después seguimos igual: compramos directo, tostamos poco y seguido, y probamos cada lote antes de servirlo.</p>
+    </section>
+
+    <!-- Escena 11 · Coffee Macro Journey, dirigida por scroll, con los textos de la marca -->
+    <section class="cf-story cf-story--dark" aria-label="Recorrido del grano">
+      <div class="cf-story__intro">
+        <span class="cf-kicker">Bajá despacio</span>
+        <h2 data-words>Un grano, de cerca</h2>
+      </div>
+      <div data-c3="journey" data-c3-scroll data-roast="medium" data-captions="textos-viaje"></div>
+      <script type="application/json" id="textos-viaje">[
+        { "at": 0.02, "to": 0.18, "kicker": "01 · Origen", "title": "Cada grano cuenta una finca", "text": "Compramos directo a productores de Etiopía, Colombia y Brasil." },
+        { "at": 0.22, "to": 0.38, "kicker": "02 · Selección", "title": "Elegimos uno por uno", "text": "Separamos a mano los granos con defectos antes de tostar." },
+        { "at": 0.42, "to": 0.58, "kicker": "03 · Tueste", "title": "Poros, aceites y aroma", "text": "El calor abre la superficie del grano y despierta sus azúcares.", "side": "right" },
+        { "at": 0.62, "to": 0.8, "kicker": "04 · Cata", "title": "Probamos cada lote", "text": "Si no nos convence en la taza, no llega a la barra.", "side": "right" },
+        { "at": 0.86, "to": 1.1, "kicker": "05 · Taza", "title": "Y recién ahí, tu café", "text": "", "side": "center" }
+      ]</script>
+    </section>
+
+    <section class="cf-features" aria-labelledby="t-como" style="padding-top: clamp(5rem, 12vh, 8rem)">
+      <h2 class="cf-features__title" id="t-como" data-words>Cómo trabajamos</h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/ola.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Compra directa</h3><span class="cf-item__num">01</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Pagamos por encima del precio de mercado y repetimos productores año a año. Conocemos a quien cosecha.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/grano-macro.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Tueste en lotes chicos</h3><span class="cf-item__num">02</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Curvas pensadas para cada origen y nada de stock viejo: lo que tostamos el martes se termina el sábado.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><img src="../img/enjambre.webp" alt="" loading="lazy" /></span>
+          <div class="cf-item__head"><h3>Barra abierta</h3><span class="cf-item__num">03</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Preguntá lo que quieras: te mostramos la receta, la molienda y por qué ese café sabe así.</p>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>Probalo vos</h2>
+      <p class="cf-fade">El origen de la semana está en la pizarra de la barra.</p>
+      <a class="cf-btn cf-fade" href="carta.html">Ver la carta <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <a class="cf-logo" href="index.html">Alba<i>.</i></a>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="nosotros.html">Nosotros</a><a href="visitanos.html">Visitanos</a></nav>
+      <span>Marca y textos ficticios · sitio de ejemplo</span>
+    </div>
+  </footer>
+
+  <a class="lib-back" href="../../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cafetería · Nosotros</small></a>
+</body>
+</html>
