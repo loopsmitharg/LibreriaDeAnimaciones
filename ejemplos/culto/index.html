@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es" data-pedido-key="culto_pedido">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Culto Café — Oscura devoción</title>
+  <meta name="description" content="Culto Café — Oscura devoción. Café de especialidad en Barracas, Microcentro y Villa Pueyrredón." />
+  <!-- Tipografías de la marca: Bebas Neue (cartel) y Cormorant Garamond (itálica). Si no cargan, hay respaldos del sistema. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,500&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="../../animaciones/scroll-logo-al-navbar/style.css" />
+  <link rel="stylesheet" href="culto.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="../../animaciones/cursor-invertido/script.js"></script>
+  <script defer src="../../animaciones/scroll-logo-al-navbar/script.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../../animaciones/cafeteria-ejemplo/shared/scenes.js"></script>
+</head>
+<body>
+  <!-- Cursor invertido (animaciones/cursor-invertido): hijos directos del body para que funcione el blend. -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Navbar en píldora (animaciones/scroll-logo-al-navbar) + menú móvil (cafeteria-ejemplo/shared) -->
+  <header class="site-nav" id="site-header" data-nav>
+    <div class="site-nav__inner">
+      <a class="site-brand" href="index.html" aria-label="Culto Café, inicio">
+        <span class="brand-symbol site-brand__symbol"><svg class="mono" viewBox="0 0 100 100" aria-hidden="true"><path d="M66 20 A28 28 0 1 0 66 56" stroke="currentColor" stroke-width="10"/><path d="M74 44 A28 28 0 1 0 74 80" stroke="currentColor" stroke-width="10"/><path class="mono-cut" d="M66 20 A28 28 0 1 0 66 56" stroke-width="2.6"/><path class="mono-cut" d="M74 44 A28 28 0 1 0 74 80" stroke-width="2.6"/></svg></span>
+        <span class="site-brand__name">Culto<span>café</span></span>
+      </a>
+      <nav class="site-nav__links" aria-label="Principal"><a href="index.html" aria-current="page">Inicio</a><a href="menu.html">Menú</a><a href="cafe.html">Café</a><a href="sedes.html">Sedes</a></nav>
+      <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil" data-cursor="MENÚ"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+    </div>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul><li><a href="index.html" aria-current="page">Inicio</a></li><li><a href="menu.html">Menú</a></li><li><a href="cafe.html">Café</a></li><li><a href="sedes.html">Sedes</a></li></ul></nav>
+    <p>Barracas · Microcentro · Villa Pueyrredón</p>
+  </div>
+
+  <main>
+    <!-- Intro (animaciones/scroll-logo-al-navbar): el monograma a pantalla completa viaja y aterriza en el navbar -->
+    <section class="brand-stage">
+      <div class="brand-stage__pin">
+        <div class="brand-stage__grid" aria-hidden="true"></div>
+        <span class="brand-stage__eyebrow">Desde MMXIX · Buenos Aires</span>
+        <div class="brand-lockup" aria-hidden="true">
+          <span class="brand-symbol brand-lockup__symbol"><svg class="mono" viewBox="0 0 100 100" aria-hidden="true"><path d="M66 20 A28 28 0 1 0 66 56" stroke="currentColor" stroke-width="10"/><path d="M74 44 A28 28 0 1 0 74 80" stroke="currentColor" stroke-width="10"/><path class="mono-cut" d="M66 20 A28 28 0 1 0 66 56" stroke-width="2.6"/><path class="mono-cut" d="M74 44 A28 28 0 1 0 74 80" stroke-width="2.6"/></svg></span>
+          <span class="brand-lockup__name">Culto<span>café</span></span>
+        </div>
+        <div class="brand-stage__handoff"><p>Oscura devoción, <strong>taza por taza.</strong></p></div>
+        <a class="brand-stage__scroll" href="#rito" aria-label="Bajar"><span class="material-icons-round">south</span></a>
+      </div>
+    </section>
+
+    <div class="next-section" id="rito">
+      <h1 class="cf-sr">Culto Café</h1>
+      <section class="cf-overview">
+        <span class="cf-kicker">El rito</span>
+        <p class="cf-overview__text" data-lines>Culto es una cafetería para quienes se toman el café en serio. Tres templos en Buenos Aires, una barra a la vista y alquimistas que repiten el mismo rito cada mañana.</p>
+      </section>
+    </div>
+
+    <!-- Portada con clip-path (Scroll de agencia) con la ola de granos 3D (coffee-3d · 17) en tostado espresso -->
+    <section class="cf-frame-wrap" aria-label="Granos en movimiento">
+      <div class="cf-frame" data-frame>
+        <div class="cf-frame__media" data-frame-media>
+          <div data-c3="wave" data-roast="espresso" data-rig="back" style="position:absolute;inset:0"></div>
+        </div>
+        <span class="cf-frame__label">Oscura devoción</span>
+      </div>
+    </section>
+
+    <!-- Tarjetas-acordeón que se abren con el scroll (Scroll de agencia) -->
+    <section class="cf-features" aria-labelledby="t-rito">
+      <h2 class="cf-features__title" id="t-rito" data-words>Cuatro mandamientos</h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="culto-bg "></i></span>
+          <div class="cf-item__head"><h3>Café de especialidad</h3><span class="cf-item__num">I</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Granos seleccionados, extracción cuidada y una carta corta. Lo importante está en la taza.</p>
+            <a class="cf-more" href="cafe.html">El café <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="culto-bg culto-bg--2"></i></span>
+          <div class="cf-item__head"><h3>Los alquimistas</h3><span class="cf-item__num">II</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Nuestros baristas. Calibran la molienda cada mañana y te recomiendan qué tomar según el día.</p>
+            <a class="cf-more" href="cafe.html#alquimistas">Conocerlos <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="culto-bg culto-bg--3"></i></span>
+          <div class="cf-item__head"><h3>Cocina</h3><span class="cf-item__num">III</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Wraps, sándwiches y papas para acompañar. Comida honesta para la mesa larga.</p>
+            <a class="cf-more" href="menu.html">Ver el menú <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="culto-bg culto-bg--4"></i></span>
+          <div class="cf-item__head"><h3>Tres templos</h3><span class="cf-item__num">IV</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Barracas, Microcentro y Villa Pueyrredón. Mismo rito, tres barrios.</p>
+            <a class="cf-more" href="sedes.html">Las sedes <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Escena de scroll (coffee-3d · 07 Coffee Explosion) con textos de la marca -->
+    <section class="cf-story cf-story--dark" aria-label="Del grano a la devoción">
+      <div class="cf-story__intro">
+        <span class="cf-kicker">Bajá despacio</span>
+        <h2 data-words>Todo empieza en un grano</h2>
+      </div>
+      <div data-c3="explosion" data-c3-scroll data-screens="2.5" data-roast="espresso" data-rig="side" data-captions="textos-culto"></div>
+      <script type="application/json" id="textos-culto">[
+        { "at": 0.04, "to": 0.3, "kicker": "I · Origen", "title": "Un grano oscuro", "text": "Lo elegimos, lo tostamos y lo cuidamos como lo que es: el centro de todo." },
+        { "at": 0.36, "to": 0.62, "kicker": "II · Extracción", "title": "Se abre en la taza", "text": "Molienda, agua y tiempo. Siempre la misma receta, siempre a mano.", "side": "right" },
+        { "at": 0.74, "to": 1.1, "kicker": "III · Devoción", "title": "Y se vuelve costumbre", "text": "", "side": "center" }
+      ]</script>
+    </section>
+
+    <!-- Tarjetas en dos columnas desfasadas (Scroll de agencia) -->
+    <section class="cf-work">
+      <div class="cf-work__inner">
+        <h2 data-words>Entrá al templo</h2>
+        <div class="cf-cards">
+          <a class="cf-card" href="menu.html" data-card data-cursor="ENTRAR">
+            <div class="cf-card__img"><span class="cf-card__tag">Menú</span><div class="culto-art " aria-hidden="true"><b>I</b><span class="material-icons-round">menu_book</span></div></div>
+            <h3>La carta</h3><p>Café, cocina y algo dulce. Armá tu pedido y mostralo en la barra.</p>
+          </a>
+          <a class="cf-card" href="cafe.html" data-card data-cursor="ENTRAR">
+            <div class="cf-card__img"><span class="cf-card__tag">El café</span><div class="culto-art culto-art--rombos" aria-hidden="true"><b>II</b><span class="material-icons-round">coffee</span></div></div>
+            <h3>Oscura devoción</h3><p>De dónde viene el grano y cómo lo servimos.</p>
+          </a>
+          <a class="cf-card" href="sedes.html" data-card data-cursor="ENTRAR">
+            <div class="cf-card__img"><span class="cf-card__tag">Sedes</span><div class="culto-art " aria-hidden="true"><b>III</b><span class="material-icons-round">place</span></div></div>
+            <h3>Tres templos</h3><p>Barracas, Microcentro y Villa Pueyrredón.</p>
+          </a>
+          <a class="cf-card" href="cafe.html#alquimistas" data-card data-cursor="ENTRAR">
+            <div class="cf-card__img"><span class="cf-card__tag">Equipo</span><div class="culto-art " aria-hidden="true"><b>IV</b><span class="material-icons-round">auto_awesome</span></div></div>
+            <h3>Alquimistas</h3><p>Las manos detrás de cada taza.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>Tres templos, una misma devoción</h2>
+      <p class="cf-fade">Abrimos en Barracas, Microcentro y Villa Pueyrredón.</p>
+      <a class="cf-btn cf-fade" href="sedes.html">Encontrá el tuyo <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="culto-footer">
+    <div class="culto-footer__inner">
+      <div class="culto-footer__brand"><svg class="mono" viewBox="0 0 100 100" aria-hidden="true"><path d="M66 20 A28 28 0 1 0 66 56" stroke="currentColor" stroke-width="10"/><path d="M74 44 A28 28 0 1 0 74 80" stroke="currentColor" stroke-width="10"/><path class="mono-cut" d="M66 20 A28 28 0 1 0 66 56" stroke-width="2.6"/><path class="mono-cut" d="M74 44 A28 28 0 1 0 74 80" stroke-width="2.6"/></svg><div><b>Culto café</b><i>Oscura devoción · desde MMXIX</i></div></div>
+      <div>
+        <h3>Templos</h3>
+        <ul><li><a href="https://www.google.com/maps/search/?api=1&query=Regimiento+de+Patricios+76,+CABA" target="_blank" rel="noopener">Regimiento de Patricios 76 · Barracas</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Esmeralda+699,+CABA" target="_blank" rel="noopener">Esmeralda 699 · Microcentro</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Av.+Mosconi+2202,+CABA" target="_blank" rel="noopener">Av. Mosconi 2202 · Villa Pueyrredón</a></li></ul>
+      </div>
+      <div>
+        <h3>Seguinos</h3>
+        <ul><li><a href="https://www.instagram.com/culto.arg/" target="_blank" rel="noopener">Instagram · @culto.arg</a></li><li><a href="menu.html">Menú</a></li><li><a href="sedes.html">Horarios por sede</a></li></ul>
+      </div>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Culto Café · multi-page</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@culto.arg)</span><span>4 páginas: Inicio, Menú, Café, Sedes</span><span>Hecha solo con componentes de la librería</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Componentes usados</h3>
+          <ul>
+            <li><strong>Logo al navbar</strong> (Inicio): el monograma a pantalla completa aterriza en la píldora del navbar, que es el mismo en todas las páginas.</li>
+            <li><strong>Coffee 3D:</strong> ola de granos (17) en la portada con clip-path y la explosión (07) dirigida por scroll en Inicio; el viaje macro (11) en Café. Tostado <code>espresso</code>.</li>
+            <li><strong>Scroll de agencia</strong> (vía <code>cafeteria-ejemplo/shared</code>): palabras y líneas que suben, acordeón por scroll, tarjetas desfasadas y menú móvil.</li>
+            <li><strong>Carta con pedido</strong> (Menú), <strong>Títulos sticky</strong> (Café), <strong>Acordeón horizontal</strong> (Sedes) y <strong>Cursor invertido</strong> en todo el sitio.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido a confirmar</h3>
+          <ul>
+            <li>De Instagram salen el nombre, "Oscura devoción", el año (MMXIX), las tres direcciones y los destacados (Horarios, Menú, Café, Alquimistas).</li>
+            <li>El monograma es una aproximación en SVG: con el logo vectorial real, va en <code>MONO</code> (en los cuatro HTML).</li>
+            <li>Productos, precios y textos son de ejemplo. Los horarios no se ven sin iniciar sesión: se enlaza a Instagram.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Culto · Inicio</small></a>
+</body>
+</html>

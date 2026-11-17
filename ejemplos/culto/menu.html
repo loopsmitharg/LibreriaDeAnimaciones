@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="es" data-pedido-key="culto_pedido">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menú — Culto Café</title>
+  <meta name="description" content="Culto Café — Oscura devoción. Café de especialidad en Barracas, Microcentro y Villa Pueyrredón." />
+  <!-- Tipografías de la marca: Bebas Neue (cartel) y Cormorant Garamond (itálica). Si no cargan, hay respaldos del sistema. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,500&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="../../animaciones/scroll-logo-al-navbar/style.css" />
+  <link rel="stylesheet" href="../../animaciones/menu-carta-pedidos/style.css" />
+  <link rel="stylesheet" href="culto.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="../../animaciones/cursor-invertido/script.js"></script>
+  <script defer src="../../animaciones/menu-carta-pedidos/script.js"></script>
+</head>
+<body class="brand-landed">
+  <!-- Cursor invertido (animaciones/cursor-invertido): hijos directos del body para que funcione el blend. -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Navbar en píldora (animaciones/scroll-logo-al-navbar) + menú móvil (cafeteria-ejemplo/shared) -->
+  <header class="site-nav" id="site-header" data-nav>
+    <div class="site-nav__inner">
+      <a class="site-brand" href="index.html" aria-label="Culto Café, inicio">
+        <span class="brand-symbol site-brand__symbol"><svg class="mono" viewBox="0 0 100 100" aria-hidden="true"><path d="M66 20 A28 28 0 1 0 66 56" stroke="currentColor" stroke-width="10"/><path d="M74 44 A28 28 0 1 0 74 80" stroke="currentColor" stroke-width="10"/><path class="mono-cut" d="M66 20 A28 28 0 1 0 66 56" stroke-width="2.6"/><path class="mono-cut" d="M74 44 A28 28 0 1 0 74 80" stroke-width="2.6"/></svg></span>
+        <span class="site-brand__name">Culto<span>café</span></span>
+      </a>
+      <nav class="site-nav__links" aria-label="Principal"><a href="index.html">Inicio</a><a href="menu.html" aria-current="page">Menú</a><a href="cafe.html">Café</a><a href="sedes.html">Sedes</a></nav>
+      <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil" data-cursor="MENÚ"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+    </div>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul><li><a href="index.html">Inicio</a></li><li><a href="menu.html" aria-current="page">Menú</a></li><li><a href="cafe.html">Café</a></li><li><a href="sedes.html">Sedes</a></li></ul></nav>
+    <p>Barracas · Microcentro · Villa Pueyrredón</p>
+  </div>
+
+  <!-- Carta con filtros de dos niveles, opciones y pedido (animaciones/menu-carta-pedidos) -->
+  <main class="menu-page">
+    <div class="menu-hero">
+      <span class="menu-kicker">Carta</span>
+      <h1 data-words>Menú</h1>
+      <p class="menu-subtitle">Filtrá, elegí el tamaño y armá tu pedido. Cuando termines, mostráselo a un alquimista en la barra.</p>
+      <span class="menu-note">Productos y precios de ejemplo · la carta vigente está en el local</span>
+    </div>
+    <div class="filter-sticky-container">
+      <div class="filter-pills">
+        <button class="filter-pill main-filter active" data-filter-category="all">Todo</button>
+        <button class="filter-pill main-filter" data-filter-category="cafe" data-filter-is-sub="true">Café</button>
+        <button class="filter-pill main-filter" data-filter-category="cocina" data-filter-is-sub="true">Cocina</button>
+        <button class="filter-pill main-filter" data-filter-category="dulce">Dulce</button>
+        <button class="filter-pill main-filter" data-filter-category="frios">Fríos</button>
+        <button class="filter-pill sub-filter sub-cafe hidden" data-filter-category="back">← Volver</button>
+        <button class="filter-pill sub-filter sub-cafe hidden" data-filter-category="cafe">Todo el café</button>
+        <button class="filter-pill sub-filter sub-cafe hidden" data-filter-category="cafe-espresso">Espresso</button>
+        <button class="filter-pill sub-filter sub-cafe hidden" data-filter-category="cafe-leche">Con leche</button>
+        <button class="filter-pill sub-filter sub-cafe hidden" data-filter-category="cafe-filtrado">Filtrados</button>
+        <button class="filter-pill sub-filter sub-cocina hidden" data-filter-category="back">← Volver</button>
+        <button class="filter-pill sub-filter sub-cocina hidden" data-filter-category="cocina">Toda la cocina</button>
+        <button class="filter-pill sub-filter sub-cocina hidden" data-filter-category="cocina-wraps">Wraps</button>
+        <button class="filter-pill sub-filter sub-cocina hidden" data-filter-category="cocina-sandwich">Sándwiches</button>
+      </div>
+    </div>
+    <div class="masonry-grid">
+      <div class="menu-card-rich category-cafe category-cafe-espresso">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">coffee</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Espresso</h3><span class="card-price">$2.800 / $3.400</span></div>
+          <p class="card-desc">Corto, intenso y con crema.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Simple", "price": 2800}, {"name": "Doble", "price": 3400}]' aria-label="Añadir Espresso al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cafe category-cafe-espresso">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">coffee</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Cortado</h3><span class="card-price">$3.000 / $3.500</span></div>
+          <p class="card-desc">Espresso con un toque de leche.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Chico", "price": 3000}, {"name": "Jarrito", "price": 3500}]' aria-label="Añadir Cortado al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cafe category-cafe-leche">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">local_cafe</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Flat white</h3><span class="card-price">$4.200</span></div>
+          <p class="card-desc">Doble espresso y leche texturizada.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Único", "price": 4200}]' aria-label="Añadir Flat white al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cafe category-cafe-leche">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">local_cafe</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Latte</h3><span class="card-price">$4.000 / $4.600</span></div>
+          <p class="card-desc">Suave, con mucha leche.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Mediano", "price": 4000}, {"name": "Grande", "price": 4600}]' aria-label="Añadir Latte al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cafe category-cafe-leche">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">local_cafe</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Capuccino</h3><span class="card-price">$4.100 / $4.700</span></div>
+          <p class="card-desc">Con espuma y cacao amargo.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Mediano", "price": 4100}, {"name": "Grande", "price": 4700}]' aria-label="Añadir Capuccino al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cafe category-cafe-filtrado">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">coffee_maker</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">V60</h3><span class="card-price">$4.800</span></div>
+          <p class="card-desc">Filtrado del origen de la semana.</p>
+          <button class="btn-icon-only" data-options='[{"name": "300 ml", "price": 4800}]' aria-label="Añadir V60 al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cafe category-cafe-filtrado">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">coffee_maker</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Chemex para dos</h3><span class="card-price">$8.200</span></div>
+          <p class="card-desc">Para compartir en la mesa larga.</p>
+          <button class="btn-icon-only" data-options='[{"name": "600 ml", "price": 8200}]' aria-label="Añadir Chemex para dos al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-frios">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">local_drink</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Cold brew</h3><span class="card-price">$4.300 / $4.900</span></div>
+          <p class="card-desc">Extracción en frío, 18 horas.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Solo", "price": 4300}, {"name": "Con tónica", "price": 4900}]' aria-label="Añadir Cold brew al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-frios">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">local_drink</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Iced latte</h3><span class="card-price">$4.500</span></div>
+          <p class="card-desc">Espresso doble sobre leche fría.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Único", "price": 4500}]' aria-label="Añadir Iced latte al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cocina category-cocina-wraps">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">takeout_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Wrap de pollo</h3><span class="card-price">$9.800</span></div>
+          <p class="card-desc">Pollo grillado, vegetales y salsa de la casa. Con papas.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Con papas", "price": 9800}]' aria-label="Añadir Wrap de pollo al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cocina category-cocina-wraps">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">takeout_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Wrap veggie</h3><span class="card-price">$9.200</span></div>
+          <p class="card-desc">Vegetales asados y hummus. Con papas.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Con papas", "price": 9200}]' aria-label="Añadir Wrap veggie al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cocina category-cocina-sandwich">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">lunch_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Sándwich de bondiola</h3><span class="card-price">$9.500 / $11.200</span></div>
+          <p class="card-desc">Pan de masa madre, bondiola braseada y pickles.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Solo", "price": 9500}, {"name": "Con papas", "price": 11200}]' aria-label="Añadir Sándwich de bondiola al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cocina category-cocina-sandwich">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">breakfast_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Tostado clásico</h3><span class="card-price">$5.200 / $7.400</span></div>
+          <p class="card-desc">Jamón cocido y queso en pan de miga.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Simple", "price": 5200}, {"name": "Doble", "price": 7400}]' aria-label="Añadir Tostado clásico al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-cocina">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">fastfood</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Papas rústicas</h3><span class="card-price">$5.600</span></div>
+          <p class="card-desc">Con piel, especias y alioli.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Porción", "price": 5600}]' aria-label="Añadir Papas rústicas al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-dulce">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">bakery_dining</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Medialunas</h3><span class="card-price">$1.200 / $6.600</span></div>
+          <p class="card-desc">De manteca, horneadas en el día.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Unidad", "price": 1200}, {"name": "Media docena", "price": 6600}]' aria-label="Añadir Medialunas al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-dulce">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">cake</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Torta del día</h3><span class="card-price">$5.400</span></div>
+          <p class="card-desc">Preguntá en la barra cuál salió hoy.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Porción", "price": 5400}]' aria-label="Añadir Torta del día al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-dulce">
+        <div class="card-img-container placeholder-img" aria-hidden="true"><span class="material-icons-round">cookie</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Cookie negra</h3><span class="card-price">$2.900</span></div>
+          <p class="card-desc">Cacao, chocolate amargo y sal.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Unidad", "price": 2900}]' aria-label="Añadir Cookie negra al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="optionsModal" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
+    <div class="modal-content">
+      <button class="modal-close" data-action="close-options-modal" aria-label="Cerrar">&times;</button>
+      <h3 class="modal-title" id="modalProductTitle">Producto</h3>
+      <div class="modal-options-list" id="modalOptionsContainer"></div>
+      <button class="btn-modal-add" data-action="confirm-options">Añadir al pedido</button>
+    </div>
+  </div>
+  <button class="fab-order" data-action="toggle-order" aria-label="Ver pedido" aria-expanded="false" aria-controls="orderPanel" data-cursor="PEDIDO">
+    <span class="material-icons-round">shopping_bag</span>
+    <span class="fab-badge hidden" id="orderBadge">0</span>
+  </button>
+  <section class="order-panel" id="orderPanel" aria-label="Panel de pedido">
+    <div class="order-header">
+      <h2>Tu pedido</h2>
+      <button class="close-order-btn" data-action="toggle-order" aria-label="Cerrar panel de pedido">&times;</button>
+    </div>
+    <div class="order-items" id="orderItemsContainer"><div class="empty-state">Todavía no elegiste nada.<br>El rito empieza con un espresso.</div></div>
+    <div class="order-footer">
+      <div class="order-total"><span>Total</span><span id="orderTotal">$0</span></div>
+      <p class="order-notice">Mostrale este pedido a un alquimista en la barra.</p>
+    </div>
+  </section>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="culto-footer">
+    <div class="culto-footer__inner">
+      <div class="culto-footer__brand"><svg class="mono" viewBox="0 0 100 100" aria-hidden="true"><path d="M66 20 A28 28 0 1 0 66 56" stroke="currentColor" stroke-width="10"/><path d="M74 44 A28 28 0 1 0 74 80" stroke="currentColor" stroke-width="10"/><path class="mono-cut" d="M66 20 A28 28 0 1 0 66 56" stroke-width="2.6"/><path class="mono-cut" d="M74 44 A28 28 0 1 0 74 80" stroke-width="2.6"/></svg><div><b>Culto café</b><i>Oscura devoción · desde MMXIX</i></div></div>
+      <div>
+        <h3>Templos</h3>
+        <ul><li><a href="https://www.google.com/maps/search/?api=1&query=Regimiento+de+Patricios+76,+CABA" target="_blank" rel="noopener">Regimiento de Patricios 76 · Barracas</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Esmeralda+699,+CABA" target="_blank" rel="noopener">Esmeralda 699 · Microcentro</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Av.+Mosconi+2202,+CABA" target="_blank" rel="noopener">Av. Mosconi 2202 · Villa Pueyrredón</a></li></ul>
+      </div>
+      <div>
+        <h3>Seguinos</h3>
+        <ul><li><a href="https://www.instagram.com/culto.arg/" target="_blank" rel="noopener">Instagram · @culto.arg</a></li><li><a href="menu.html">Menú</a></li><li><a href="sedes.html">Horarios por sede</a></li></ul>
+      </div>
+    </div>
+  </footer>
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Culto · Menú</small></a>
+</body>
+</html>

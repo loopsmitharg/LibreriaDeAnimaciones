@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es" data-pedido-key="culto_pedido">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>El café — Culto Café</title>
+  <meta name="description" content="Culto Café — Oscura devoción. Café de especialidad en Barracas, Microcentro y Villa Pueyrredón." />
+  <!-- Tipografías de la marca: Bebas Neue (cartel) y Cormorant Garamond (itálica). Si no cargan, hay respaldos del sistema. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,500&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="../../animaciones/scroll-logo-al-navbar/style.css" />
+  <link rel="stylesheet" href="../../animaciones/titulos-sticky/style.css" />
+  <link rel="stylesheet" href="culto.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="../../animaciones/cursor-invertido/script.js"></script>
+
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../../animaciones/cafeteria-ejemplo/shared/scenes.js"></script>
+</head>
+<body class="brand-landed">
+  <!-- Cursor invertido (animaciones/cursor-invertido): hijos directos del body para que funcione el blend. -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Navbar en píldora (animaciones/scroll-logo-al-navbar) + menú móvil (cafeteria-ejemplo/shared) -->
+  <header class="site-nav" id="site-header" data-nav>
+    <div class="site-nav__inner">
+      <a class="site-brand" href="index.html" aria-label="Culto Café, inicio">
+        <span class="brand-symbol site-brand__symbol"><svg class="mono" viewBox="0 0 100 100" aria-hidden="true"><path d="M66 20 A28 28 0 1 0 66 56" stroke="currentColor" stroke-width="10"/><path d="M74 44 A28 28 0 1 0 74 80" stroke="currentColor" stroke-width="10"/><path class="mono-cut" d="M66 20 A28 28 0 1 0 66 56" stroke-width="2.6"/><path class="mono-cut" d="M74 44 A28 28 0 1 0 74 80" stroke-width="2.6"/></svg></span>
+        <span class="site-brand__name">Culto<span>café</span></span>
+      </a>
+      <nav class="site-nav__links" aria-label="Principal"><a href="index.html">Inicio</a><a href="menu.html">Menú</a><a href="cafe.html" aria-current="page">Café</a><a href="sedes.html">Sedes</a></nav>
+      <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil" data-cursor="MENÚ"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+    </div>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul><li><a href="index.html">Inicio</a></li><li><a href="menu.html">Menú</a></li><li><a href="cafe.html" aria-current="page">Café</a></li><li><a href="sedes.html">Sedes</a></li></ul></nav>
+    <p>Barracas · Microcentro · Villa Pueyrredón</p>
+  </div>
+
+  <main class="svc-page">
+    <section class="cf-top">
+      <span class="cf-kicker cf-fade">El café</span>
+      <h1 data-words>Oscura devoción</h1>
+      <p class="cf-fade"><span class="rito">Una sola obsesión:</span> que cada taza salga igual de buena que la anterior.</p>
+    </section>
+
+    <!-- Escena de scroll (coffee-3d · 11 Macro Journey) con textos de la marca -->
+    <section class="cf-story cf-story--dark" aria-label="Un grano, de cerca">
+      <div data-c3="journey" data-c3-scroll data-roast="espresso" data-captions="textos-grano"></div>
+      <script type="application/json" id="textos-grano">[
+        { "at": 0.02, "to": 0.18, "kicker": "I · El lote", "title": "Todos distintos", "text": "Ningún grano es igual a otro. Por eso probamos cada lote antes de servirlo." },
+        { "at": 0.22, "to": 0.38, "kicker": "II · La elección", "title": "Elegimos uno", "text": "Y lo seguimos de cerca hasta la taza." },
+        { "at": 0.42, "to": 0.58, "kicker": "III · El tueste", "title": "Oscuro, sin quemar", "text": "Poros abiertos, aceites a la vista, dulzor intacto.", "side": "right" },
+        { "at": 0.62, "to": 0.8, "kicker": "IV · La hendidura", "title": "Donde vive el sabor", "text": "Molienda pareja para que el agua lo encuentre todo.", "side": "right" },
+        { "at": 0.86, "to": 1.1, "kicker": "V · La taza", "title": "Oscura devoción", "text": "", "side": "center" }
+      ]</script>
+    </section>
+
+    <!-- Títulos sticky en dos columnas (animaciones/titulos-sticky) -->
+    <section class="svc-section svc-section--split" aria-labelledby="t-taza">
+      <h2 id="t-taza" class="svc-h2">Lo que pasa en la taza</h2>
+      <div class="svc-prose">
+        <p class="cf-fade">Trabajamos con café de especialidad y una carta corta a propósito: pocas cosas, bien hechas. El espresso es la base de casi todo, así que lo calibramos cada mañana y lo volvemos a probar a la tarde.</p>
+        <p class="cf-fade">Si te gusta intenso, pedí un espresso o un cortado. Si preferís algo más suave, un filtrado del origen de la semana. Y si no sabés, preguntá: para eso estamos.</p>
+        <ul class="svc-cards">
+          <li><span class="material-icons-round" aria-hidden="true">coffee</span><b>Espresso</b><small>La base del rito. Corto, con crema.</small></li>
+          <li><span class="material-icons-round" aria-hidden="true">coffee_maker</span><b>Filtrados</b><small>V60 y Chemex con el origen de la semana.</small></li>
+          <li><span class="material-icons-round" aria-hidden="true">local_cafe</span><b>Con leche</b><small>Flat white, latte y capuccino.</small></li>
+          <li><span class="material-icons-round" aria-hidden="true">ac_unit</span><b>Fríos</b><small>Cold brew de 18 horas y iced latte.</small></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="svc-section svc-section--split" id="alquimistas" aria-labelledby="t-alq">
+      <h2 id="t-alq" class="svc-h2">Los alquimistas</h2>
+      <div class="svc-prose">
+        <p class="cf-fade">Así llamamos a nuestros baristas. Ajustan la molienda según el clima, conocen cada receta de memoria y te van a recomendar algo distinto si se lo pedís.</p>
+        <p class="cf-fade">En Instagram, el destacado <em>Alquimistas</em> muestra quiénes están detrás de la barra en cada templo.</p>
+        <p class="cf-fade"><a class="cf-more" href="https://www.instagram.com/culto.arg/" target="_blank" rel="noopener">Ver en Instagram <span aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+    <section class="cf-outro" style="margin-top:clamp(5rem,12vh,8rem)">
+      <h2 data-words>El rito sigue en la carta</h2>
+      <a class="cf-btn cf-fade" href="menu.html">Ver el menú <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="culto-footer">
+    <div class="culto-footer__inner">
+      <div class="culto-footer__brand"><svg class="mono" viewBox="0 0 100 100" aria-hidden="true"><path d="M66 20 A28 28 0 1 0 66 56" stroke="currentColor" stroke-width="10"/><path d="M74 44 A28 28 0 1 0 74 80" stroke="currentColor" stroke-width="10"/><path class="mono-cut" d="M66 20 A28 28 0 1 0 66 56" stroke-width="2.6"/><path class="mono-cut" d="M74 44 A28 28 0 1 0 74 80" stroke-width="2.6"/></svg><div><b>Culto café</b><i>Oscura devoción · desde MMXIX</i></div></div>
+      <div>
+        <h3>Templos</h3>
+        <ul><li><a href="https://www.google.com/maps/search/?api=1&query=Regimiento+de+Patricios+76,+CABA" target="_blank" rel="noopener">Regimiento de Patricios 76 · Barracas</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Esmeralda+699,+CABA" target="_blank" rel="noopener">Esmeralda 699 · Microcentro</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Av.+Mosconi+2202,+CABA" target="_blank" rel="noopener">Av. Mosconi 2202 · Villa Pueyrredón</a></li></ul>
+      </div>
+      <div>
+        <h3>Seguinos</h3>
+        <ul><li><a href="https://www.instagram.com/culto.arg/" target="_blank" rel="noopener">Instagram · @culto.arg</a></li><li><a href="menu.html">Menú</a></li><li><a href="sedes.html">Horarios por sede</a></li></ul>
+      </div>
+    </div>
+  </footer>
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Culto · Café</small></a>
+</body>
+</html>

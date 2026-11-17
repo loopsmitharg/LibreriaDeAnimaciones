@@ -1,0 +1,190 @@
+/* ==========================================================================
+   Culto Café · "Oscura devoción" — identidad del sitio de ejemplo
+   Se carga ÚLTIMO, después de los CSS de los componentes de la librería:
+     - animaciones/cafeteria-ejemplo/shared/cafe.css   (reveals, acordeón por scroll, tarjetas, menú móvil)
+     - animaciones/scroll-logo-al-navbar/style.css      (navbar en píldora + intro del logo)
+     - animaciones/acordeon-horizontal/style.css        (sedes)
+     - animaciones/titulos-sticky/style.css             (títulos sticky)
+     - animaciones/menu-carta-pedidos/style.css         (carta con pedido)
+   Acá solo se pisan sus variables y algunos detalles para que hablen el mismo idioma:
+   negro, hueso y bronce, tipografía de cartel y numerales romanos.
+   ========================================================================== */
+:root {
+  --negro: #0b0b0a;
+  --negro-2: #141412;
+  --negro-3: #1c1b19;
+  --hueso: #ece6da;
+  --hueso-2: #a39d92;
+  --bronce: #c39b5f;
+  --linea: rgba(236, 230, 218, .14);
+  --cartel: "Bebas Neue", "Oswald", "Arial Narrow", sans-serif;
+  --rito: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+
+  /* cafe.css */
+  --paper: var(--negro); --ink: var(--hueso); --espresso: var(--negro-2); --roast: var(--negro-3);
+  --caramel: var(--bronce); --muted: var(--hueso-2); --closed: #191816; --serif: var(--cartel);
+  --c3-ink: var(--hueso); --c3-accent: var(--bronce);
+  /* scroll-logo-al-navbar / acordeon-horizontal / titulos-sticky */
+  --color-bg: var(--negro); --color-bg-soft: var(--negro-2); --color-text: var(--hueso); --color-text-muted: var(--hueso-2);
+  --color-accent: var(--bronce); --color-secondary: #8a6a3a; --color-on-accent: var(--negro);
+  --color-border: var(--linea); --color-grid: rgba(236, 230, 218, .05);
+  --brand-ratio-name: .62; --brand-ratio-gap: .3; --nav-symbol: 2.3rem; --nav-height: 5rem;
+  /* menu-carta-pedidos */
+  --bg-cream: var(--negro); --bg-beige: var(--negro-3); --wood-dark: var(--hueso); --wood-light: var(--hueso-2);
+  --gold: var(--bronce); --white: var(--negro-2); --white-pink: #1f1d1a; --border-light: var(--linea); --bg-light-gray: var(--negro-3);
+  --text-secondary: var(--hueso-2); --gold-tint: rgba(195, 155, 95, .14); --gold-glow: rgba(195, 155, 95, .35);
+  --glass-bg: rgba(11, 11, 10, .82); --glass-pills-bg: rgba(28, 27, 25, .85); --glass-pills-border: var(--linea);
+  --panel-bg: rgba(20, 20, 18, .98); --card-shadow: 0 0 0 1px var(--linea); --card-shadow-hover: 0 0 0 1px rgba(195, 155, 95, .5), 0 20px 40px rgba(0, 0, 0, .5);
+  --header-h: 5.2rem;
+}
+html, body { background: var(--negro); color: var(--hueso); }
+body { font-family: "Outfit", system-ui, sans-serif; }
+::selection { background: var(--bronce); color: var(--negro); }
+/* Grano de película sobre todo el sitio (muy sutil). */
+body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* ---------- Monograma CC ---------- */
+.mono { display: block; width: 100%; height: 100%; color: var(--hueso); }
+.mono path { fill: none; }
+.mono .mono-cut { stroke: var(--negro); }
+.brand-symbol { background: none; border-radius: 50%; color: var(--hueso); box-shadow: inset 0 0 0 1px var(--linea); padding: calc(var(--s) * .12); }
+.brand-lockup__name, .site-brand__name { font-family: var(--cartel); font-weight: 400; letter-spacing: .02em; text-transform: uppercase; }
+.brand-lockup__name span, .site-brand__name span { margin-left: .18em; color: var(--bronce); }
+
+/* ---------- Navbar (del logo al navbar) en todas las páginas ---------- */
+.site-nav__inner::before { background: rgba(11, 11, 10, .78); }
+.site-nav__links a { font-family: var(--cartel); font-size: 1.15rem; letter-spacing: .06em; }
+.site-nav__links a[aria-current="page"] { color: var(--bronce); }
+.site-nav__links a.is-cta { margin-left: .4rem; background: var(--bronce); color: var(--negro); }
+.site-nav .cf-burger { background: var(--bronce); color: var(--negro); }
+@media (max-width: 760px) { .site-nav__links { display: none; } .site-nav .cf-burger { display: block; margin-left: auto; } }
+.cf-drawer { background: var(--negro); }
+.cf-drawer li a { font-family: var(--cartel); font-weight: 400; letter-spacing: .02em; font-size: clamp(3.4rem, 17vw, 5.4rem); }
+.cf-drawer p { color: var(--hueso-2); }
+
+/* ---------- Intro: el monograma viaja al navbar ---------- */
+.brand-stage__pin::before { background: radial-gradient(circle at 50% 50%, rgba(195, 155, 95, .14), transparent 50%); }
+.brand-lockup { --lockup-symbol: clamp(6rem, 15vw, 15rem); }
+.brand-stage__handoff p { font-family: var(--rito); font-style: italic; font-weight: 500; letter-spacing: 0; }
+.brand-stage__handoff strong { font-style: normal; font-family: var(--cartel); font-weight: 400; letter-spacing: .04em; color: var(--bronce); }
+.brand-stage__eyebrow { position: absolute; z-index: 4; top: 22vh; left: 0; right: 0; text-align: center; color: var(--hueso-2); font: 500 .72rem/1 "IBM Plex Mono", monospace; letter-spacing: .4em; text-transform: uppercase; }
+.next-section { min-height: 0; padding: 0; background: var(--negro); display: block; }
+
+/* ---------- Tipografía de los componentes de cafe.css ---------- */
+.cf-kicker, .kicker { color: var(--bronce); font: 500 .72rem/1 "IBM Plex Mono", monospace; letter-spacing: .3em; text-transform: uppercase; }
+.cf-top h1, .cf-top h2, .cf-features__title, .cf-work h2, .cf-outro h2, .cf-story__intro h2, .c3-caption strong {
+  font-family: var(--cartel); font-weight: 400; letter-spacing: .01em; line-height: .92; text-transform: uppercase; }
+.cf-top h1 { font-size: clamp(3.6rem, 10vw, 9rem); max-width: 12ch; }
+.cf-top p, .cf-outro p { color: var(--hueso-2); }
+.rito { font-family: var(--rito); font-style: italic; font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--bronce); }
+.cf-overview__text { font-family: var(--rito); font-weight: 500; font-size: clamp(1.7rem, 3.2vw, 2.7rem); line-height: 1.18; letter-spacing: 0; }
+.cf-overview__text em { color: var(--bronce); }
+.cf-item h3 { font-family: var(--cartel); font-weight: 400; font-size: clamp(1.8rem, 3.6vw, 3rem); letter-spacing: .02em; text-transform: uppercase; }
+.cf-item__num { font-family: var(--rito); font-style: italic; font-size: 1.3rem; opacity: .8; color: var(--bronce); }
+.cf-item, .cf-item.is-open { color: var(--hueso); }
+.cf-js .cf-item:not(.is-open) { color: var(--hueso-2); }
+.cf-item .cf-item__fill, .cf-item.is-open .cf-item__fill { background: var(--negro-3); box-shadow: inset 0 0 0 1px rgba(195, 155, 95, .35); }
+.cf-js .cf-item:not(.is-open) .cf-item__fill { background: #121110; box-shadow: inset 0 0 0 1px var(--linea); }
+.cf-more span { background: var(--bronce); color: var(--negro); }
+.cf-btn { background: var(--bronce); color: var(--negro); font-family: var(--cartel); font-size: 1.2rem; letter-spacing: .06em; }
+.cf-frame { background: radial-gradient(120% 100% at 50% 100%, #2a2219 0, #121110 55%, #070706 100%); box-shadow: inset 0 0 0 1px var(--linea); }
+.cf-work { background: var(--negro-2); border-top: 1px solid var(--linea); }
+.cf-card h3 { font-family: var(--cartel); font-weight: 400; font-size: 2rem; letter-spacing: .02em; text-transform: uppercase; }
+.cf-card p { color: var(--hueso-2); }
+.cf-card__img { background: var(--negro-3); box-shadow: inset 0 0 0 1px var(--linea); }
+.cf-outro { background: var(--negro); }
+.cf-story--dark { background: radial-gradient(120% 90% at 50% 35%, #1d1813 0%, #0d0b09 55%, #050504 100%); }
+.cf-story .c3-caption { background: rgba(11, 11, 10, .66); box-shadow: inset 0 0 0 1px var(--linea); }
+
+/* Viñetas de las tarjetas: numerales romanos y arte en CSS (sin fotos del local) */
+.culto-art { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden;
+  background: radial-gradient(70% 55% at 50% 45%, #2a2016, transparent 70%), repeating-linear-gradient(90deg, transparent 0 46px, rgba(195, 155, 95, .07) 46px 47px), var(--negro-3); }
+.culto-art b { font: 400 clamp(6rem, 16vw, 11rem)/1 var(--rito); font-style: italic; color: transparent; -webkit-text-stroke: 1px rgba(195, 155, 95, .7); }
+.culto-art .material-icons-round { position: absolute; bottom: 1.2rem; right: 1.2rem; color: var(--bronce); font-size: 1.6rem; }
+.culto-art--rombos { background: linear-gradient(45deg, transparent 48.5%, rgba(195, 155, 95, .35) 49.5% 50.5%, transparent 51.5%) 0 0 / 60px 60px,
+  linear-gradient(-45deg, transparent 48.5%, rgba(195, 155, 95, .35) 49.5% 50.5%, transparent 51.5%) 0 0 / 60px 60px, radial-gradient(60% 50% at 50% 40%, #2a2016, var(--negro-3) 70%); }
+.culto-art--rombos::after { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 42%; background: rgba(236, 230, 218, .5); }
+.culto-art--rombos::before { content: ""; position: absolute; left: 50%; top: 42%; width: 2.2rem; height: 2.2rem; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #fff8e6, #f0c97a 45%, rgba(240, 201, 122, 0) 72%); box-shadow: 0 0 60px 20px rgba(240, 201, 122, .25); }
+
+/* Fondos del acordeón por scroll: anillos y arcos en bronce */
+.culto-bg { display: block; width: 100%; height: 100%;
+  background: repeating-radial-gradient(circle at 85% 50%, transparent 0 22px, rgba(195, 155, 95, .22) 22px 23px), radial-gradient(60% 70% at 85% 50%, rgba(195, 155, 95, .18), transparent 70%); }
+.culto-bg--2 { background: repeating-linear-gradient(115deg, transparent 0 18px, rgba(195, 155, 95, .18) 18px 19px); }
+.culto-bg--3 { background: conic-gradient(from 200deg at 85% 55%, transparent, rgba(195, 155, 95, .35), transparent 30%), repeating-radial-gradient(circle at 85% 55%, transparent 0 40px, rgba(236, 230, 218, .1) 40px 41px); }
+.culto-bg--4 { background: linear-gradient(45deg, transparent 48.5%, rgba(195, 155, 95, .28) 49.5% 50.5%, transparent 51.5%) 0 0 / 56px 56px, linear-gradient(-45deg, transparent 48.5%, rgba(195, 155, 95, .28) 49.5% 50.5%, transparent 51.5%) 0 0 / 56px 56px; }
+
+/* ---------- Cursor invertido (efecto de animaciones/cursor-invertido, en bronce) ---------- */
+.cursor, .cursor-dot { position: fixed; top: 0; left: 0; z-index: 999; pointer-events: none; opacity: 0; }
+.cursor { width: 4.4rem; height: 4.4rem; margin: -2.2rem 0 0 -2.2rem; display: grid; place-items: center; border: 1px solid var(--bronce); border-radius: 50%; mix-blend-mode: difference; transition: width .26s cubic-bezier(.22,1,.36,1), height .26s cubic-bezier(.22,1,.36,1), margin .26s cubic-bezier(.22,1,.36,1), background .26s; }
+.cursor.is-active { width: 6rem; height: 6rem; margin: -3rem 0 0 -3rem; background: var(--hueso); color: var(--negro); mix-blend-mode: exclusion; }
+.cursor__label { font: 500 .62rem/1 "IBM Plex Mono", monospace; letter-spacing: .12em; }
+.cursor-dot { width: .4rem; height: .4rem; margin: -.2rem 0 0 -.2rem; border-radius: 50%; background: var(--bronce); }
+
+/* ---------- Títulos sticky (página Café) ---------- */
+.svc-h2 { font-family: var(--cartel); font-weight: 400; font-size: clamp(2.6rem, 5vw, 4.6rem); line-height: .92; letter-spacing: .01em; text-transform: uppercase; }
+.svc-prose p { color: var(--hueso-2); }
+.svc-cards li { background: var(--negro-2); }
+.svc-cards .material-icons-round { background: rgba(195, 155, 95, .12); color: var(--bronce); }
+.svc-cards b { font-family: var(--cartel); font-weight: 400; font-size: 1.5rem; letter-spacing: .03em; }
+.svc-page { padding-top: 0; }
+
+/* ---------- Sedes: acordeón horizontal ---------- */
+.services__heading h1 { font-family: var(--cartel); font-weight: 400; letter-spacing: .01em; text-transform: uppercase; font-size: clamp(3.4rem, 8vw, 7.5rem); line-height: .9; }
+.service-accordion__copy h3 { font-family: var(--cartel); font-weight: 400 !important; letter-spacing: .02em !important; text-transform: uppercase; }
+.service-accordion__copy .sede-dir { display: block; margin-top: .6rem; color: var(--hueso); font: 500 italic clamp(1.3rem, 1.8vw, 1.9rem)/1.2 var(--rito); }
+@media (min-width: 901px) {
+  .service-accordion__item.is-active { background: radial-gradient(90% 120% at 100% 100%, rgba(195, 155, 95, .16), transparent 60%), linear-gradient(140deg, #1a1916, #0f0f0e); }
+  .services-accordion:has(> .service-accordion__item:first-child.is-active)::before, .service-accordion__item.is-active::before { background: rgba(195, 155, 95, .55); }
+}
+.service-accordion__item::after { background: linear-gradient(var(--bronce), #6e5430); }
+.sede-num { font: 500 italic 1.2rem/1 var(--rito); color: var(--bronce); }
+@media (min-width: 901px) {
+  .service-accordion__item:not(.is-active) .sede-num { display: none; }
+  .service-accordion__item.is-active .service-accordion__copy h3 { font-size: clamp(3rem, 6vw, 6rem); line-height: .9; }
+}
+
+/* ---------- Menú: carta con pedido en negro ---------- */
+.menu-page { padding-top: var(--header-h); }
+.menu-hero h1 { font-family: var(--cartel); font-weight: 400; font-size: clamp(4.5rem, 13vw, 10rem); letter-spacing: .02em; line-height: .9; }
+.menu-kicker { color: var(--bronce); font-family: "IBM Plex Mono", monospace; font-weight: 500; letter-spacing: .3em; }
+.menu-subtitle { color: var(--hueso-2); }
+.menu-note { display: inline-block; margin-top: 1.2rem; padding: .5rem .9rem; border: 1px dashed rgba(195, 155, 95, .5); border-radius: 999px; color: var(--bronce); font: 500 .72rem/1.3 "IBM Plex Mono", monospace; letter-spacing: .08em; }
+.filter-pill { color: var(--hueso); }
+.filter-pill.active { color: var(--negro); box-shadow: none; }
+.menu-card-rich { background: var(--negro-2); }
+.card-img-container.placeholder-img { color: rgba(195, 155, 95, .45); background: radial-gradient(70% 90% at 50% 100%, #2a2016, #161513 70%); border-bottom: 1px solid var(--linea); }
+.card-title { font-family: var(--cartel); font-weight: 400; font-size: 1.6rem; letter-spacing: .03em; text-transform: uppercase; }
+.card-price { font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: .95rem; }
+.btn-icon-only { color: var(--bronce); }
+.btn-icon-only:hover, .fab-order, .btn-modal-add { color: var(--negro); }
+.fab-order:hover { background: var(--hueso); }
+.fab-badge { border-color: var(--negro); }
+.order-header h2, .modal-title, .order-total { font-family: var(--cartel); font-weight: 400; letter-spacing: .03em; }
+.qty-btn { background: var(--negro-3); color: var(--hueso); }
+.qty-btn:hover { color: var(--negro); }
+.order-footer { background: var(--negro-2); }
+.modal-content { background: var(--negro-2); box-shadow: 0 0 0 1px var(--linea), 0 30px 60px rgba(0, 0, 0, .6); }
+#toast { bottom: 10.5rem; background: var(--bronce); color: var(--negro); }
+.fab-order { bottom: 5.2rem; }   /* deja lugar a la píldora "Librería" */
+
+/* ---------- Pie ---------- */
+.culto-footer { border-top: 1px solid var(--linea); background: var(--negro); color: var(--hueso-2); }
+.culto-footer__inner { display: grid; gap: 2rem; width: min(1200px, calc(100vw - 2.5rem)); margin: 0 auto; padding: 4rem 0 7rem; }
+@media (min-width: 800px) { .culto-footer__inner { grid-template-columns: 1.2fr 1fr 1fr; } }
+.culto-footer__brand { display: flex; align-items: center; gap: 1rem; color: var(--hueso); }
+.culto-footer__brand .mono { width: 3.4rem; height: 3.4rem; }
+.culto-footer__brand b { display: block; font: 400 2rem/1 var(--cartel); letter-spacing: .04em; }
+.culto-footer__brand i { font: 500 italic 1.1rem/1 var(--rito); color: var(--bronce); }
+.culto-footer h3 { margin: 0 0 .8rem; color: var(--bronce); font: 500 .72rem/1 "IBM Plex Mono", monospace; letter-spacing: .3em; text-transform: uppercase; }
+.culto-footer ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .45rem; }
+.culto-footer a { text-decoration: none; }
+.culto-footer a:hover { color: var(--bronce); }
+
+.lib-notes { border-top: 1px solid var(--linea); }
+
+/* La hamburguesa se vuelve X también con el navbar en píldora (cafe.css lo hace solo para .cf-nav). */
+.site-nav.is-open .cf-burger span:first-child { transform: translateY(5.5px) rotate(45deg); }
+.site-nav.is-open .cf-burger span:nth-child(2) { opacity: 0; }
+.site-nav.is-open .cf-burger span:last-child { transform: translateY(-5.5px) rotate(-45deg); }
+.site-nav.is-open .site-nav__inner::before { opacity: 0; }

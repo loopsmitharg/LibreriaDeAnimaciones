@@ -3,9 +3,10 @@
  *
  *   <div data-c3="hero" data-roast="dark"><template data-c3-html>…HTML de la marca…</template></div>
  *
- * Escenas disponibles (ver ESCENAS): hero, wave, flow, assembly, journey.
+ * Escenas disponibles (ver ESCENAS): hero, wave, flow, explosion, assembly, journey.
  * - Las escenas comunes se montan cuando están cerca de la pantalla (y el bucle se pausa solo fuera de ella).
  * - Las de scroll se montan enseguida porque crean su propio tramo alto; al terminar avisan con "cf:layout".
+ * - Largo de las escenas de scroll: data-screens="2.5" (en pantallas) reemplaza el del efecto.
  * - Textos de las escenas de scroll: data-captions="<id de un <script type=application/json>>" reemplaza los del efecto.
  * Si WebGL o los módulos fallan, queda el contenido HTML de respaldo (.cf-hero__fallback, etc.).
  */
@@ -15,6 +16,7 @@ const ESCENAS = {
   hero: () => import("../../coffee-3d/effects/21-product-hero.js"),
   wave: () => import("../../coffee-3d/effects/17-coffee-wave.js"),
   flow: () => import("../../coffee-3d/effects/18-infinite-flow.js"),
+  explosion: () => import("../../coffee-3d/effects/07-coffee-explosion.js"),
   assembly: () => import("../../coffee-3d/effects/10-scroll-assembly.js"),
   journey: () => import("../../coffee-3d/effects/11-macro-journey.js"),
 };
@@ -46,7 +48,10 @@ async function montar(host) {
     const listaId = host.dataset.captions;
     const lista = listaId ? JSON.parse(document.getElementById(listaId).textContent) : null;
     const params = tpl ? { html: tpl.innerHTML } : {};
-    const scene = await mountScene(conTextos(def, lista), host, { roast: host.dataset.roast || def.roast, rig: host.dataset.rig || def.rig, params });
+    // data-screens="2.5": cuántas pantallas de scroll dura una escena de scroll (pisa el def.scroll del efecto).
+    const largo = Number(host.dataset.screens);
+    const base = def.scroll && largo > 0 ? { ...def, scroll: largo } : def;
+    const scene = await mountScene(conTextos(base, lista), host, { roast: host.dataset.roast || def.roast, rig: host.dataset.rig || def.rig, params });
     host.dataset.c3State = "ready";
     const caja = host.closest(".cf-hero, .cf-frame, .cf-story");
     caja?.classList.add("is-ready");

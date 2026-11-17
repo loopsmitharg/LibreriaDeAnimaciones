@@ -10,7 +10,8 @@
 (function () {
   "use strict";
 
-  const STORAGE_KEY = "libreria_demo_pedido"; // cambiar por proyecto
+  // Clave por proyecto: <html data-pedido-key="mi_local"> (así dos sitios no mezclan pedidos).
+  const STORAGE_KEY = document.documentElement.dataset.pedidoKey || "libreria_demo_pedido";
   const money = (n) => "$" + Number(n || 0).toLocaleString("es-AR");
 
   /* ---- Toast ------------------------------------------------------------ */
