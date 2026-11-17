@@ -166,9 +166,31 @@
           <article class="cf-card" data-card>
             <div class="cf-card__img"><span class="cf-card__tag">Helado</span>
               <div class="tr-art" aria-hidden="true">
-                <span class="tr-cone"></span>
-                <span class="tr-scoop f-ddl" style="--s:36%;left:32%;top:30%"></span>
-                <span class="tr-scoop f-frutilla" style="--s:32%;left:34%;top:14%"></span>
+                <!-- Cucurucho: barquillo con relieve en rombos, borde enrollado y dos bochas (dulce de leche y frutilla) -->
+                <svg class="tr-svg" viewBox="0 0 400 500">
+                  <defs>
+                    <linearGradient id="cn-wafer" x1="0" x2="1"><stop offset="0" stop-color="#b9793a"/><stop offset=".4" stop-color="#e7b46c"/><stop offset=".75" stop-color="#d49a52"/><stop offset="1" stop-color="#9c6128"/></linearGradient>
+                    <linearGradient id="cn-lip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0c27e"/><stop offset="1" stop-color="#b47434"/></linearGradient>
+                    <pattern id="cn-grid" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45 200 300)"><path d="M0 0H22M0 0V22" stroke="#8a5220" stroke-width="3" opacity=".55"/><path d="M2 2H22M2 2V22" stroke="#f6d39b" stroke-width="1" opacity=".5"/></pattern>
+                    <clipPath id="cn-clip"><path d="M126 270 L274 270 L206 468 Q200 480 194 468 Z"/></clipPath>
+                    <radialGradient id="cn-ddl" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#e2ad74"/><stop offset=".55" stop-color="#c48a4f"/><stop offset="1" stop-color="#8a5629"/></radialGradient>
+                    <radialGradient id="cn-fru" cx=".36" cy=".3" r=".8"><stop offset="0" stop-color="#fbd0d8"/><stop offset=".5" stop-color="#f2a3b3"/><stop offset="1" stop-color="#c9566f"/></radialGradient>
+                    <filter id="cn-blur" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="8"/></filter>
+                  </defs>
+                  <ellipse cx="200" cy="474" rx="46" ry="8" fill="#000" opacity=".45" filter="url(#cn-blur)"/>
+                  <path d="M126 270 L274 270 L206 468 Q200 480 194 468 Z" fill="url(#cn-wafer)"/>
+                  <rect x="100" y="250" width="200" height="230" fill="url(#cn-grid)" clip-path="url(#cn-clip)"/>
+                  <path d="M118 262 Q200 250 282 262 Q290 274 280 284 Q200 272 120 284 Q110 274 118 262 Z" fill="url(#cn-lip)"/>
+                  <!-- Bocha de dulce de leche: base ondulada que cae sobre el borde -->
+                  <path d="M124 262 C110 200 150 154 200 152 C250 154 290 200 276 262 C268 274 258 262 248 270 C238 280 228 266 216 276 C204 286 194 268 182 276 C170 284 160 266 148 274 C138 280 128 272 124 262 Z" fill="url(#cn-ddl)"/>
+                  <path d="M148 272 C150 284 146 296 152 300 C158 302 160 290 158 276 Z" fill="#a8703c"/>
+                  <path d="M232 274 C234 290 230 304 237 308 C244 309 245 294 242 272 Z" fill="#a8703c"/>
+                  <ellipse cx="166" cy="196" rx="20" ry="11" fill="#fff" opacity=".35" transform="rotate(-28 166 196)"/>
+                  <!-- Bocha de frutilla arriba -->
+                  <path d="M140 180 C128 128 160 86 200 84 C240 86 272 128 260 180 C252 190 244 178 234 186 C224 194 214 180 202 189 C190 197 180 182 170 189 C160 195 146 188 140 180 Z" fill="url(#cn-fru)"/>
+                  <g fill="#c2445f" opacity=".7"><circle cx="182" cy="124" r="3.5"/><circle cx="222" cy="112" r="3"/><circle cx="238" cy="150" r="3.5"/><circle cx="170" cy="160" r="3"/><circle cx="206" cy="146" r="2.5"/></g>
+                  <ellipse cx="174" cy="116" rx="18" ry="10" fill="#fff" opacity=".5" transform="rotate(-28 174 116)"/>
+                </svg>
               </div>
             </div>
             <h3>Cucurucho</h3><p>Una, dos o tres bochas, con baño de chocolate si querés.</p>
@@ -176,8 +198,33 @@
           <article class="cf-card" data-card>
             <div class="cf-card__img"><span class="cf-card__tag">Para llevar</span>
               <div class="tr-art tr-art--light" aria-hidden="true">
-                <span class="tr-pote-top"><span class="tr-scoop f-choc" style="left:6%"></span><span class="tr-scoop f-pista" style="left:48%"></span></span>
-                <span class="tr-pote"></span>
+                <!-- Potes cerrados de telgopor con tapa: 1 kg adelante y ¼ atrás -->
+                <svg class="tr-svg" viewBox="0 0 400 500">
+                  <defs>
+                    <linearGradient id="pt-body" x1="0" x2="1"><stop offset="0" stop-color="#cfc9c0"/><stop offset=".32" stop-color="#fffefc"/><stop offset=".65" stop-color="#efebe5"/><stop offset="1" stop-color="#bdb6ac"/></linearGradient>
+                    <radialGradient id="pt-lid" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#ece8e2"/><stop offset="1" stop-color="#cbc5bc"/></radialGradient>
+                    <filter id="pt-blur" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="9"/></filter>
+                    <clipPath id="pt-clip"><path d="M106 200 L126 420 A74 16 0 0 0 274 420 L294 200 Z"/></clipPath>
+                    <g id="pt-tub">
+                      <path d="M106 200 L126 420 A74 16 0 0 0 274 420 L294 200 Z" fill="url(#pt-body)"/>
+                      <g clip-path="url(#pt-clip)">
+                        <path d="M100 286 A100 20 0 0 0 300 286 L300 346 A100 20 0 0 1 100 346 Z" fill="#3b3a39"/>
+                        <path d="M100 292 A100 20 0 0 0 300 292" fill="none" stroke="#d5a26c" stroke-width="2"/>
+                        <path d="M100 340 A100 20 0 0 0 300 340" fill="none" stroke="#d5a26c" stroke-width="2"/>
+                      </g>
+                      <text class="tr-svg-text" x="200" y="330" text-anchor="middle" font-size="44" fill="#f4f2ef">Traiano</text>
+                      <path d="M98 196 v12 a102 25 0 0 0 204 0 v-12 a102 25 0 0 1 -204 0 Z" fill="#c9c3ba"/>
+                      <ellipse cx="200" cy="196" rx="102" ry="25" fill="url(#pt-lid)"/>
+                      <ellipse cx="200" cy="196" rx="84" ry="18" fill="none" stroke="#d8d3cb" stroke-width="2"/>
+                      <path d="M140 228 L144 300" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"/>
+                    </g>
+                  </defs>
+                  <ellipse cx="290" cy="420" rx="80" ry="12" fill="#5a4a3a" opacity=".3" filter="url(#pt-blur)"/>
+                  <ellipse cx="190" cy="448" rx="120" ry="16" fill="#5a4a3a" opacity=".35" filter="url(#pt-blur)"/>
+                  <use href="#pt-tub" transform="translate(196 176) scale(.6)"/>
+                  <use href="#pt-tub" transform="translate(-14 26)"/>
+                  <text x="186" y="225" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" letter-spacing="3" fill="#8f877c">1 KG</text>
+                </svg>
               </div>
             </div>
             <h3>Potes de ¼, ½ y 1 kg</h3><p>Elegí hasta cuatro sabores. Ideal para la sobremesa.</p>
