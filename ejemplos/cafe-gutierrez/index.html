@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Café Gutiérrez · Café de especialidad en Recoleta</title>
+  <meta name="description" content="Café Gutiérrez: café de especialidad, platitos, vinos y cócteles en Recoleta. Juan María Gutiérrez 2637 y Uruguay 917." />
+  <!-- Slab de la marca (como su carta): Zilla Slab, de Google Fonts. Si no carga, cae en Rockwell / Georgia. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="gutierrez.css" />
+  <script>document.documentElement.classList.add('cf-js', 'gz-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="gutierrez.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../../animaciones/cafeteria-ejemplo/shared/scenes.js"></script>
+</head>
+<body class="gz">
+  <header class="cf-nav" data-nav>
+    <a class="gz-logo" href="#inicio"><svg class="gz-g" viewBox="0 0 100 100" aria-hidden="true"><path d="M80.7 27.7A38 38 0 1 0 88 50"/><path d="M67.8 37.1A22 22 0 1 0 72 50"/><path d="M58 50H88"/></svg>Gutiérrez</a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="#cafe">Café</a>
+      <a href="#carta">Carta</a>
+      <a href="#eventos">Eventos</a>
+      <a href="#sedes">Sedes</a>
+    </nav>
+    <a class="cf-nav__cta" href="#sedes">Cómo llegar</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="#cafe">Café</a></li>
+      <li><a href="#carta">Carta</a></li>
+      <li><a href="#eventos">Eventos</a></li>
+      <li><a href="#sedes">Sedes</a></li>
+    </ul></nav>
+    <p>Juan María Gutiérrez 2637 · Uruguay 917 · Recoleta</p>
+  </div>
+
+  <main id="inicio">
+    <!-- Hero: ladrillo visto + lámpara colgante + granos 3D (Coffee Product Hero) alrededor de la G -->
+    <section class="cf-hero gz-brick">
+      <span class="gz-lamp" aria-hidden="true"><i></i></span>
+      <div class="cf-hero__fallback">
+        <span class="cf-kicker">Café de especialidad · Recoleta</span>
+        <h1>Café Gutiérrez</h1>
+      </div>
+      <div data-c3="hero" data-roast="medium" data-rig="side" style="position:absolute;inset:0">
+        <template data-c3-html>
+          <svg class="gz-g" viewBox="0 0 100 100" aria-hidden="true"><path d="M80.7 27.7A38 38 0 1 0 88 50"/><path d="M67.8 37.1A22 22 0 1 0 72 50"/><path d="M58 50H88"/></svg>
+          <small>Café de especialidad · Recoleta</small>
+          <h1>Café Gutiérrez</h1>
+          <p>Filtrados, espresso, platitos y vinos. De día, una barra de café; de noche, ciclos de música y arte.</p>
+          <a href="#carta">Ver la carta</a>
+        </template>
+      </div>
+      <span class="cf-scroll-cue">Bajá</span>
+    </section>
+
+    <section class="cf-overview">
+      <span class="cf-kicker">La casa</span>
+      <p class="cf-overview__text" data-lines>Ladrillo, una barra larga de madera y la pava siempre caliente. En Gutiérrez el café se prepara a la vista y se toma sin apuro, en Recoleta.</p>
+    </section>
+
+    <!-- Portada con clip-path: la barra de filtrados, dibujada en SVG y trazándose al entrar -->
+    <section class="cf-frame-wrap" aria-label="La barra de filtrados">
+      <div class="cf-frame" data-frame>
+        <div class="cf-frame__media" data-frame-media>
+          <svg class="gz-bar" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" data-draw aria-hidden="true">
+            <defs>
+              <pattern id="gz-tiles" width="80" height="40" patternUnits="userSpaceOnUse"><rect width="80" height="40" fill="#1d1b19"/><path d="M0 0H80M0 0V40" stroke="#0c0b0a" stroke-width="3"/><rect x="3" y="3" width="74" height="10" fill="#fff" opacity=".03"/></pattern>
+              <linearGradient id="gz-counter" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6cb9f"/><stop offset=".08" stop-color="#d4b182"/><stop offset="1" stop-color="#8f6c45"/></linearGradient>
+              <pattern id="gz-strips" width="64" height="300" patternUnits="userSpaceOnUse"><rect width="64" height="300" fill="none"/><rect x="0" width="2" height="300" fill="#7d5a36" opacity=".35"/><rect x="30" width="1" height="300" fill="#fff" opacity=".12"/></pattern>
+              <radialGradient id="gz-glow" cx=".5" cy=".3" r=".5"><stop offset="0" stop-color="#ffd59a" stop-opacity=".55"/><stop offset="1" stop-color="#ffd59a" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="1600" height="900" fill="url(#gz-tiles)"/>
+            <!-- Lámparas colgantes -->
+            <g>
+              <ellipse cx="420" cy="420" rx="260" ry="320" fill="url(#gz-glow)"/>
+              <ellipse cx="1180" cy="420" rx="260" ry="320" fill="url(#gz-glow)"/>
+              <path class="ln" pathLength="1" d="M420 0V210M1180 0V210M800 0V150" stroke="#0b0a09" stroke-width="4" fill="none"/>
+              <path d="M370 250Q370 210 420 210Q470 210 470 250Z" fill="#0b0a09"/>
+              <path d="M1130 250Q1130 210 1180 210Q1230 210 1230 250Z" fill="#0b0a09"/>
+              <path d="M760 190Q760 150 800 150Q840 150 840 190Z" fill="#0b0a09"/>
+              <ellipse cx="420" cy="252" rx="22" ry="7" fill="#ffe2b0"/><ellipse cx="1180" cy="252" rx="22" ry="7" fill="#ffe2b0"/><ellipse cx="800" cy="192" rx="18" ry="6" fill="#ffe2b0"/>
+            </g>
+            <!-- Barra de madera -->
+            <rect y="600" width="1600" height="300" fill="url(#gz-counter)"/>
+            <rect y="600" width="1600" height="300" fill="url(#gz-strips)"/>
+            <rect y="596" width="1600" height="8" fill="#f2dcb6"/>
+            <g fill="none" stroke="#f3ece2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- V60 sobre su jarra -->
+              <path class="fill-in" d="M426 600L428 560Q480 552 532 560L536 600Z" fill="#3b1d0e" stroke="none"/>
+              <path class="ln" pathLength="1" d="M420 600L425 520Q480 505 535 520L540 600Z"/>
+              <path class="ln" pathLength="1" d="M410 470L550 470L510 520L450 520Z"/>
+              <path class="ln" pathLength="1" d="M550 480q34 0 34 22q0 16 -40 20"/>
+              <path class="ln" pathLength="1" d="M540 540q40 2 40 26q0 20 -40 22"/>
+              <path class="gz-steam" d="M465 450c-14 -20 14 -34 0 -56M495 450c-14 -20 14 -34 0 -56" stroke-width="4" opacity=".6"/>
+              <!-- Chemex -->
+              <path class="fill-in" d="M748 600Q756 560 768 545L832 545Q844 560 852 600Z" fill="#3b1d0e" stroke="none"/>
+              <path class="ln" pathLength="1" d="M740 370L860 370L820 465Q842 520 860 600L740 600Q758 520 780 465Z"/>
+              <path class="fill-in" d="M776 452L824 452L830 488L770 488Z" fill="#c79d6b" stroke="none"/>
+              <path class="ln" pathLength="1" d="M776 452L824 452L830 488L770 488Z"/>
+              <path class="ln" pathLength="1" d="M800 488l-10 34M800 488l10 34"/>
+              <!-- Pava cuello de cisne -->
+              <path class="fill-in" d="M1080 600L1090 505Q1150 485 1210 505L1220 600Z" fill="#0b0a09" stroke="none"/>
+              <path class="ln" pathLength="1" d="M1080 600L1090 505Q1150 485 1210 505L1220 600Z"/>
+              <path class="ln" pathLength="1" d="M1110 497Q1150 470 1190 497M1150 478v-14"/>
+              <path class="ln" pathLength="1" d="M1210 515Q1272 505 1264 562Q1256 592 1218 592"/>
+              <path class="ln" pathLength="1" d="M1090 560Q1040 560 1030 500Q1024 468 984 456"/>
+              <!-- Tacita -->
+              <path class="fill-in" d="M612 600L616 566H684L688 600Z" fill="#f3ece2" stroke="none"/>
+              <path class="ln" pathLength="1" d="M612 600L616 566H684L688 600ZM686 574q22 0 20 14q-2 10 -20 10"/>
+            </g>
+          </svg>
+        </div>
+        <span class="cf-frame__label">La barra de filtrados</span>
+      </div>
+    </section>
+
+    <!-- Café: tarjetas-acordeón del Scroll de agencia (precios de su carta) -->
+    <section class="cf-features" id="cafe" aria-labelledby="t-cafe">
+      <h2 class="cf-features__title" id="t-cafe" data-words>Café de especialidad</h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="gz-wood"></i></span>
+          <div class="cf-item__head"><h3>V60 · 600 ml</h3><span class="cf-item__num">$7000</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>El filtrado más limpio de la barra. Alcanza para dos tazas y deja ver todo lo que tiene el grano.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="gz-wood gz-wood--dark"></i></span>
+          <div class="cf-item__head"><h3>Chemex · 700 ml</h3><span class="cf-item__num">$7000</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Filtro grueso, cuerpo liviano y una jarra entera para compartir en la mesa.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="gz-wood gz-wood--tile"></i></span>
+          <div class="cf-item__head"><h3>Aeropress · 400 ml</h3><span class="cf-item__num">$7000</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Presión suave y una taza con más cuerpo. Para quien quiere algo entre el filtrado y el espresso.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><i class="gz-wood"></i></span>
+          <div class="cf-item__head"><h3>Barra de espresso</h3><span class="cf-item__num">Todo el día</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Espresso, cortado y con leche, con el café de la semana. Preguntá en la barra qué origen está hoy.</p>
+            <a class="cf-more" href="https://www.instagram.com/cafe_gutierrez/" target="_blank" rel="noopener">Ver novedades <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Carta de eventos: papel crema, bordó y dibujos de línea (como la carta impresa) -->
+    <section class="gz-menu" id="carta" aria-labelledby="t-carta">
+      <div class="gz-menu__inner">
+        <div class="gz-menu__head">
+          <span class="cf-kicker">Desde las 19 h</span>
+          <h2 id="t-carta" data-words>Menú de eventos</h2>
+          <p>Café Gutiérrez</p>
+        </div>
+        <div class="gz-menu__cols">
+          <div class="gz-group cf-fade">
+            <header>
+              <h3>Platitos</h3>
+              <svg viewBox="0 0 64 64" data-draw aria-hidden="true"><path class="ln" pathLength="1" d="M8 30H56Q54 50 32 52Q10 50 8 30Z"/><path class="ln" pathLength="1" d="M24 24c-4 -5 4 -8 0 -14M32 24c-4 -5 4 -8 0 -14M40 24c-4 -5 4 -8 0 -14"/><path class="ln" pathLength="1" d="M22 56H42"/></svg>
+            </header>
+            <ul class="gz-items">
+              <li><b>Estofado</b><span>Berenjenas con papines, provenzal &amp; pan tostado</span><em>$5900</em></li>
+              <li><b>Empanadas</b><span>Brisket, cebollas caramelizadas &amp; mojo de tomate</span><em>$6000</em></li>
+              <li><b>Omelette</b><span>Con jamón crudo, alioli, papas pai &amp; ciboulette</span><em>$6800</em></li>
+              <li><b>Sopa</b><span>Calabaza, croutons &amp; verdeo</span><em>$6500</em></li>
+            </ul>
+          </div>
+          <div class="gz-group cf-fade">
+            <header>
+              <h3>Vinos por copa<small>En promo, todos los días, desde las 19 h</small></h3>
+              <svg viewBox="0 0 64 64" data-draw aria-hidden="true"><path class="ln" pathLength="1" d="M22 6H42Q45 28 32 33Q19 28 22 6Z"/><path class="ln" pathLength="1" d="M23 17H41"/><path class="ln" pathLength="1" d="M32 33V54M22 57H42"/></svg>
+            </header>
+            <ul class="gz-items gz-items--compact">
+              <li><b>Casa del Herrero · blanco</b><em>$4500</em></li>
+              <li><b>Casa del Herrero · rosé</b><em>$4500</em></li>
+              <li><b>Animal · malbec</b><em>$4500</em></li>
+              <li><b>Ojo de Buen Cubero · malbec</b><em>$4500</em></li>
+              <li><b>Vinos por botella</b><span>Todos los disponibles en nuestra cava</span><em>Consultá</em></li>
+            </ul>
+          </div>
+          <div class="gz-group cf-fade">
+            <header>
+              <h3>Pizzas</h3>
+              <svg viewBox="0 0 64 64" data-draw aria-hidden="true"><path class="ln" pathLength="1" d="M8 14Q32 2 56 14L32 60Z"/><path class="ln" pathLength="1" d="M12 21Q32 11 52 21"/><circle class="ln" pathLength="1" cx="27" cy="27" r="4"/><circle class="ln" pathLength="1" cx="38" cy="33" r="3.5"/><circle class="ln" pathLength="1" cx="31" cy="42" r="3"/></svg>
+            </header>
+            <ul class="gz-items">
+              <li><b>Pizza de lomito</b><span>Salsa de tomates, queso mozzarella, pistachos, cebolla morada &amp; ciboulette</span><em>$9000</em></li>
+              <li><b>Pizza de hongos</b><span>Queso mozzarella, queso azul, queso crema, hongos salteados, cebolla caramelizada &amp; ciboulette</span><em>$9000</em></li>
+            </ul>
+          </div>
+          <div class="gz-group cf-fade">
+            <header>
+              <h3>Cócteles</h3>
+              <svg viewBox="0 0 64 64" data-draw aria-hidden="true"><path class="ln" pathLength="1" d="M17 16L47 16L43 57L21 57Z"/><path class="ln" pathLength="1" d="M23 30h10v10h-10zM33 38h9v9h-9z"/><path class="ln" pathLength="1" d="M40 4L36 30"/><circle class="ln" pathLength="1" cx="48" cy="17" r="7"/></svg>
+            </header>
+            <ul class="gz-items gz-items--compact">
+              <li><b>Gin tonic</b><em>$6500</em></li>
+              <li><b>Campari tonic</b><em>$6500</em></li>
+              <li><b>Fernet</b><em>$6500</em></li>
+              <li><b>Aperol spritz</b><em>$6500</em></li>
+              <li><b>Vermú</b><em>$6500</em></li>
+              <li><b>Negroni</b><em>$6000</em></li>
+            </ul>
+          </div>
+        </div>
+        <p class="gz-menu__note">Carta de eventos con precios tomada de su menú en PDF. Los precios pueden cambiar: la carta vigente está en el local.</p>
+      </div>
+    </section>
+
+    <!-- Eventos: cinta que corre + dibujo de línea -->
+    <section class="gz-events" id="eventos" aria-labelledby="t-eventos">
+      <div class="gz-marquee" aria-hidden="true">
+        <span>Música <i>+</i> Café <i>+</i> Vinos <i>+</i> Arte <i>+</i></span><span>Música <i>+</i> Café <i>+</i> Vinos <i>+</i> Arte <i>+</i></span>
+      </div>
+      <div class="gz-marquee gz-marquee--rev" aria-hidden="true">
+        <span>Ciclos <i>·</i> Recoleta <i>·</i> De noche <i>·</i></span><span>Ciclos <i>·</i> Recoleta <i>·</i> De noche <i>·</i></span>
+      </div>
+      <div class="gz-events__body">
+        <div>
+          <span class="cf-kicker">Eventos</span>
+          <h2 class="cf-sr" id="t-eventos">Ciclos de música, café, vinos y arte</h2>
+          <p class="cf-fade">Cuando cae el sol, la barra cambia de ritmo: ciclos de música en vivo, muestras de arte, vinos por copa y platitos para compartir. Las fechas se anuncian en el destacado <em>Eventos</em> de Instagram.</p>
+          <a class="cf-btn cf-fade" href="https://www.instagram.com/cafe_gutierrez/" target="_blank" rel="noopener">Ver la agenda <span aria-hidden="true">→</span></a>
+        </div>
+        <svg viewBox="0 0 300 260" data-draw aria-hidden="true">
+          <g transform="rotate(-14 110 140)"><path class="ln" pathLength="1" d="M88 40H132Q138 96 110 108Q82 96 88 40Z"/><path class="ln" pathLength="1" d="M90 70H130"/><path class="ln" pathLength="1" d="M110 108V190M86 196H134"/></g>
+          <g transform="rotate(14 190 140)"><path class="ln" pathLength="1" d="M168 40H212Q218 96 190 108Q162 96 168 40Z"/><path class="ln" pathLength="1" d="M170 70H210"/><path class="ln" pathLength="1" d="M190 108V190M166 196H214"/></g>
+          <path class="ln" pathLength="1" d="M150 30l5 -12l5 12l-5 12zM40 60v34M40 94a9 7 0 1 1 -1 -1M40 60l20 -6v32M60 86a9 7 0 1 1 -1 -1M248 70l4 -9l4 9l-4 9zM262 120l3 -7l3 7l-3 7z"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Sedes -->
+    <section class="gz-sedes" id="sedes" aria-labelledby="t-sedes">
+      <div class="gz-sedes__inner">
+        <h2 id="t-sedes" data-words>Dos barras en Recoleta</h2>
+        <div class="gz-sedes__grid">
+          <a class="gz-sede" href="https://www.google.com/maps/search/?api=1&amp;query=Juan+Mar%C3%ADa+Guti%C3%A9rrez+2637,+Recoleta,+CABA" target="_blank" rel="noopener">
+            <small>Sede I · Recoleta</small>
+            <h3>Juan María Gutiérrez 2637</h3>
+            <p>La casa que le dio el nombre.</p>
+            <span class="cf-more">Cómo llegar <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="gz-sede gz-sede--b" href="https://www.google.com/maps/search/?api=1&amp;query=Uruguay+917,+Recoleta,+CABA" target="_blank" rel="noopener">
+            <small>Sede II · Recoleta</small>
+            <h3>Uruguay 917</h3>
+            <p>Misma barra, otra esquina.</p>
+            <span class="cf-more">Cómo llegar <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
+        <div class="gz-sedes__info">
+          <p><b>Horarios:</b> en el destacado <em>Horarios</em> de <a href="https://www.instagram.com/cafe_gutierrez/" target="_blank" rel="noopener">Instagram</a>.</p>
+          <p><b>Links:</b> <a href="https://linktr.ee/cafe_gutierrez" target="_blank" rel="noopener">linktr.ee/cafe_gutierrez</a></p>
+          <p><b>Seguinos:</b> <a href="https://www.instagram.com/cafe_gutierrez/" target="_blank" rel="noopener">@cafe_gutierrez</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="gz-logo"><svg class="gz-g" viewBox="0 0 100 100" aria-hidden="true"><path d="M80.7 27.7A38 38 0 1 0 88 50"/><path d="M67.8 37.1A22 22 0 1 0 72 50"/><path d="M58 50H88"/></svg>Café Gutiérrez</span>
+      <nav aria-label="Pie"><a href="#cafe">Café</a><a href="#carta">Carta</a><a href="#eventos">Eventos</a><a href="#sedes">Sedes</a></nav>
+      <span>Sitio de ejemplo · Librería de Animaciones</span>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Café Gutiérrez · one-page</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@cafe_gutierrez)</span><span>Hermana de Traiano: misma base, otra identidad</span><span>Three.js · GSAP + ScrollTrigger · SVG</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué comparte con Traiano y qué no</h3>
+          <ul>
+            <li><strong>Igual:</strong> one-page con menú de anclas, textura de material en el hero con granos 3D (Coffee Product Hero), portada con clip-path, tarjetas-acordeón por scroll e ilustraciones SVG en lugar de fotos.</li>
+            <li><strong>Distinto:</strong> ladrillo visto (SVG que tilea sin cortes) y lámpara colgante en vez de madera gris; slab bordó sobre papel crema; dibujos de línea que se trazan solos al entrar (<code>[data-draw]</code>, <code>pathLength="1"</code>); cinta de eventos que corre.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido</h3>
+          <ul>
+            <li>De Instagram: "Café de especialidad", las dos direcciones en Recoleta, el linktree y los destacados (Horarios, Eventos, Café…). El logo (la G de arcos) es una aproximación en SVG.</li>
+            <li>La carta es la de eventos de su PDF, con sus precios. Las descripciones de los filtrados y los textos de la casa son de ejemplo.</li>
+            <li>Sin fotos del local: si las pasan, van en la portada y en las tarjetas de sedes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Café Gutiérrez</small></a>
+</body>
+</html>

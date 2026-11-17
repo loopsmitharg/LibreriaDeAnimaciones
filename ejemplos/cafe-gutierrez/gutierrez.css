@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Café Gutiérrez · café de especialidad en Recoleta — identidad del sitio
+   Hermana de Traiano (ejemplos/traiano): misma base de componentes
+   (animaciones/cafeteria-ejemplo/shared/cafe.css + scenes.js), textura de
+   material en el hero y dibujos SVG; pero otro mundo: loft industrial
+   (ladrillo, barra de madera clara, lámparas negras) y la carta en papel
+   crema con bordó, como su menú de eventos.
+   ========================================================================== */
+:root {
+  --vino: #7b1e22;
+  --vino-2: #5c1418;
+  --papel: #efe8dc;
+  --papel-2: #e4dacb;
+  --negro: #121110;
+  --hollin: #1c1a18;
+  --madera: #d9b88a;
+  --slab: "Zilla Slab", "Rockwell", Georgia, serif;
+
+  /* cafe.css */
+  --paper: var(--papel); --ink: #1b1715; --espresso: var(--negro); --roast: var(--hollin);
+  --caramel: var(--vino); --muted: #6f655b; --closed: var(--papel-2); --serif: var(--slab);
+  --c3-ink: #f3ece2; --c3-accent: var(--madera);
+
+  /* Ladrillo visto: un SVG de 120×60 con dos hiladas (la segunda corrida media pieza) que repite sin cortes. */
+  --ladrillos: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Crect width='120' height='60' fill='%23423a35'/%3E%3Cg%3E%3Crect x='1' y='1' width='57' height='27' rx='2' fill='%238a4a35'/%3E%3Crect x='61' y='1' width='57' height='27' rx='2' fill='%237a4030'/%3E%3Crect x='-29' y='31' width='57' height='27' rx='2' fill='%23804634'/%3E%3Crect x='31' y='31' width='57' height='27' rx='2' fill='%2394533c'/%3E%3Crect x='91' y='31' width='57' height='27' rx='2' fill='%23804634'/%3E%3C/g%3E%3C/svg%3E");
+  /* Grano fino (papel / revoque): ruido que tilea sin costuras (stitchTiles). */
+  --grano: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body { background: var(--papel) var(--grano); }
+.gz-slab { font-family: var(--slab); font-weight: 700; }
+
+/* ---------- Logo: la G de arcos concéntricos ---------- */
+.gz-g { display: inline-block; width: 1em; height: 1em; vertical-align: -.15em; }
+.gz-g path { fill: none; stroke: currentColor; stroke-width: 7; stroke-linecap: round; }
+.gz-logo { display: inline-flex; align-items: center; gap: .55rem; text-decoration: none; font: 700 1.3rem/1 var(--slab); letter-spacing: -.01em; }
+.gz-logo .gz-g { width: 1.9rem; height: 1.9rem; }
+.gz .cf-nav__cta, .gz .cf-burger { background: var(--vino); color: #f3ece2; }
+.gz .cf-nav.is-solid { background: rgba(239, 232, 220, .9); }
+.gz .cf-drawer { background: var(--negro) var(--ladrillos); background-blend-mode: multiply; }
+.gz .cf-drawer li a { font: 700 clamp(2.8rem, 13vw, 4.2rem)/1.1 var(--slab); }
+
+/* ---------- Hero: ladrillo visto + granos 3D ---------- */
+.gz-brick, .gz .gz-brick { background-color: #2a2421; background-image: linear-gradient(180deg, rgba(10, 8, 7, .55), rgba(10, 8, 7, .78) 70%, rgba(10, 8, 7, .92)), radial-gradient(60% 50% at 50% 38%, rgba(255, 196, 120, .22), transparent 70%), var(--grano), var(--ladrillos);
+  background-size: auto, auto, 260px 260px, 120px 60px; }
+/* Lámpara colgante sobre el título (como las del local). */
+.gz-lamp { position: absolute; z-index: 2; left: 50%; top: 0; translate: -50% 0; width: 2px; height: 16vh; background: #0b0a09; pointer-events: none; }
+.gz-lamp::after { content: ""; position: absolute; left: 50%; top: 100%; width: 3.2rem; height: 2rem; translate: -50% 0; border-radius: 3.2rem 3.2rem 0 0; background: linear-gradient(#2a2725, #0b0a09); box-shadow: 0 1.6rem 5rem 1.6rem rgba(255, 196, 120, .18); }
+.gz-lamp i { position: absolute; left: 50%; top: calc(100% + 1.8rem); width: 1rem; height: .5rem; translate: -50% 0; border-radius: 0 0 1rem 1rem; background: #ffe2b0; box-shadow: 0 0 30px 10px rgba(255, 210, 140, .45); }
+.gz .c3-hero { gap: .9rem; padding-top: 22vh; }
+.gz .c3-hero .gz-g { width: clamp(3.4rem, 7vw, 5rem); height: clamp(3.4rem, 7vw, 5rem); color: #f3ece2; }
+.gz .c3-hero h1, .gz .cf-hero__fallback h1 { max-width: none; font: 700 clamp(3.2rem, 9vw, 7.4rem)/.92 var(--slab); letter-spacing: -.02em; color: #f3ece2; }
+.gz .c3-hero small, .gz .cf-hero__fallback .cf-kicker { color: var(--madera); }
+.gz .c3-hero p { color: rgba(243, 236, 226, .78); }
+.gz .c3-hero a { background: var(--vino); color: #f3ece2; }
+
+/* ---------- Tipografía de los componentes ---------- */
+.gz .cf-kicker { color: var(--vino); }
+.gz .cf-features__title, .gz .cf-work h2, .gz .cf-outro h2, .gz .cf-top h2 { font-family: var(--slab); font-weight: 700; letter-spacing: -.02em; }
+.gz .cf-overview__text em { font-style: normal; color: var(--vino); }
+.gz .cf-item h3 { font-family: var(--slab); font-weight: 700; }
+.gz .cf-item, .gz .cf-item.is-open { color: #f3ece2; }
+.gz .cf-item .cf-item__fill, .gz .cf-item.is-open .cf-item__fill { background: var(--vino-2); }
+.cf-js .gz .cf-item:not(.is-open) { color: var(--ink); }
+.gz .cf-item__num { font-family: var(--slab); font-size: 1rem; }
+.gz .cf-item__bg { width: 40%; }
+.gz .cf-prices b { color: var(--madera); }
+.gz .cf-more span { background: var(--madera); color: var(--negro); }
+
+/* Fondos del acordeón: madera de la barra (listones verticales) */
+.gz-wood { display: block; width: 100%; height: 100%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, .25), transparent 40%), repeating-linear-gradient(90deg, #d9b88a 0 34px, #caa271 34px 36px, #e2c497 36px 70px, #c79d6b 70px 72px, #d6b280 72px 104px, #bf955f 104px 106px); }
+.gz-wood--dark { background: linear-gradient(90deg, rgba(0, 0, 0, .3), transparent 40%), repeating-linear-gradient(90deg, #2a2725 0 30px, #1c1a18 30px 32px); }
+.gz-wood--tile { background: linear-gradient(90deg, rgba(0, 0, 0, .3), transparent 40%), linear-gradient(#0e0d0c 2px, transparent 2px) 0 0 / 40px 20px, linear-gradient(90deg, #0e0d0c 2px, #1e1c1a 2px) 0 0 / 40px 20px; }
+
+/* ---------- La barra (portada con clip-path): ilustración SVG ---------- */
+.gz .cf-frame { background: #151311; }
+.gz-bar { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gz .cf-frame__label { color: var(--madera); }
+
+/* Dibujo que se traza: cada trazo tiene pathLength="1"; .is-drawn lo completa (gutierrez.js). */
+[data-draw] .ln { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.gz-js [data-draw] .ln { stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s cubic-bezier(.65, 0, .35, 1); }
+.gz-js [data-draw].is-drawn .ln { stroke-dashoffset: 0; }
+.gz-js [data-draw] .fill-in { opacity: 0; transition: opacity .8s ease .9s; }
+.gz-js [data-draw].is-drawn .fill-in { opacity: 1; }
+.gz-steam { animation: gz-steam 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+.gz-steam:nth-of-type(2) { animation-delay: -1.7s; }
+@keyframes gz-steam { 0% { opacity: 0; transform: translateY(10px); } 40% { opacity: .7; } 100% { opacity: 0; transform: translateY(-18px) skewX(-8deg); } }
+@media (prefers-reduced-motion: reduce) { .gz-steam { animation: none; opacity: .5; } }
+
+/* ---------- Carta de eventos: papel crema con bordó ---------- */
+.gz-menu { position: relative; padding: clamp(5rem, 12vh, 8rem) 0; background: var(--papel) var(--grano); color: var(--vino); overflow: clip; }
+.gz-menu::before { content: ""; position: absolute; right: -8vw; top: 4rem; width: min(46vw, 34rem); aspect-ratio: 1; opacity: .07;
+  background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%237b1e22' stroke-width='7' stroke-linecap='round'%3E%3Cpath d='M80.7 27.7A38 38 0 1 0 88 50'/%3E%3Cpath d='M67.8 37.1A22 22 0 1 0 72 50'/%3E%3Cpath d='M58 50H88'/%3E%3C/g%3E%3C/svg%3E"); }
+.gz-menu__inner { position: relative; width: min(1100px, calc(100vw - 2.5rem)); margin: 0 auto; }
+.gz-menu__head { display: grid; gap: .6rem; margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+.gz-menu__head h2 { margin: 0; font: 700 clamp(3rem, 8vw, 6.4rem)/.88 var(--slab); letter-spacing: -.02em; text-transform: uppercase; }
+.gz-menu__head p { margin: 0; font: 500 .8rem/1.4 var(--sans); letter-spacing: .5em; text-transform: uppercase; }
+.gz-menu__cols { display: grid; gap: clamp(2.5rem, 5vw, 4.5rem); }
+@media (min-width: 860px) { .gz-menu__cols { grid-template-columns: 1fr 1fr; } }
+.gz-group { display: grid; gap: 1.1rem; }
+.gz-group > header { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding-bottom: .7rem; border-bottom: 2px solid var(--vino); }
+.gz-group h3 { margin: 0; font: 700 clamp(1.7rem, 3vw, 2.3rem)/1 var(--slab); text-transform: uppercase; }
+.gz-group h3 small { display: block; margin-top: .35rem; font: 500 italic .9rem/1.2 var(--sans); text-transform: none; opacity: .8; }
+.gz-group svg { flex: 0 0 auto; width: 4.2rem; height: 4.2rem; }
+.gz-group svg .ln { fill: none; stroke: var(--vino); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.gz-items { display: grid; gap: .1rem; margin: 0; padding: 0; list-style: none; }
+.gz-items li { display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; padding: .7rem 0; border-bottom: 1px dashed rgba(123, 30, 34, .3); }
+.gz-items b { font: 700 1.05rem/1.2 var(--sans); letter-spacing: .04em; text-transform: uppercase; }
+.gz-items span { grid-column: 1; color: #5a4a44; font: 400 .92rem/1.45 var(--sans); }
+.gz-items em { grid-row: 1 / span 2; grid-column: 2; align-self: center; font: 700 1.15rem/1 var(--slab); font-style: normal; white-space: nowrap; }
+.gz-items--compact li { grid-template-columns: 1fr auto; padding: .5rem 0; }
+.gz-tag { display: inline-block; margin-left: .4rem; padding: .25rem .5rem; border-radius: 999px; background: var(--vino); color: var(--papel); font: 600 .62rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; vertical-align: .2em; }
+.gz-menu__note { margin: clamp(2.5rem, 6vh, 4rem) 0 0; color: #6f655b; font: 400 .85rem/1.5 var(--sans); }
+
+/* ---------- Eventos: cinta que corre ---------- */
+.gz-events { position: relative; padding: clamp(5rem, 12vh, 8rem) 0; background: var(--vino); color: var(--papel); overflow: clip; }
+.gz-marquee { display: flex; width: max-content; animation: gz-marquee 28s linear infinite; }
+.gz-marquee span { display: flex; align-items: center; gap: 2.4rem; padding-right: 2.4rem; white-space: nowrap; font: 700 clamp(3rem, 9vw, 7.5rem)/1 var(--slab); text-transform: uppercase; letter-spacing: -.01em; }
+.gz-marquee span i { font-style: normal; color: var(--madera); }
+.gz-marquee--rev { animation-direction: reverse; animation-duration: 34s; opacity: .35; }
+.gz-marquee--rev span { -webkit-text-stroke: 1px var(--papel); color: transparent; }
+.gz-marquee--rev span i { color: transparent; }
+@keyframes gz-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .gz-marquee { animation: none; } }
+.gz-events__body { display: grid; gap: 2rem; width: min(1100px, calc(100vw - 2.5rem)); margin: clamp(3rem, 7vh, 5rem) auto 0; }
+@media (min-width: 860px) { .gz-events__body { grid-template-columns: 1.2fr 1fr; align-items: center; } }
+.gz-events__body p { margin: 0; font: 400 clamp(1.1rem, 1.8vw, 1.4rem)/1.55 var(--sans); }
+.gz-events__body .cf-kicker { color: var(--madera); }
+.gz-events svg { width: min(100%, 24rem); justify-self: center; }
+.gz-events svg .ln { fill: none; stroke: var(--papel); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.gz .cf-btn { background: var(--papel); color: var(--vino); }
+
+/* ---------- Sedes ---------- */
+.gz-sedes { padding: clamp(5rem, 12vh, 8rem) 0; background: var(--negro); color: #f3ece2; }
+.gz-sedes__inner { width: min(1100px, calc(100vw - 2.5rem)); margin: 0 auto; }
+.gz-sedes h2 { margin: 0 0 clamp(2.5rem, 6vh, 4rem); font: 700 clamp(2.6rem, 6vw, 4.6rem)/.95 var(--slab); letter-spacing: -.02em; }
+.gz-sedes__grid { display: grid; gap: 1.2rem; }
+@media (min-width: 760px) { .gz-sedes__grid { grid-template-columns: 1fr 1fr; } }
+.gz-sede { position: relative; display: grid; gap: .8rem; min-height: 19rem; align-content: end; padding: clamp(1.5rem, 3vw, 2.4rem); overflow: hidden; border-radius: 1.4rem; color: #f3ece2; text-decoration: none; isolation: isolate; }
+.gz-sede::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(18, 17, 16, .15), rgba(18, 17, 16, .9)), var(--grano), var(--ladrillos); background-size: auto, 260px 260px, 120px 60px; transition: transform 1s cubic-bezier(.22, 1, .36, 1); }
+.gz-sede--b::before { background: linear-gradient(180deg, rgba(18, 17, 16, .1), rgba(18, 17, 16, .92)), linear-gradient(#0e0d0c 2px, transparent 2px) 0 0 / 44px 22px, linear-gradient(90deg, #0e0d0c 2px, #24211f 2px) 0 0 / 44px 22px; }
+.gz-sede:hover::before { transform: scale(1.05); }
+.gz-sede small { color: var(--madera); font: 500 .72rem/1 "IBM Plex Mono", monospace; letter-spacing: .2em; text-transform: uppercase; }
+.gz-sede h3 { margin: 0; font: 700 clamp(1.8rem, 3.4vw, 2.6rem)/1 var(--slab); }
+.gz-sede p { margin: 0; color: rgba(243, 236, 226, .75); }
+.gz-sede .cf-more { color: #f3ece2; }
+.gz-sedes__info { display: grid; gap: 1rem; margin-top: 2.5rem; color: rgba(243, 236, 226, .75); }
+@media (min-width: 760px) { .gz-sedes__info { grid-template-columns: repeat(3, 1fr); } }
+.gz-sedes__info a { color: #f3ece2; }
+.gz .cf-footer { background: var(--negro); border-top: 1px solid rgba(243, 236, 226, .1); }
+.gz .cf-footer .gz-logo { color: #f3ece2; }
