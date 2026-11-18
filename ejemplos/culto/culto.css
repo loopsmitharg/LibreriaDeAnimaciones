@@ -94,7 +94,14 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
 .cf-card p { color: var(--hueso-2); }
 .cf-card__img { background: var(--negro-3); box-shadow: inset 0 0 0 1px var(--linea); }
 .cf-outro { background: var(--negro); }
-.cf-story--dark { background: radial-gradient(120% 90% at 50% 35%, #1d1813 0%, #0d0b09 55%, #050504 100%); }
+/* Escena de scroll: la sección queda del mismo negro que sus vecinas (sin borde arriba) y el degradé vive en el
+   escenario sticky, del alto de la pantalla, fundido al negro en los bordes. El título se superpone a la primera
+   pantalla de la escena en vez de ir antes: así el escenario no arranca con un corte debajo del título. */
+.cf-story--dark { background: var(--negro); }
+.cf-story--dark .c3-sticky { background: radial-gradient(110% 85% at 50% 45%, #1d1813 0%, #0f0d0b 55%, var(--negro) 100%); }
+/* Los granos se funden en el negro arriba y abajo: el borde del escenario nunca corta un grano. */
+.cf-story--dark .c3-canvas { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%); }
+.cf-story .cf-story__intro { position: absolute; z-index: 4; top: 0; left: 0; right: 0; pointer-events: none; }
 .cf-story .c3-caption { background: rgba(11, 11, 10, .66); box-shadow: inset 0 0 0 1px var(--linea); }
 
 /* Viñetas de las tarjetas: numerales romanos y arte en CSS (sin fotos del local) */
