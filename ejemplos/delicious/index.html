@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delicious — Arte en la cocina · Recoleta</title>
+  <meta name="description" content="Delicious: pastelería artesanal, almuerzos y brunch en Laprida 2015, Recoleta. Lunes a sábado de 8 a 20 h." />
+  <!-- Tipografías: Fraunces (serif itálica de sus posteos) y Oswald (las mayúsculas del logo), de Google Fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400;1,9..144,500&family=Oswald:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="delicious.css" />
+  <script>document.documentElement.classList.add('cf-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../../animaciones/cafeteria-ejemplo/shared/scenes.js"></script>
+</head>
+<body class="dl">
+  <!-- Ilustraciones (fuente: arte.svg), embebidas para que <use href="#…"> pinte siempre en cualquier navegador -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">
+  
+
+  
+  <symbol id="plato" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="48" fill="#f4f1e8"/>
+    <circle cx="50" cy="50" r="44" fill="none" stroke="#24408e" stroke-width="3"/>
+    <circle cx="50" cy="50" r="38" fill="none" stroke="#24408e" stroke-width="1" stroke-dasharray="3 4"/>
+    <g fill="#24408e">
+      <path d="M50 22c6 8 6 14 0 20c-6 -6 -6 -12 0 -20Z"/><path d="M50 78c6 -8 6 -14 0 -20c-6 6 -6 12 0 20Z"/>
+      <path d="M22 50c8 -6 14 -6 20 0c-6 6 -12 6 -20 0Z"/><path d="M78 50c-8 -6 -14 -6 -20 0c6 6 12 6 20 0Z"/>
+      <circle cx="50" cy="50" r="5"/>
+      <circle cx="30" cy="30" r="2.5"/><circle cx="70" cy="30" r="2.5"/><circle cx="30" cy="70" r="2.5"/><circle cx="70" cy="70" r="2.5"/>
+    </g>
+  </symbol>
+
+  
+  <symbol id="porcion-carrot" viewBox="0 0 400 400">
+    <ellipse cx="200" cy="330" rx="170" ry="34" fill="#e9e1d2"/>
+    <ellipse cx="200" cy="322" rx="150" ry="26" fill="#f7f2e8"/>
+    <path d="M90 300L120 130L330 175L320 315Z" fill="#c9762f"/>
+    <path d="M96 268L320 285L321 268L99 250Z" fill="#f4ead8"/>
+    <path d="M104 220L324 240L326 222L107 202Z" fill="#f4ead8"/>
+    <path d="M112 172L328 196L330 178L115 154Z" fill="#f4ead8"/>
+    <path d="M120 130L330 175L322 150L128 112Z" fill="#f7efe0"/>
+    <path d="M128 112L322 150Q300 136 270 134Q240 120 200 120Q160 106 128 112Z" fill="#fbf6ec"/>
+    <path d="M330 175L320 315L338 300L344 178Z" fill="#a85f22"/>
+    <g fill="#8a5a2b"><path d="M180 112q10 -14 22 -4q-4 12 -22 4Z"/><path d="M236 126q12 -12 22 0q-8 10 -22 0Z"/></g>
+    <g fill="#e39a4f"><circle cx="150" cy="290" r="4"/><circle cx="210" cy="246" r="4"/><circle cx="270" cy="300" r="4"/><circle cx="160" cy="196" r="3.5"/><circle cx="280" cy="210" r="3.5"/></g>
+  </symbol>
+
+  
+  <symbol id="porcion-torta" viewBox="0 0 400 400">
+    <ellipse cx="200" cy="332" rx="170" ry="34" fill="#e9e1d2"/>
+    <ellipse cx="200" cy="324" rx="150" ry="26" fill="#f7f2e8"/>
+    <path d="M80 315L80 170L320 170L320 315Z" fill="#4a2a1a"/>
+    <path d="M80 285H320V270H80Z" fill="#c98a45"/>
+    <path d="M80 245H320V230H80Z" fill="#c98a45"/>
+    <path d="M80 205H320V190H80Z" fill="#c98a45"/>
+    <path d="M70 172H330V156H70Z" fill="#2e180e"/>
+    <g fill="#d99a52">
+      <path d="M100 156q10 -30 20 0Z"/><path d="M140 156q10 -30 20 0Z"/><path d="M180 156q10 -30 20 0Z"/><path d="M220 156q10 -30 20 0Z"/><path d="M260 156q10 -30 20 0Z"/><path d="M296 156q10 -30 20 0Z"/>
+    </g>
+    <g fill="#f3d39c"><circle cx="110" cy="138" r="2.5"/><circle cx="190" cy="138" r="2.5"/><circle cx="270" cy="138" r="2.5"/></g>
+  </symbol>
+
+  
+  <symbol id="porcion-cheese" viewBox="0 0 400 400">
+    <ellipse cx="200" cy="332" rx="170" ry="34" fill="#e9e1d2"/>
+    <ellipse cx="200" cy="324" rx="150" ry="26" fill="#f7f2e8"/>
+    <path d="M90 318L110 186L320 206L314 318Z" fill="#f6ead0"/>
+    <path d="M90 318L94 292L316 296L314 318Z" fill="#b98545"/>
+    <path d="M110 186L320 206L322 186Q220 160 112 166Z" fill="#b5174a"/>
+    <path d="M140 210q6 20 0 34q-6 -14 0 -34ZM250 220q6 22 0 36q-6 -14 0 -36Z" fill="#b5174a"/>
+    <g fill="#5a1a3a"><circle cx="150" cy="166" r="12"/><circle cx="196" cy="160" r="13"/><circle cx="244" cy="166" r="12"/><circle cx="288" cy="176" r="11"/></g>
+    <g fill="#d63a5e"><circle cx="172" cy="156" r="10"/><circle cx="220" cy="154" r="10"/><circle cx="266" cy="162" r="9"/></g>
+    <path d="M196 140q14 -16 26 -8q-10 10 -26 8Z" fill="#4f7a3a"/>
+  </symbol>
+
+  
+  <symbol id="avocado" viewBox="0 0 400 400">
+    <ellipse cx="200" cy="230" rx="180" ry="150" fill="#cfe0dc"/>
+    <ellipse cx="200" cy="230" rx="160" ry="132" fill="#e8f0ee"/>
+    <ellipse cx="200" cy="230" rx="150" ry="122" fill="none" stroke="#24408e" stroke-width="3" stroke-dasharray="2 8"/>
+    <path d="M110 200Q100 140 160 136L280 134Q330 140 312 200L300 300Q200 318 120 302Z" fill="#c98b4a"/>
+    <path d="M122 206Q114 156 164 152L276 150Q314 156 300 206L290 290Q200 304 130 292Z" fill="#e6c08a"/>
+    <path d="M132 214Q130 170 170 166L270 166Q300 172 290 214L282 278Q200 292 140 282Z" fill="#7aa33a"/>
+    <g fill="#a8c766"><circle cx="170" cy="200" r="10"/><circle cx="240" cy="190" r="9"/><circle cx="200" cy="250" r="11"/><circle cx="260" cy="250" r="8"/></g>
+    <ellipse cx="214" cy="214" rx="42" ry="34" fill="#fbfaf6"/>
+    <circle cx="220" cy="210" r="16" fill="#f2a422"/>
+    <g fill="#d93a2a"><circle cx="150" cy="262" r="14"/><circle cx="270" cy="200" r="13"/><circle cx="160" cy="180" r="12"/></g>
+    <g fill="#f4b2a6"><circle cx="146" cy="258" r="4"/><circle cx="266" cy="196" r="4"/></g>
+    <g fill="#2e2a24"><circle cx="196" cy="194" r="1.8"/><circle cx="236" cy="236" r="1.8"/><circle cx="250" cy="214" r="1.8"/></g>
+  </symbol>
+
+  
+  <symbol id="latte" viewBox="0 0 400 400">
+    <ellipse cx="200" cy="318" rx="160" ry="36" fill="#2f5a4a"/>
+    <ellipse cx="200" cy="310" rx="140" ry="28" fill="#3d7560"/>
+    <path d="M316 214q56 -6 52 40q-4 36 -56 34" fill="none" stroke="#2f5a4a" stroke-width="20" stroke-linecap="round"/>
+    <path d="M86 176Q90 290 200 300Q310 290 314 176Z" fill="#3d7560"/>
+    <path d="M100 200Q110 280 160 292" fill="none" stroke="#5f9a82" stroke-width="8" stroke-linecap="round"/>
+    <ellipse cx="200" cy="176" rx="114" ry="30" fill="#2f5a4a"/>
+    <ellipse cx="200" cy="178" rx="102" ry="24" fill="#b97c45"/>
+    <path transform="translate(200 180) scale(1.3 .5)" d="M0 30C-40 0 -46 -30 -20 -35C-8 -37 0 -28 0 -18C0 -28 8 -37 20 -35C46 -30 40 0 0 30Z" fill="#f6ead6"/>
+  </symbol>
+
+  
+  <symbol id="medialunas" viewBox="0 0 400 400">
+    <ellipse cx="200" cy="300" rx="170" ry="46" fill="#24408e"/>
+    <ellipse cx="200" cy="292" rx="156" ry="38" fill="#f4f1e8"/>
+    <g transform="translate(150 250) rotate(-10)">
+      <path d="M-90 20C-80 -40 -30 -66 0 -66C30 -66 80 -40 90 20C70 4 50 -4 30 0C20 -24 -20 -24 -30 0C-50 -4 -70 4 -90 20Z" fill="#d98a35"/>
+      <path d="M-30 0C-24 -30 24 -30 30 0M-62 -14C-54 -34 -40 -44 -26 -50M62 -14C54 -34 40 -44 26 -50" fill="none" stroke="#9c5a1c" stroke-width="4" stroke-linecap="round"/>
+      <path d="M-20 -54q20 -8 40 0" fill="none" stroke="#f7c98a" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(260 262) rotate(14) scale(.8)">
+      <path d="M-90 20C-80 -40 -30 -66 0 -66C30 -66 80 -40 90 20C70 4 50 -4 30 0C20 -24 -20 -24 -30 0C-50 -4 -70 4 -90 20Z" fill="#c97a2a"/>
+      <path d="M-30 0C-24 -30 24 -30 30 0M-62 -14C-54 -34 -40 -44 -26 -50M62 -14C54 -34 40 -44 26 -50" fill="none" stroke="#9c5a1c" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </symbol>
+
+  
+  <symbol id="almuerzo" viewBox="0 0 400 400">
+    <ellipse cx="200" cy="220" rx="180" ry="150" fill="#f4f1e8"/>
+    <ellipse cx="200" cy="220" rx="150" ry="124" fill="none" stroke="#e2dccf" stroke-width="4"/>
+    <path d="M110 250Q120 180 220 186Q320 194 300 260Q280 300 190 298Q100 292 110 250Z" fill="#e9a23b"/>
+    <path d="M150 220Q150 180 190 178Q236 178 236 222Q236 262 192 262Q150 262 150 220Z" fill="#4a2414"/>
+    <path d="M160 206Q190 190 228 206" fill="none" stroke="#7a3e22" stroke-width="6" stroke-linecap="round"/>
+    <path d="M236 216q20 30 6 60q-10 -24 -6 -60Z" fill="#3a1a0e"/>
+    <g fill="#4f7a3a"><path d="M240 170q30 -20 50 10q-30 10 -50 -10Z"/><path d="M262 196q30 -6 40 22q-28 2 -40 -22Z"/><path d="M226 182q10 -30 40 -26q-16 26 -40 26Z"/></g>
+    <g fill="#8a2a5a"><path d="M250 186q18 -12 30 4q-16 8 -30 -4Z"/></g>
+  </symbol>
+
+  
+  <symbol id="registradora" viewBox="0 0 400 400">
+    <path d="M60 330H340L320 250H80Z" fill="#9aa0a6"/>
+    <path d="M80 250H320L300 150H100Z" fill="#c3c8cc"/>
+    <path d="M100 150H300V96Q300 76 280 76H120Q100 76 100 96Z" fill="#aeb4b9"/>
+    <rect x="150" y="90" width="100" height="36" rx="6" fill="#2c2f33"/>
+    <g fill="#f4f1e8"><rect x="160" y="100" width="18" height="16" rx="2"/><rect x="182" y="100" width="18" height="16" rx="2"/><rect x="204" y="100" width="18" height="16" rx="2"/><rect x="226" y="100" width="14" height="16" rx="2"/></g>
+    <g fill="#e9ecee"><circle cx="130" cy="180" r="9"/><circle cx="160" cy="180" r="9"/><circle cx="190" cy="180" r="9"/><circle cx="220" cy="180" r="9"/><circle cx="250" cy="180" r="9"/><circle cx="280" cy="180" r="9"/>
+      <circle cx="124" cy="214" r="9"/><circle cx="156" cy="214" r="9"/><circle cx="188" cy="214" r="9"/><circle cx="220" cy="214" r="9"/><circle cx="252" cy="214" r="9"/><circle cx="284" cy="214" r="9"/></g>
+    <g fill="none" stroke="#7d848a" stroke-width="3"><path d="M110 270q30 30 60 0t60 0t60 0"/><path d="M110 300q30 -26 60 0t60 0t60 0"/></g>
+    <rect x="160" y="300" width="80" height="16" rx="4" fill="#7d848a"/>
+    <path d="M320 200l40 -20" stroke="#7d848a" stroke-width="8" stroke-linecap="round"/><circle cx="364" cy="178" r="10" fill="#b5174a"/>
+  </symbol>
+</svg>
+  <header class="cf-nav" data-nav>
+    <a class="dl-logo" href="index.html" aria-label="Delicious, inicio">Delicious</a>
+    <nav class="cf-nav__links" aria-label="Principal"><a href="index.html" aria-current="page">Inicio</a><a href="pasteleria.html">Pastelería</a><a href="cocina.html">Cocina</a><a href="visitanos.html">Visitanos</a></nav>
+    <a class="cf-nav__cta" href="visitanos.html">Cómo llegar</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul><li><a href="index.html" aria-current="page">Inicio</a></li><li><a href="pasteleria.html">Pastelería</a></li><li><a href="cocina.html">Cocina</a></li><li><a href="visitanos.html">Visitanos</a></li></ul></nav>
+    <p>Laprida 2015, Recoleta · Lunes a sábado de 8 a 20 h</p>
+  </div>
+
+  <main>
+    <!-- Hero: pared verde con platos de porcelana, zócalo de azulejos y granos 3D (Coffee Product Hero) alrededor del logo -->
+    <section class="cf-hero dl-wall">
+      <div class="dl-plates" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg></div>
+      <div class="cf-hero__fallback">
+        <span class="cf-kicker">Arte en la cocina ✷</span>
+        <h1 class="dl-logo dl-logo--big">Delicious</h1>
+      </div>
+      <div data-c3="hero" data-roast="medium" data-rig="soft" style="position:absolute;inset:0">
+        <template data-c3-html>
+          <h1 class="dl-logo dl-logo--big">Delicious</h1>
+          <small>Arte en la cocina ✷</small>
+          <p>Pastelería artesanal, almuerzos y brunch. De lunes a sábado, de 8 a 20 h, en Recoleta.</p>
+          <a href="pasteleria.html">Ver la pastelería</a>
+        </template>
+      </div>
+      <span class="cf-scroll-cue">Bajá</span>
+      <div class="dl-zocalo" aria-hidden="true"></div>
+    </section>
+
+    <section class="cf-overview">
+      <span class="cf-kicker">La casa</span>
+      <p class="cf-overview__text" data-lines>Una caja registradora antigua, paredes verdes con platos de porcelana y una vitrina que cambia cada mañana. Vení por un café y quedate por una porción de torta.</p>
+    </section>
+
+    <!-- Portada con clip-path (Scroll de agencia): la vitrina de tortas, en SVG -->
+    <section class="cf-frame-wrap" aria-label="La vitrina">
+      <div class="cf-frame" data-frame>
+        <div class="cf-frame__media" data-frame-media>
+          <svg class="dl-vitrina" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="1600" height="900" fill="#33503a"/>
+            <rect width="1600" height="900" fill="#000" opacity=".12"/>
+            <use href="#plato" x="180" y="70" width="110" height="110"/>
+            <use href="#plato" x="420" y="110" width="80" height="80"/>
+            <use href="#plato" x="1110" y="100" width="90" height="90"/>
+            <use href="#plato" x="1320" y="60" width="120" height="120"/>
+            <rect y="636" width="1600" height="30" fill="#8a5a2b"/>
+            <rect y="666" width="1600" height="234" fill="#5e3a1d"/>
+            <rect y="636" width="1600" height="6" fill="#b07a42"/>
+            <g>
+              <ellipse cx="380" cy="632" rx="150" ry="14" fill="#000" opacity=".25"/>
+              <path d="M340 630H420L398 600H362Z" fill="#e9e2d4"/>
+              <rect x="370" y="560" width="20" height="44" fill="#f4f1e8"/>
+              <ellipse cx="380" cy="560" rx="170" ry="20" fill="#f4f1e8"/>
+              <ellipse cx="380" cy="556" rx="170" ry="16" fill="#fbf8f1"/>
+              <use href="#porcion-carrot" x="210" y="236" width="340" height="340"/>
+              <path d="M204 556Q200 250 380 238Q560 250 556 556" fill="#ffffff" fill-opacity=".1" stroke="#fff" stroke-opacity=".45" stroke-width="4"/>
+              <path d="M250 470Q240 320 320 278" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="380" cy="230" r="14" fill="#f4f1e8"/>
+              <g transform="translate(470 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Carrot cake</text></g>
+            </g>
+            <g>
+              <ellipse cx="800" cy="632" rx="150" ry="14" fill="#000" opacity=".25"/>
+              <path d="M760 630H840L818 600H782Z" fill="#e9e2d4"/>
+              <rect x="790" y="560" width="20" height="44" fill="#f4f1e8"/>
+              <ellipse cx="800" cy="560" rx="170" ry="20" fill="#f4f1e8"/>
+              <ellipse cx="800" cy="556" rx="170" ry="16" fill="#fbf8f1"/>
+              <use href="#porcion-torta" x="630" y="236" width="340" height="340"/>
+              <path d="M624 556Q620 250 800 238Q980 250 976 556" fill="#ffffff" fill-opacity=".1" stroke="#fff" stroke-opacity=".45" stroke-width="4"/>
+              <path d="M670 470Q660 320 740 278" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="800" cy="230" r="14" fill="#f4f1e8"/>
+              <g transform="translate(890 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Chocolate & ddl</text></g>
+            </g>
+            <g>
+              <ellipse cx="1220" cy="632" rx="150" ry="14" fill="#000" opacity=".25"/>
+              <path d="M1180 630H1260L1238 600H1202Z" fill="#e9e2d4"/>
+              <rect x="1210" y="560" width="20" height="44" fill="#f4f1e8"/>
+              <ellipse cx="1220" cy="560" rx="170" ry="20" fill="#f4f1e8"/>
+              <ellipse cx="1220" cy="556" rx="170" ry="16" fill="#fbf8f1"/>
+              <use href="#porcion-cheese" x="1050" y="236" width="340" height="340"/>
+              <path d="M1044 556Q1040 250 1220 238Q1400 250 1396 556" fill="#ffffff" fill-opacity=".1" stroke="#fff" stroke-opacity=".45" stroke-width="4"/>
+              <path d="M1090 470Q1080 320 1160 278" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="1220" cy="230" r="14" fill="#f4f1e8"/>
+              <g transform="translate(1310 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Frutos rojos</text></g>
+            </g>
+          </svg>
+        </div>
+        <span class="cf-frame__label">La vitrina de hoy</span>
+      </div>
+    </section>
+
+    <!-- Tarjetas-acordeón que se abren con el scroll; un color de sus destacados por tarjeta -->
+    <section class="cf-features" aria-labelledby="t-arte">
+      <h2 class="cf-features__title" id="t-arte">Arte en la <b>cocina</b></h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item c-mostaza is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#porcion-carrot"/></svg></span>
+          <div class="cf-item__head"><h3>Pastelería artesanal</h3><span class="cf-item__num">I</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Tortas, budines y medialunas que salen del horno todos los días. La vitrina cambia según la estación.</p>
+            <a class="cf-more" href="pasteleria.html">Ver la pastelería <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item c-verde" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#avocado"/></svg></span>
+          <div class="cf-item__head"><h3>Brunch</h3><span class="cf-item__num">II</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Avocado toast, huevos, granola y jugos para arrancar tarde y sin apuro.</p>
+            <a class="cf-more" href="cocina.html#brunch">El brunch <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item c-azul" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#almuerzo"/></svg></span>
+          <div class="cf-item__head"><h3>Almuerzos</h3><span class="cf-item__num">III</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Platos de cocina casera al mediodía, con lo mejor de cada estación.</p>
+            <a class="cf-more" href="cocina.html#almuerzos">Los almuerzos <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item c-frambuesa" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#latte"/></svg></span>
+          <div class="cf-item__head"><h3>Café</h3><span class="cf-item__num">IV</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Espresso, cortado y café con leche, con o sin algo dulce al lado.</p>
+            <a class="cf-more" href="cocina.html#cafe">El café <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Tarjetas en dos columnas desfasadas (Scroll de agencia), con ilustraciones -->
+    <section class="cf-work">
+      <div class="cf-work__inner">
+        <h2>Qué podés comer en <b>Delicious</b></h2>
+        <div class="cf-cards">
+          <a class="cf-card" href="cocina.html#brunch" data-card>
+            <div class="cf-card__img bg-azul"><span class="cf-card__tag">Brunch</span><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#avocado"/></svg></div>
+            <h3>Avocado toast</h3><p>Pan tostado, palta, huevo y tomates.</p>
+          </a>
+          <a class="cf-card" href="pasteleria.html" data-card>
+            <div class="cf-card__img bg-mostaza"><span class="cf-card__tag">Pastelería</span><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#porcion-torta"/></svg></div>
+            <h3>Chocolate y dulce de leche</h3><p>La torta de capas que siempre se termina primero.</p>
+          </a>
+          <a class="cf-card" href="cocina.html#cafe" data-card>
+            <div class="cf-card__img bg-crema"><span class="cf-card__tag">Café</span><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#latte"/></svg></div>
+            <h3>Café con leche</h3><p>En taza verde y con corazón, como corresponde.</p>
+          </a>
+          <a class="cf-card" href="pasteleria.html" data-card>
+            <div class="cf-card__img bg-frambuesa"><span class="cf-card__tag">Desayuno</span><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#medialunas"/></svg></div>
+            <h3>Medialunas</h3><p>De manteca, recién horneadas.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2>Vení por un café, <b>quedate</b> por la torta</h2>
+      <p class="cf-fade">Laprida 2015, Recoleta · Lunes a sábado de 8 a 20 h</p>
+      <a class="cf-btn cf-fade" href="visitanos.html">Cómo llegar <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <div class="dl-guarda" aria-hidden="true"></div>
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <a class="dl-logo" href="index.html" aria-label="Delicious, inicio">Delicious</a>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="pasteleria.html">Pastelería</a><a href="cocina.html">Cocina</a><a href="visitanos.html">Visitanos</a><a href="https://www.instagram.com/delicious.bsas/" target="_blank" rel="noopener">Instagram</a></nav>
+      <span>Laprida 2015, Recoleta · Lun a Sáb 8–20 h</span>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Delicious · multi-page</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@delicious.bsas)</span><span>Prima de Traiano: misma base, otra identidad</span><span>4 páginas · Three.js · GSAP + ScrollTrigger · SVG</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué comparte con Traiano</h3>
+          <ul>
+            <li>Textura de material en el hero con los granos 3D alrededor de la marca, una vitrina dentro de la portada con clip-path, tarjetas-acordeón con un fondo de color cada una, tarjetas desfasadas e ilustraciones en lugar de fotos.</li>
+            <li>Distinto: pared verde con platos de porcelana y zócalo de azulejos, el círculo frambuesa del logo, serif itálica, cuatro páginas (con títulos sticky en Cocina) e ilustraciones planas reutilizables: se dibujan una vez en <code>arte.svg</code>, se embeben en cada página y se usan con <code>&lt;use href="#porcion-torta"&gt;</code>.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido</h3>
+          <ul>
+            <li>De Instagram: "Arte en la cocina", pastelería artesanal, almuerzos y brunch, lunes a sábado de 8 a 20 h, Laprida 2015 (Recoleta). Lo visual sale de sus fotos: caja registradora, platos en la pared, porcelana azul, taza verde.</li>
+            <li>Los platos y textos son de ejemplo (sin precios): reemplazar por su carta real. Sin fotos del local: las ilustraciones van en su lugar.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Delicious · Inicio</small></a>
+</body>
+</html>

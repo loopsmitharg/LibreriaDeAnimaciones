@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Delicious · "Arte en la cocina" — identidad del sitio de ejemplo
+   Prima de Traiano (ejemplos/traiano): misma base de componentes
+   (animaciones/cafeteria-ejemplo/shared/cafe.css + cafe.js + scenes.js),
+   textura de material en el hero, granos 3D, vitrina, acordeón de colores
+   e ilustraciones SVG. Otra identidad: bistró vintage — pared verde con
+   platos de porcelana azul, círculo frambuesa del logo, mostaza y cobalto
+   de sus destacados, serif itálica de sus posteos.
+   ========================================================================== */
+:root {
+  --frambuesa: #b5174a;
+  --frambuesa-2: #8e0f38;
+  --verde: #33503a;
+  --verde-2: #263d2b;
+  --mostaza: #d9a43a;
+  --cobalto: #24408e;
+  --crema: #f6efe2;
+  --crema-2: #ece2d0;
+  --tinta: #2a1d1a;
+  --cartel: "Oswald", "Bebas Neue", "Arial Narrow", sans-serif;
+  --italica: "Fraunces", "Playfair Display", Georgia, serif;
+
+  /* cafe.css */
+  --paper: var(--crema); --ink: var(--tinta); --espresso: var(--verde-2); --roast: var(--verde);
+  --caramel: var(--frambuesa); --muted: #6e5f55; --closed: var(--crema-2); --serif: var(--italica);
+  --c3-ink: #fbf6ec; --c3-accent: var(--mostaza);
+
+  /* Pared pintada: ruido suave, estirado al tamaño de la caja (background-size 100%): nunca se repite. */
+  --pared: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .22 -.04'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Azulejo azul y blanco (para guardas y fondos). */
+  --azulejo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect width='80' height='80' fill='%23f4f1e8'/%3E%3Cg fill='none' stroke='%2324408e' stroke-width='2.4'%3E%3Cpath d='M0 20A20 20 0 0 0 20 0M60 0A20 20 0 0 0 80 20M80 60A20 20 0 0 0 60 80M20 80A20 20 0 0 0 0 60'/%3E%3Ccircle cx='40' cy='40' r='12'/%3E%3C/g%3E%3Cg fill='%2324408e'%3E%3Cpath d='M40 22c4 6 4 10 0 14c-4 -4 -4 -8 0 -14ZM40 58c4 -6 4 -10 0 -14c-4 4 -4 8 0 14ZM22 40c6 -4 10 -4 14 0c-4 4 -8 4 -14 0ZM58 40c-6 -4 -10 -4 -14 0c4 4 8 4 14 0Z'/%3E%3C/g%3E%3Crect width='80' height='80' fill='none' stroke='%23cfd6e6' stroke-width='1'/%3E%3C/svg%3E");
+}
+/* html y body explícitos: otros CSS de la librería (titulos-sticky) traen fondo oscuro y texto blanco. */
+html, body { background: var(--crema); color: var(--tinta); }
+.dl-italica { font-family: var(--italica); font-style: italic; font-weight: 500; }
+
+/* ---------- Logo: círculo frambuesa con DELICIOUS ---------- */
+.dl-logo { display: inline-grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: var(--frambuesa); color: #fbf6ec; text-decoration: none; font: 600 .62rem/1 var(--cartel); letter-spacing: .04em; text-transform: uppercase; box-shadow: 0 6px 18px rgba(142, 15, 56, .35); }
+.dl-logo--big { width: clamp(11rem, 26vw, 17rem); height: clamp(11rem, 26vw, 17rem); font-size: clamp(2rem, 4.6vw, 3.1rem); box-shadow: 0 30px 60px rgba(0, 0, 0, .35), inset 0 0 0 6px rgba(255, 255, 255, .08); }
+.dl .cf-nav { padding-block: .7rem; }
+.dl .cf-nav__links a { font-family: var(--cartel); font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; }
+.dl .cf-nav__cta, .dl .cf-burger { background: var(--mostaza); color: var(--tinta); }
+.dl .cf-nav.is-solid .cf-nav__cta { background: var(--frambuesa); color: #fbf6ec; }
+.dl .cf-drawer { background: var(--verde) var(--pared) 0 0 / 100% 100%; }
+.dl .cf-drawer li a { font: 500 italic clamp(3rem, 14vw, 4.4rem)/1.1 var(--italica); }
+.dl .cf-drawer li a[aria-current="page"] { color: var(--mostaza); }
+/* Páginas internas: arrancan sobre crema, la barra va en tinta. */
+.dl .cf-nav--light { color: var(--tinta); }
+
+/* ---------- Hero: pared verde, platos colgados y granos 3D ---------- */
+.dl-wall, .dl .dl-wall { background-color: var(--verde); background-image: radial-gradient(80% 70% at 50% 40%, rgba(255, 230, 170, .14), transparent 60%, rgba(0, 0, 0, .35)), var(--pared); background-size: auto, 100% 100%; }
+.dl-plates { position: absolute; z-index: 1; top: 12%; left: 0; right: 0; display: flex; justify-content: center; gap: clamp(1rem, 5vw, 4.5rem); pointer-events: none; }
+.dl-plates svg { width: clamp(3.4rem, 7vw, 6rem); height: clamp(3.4rem, 7vw, 6rem); filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .35)); }
+.dl-plates svg:nth-child(2n) { width: clamp(2.6rem, 5vw, 4.4rem); height: clamp(2.6rem, 5vw, 4.4rem); margin-top: 2.2rem; }
+@media (max-width: 640px) { .dl-plates svg:nth-child(n+5) { display: none; } }
+/* Guarda de azulejos al pie del hero, como un zócalo. */
+.dl-zocalo { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: clamp(2.6rem, 5vw, 3.6rem); background: var(--azulejo); background-size: auto 100%; box-shadow: 0 -6px 14px rgba(0, 0, 0, .25); }
+.dl .c3-hero { gap: 1.1rem; }
+.dl .c3-hero small, .dl .cf-hero__fallback .cf-kicker { font: 500 italic clamp(1.3rem, 2.6vw, 1.8rem)/1 var(--italica); letter-spacing: 0; text-transform: none; color: var(--mostaza); }
+.dl .c3-hero p { color: rgba(251, 246, 236, .82); }
+.dl .c3-hero a { background: var(--mostaza); color: var(--tinta); }
+.dl .cf-scroll-cue { bottom: 4.4rem; }
+
+/* ---------- Tipografía de los componentes ---------- */
+.dl .cf-kicker { color: var(--frambuesa); }
+.dl .cf-top h1, .dl .cf-top h2, .dl .cf-features__title, .dl .cf-work h2, .dl .cf-outro h2 { font: 500 italic clamp(2.6rem, 6vw, 5rem)/1 var(--italica); letter-spacing: -.02em; }
+.dl .cf-top h1 { font-size: clamp(3.2rem, 8vw, 6.4rem); }
+.dl .cf-top h1 b, .dl .cf-features__title b, .dl .cf-work h2 b, .dl .cf-outro h2 b { font: 600 .82em/1 var(--cartel); font-style: normal; letter-spacing: .02em; text-transform: uppercase; color: var(--frambuesa); }
+.dl .cf-work h2 b, .dl .cf-outro h2 b { color: var(--mostaza); }
+.dl .cf-overview__text { font: 400 italic clamp(1.6rem, 3vw, 2.5rem)/1.22 var(--italica); letter-spacing: -.01em; }
+.dl .cf-overview__text em { font-style: normal; color: var(--frambuesa); }
+
+/* Acordeón: cada tarjeta toma un color de sus destacados (mostaza, verde, azul, frambuesa) */
+.dl .cf-item h3 { font: 600 clamp(1.6rem, 3.2vw, 2.6rem)/1 var(--cartel); letter-spacing: .02em; text-transform: uppercase; }
+.dl .cf-item__num { font: 500 italic 1.4rem/1 var(--italica); opacity: .85; }
+.dl .cf-item { --c: var(--frambuesa); }
+.dl .cf-item.c-mostaza { --c: #b9862a; } .dl .cf-item.c-verde { --c: var(--verde); } .dl .cf-item.c-azul { --c: var(--cobalto); } .dl .cf-item.c-frambuesa { --c: var(--frambuesa); }
+.dl .cf-item .cf-item__fill, .dl .cf-item.is-open .cf-item__fill { background: var(--c); }
+.cf-js .dl .cf-item:not(.is-open) .cf-item__fill { background: var(--crema-2); }
+.dl .cf-item__bg { top: -6%; bottom: -6%; right: clamp(.6rem, 3vw, 2rem); width: min(32%, 13rem); -webkit-mask-image: none; mask-image: none; }
+.dl .cf-item__bg svg { display: block; width: 100%; height: 100%; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .25)); }
+.dl .cf-more span { background: #fbf6ec; color: var(--tinta); }
+
+/* ---------- Vitrina (portada con clip-path) ---------- */
+.dl .cf-frame { background: var(--verde); }
+.dl-vitrina { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dl .cf-frame__label { color: #fbf6ec; font: 500 italic 1.4rem/1 var(--italica); letter-spacing: 0; text-transform: none; }
+
+/* ---------- Tarjetas con ilustración ---------- */
+.dl .cf-work { background: var(--verde-2) var(--pared) 0 0 / 100% 100%; }
+.dl .cf-card__img { background: var(--crema); }
+.dl .cf-card__img svg { position: absolute; inset: 8%; width: 84%; height: 84%; transition: transform .8s cubic-bezier(.22, 1, .36, 1); }
+.dl .cf-card:hover .cf-card__img svg { transform: rotate(-4deg) scale(1.04); }
+.dl .cf-card__img.bg-mostaza { background: #e8bd5c; } .dl .cf-card__img.bg-azul { background: #c9d4ec; } .dl .cf-card__img.bg-frambuesa { background: #f1c4cf; } .dl .cf-card__img.bg-crema { background: var(--crema); } .dl .cf-card__img.bg-salvia { background: #cfdcc8; }
+.dl .cf-card__tag { background: var(--tinta); color: #fbf6ec; }
+.dl .cf-card h3 { font: 600 1.7rem/1.05 var(--cartel); letter-spacing: .02em; text-transform: uppercase; color: #fbf6ec; }
+.dl .cf-card p { color: rgba(251, 246, 236, .75); }
+/* Variante clara (página Pastelería) */
+.dl-cards-light .cf-card h3 { color: var(--tinta); }
+.dl-cards-light .cf-card p { color: var(--muted); }
+.dl-cards-light .cf-card__tag { background: var(--frambuesa); }
+
+/* ---------- Títulos sticky (página Cocina) ---------- */
+.dl .svc-section { width: min(100% - 2.5rem, 1100px); margin-inline: auto; }
+.dl .svc-h2 { font: 500 italic clamp(2.4rem, 5vw, 4rem)/1 var(--italica); letter-spacing: -.02em; color: var(--tinta); }
+.dl .svc-h2 small { display: block; margin-top: .6rem; font: 600 .78rem/1 var(--cartel); font-style: normal; letter-spacing: .18em; text-transform: uppercase; color: var(--frambuesa); }
+.dl .svc-prose p { color: var(--muted); }
+.dl .svc-cards li { background: #fffaf1; border: 1px solid rgba(42, 29, 26, .1); }
+.dl .svc-cards b { font: 600 1.3rem/1.1 var(--cartel); letter-spacing: .03em; text-transform: uppercase; color: var(--tinta); }
+.dl .svc-cards small { color: var(--muted); }
+.dl .svc-cards svg { width: 4.4rem; height: 4.4rem; }
+.dl .svc-dish { width: 100%; max-width: 22rem; margin: .5rem auto 0; aspect-ratio: 1; }
+.dl .svc-dish svg { width: 100%; height: 100%; filter: drop-shadow(0 18px 24px rgba(42, 29, 26, .2)); }
+
+/* ---------- Guarda de azulejos entre secciones ---------- */
+.dl-guarda { height: clamp(2.4rem, 4vw, 3.2rem); background: var(--azulejo); background-size: auto 100%; }
+
+/* ---------- Visitanos ---------- */
+.dl .cf-visit h3 { color: var(--frambuesa); font: 600 1rem/1 var(--cartel); letter-spacing: .14em; }
+.dl .cf-visit li { border-color: rgba(42, 29, 26, .12); }
+.dl-reg { display: grid; gap: 2rem; align-items: center; width: var(--wrap); margin: 0 auto; padding: clamp(4rem, 10vh, 7rem) 0; }
+@media (min-width: 820px) { .dl-reg { grid-template-columns: 1fr 1.1fr; } }
+.dl-reg svg { width: min(100%, 26rem); justify-self: center; filter: drop-shadow(0 24px 30px rgba(42, 29, 26, .25)); }
+.dl-reg p { margin: 0; font: 400 italic clamp(1.5rem, 2.6vw, 2.2rem)/1.25 var(--italica); color: var(--tinta); }
+.dl-reg p + p { margin-top: 1.2rem; font: 400 1rem/1.6 var(--sans); font-style: normal; color: var(--muted); }
+
+/* ---------- Cierre y pie ---------- */
+.dl .cf-outro { background: var(--frambuesa); }
+.dl .cf-outro p { color: rgba(251, 246, 236, .8); }
+.dl .cf-btn { background: var(--mostaza); color: var(--tinta); }
+.dl .cf-footer { background: var(--tinta); }
+.dl .cf-footer .dl-logo { width: 3rem; height: 3rem; font-size: .55rem; }
+/* El logo como h1 dentro del hero 3D (pisa el estilo de título de .c3-hero h1). */
+.dl .c3-hero h1.dl-logo, .dl .cf-hero__fallback h1.dl-logo { max-width: none; margin: 0; font: 600 clamp(2rem, 4.6vw, 3.1rem)/1 var(--cartel); letter-spacing: .04em; color: #fbf6ec; text-shadow: none; }
