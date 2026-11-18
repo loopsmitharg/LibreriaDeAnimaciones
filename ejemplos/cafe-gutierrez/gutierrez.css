@@ -62,15 +62,15 @@ body { background: var(--papel) var(--grano); }
 .gz .cf-item .cf-item__fill, .gz .cf-item.is-open .cf-item__fill { background: var(--vino-2); }
 .cf-js .gz .cf-item:not(.is-open) { color: var(--ink); }
 .gz .cf-item__num { font-family: var(--slab); font-size: 1rem; }
-.gz .cf-item__bg { width: 40%; }
 .gz .cf-prices b { color: var(--madera); }
 .gz .cf-more span { background: var(--madera); color: var(--negro); }
 
-/* Fondos del acordeón: madera de la barra (listones verticales) */
-.gz-wood { display: block; width: 100%; height: 100%;
-  background: linear-gradient(90deg, rgba(0, 0, 0, .25), transparent 40%), repeating-linear-gradient(90deg, #d9b88a 0 34px, #caa271 34px 36px, #e2c497 36px 70px, #c79d6b 70px 72px, #d6b280 72px 104px, #bf955f 104px 106px); }
-.gz-wood--dark { background: linear-gradient(90deg, rgba(0, 0, 0, .3), transparent 40%), repeating-linear-gradient(90deg, #2a2725 0 30px, #1c1a18 30px 32px); }
-.gz-wood--tile { background: linear-gradient(90deg, rgba(0, 0, 0, .3), transparent 40%), linear-gradient(#0e0d0c 2px, transparent 2px) 0 0 / 40px 20px, linear-gradient(90deg, #0e0d0c 2px, #1e1c1a 2px) 0 0 / 40px 20px; }
+/* Tarjetas de café: fondo liso con un brillo en la esquina y el método dibujado en línea (se traza al abrirse). */
+.cf-js .gz .cf-item.is-open .cf-item__fill, .gz .cf-item.is-open .cf-item__fill { background: radial-gradient(70% 120% at 100% 100%, rgba(217, 184, 138, .2), transparent 60%), var(--vino-2); }
+.gz .cf-item__bg { top: 0; bottom: 0; right: clamp(5.5rem, 10vw, 8.5rem); width: min(26%, 12rem); -webkit-mask-image: none; mask-image: none; }
+.gz-method { display: block; width: 100%; height: 100%; padding: 1rem 0; opacity: .6; }
+@media (max-width: 640px) { .gz .cf-item__bg { right: .5rem; width: 34%; opacity: .5; } .gz-method { padding-top: 3rem; } }
+.gz-method .ln { fill: none; stroke: var(--madera); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---------- La barra (portada con clip-path): ilustración SVG ---------- */
 .gz .cf-frame { background: #151311; }
@@ -138,9 +138,14 @@ body { background: var(--papel) var(--grano); }
 .gz-sedes__grid { display: grid; gap: 1.2rem; }
 @media (min-width: 760px) { .gz-sedes__grid { grid-template-columns: 1fr 1fr; } }
 .gz-sede { position: relative; display: grid; gap: .8rem; min-height: 19rem; align-content: end; padding: clamp(1.5rem, 3vw, 2.4rem); overflow: hidden; border-radius: 1.4rem; color: #f3ece2; text-decoration: none; isolation: isolate; }
-.gz-sede::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(18, 17, 16, .15), rgba(18, 17, 16, .9)), var(--grano), var(--ladrillos); background-size: auto, 260px 260px, 120px 60px; transition: transform 1s cubic-bezier(.22, 1, .36, 1); }
-.gz-sede--b::before { background: linear-gradient(180deg, rgba(18, 17, 16, .1), rgba(18, 17, 16, .92)), linear-gradient(#0e0d0c 2px, transparent 2px) 0 0 / 44px 22px, linear-gradient(90deg, #0e0d0c 2px, #24211f 2px) 0 0 / 44px 22px; }
-.gz-sede:hover::before { transform: scale(1.05); }
+/* Tarjetas de sede: fondo liso con un brillo bordó en una esquina y la G de arcos en línea, grande y recortada. */
+.gz-sede { background: radial-gradient(110% 90% at 100% 0, rgba(123, 30, 34, .45), transparent 60%), #1a1816; box-shadow: inset 0 0 0 1px rgba(243, 236, 226, .1); transition: box-shadow .4s ease; }
+.gz-sede--b { background: radial-gradient(110% 90% at 0 0, rgba(217, 184, 138, .2), transparent 60%), #1a1816; }
+.gz-sede::before { content: ""; position: absolute; z-index: -1; right: -9%; top: -16%; width: 44%; max-width: 15rem; aspect-ratio: 1; opacity: .2; background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23d9b88a' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M80.7 27.7A38 38 0 1 0 88 50'/%3E%3Cpath d='M67.8 37.1A22 22 0 1 0 72 50'/%3E%3Cpath d='M58 50H88'/%3E%3C/g%3E%3C/svg%3E"); transition: transform 1.2s cubic-bezier(.22, 1, .36, 1), opacity .4s ease; }
+.gz-sede--b::before { transform: rotate(180deg); }
+.gz-sede:hover { box-shadow: inset 0 0 0 1px rgba(217, 184, 138, .5); }
+.gz-sede:hover::before { opacity: .35; transform: rotate(-12deg) scale(1.04); }
+.gz-sede--b:hover::before { transform: rotate(168deg) scale(1.04); }
 .gz-sede small { color: var(--madera); font: 500 .72rem/1 "IBM Plex Mono", monospace; letter-spacing: .2em; text-transform: uppercase; }
 .gz-sede h3 { margin: 0; font: 700 clamp(1.8rem, 3.4vw, 2.6rem)/1 var(--slab); }
 .gz-sede p { margin: 0; color: rgba(243, 236, 226, .75); }
