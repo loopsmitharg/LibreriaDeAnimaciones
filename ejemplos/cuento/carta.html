@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>La carta — Cuento · Confitería y café</title>
+  <meta name="description" content="La carta de Cuento: café de especialidad, filtrados, fríos, confitería del día y tostadas. Recoleta." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="cuento.css" />
+  <script>document.documentElement.classList.add('cf-js', 'cu-js'); if (sessionStorage.getItem('cu-telon')) document.documentElement.classList.add('cu-llegando');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="cuento.js"></script>
+</head>
+<body class="cu">
+  <script src="arte.js"></script>
+  <div class="cu-telon" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#mono"/></svg><small></small><span></span></div>
+
+  <header class="cf-nav cf-nav--light" data-nav data-solid-after="top">
+    <a class="cu-logo" href="index.html" aria-label="Cuento, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg><b>Cuento</b></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html"><i>I</i>Inicio</a>
+      <a href="carta.html" aria-current="page"><i>II</i>Carta</a>
+      <a href="cafe.html"><i>III</i>Café</a>
+      <a href="visitanos.html"><i>IV</i>Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="visitanos.html">Cómo llegar</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carta.html" aria-current="page">Carta</a></li>
+      <li><a href="cafe.html">Café</a></li>
+      <li><a href="visitanos.html">Visitanos</a></li>
+    </ul></nav>
+    <p>Confitería y café · Recoleta</p>
+  </div>
+
+  <main>
+    <header class="cf-top">
+      <span class="cu-cap">Capítulo II</span>
+      <h1>La <em>carta</em></h1>
+      <p>Todo lo que sale del horno y de la barra. Tocá cada capítulo para abrirlo.</p>
+      <p class="cu-mono-azul" data-type="500">Carta de ejemplo · la vigente está en el mostrador</p>
+    </header>
+
+    <!-- Carta: tarjetas-acordeón que se abren con el scroll y con clic (botón en el título) -->
+    <section class="cf-features" aria-label="Carta">
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#taza"/></svg></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-cafe">Café</button></h3><span class="cf-item__num">i.</span></div>
+          <div class="cf-item__acc" id="c-cafe"><div class="cf-item__content">
+            <p>Espresso de especialidad, en porcelana blanca con filete rojo.</p>
+            <ul class="cu-lista">
+              <li>Espresso<small>Simple o doble</small></li>
+              <li>Cortado<small>En jarrito o en taza</small></li>
+              <li>Lágrima</li>
+              <li>Flat white</li>
+              <li>Café con leche</li>
+              <li>Latte<small>Con leche vegetal si querés</small></li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#bolsa"/></svg></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-filtrados">Filtrados</button></h3><span class="cf-item__num">ii.</span></div>
+          <div class="cf-item__acc" id="c-filtrados"><div class="cf-item__content">
+            <p>Métodos lentos para tomar sin apuro. Preguntá qué origen está en la barra.</p>
+            <ul class="cu-lista">
+              <li>V60<small>Origen del día</small></li>
+              <li>Batch brew</li>
+              <li>Cold brew<small>Para los días de calor</small></li>
+            </ul>
+            <a class="cf-more" href="cafe.html">Cómo filtramos <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#iced"/></svg></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-frios">Fríos</button></h3><span class="cf-item__num">iii.</span></div>
+          <div class="cf-item__acc" id="c-frios"><div class="cf-item__content">
+            <p>Con hielo, en vaso de vidrio.</p>
+            <ul class="cu-lista">
+              <li>Iced latte</li>
+              <li>Iced latte con dulce de leche<small>El de la foto</small></li>
+              <li>Espresso tonic</li>
+              <li>Limonada</li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#palmerita"/></svg></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-confiteria">Confitería</button></h3><span class="cf-item__num">iv.</span></div>
+          <div class="cf-item__acc" id="c-confiteria"><div class="cf-item__content">
+            <p>Horneada todos los días. Lo que se termina, se termina.</p>
+            <ul class="cu-lista">
+              <li>Medialunas de manteca</li>
+              <li>Croissant<small>Solo o relleno de dulce</small></li>
+              <li>Palmeritas</li>
+              <li>Alfajores</li>
+              <li>Tarta de frutillas<small>Hojaldre y crema pastelera</small></li>
+              <li>Cookies y budines</li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#tostadas"/></svg></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-tostadas">Tostadas y salado</button></h3><span class="cf-item__num">v.</span></div>
+          <div class="cf-item__acc" id="c-tostadas"><div class="cf-item__content">
+            <p>Para el desayuno o la merienda que se estira.</p>
+            <ul class="cu-lista">
+              <li>Tostadas<small>Manteca y dulce de leche o mermelada</small></li>
+              <li>Tostado de jamón y queso</li>
+              <li>Medialuna con jamón y queso</li>
+              <li>Tostada con palta y huevo</li>
+            </ul>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#alfajor"/></svg></span>
+          <div class="cf-item__head"><h3><button class="cf-item__toggle" type="button" aria-controls="c-llevar">Para llevar</button></h3><span class="cf-item__num">vi.</span></div>
+          <div class="cf-item__acc" id="c-llevar"><div class="cf-item__content">
+            <p>El café en vaso con el monograma, y la confitería en cajita.</p>
+            <ul class="cu-lista">
+              <li>Café en grano<small>Bolsa de 250 g</small></li>
+              <li>Cajita de confitería<small>Con un vale por un café adentro</small></li>
+              <li>Café para llevar</li>
+            </ul>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <div class="cu-damero" aria-hidden="true"></div>
+    <!-- Los favoritos: tarjetas en dos columnas desfasadas, con arte SVG (como "Para llevar" de Traiano) -->
+    <section class="cf-work" data-rim>
+      <div class="cf-work__inner">
+        <span class="cu-cap" style="color:#ffb4a6">Los de siempre</span>
+        <h2>Los <em>favoritos</em> de la casa</h2>
+        <div class="cf-cards">
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Confitería</span>
+              <div class="cu-arte cu-arte--marmol" aria-hidden="true"><svg class="cu-arte__plato" viewBox="0 0 400 400"><use href="#plato"/></svg><svg viewBox="0 0 400 400"><use href="#croissant-dulce"/></svg></div>
+            </div>
+            <h3>Croissant relleno</h3><p>De manteca, abierto al medio y con dulce rojo. Para comer con las manos.</p>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Pastelería</span>
+              <div class="cu-arte" aria-hidden="true"><svg viewBox="0 0 400 400"><use href="#tarta"/></svg></div>
+            </div>
+            <h3>Tarta de frutillas</h3><p>Hojaldre crocante, crema pastelera y frutillas enteras con azúcar impalpable.</p>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Frío</span>
+              <div class="cu-arte cu-arte--bordo" aria-hidden="true"><svg viewBox="0 0 400 400"><use href="#iced"/></svg></div>
+            </div>
+            <h3>Iced latte con dulce de leche</h3><p>Espresso, leche fría y dulce de leche que baja por el vaso.</p>
+          </article>
+          <article class="cf-card" data-card>
+            <div class="cf-card__img"><span class="cf-card__tag">Para el cortado</span>
+              <div class="cu-arte cu-arte--marmol" aria-hidden="true"><svg class="cu-arte__plato" viewBox="0 0 400 400"><use href="#plato"/></svg><svg viewBox="0 0 400 400"><use href="#alfajor"/></svg></div>
+            </div>
+            <h3>Alfajor</h3><p>Dos tapitas, mucho dulce de leche y azúcar impalpable. El compañero del cortado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2>¿Y el café? <em>Tiene su capítulo</em></h2>
+      <p>Filtrados, espresso y granos para llevar a casa.</p>
+      <a class="cf-btn" href="cafe.html">Seguir leyendo</a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="cu-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg><b>Cuento</b><small>confitería<br />y café</small></span>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="cafe.html">Café</a><a href="visitanos.html">Visitanos</a><a href="https://www.instagram.com/cuento.ba/" target="_blank" rel="noopener">Instagram</a></nav>
+      <span>Sitio de ejemplo · Librería de Animaciones</span>
+    </div>
+  </footer>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cuento · Carta</small></a>
+</body>
+</html>

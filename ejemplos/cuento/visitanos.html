@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visitanos — Cuento · Confitería y café</title>
+  <meta name="description" content="Cuento, confitería y café en Recoleta. Lunes a viernes de 8 a 20 h, sábados y feriados de 9 a 20 h." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="cuento.css" />
+  <script>document.documentElement.classList.add('cf-js', 'cu-js'); if (sessionStorage.getItem('cu-telon')) document.documentElement.classList.add('cu-llegando');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="cuento.js"></script>
+</head>
+<body class="cu">
+  <script src="arte.js"></script>
+  <div class="cu-telon" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#mono"/></svg><small></small><span></span></div>
+
+  <header class="cf-nav cf-nav--light" data-nav data-solid-after="top">
+    <a class="cu-logo" href="index.html" aria-label="Cuento, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg><b>Cuento</b></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html"><i>I</i>Inicio</a>
+      <a href="carta.html"><i>II</i>Carta</a>
+      <a href="cafe.html"><i>III</i>Café</a>
+      <a href="visitanos.html" aria-current="page"><i>IV</i>Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="https://maps.app.goo.gl/hQzTZKiZ6nDNTBf9A" target="_blank" rel="noopener">Abrir en Maps</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carta.html">Carta</a></li>
+      <li><a href="cafe.html">Café</a></li>
+      <li><a href="visitanos.html" aria-current="page">Visitanos</a></li>
+    </ul></nav>
+    <p>Confitería y café · Recoleta</p>
+  </div>
+
+  <main>
+    <!-- Placa como la de su apertura: plato con filete rojo, croissant y la firma en azul -->
+    <section class="cu-placa" style="padding-top:clamp(7rem,16vh,10rem)" aria-labelledby="t-visita" data-rim>
+      <div class="cu-placa__plato" aria-hidden="true">
+        <svg viewBox="0 0 400 400"><use href="#plato"/></svg>
+        <svg class="cu-placa__croissant" viewBox="0 0 400 400"><use href="#croissant-dulce"/></svg>
+        <span class="cu-placa__firma">Cuento</span>
+      </div>
+      <div class="cu-placa__texto">
+        <span class="cu-cap">Capítulo IV</span>
+        <span class="cu-mono-azul" data-type="400">Confitería y café<br />Recoleta · Buenos Aires</span>
+        <h1 id="t-visita" class="cu-placa__h">Te guardamos <em>una mesa</em></h1>
+        <p>Mármol, porcelana con filete rojo y algo recién horneado. Pasá de lunes a sábado, y también los feriados.</p>
+      </div>
+    </section>
+
+    <div class="cu-damero" aria-hidden="true"></div>
+
+    <section class="cf-visit cu-visita" aria-label="Dirección y horarios">
+      <div class="cf-fade">
+        <h3>Dónde</h3>
+        <p>Recoleta, Ciudad Autónoma de Buenos Aires.</p>
+        <a class="cf-more" href="https://maps.app.goo.gl/hQzTZKiZ6nDNTBf9A" target="_blank" rel="noopener">Abrir en Google Maps <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cf-fade">
+        <h3>Cuándo</h3>
+        <ul>
+          <li><span>Lunes a viernes</span><span>8 a 20 h</span></li>
+          <li><span>Sábados y feriados</span><span>9 a 20 h</span></li>
+        </ul>
+      </div>
+      <div class="cf-fade">
+        <h3>Seguinos</h3>
+        <p>La confitería del día, novedades y los cafés que van entrando.</p>
+        <a class="cf-more" href="https://www.instagram.com/cuento.ba/" target="_blank" rel="noopener">@cuento.ba <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="cu-vale-sec" aria-label="Vale por un café">
+      <a class="cu-vale" href="https://www.instagram.com/cuento.ba/" target="_blank" rel="noopener" data-tilt><strong>Vale por<br />un café.</strong><span>Mostralo en el mostrador · Cuento, Recoleta</span><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg></a>
+      <p>Las mejores historias se cuentan en una mesa. Traé la tuya.</p>
+    </section>
+
+    <section class="cf-outro">
+      <span class="cu-mono-azul" data-type style="color:#9fc2f2">Lun a vie 8–20 h · Sáb y feriados 9–20 h</span>
+      <h2>Y colorín colorado, <em>este cuento</em> no se ha terminado</h2>
+      <p>Volvé al principio o abrí la carta.</p>
+      <a class="cf-btn" href="index.html">Volver al Capítulo I</a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="cu-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg><b>Cuento</b><small>confitería<br />y café</small></span>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="cafe.html">Café</a><a href="https://www.instagram.com/cuento.ba/" target="_blank" rel="noopener">Instagram</a></nav>
+      <span>Sitio de ejemplo · Librería de Animaciones</span>
+    </div>
+  </footer>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cuento · Visitanos</small></a>
+</body>
+</html>

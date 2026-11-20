@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Cuento · confitería y café (Recoleta) — identidad del sitio de ejemplo
+   Pariente de Traiano (ejemplos/traiano): misma base de componentes
+   (animaciones/cafeteria-ejemplo/shared/cafe.css + cafe.js + scenes.js),
+   logo en script, granos 3D en el hero, portada con clip-path, acordeón con
+   fondos ilustrados y tarjetas con arte SVG.
+   Identidad propia, sacada de su Instagram: papel crema del logo, bordó del
+   monograma y del filete de sus platos, azul y máquina de escribir de la
+   placa de apertura, piso damero, mesas de mármol y el ticket "Vale por un café".
+   El sitio se arma como un libro: cada página es un capítulo.
+   ========================================================================== */
+@property --rim { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+:root {
+  --papel: #f6f1e7;
+  --papel-2: #ece4d6;
+  --tinta: #2a1e1b;
+  --bordo: #a5222b;
+  --bordo-2: #7d161e;
+  --azul: #3a78d0;
+  --marmol: #f8f6f2;
+  --script: "Pinyon Script", "Snell Roundhand", "Brush Script MT", cursive;
+  --libro: "EB Garamond", "Cormorant Garamond", Georgia, serif;
+
+  /* cafe.css */
+  --paper: var(--papel); --ink: var(--tinta); --espresso: #1f1715; --roast: var(--bordo-2);
+  --caramel: var(--bordo); --muted: #7a6a5f; --closed: var(--papel-2); --serif: var(--libro);
+  --c3-ink: #f6f1e7; --c3-accent: #ffb4a6;
+
+  /* Papel: ruido suave estirado a la caja (nunca se repite) */
+  --grano-papel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .18 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Vetas de mármol */
+  --vetas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.003 .009' numOctaves='5' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .52 0 0 0 0 .5 1 0 0 0 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0 .45 0 0 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+}
+html, body { background: var(--papel); color: var(--tinta); }
+body.cu { background-image: var(--grano-papel); background-size: 400px; }
+.cu ::selection { background: var(--bordo); color: var(--papel); }
+.cu-script { font-family: var(--script); font-weight: 400; letter-spacing: 0; }
+.cu-mono-azul { color: var(--azul); font: 500 .74rem/1.5 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+
+/* ---------- Logo: monograma en óvalo + Cuento en script ---------- */
+.cu-logo { display: inline-flex; align-items: center; gap: .35rem; color: var(--bordo); text-decoration: none; }
+.cu-logo svg { width: 2.6rem; height: 2.6rem; flex: none; }
+.cu-logo b { font: 400 2.1rem/1 var(--script); }
+.cu-logo small { margin-left: .4rem; color: var(--tinta); font: 500 .58rem/1.3 var(--mono); letter-spacing: .18em; text-transform: uppercase; opacity: .6; }
+
+/* ---------- Navegación ---------- */
+.cu .cf-nav { color: var(--tinta); padding-block: .6rem; }
+.cu .cf-nav.is-solid { background: rgba(246, 241, 231, .9); }
+.cu .cf-nav__links a { font: 500 1.08rem/1 var(--libro); }
+.cu .cf-nav__links a i { margin-right: .35rem; color: var(--bordo); font: italic 400 .85rem/1 var(--libro); }
+.cu .cf-nav__cta, .cu .cf-burger { background: var(--bordo); color: var(--papel); }
+.cu .cf-drawer { background: var(--bordo) var(--grano-papel); color: var(--papel); }
+.cu .cf-drawer li a { font: 400 clamp(3.4rem, 15vw, 5rem)/1.15 var(--script); }
+.cu .cf-drawer li a[aria-current="page"] { color: #ffd9c9; }
+.cu .cf-drawer p { color: rgba(246, 241, 231, .75); }
+@media (max-width: 760px) { .cu .cf-nav.is-open { color: var(--papel); } .cu .cf-nav.is-open .cu-logo { color: var(--papel); } .cu .cf-nav.is-open .cf-burger { background: var(--papel); color: var(--bordo); } }
+/* Inicio: el logo de la barra aparece al bajar (arriba manda el nombre grande del hero). */
+.cu .cf-nav[data-hide-logo] .cu-logo { transition: opacity .4s ease, transform .6s cubic-bezier(.34, 1.56, .64, 1); }
+.cu .cf-nav[data-hide-logo]:not(.is-solid):not(.is-open) .cu-logo { opacity: 0; transform: translateY(-.4rem) scale(.8); pointer-events: none; }
+
+/* ---------- Telón entre capítulos (cambio de página) ---------- */
+.cu-telon { position: fixed; z-index: 90; inset: 0; display: grid; place-content: center; justify-items: center; gap: .6rem; background: var(--bordo) var(--grano-papel); color: var(--papel); pointer-events: none; transform: translateY(101%); }
+.cu-telon svg { width: clamp(5rem, 12vw, 8rem); height: clamp(5rem, 12vw, 8rem); }
+.cu-telon span { font: 400 clamp(2rem, 5vw, 3.4rem)/1 var(--script); }
+.cu-telon small { font: 500 .7rem/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
+html.cu-llegando .cu-telon { transform: none; }
+.cu-telon.is-entrando { transform: none; transition: transform .7s cubic-bezier(.76, 0, .24, 1); }
+.cu-telon.is-saliendo { transform: translateY(-101%); transition: transform .8s cubic-bezier(.76, 0, .24, 1) .1s; }
+
+/* ---------- Hero: papel crema, piso damero y granos 3D ---------- */
+.cu .cf-hero { --c3-ink: var(--tinta); --c3-accent: var(--bordo); background: radial-gradient(90% 70% at 50% 38%, #fffaf1 0%, var(--papel) 55%, #e6dccb 100%); }
+.cu-piso { position: absolute; z-index: 0; left: -30%; right: -30%; bottom: 0; height: 38%; pointer-events: none;
+  background: repeating-conic-gradient(#2a2321 0 25%, #f3ede2 0 50%) 50% 0 / 64px 64px;
+  transform: perspective(500px) rotateX(62deg); transform-origin: 50% 100%;
+  -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 92%); mask-image: linear-gradient(to top, #000 10%, transparent 92%); opacity: .5; }
+.cu .c3-hero { color: var(--tinta); gap: .9rem; }
+.cu .cf-hero__fallback { color: var(--tinta); }
+.cu .cf-hero__fallback h1, .cu .c3-hero h1 { max-width: none; color: var(--bordo); font: 400 clamp(5.5rem, 19vw, 13.5rem)/.8 var(--script); letter-spacing: 0; padding: 0 .2em; }
+.cu .c3-hero small, .cu .cf-hero__fallback .cf-kicker { color: var(--tinta); font: 500 .74rem/1 var(--mono); letter-spacing: .32em; }
+.cu .c3-hero p { max-width: 30rem; color: #5b4d45; font: 400 1.15rem/1.5 var(--libro); }
+.cu .c3-hero p b { display: block; margin-bottom: .2rem; color: var(--azul); font: 500 .72rem/1.6 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.cu .c3-hero a { background: var(--bordo); color: var(--papel); font-family: var(--libro); font-size: 1.05rem; font-weight: 500; }
+.cu .cf-scroll-cue { color: var(--tinta); }
+
+/* ---------- Tipografía de los componentes: libro + script ---------- */
+.cu .cf-kicker { color: var(--bordo); }
+.cu-cap { display: inline-flex; align-items: baseline; gap: .6rem; margin-bottom: 1rem; color: var(--bordo); font: italic 400 1.15rem/1 var(--libro); }
+.cu-cap::before { content: ""; width: 2rem; height: 1px; background: currentColor; align-self: center; }
+.cu .cf-top h1, .cu .cf-features__title, .cu .cf-work h2, .cu .cf-outro h2, .cu .cf-story__intro h2 { font: 400 clamp(2.6rem, 6vw, 4.8rem)/1.02 var(--libro); letter-spacing: -.02em; }
+.cu .cf-top h1 { font-size: clamp(3.2rem, 8vw, 6.4rem); max-width: 14ch; }
+.cu .cf-top h1 em, .cu .cf-features__title em, .cu .cf-work h2 em, .cu .cf-outro h2 em, .cu .cf-story__intro h2 em { color: var(--bordo); font: 400 1.25em/.9 var(--script); font-style: normal; }
+.cu .cf-work h2 em, .cu .cf-outro h2 em { color: #ffb4a6; }
+.cu .cf-top p { color: #5b4d45; font: 400 1.25rem/1.5 var(--libro); }
+.cu .cf-overview__text { font: 400 clamp(1.6rem, 3vw, 2.5rem)/1.25 var(--libro); letter-spacing: -.01em; }
+/* Capital iluminada: primera letra del párrafo de presentación */
+.cu-capitular::first-letter { float: left; margin: .02em .12em 0 0; color: var(--bordo); font: 400 3.3em/.8 var(--script); }
+.cu .cf-overview .cu-mono-azul { margin-top: .5rem; }
+
+/* Escritura a máquina (cuento.js): el texto se tipea al entrar en pantalla */
+.cu-type { white-space: pre-wrap; }
+.cu-type.is-tipeando::after { content: "▍"; margin-left: .05em; animation: cu-cursor .8s steps(1) infinite; }
+@keyframes cu-cursor { 50% { opacity: 0; } }
+
+/* ---------- Plato que se dibuja (filete rojo) ---------- */
+/* --rim: 1 = filete sin dibujar, 0 = completo. Lo heredan los <use> de los platos. */
+.cu-js [data-rim] { --rim: 1; transition: --rim 1.6s cubic-bezier(.65, 0, .35, 1); }
+.cu-js [data-rim].is-drawn { --rim: 0; }
+
+/* ---------- Portada: mesa de mármol vista desde arriba ---------- */
+.cu .cf-frame { background: #ece7df; }
+.cu-mesa { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(70% 90% at 40% 30%, rgba(255, 255, 255, .7), transparent 60%), var(--vetas), var(--marmol); background-size: auto, cover, auto; }
+.cu-mesa::after { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(60, 40, 30, .28)); pointer-events: none; }
+.cu-mesa svg { position: absolute; filter: drop-shadow(0 18px 18px rgba(60, 40, 30, .18)); }
+.cu-mesa .p1 { left: 6%; top: 10%; width: 32%; aspect-ratio: 1; }
+.cu-mesa .p2 { left: 38%; top: 34%; width: 27%; aspect-ratio: 1; }
+.cu-mesa .p3 { right: 6%; top: 6%; width: 30%; aspect-ratio: 1; }
+.cu-mesa .p4 { right: 12%; bottom: -6%; width: 22%; aspect-ratio: 1; }
+.cu-mesa .cu-vale { position: absolute; left: 10%; bottom: 10%; width: clamp(9rem, 22%, 15rem); transform: rotate(-9deg); }
+@media (max-width: 640px) {
+  .cu-mesa .p1 { left: -10%; top: 4%; width: 70%; } .cu-mesa .p2 { left: 30%; top: 46%; width: 62%; }
+  .cu-mesa .p3 { right: -24%; top: 0; width: 56%; } .cu-mesa .p4 { display: none; } .cu-mesa .cu-vale { left: 6%; bottom: 6%; width: 9rem; }
+}
+.cu .cf-frame__label { left: auto; right: clamp(1rem, 3vw, 2rem); color: var(--tinta); font: italic 400 1.15rem/1 var(--libro); letter-spacing: 0; text-transform: none; padding: .5rem .9rem; border-radius: 999px; background: rgba(248, 246, 242, .85); }
+
+/* ---------- Ticket "Vale por un café" ---------- */
+.cu-vale { position: relative; display: grid; gap: .5rem; padding: 1.1rem 3.2rem 1rem 1.2rem; color: #fff3ee; background: var(--bordo) var(--grano-papel); border-radius: .3rem;
+  box-shadow: 0 14px 30px rgba(125, 22, 30, .3); text-decoration: none; transform-style: preserve-3d; }
+.cu-vale::before, .cu-vale::after { content: ""; position: absolute; top: 50%; width: 1rem; height: 1rem; margin-top: -.5rem; border-radius: 50%; background: var(--papel); }
+.cu-vale::before { left: -.5rem; } .cu-vale::after { right: -.5rem; }
+.cu-vale strong { font: 500 clamp(.8rem, 1.6vw, 1rem)/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.cu-vale span { font: 400 .62rem/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+.cu-vale svg { width: 2.2rem !important; height: 2.2rem; position: absolute !important; right: .8rem; bottom: .7rem; color: #ffd9cf; filter: none !important; }
+.cu-mesa .cu-vale::before, .cu-mesa .cu-vale::after { background: #efeae2; }
+
+.cu-vale-sec { display: grid; place-items: center; gap: 2rem; padding: clamp(5rem, 12vh, 8rem) 1.25rem; text-align: center; perspective: 900px; }
+.cu-vale-sec .cu-vale { width: min(28rem, 88vw); padding: 2rem 5rem 1.8rem 2.2rem; gap: .9rem; text-align: left; transition: transform .25s ease-out; }
+.cu-vale-sec .cu-vale strong { font-size: clamp(1.2rem, 3vw, 1.7rem); }
+.cu-vale-sec .cu-vale span { font-size: .7rem; }
+.cu-vale-sec .cu-vale svg { width: 3.4rem !important; height: 3.4rem; right: 1.4rem; bottom: 1.3rem; }
+.cu-vale-sec .cu-vale::before, .cu-vale-sec .cu-vale::after { width: 1.6rem; height: 1.6rem; margin-top: -.8rem; }
+.cu-vale-sec .cu-vale::before { left: -.8rem; } .cu-vale-sec .cu-vale::after { right: -.8rem; }
+.cu-vale-sec p { max-width: 36ch; margin: 0; color: #5b4d45; font: 400 1.2rem/1.5 var(--libro); }
+
+/* ---------- Índice del libro (Inicio): capítulos con línea de puntos ---------- */
+.cu-indice { width: min(1000px, calc(100vw - 2.5rem)); margin: 0 auto; padding: 0 0 clamp(6rem, 14vh, 9rem); }
+.cu-indice h2 { margin: 0 0 2.5rem; font: 400 clamp(2.4rem, 5vw, 4rem)/1 var(--libro); letter-spacing: -.02em; }
+.cu-indice h2 em { color: var(--bordo); font: 400 1.25em/.9 var(--script); font-style: normal; }
+.cu-indice ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(42, 30, 27, .18); }
+.cu-indice li { border-bottom: 1px solid rgba(42, 30, 27, .18); }
+.cu-indice a { position: relative; display: flex; align-items: baseline; gap: 1rem; padding: clamp(1.2rem, 3vw, 2rem) .2rem; text-decoration: none; }
+.cu-indice a > i { min-width: 3.2rem; color: var(--bordo); font: italic 400 1.2rem/1 var(--libro); }
+.cu-indice a > b { font: 400 clamp(2rem, 5.4vw, 4.2rem)/1 var(--libro); letter-spacing: -.02em; transition: transform .6s cubic-bezier(.22, 1, .36, 1), color .4s ease; }
+.cu-indice a > small { color: #6f6158; font: 400 1.05rem/1.3 var(--libro); }
+.cu-indice a::after { content: ""; order: 3; flex: 1; min-width: 1rem; border-bottom: 2px dotted rgba(42, 30, 27, .3); transform: translateY(-.3em); }
+.cu-indice a > em { order: 4; color: var(--azul); font: 500 .8rem/1 var(--mono); font-style: normal; letter-spacing: .14em; }
+.cu-indice a:hover > b, .cu-indice a:focus-visible > b { color: var(--bordo); transform: translateX(.6rem); }
+@media (max-width: 640px) { .cu-indice a { flex-wrap: wrap; } .cu-indice a > small { order: 5; width: 100%; padding-left: 4.2rem; } }
+/* Ilustración que sigue al cursor sobre el índice (solo con puntero fino) */
+.cu-peek { position: fixed; z-index: 40; left: 0; top: 0; width: 15rem; height: 15rem; margin: -7.5rem 0 0 -7.5rem; pointer-events: none; opacity: 0; transform: scale(.6) rotate(-8deg); transition: opacity .35s ease, transform .5s cubic-bezier(.34, 1.56, .64, 1); }
+.cu-peek.is-on { opacity: 1; transform: none; }
+.cu-peek svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .3s ease; filter: drop-shadow(0 20px 24px rgba(60, 40, 30, .25)); }
+.cu-peek svg.is-on { opacity: 1; }
+@media (hover: none), (pointer: coarse) { .cu-peek { display: none; } }
+
+/* ---------- Acordeón: fondos ilustrados ---------- */
+.cu .cf-item h3 { font: 400 clamp(1.6rem, 3.4vw, 2.6rem)/1.05 var(--libro); letter-spacing: -.01em; }
+.cu .cf-item__num { font: italic 400 1.2rem/1 var(--libro); opacity: .8; }
+.cu .cf-item .cf-item__fill, .cu .cf-item.is-open .cf-item__fill { background: var(--bordo-2) var(--grano-papel); }
+.cu .cf-item__content > p { font: 400 1.12rem/1.5 var(--libro); max-width: 40ch; }
+.cu .cf-item__bg { width: 44%; display: grid; place-items: center; -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%); mask-image: linear-gradient(90deg, transparent, #000 35%); }
+.cu .cf-item__bg svg { width: min(22rem, 100%); aspect-ratio: 1; filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .3)); }
+.cu .cf-more span { background: var(--papel); color: var(--bordo); }
+.cu .cu-visita .cf-more span { background: var(--bordo); color: var(--papel); }
+@media (max-width: 640px) { .cu .cf-item__bg { width: 60%; opacity: .35 !important; } }
+
+/* Lista de la carta dentro del acordeón (sin precios) */
+.cu-lista { display: grid; gap: 0 3rem; max-width: 42rem; margin: 1.3rem 0 0; padding: 0; list-style: none; }
+@media (min-width: 760px) { .cu-lista { grid-template-columns: 1fr 1fr; } }
+.cu-lista li { padding: .6rem 0; border-bottom: 1px dotted rgba(246, 241, 231, .3); font: 400 1.12rem/1.3 var(--libro); }
+.cu-lista small { display: block; margin-top: .2rem; opacity: .7; font: 400 .7rem/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+
+/* ---------- Sección oscura con tarjetas ---------- */
+.cu .cf-work, .cu .cf-outro, .cu .cf-footer { background-color: #1f1715; }
+.cu .cf-work { background-image: radial-gradient(70% 420px at 50% 0, rgba(165, 34, 43, .25), transparent 70%); }
+.cu .cf-card h3 { font: 400 1.7rem/1.1 var(--libro); }
+.cu .cf-card p { color: #d6cabe; font: 400 1.05rem/1.5 var(--libro); }
+.cu .cf-card__tag { background: rgba(165, 34, 43, .85); }
+.cu-arte { position: absolute; inset: 0; display: grid; place-items: center; background: radial-gradient(90% 70% at 50% 40%, #fffdf8, #e9e1d4 80%); }
+.cu-arte--marmol { background: radial-gradient(70% 90% at 40% 30%, rgba(255, 255, 255, .7), transparent 60%), var(--vetas), var(--marmol); background-size: auto, cover, auto; }
+.cu-arte--bordo { background: radial-gradient(90% 70% at 50% 40%, #c23a43, var(--bordo-2) 80%); }
+.cu-arte svg { width: 86%; height: 86%; }
+.cu-arte svg.cu-arte__plato { position: absolute; width: 96%; height: 96%; }
+.cu-arte svg.cu-arte__plato + svg { position: relative; width: 66%; height: 66%; }
+
+/* Guarda damero (separador como el piso del local) */
+.cu-damero { height: 1.4rem; background: repeating-conic-gradient(#2a2321 0 25%, #f3ede2 0 50%) 0 0 / 1.4rem 1.4rem; }
+
+/* ---------- V60: escena del filtrado (Café) ---------- */
+.cu-v60 { position: relative; }
+.cu-v60__sticky { display: grid; gap: 2rem; align-items: center; width: var(--wrap); margin: 0 auto; padding: clamp(4rem, 10vh, 6rem) 0; }
+@media (min-width: 901px) {
+  .cu-v60 { height: 320vh; }
+  .cu-v60__sticky { position: sticky; top: 0; height: 100vh; grid-template-columns: 1fr 1fr; padding: 0; }
+}
+.cu-v60__art { position: relative; aspect-ratio: 4 / 5; max-height: 80vh; justify-self: center; width: min(100%, 30rem); }
+.cu-v60__art svg { width: 100%; height: 100%; overflow: visible; }
+.cu-v60__pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: 1.6rem; counter-reset: paso; }
+.cu-v60__pasos li { counter-increment: paso; padding-left: 3.4rem; position: relative; opacity: 1; transition: opacity .5s ease, transform .5s ease; }
+.cu-v60__pasos li::before { content: counter(paso, upper-roman); position: absolute; left: 0; top: .1rem; color: var(--bordo); font: italic 400 1.6rem/1 var(--libro); }
+.cu-v60__pasos h3 { margin: 0 0 .35rem; font: 400 clamp(1.6rem, 3vw, 2.4rem)/1.05 var(--libro); }
+.cu-v60__pasos p { margin: 0; max-width: 34ch; color: #5b4d45; font: 400 1.1rem/1.5 var(--libro); }
+.cu-v60--anclado .cu-v60__pasos li { opacity: .22; transform: translateX(-.6rem); }
+.cu-v60--anclado .cu-v60__pasos li.is-on { opacity: 1; transform: none; }
+/* Sin anclar (móvil, sin GSAP): el dibujo queda en su estado final, sin pava ni chorro. */
+.cu-v60:not(.cu-v60--anclado) :is(.v-pava, .v-chorro, .v-gotas) { display: none; }
+.cu-gota { animation: cu-gota 1.1s cubic-bezier(.55, 0, 1, .45) infinite; transform-box: fill-box; }
+.cu-gota:nth-of-type(2) { animation-delay: -.55s; }
+@keyframes cu-gota { 0% { transform: translateY(0) scale(.6); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(70px) scale(1); opacity: 0; } }
+.cu-vapor { fill: none; stroke: #b7aca0; stroke-width: 7; stroke-linecap: round; filter: blur(3px); opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; animation: cu-vapor 3.4s ease-in-out infinite; }
+.cu-vapor:nth-of-type(2) { animation-delay: -1.7s; }
+@keyframes cu-vapor { 0% { transform: translateY(14px) scaleY(.7); opacity: 0; } 35% { opacity: .55; } 100% { transform: translateY(-22px) scaleY(1.05) skewX(-8deg); opacity: 0; } }
+
+/* ---------- Visitanos ---------- */
+.cu .cf-visit h3 { color: var(--bordo); font: 400 2.2rem/1 var(--script); letter-spacing: 0; text-transform: none; }
+.cu .cf-visit p, .cu .cf-visit li { font: 400 1.18rem/1.55 var(--libro); }
+.cu .cf-visit li { border-bottom-style: dotted; }
+.cu-placa { width: var(--wrap); margin: 0 auto; padding: clamp(3rem, 8vh, 5rem) 0; display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 800px) { .cu-placa { grid-template-columns: 1.1fr 1fr; } }
+.cu-placa__plato { position: relative; aspect-ratio: 1; max-width: 30rem; width: 100%; justify-self: center; }
+.cu-placa__plato > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cu-placa__plato .cu-placa__croissant { inset: 18%; width: 64%; height: 64%; transform: rotate(-12deg); }
+.cu-placa__firma { position: absolute; left: 4%; right: -6%; top: 12%; color: var(--azul); font: 400 clamp(4.5rem, 12vw, 8rem)/1 var(--script); transform: rotate(-8deg); text-shadow: 0 2px 0 rgba(255, 255, 255, .5); pointer-events: none; }
+.cu-placa__texto .cu-mono-azul { display: block; font-size: .85rem; line-height: 1.8; }
+.cu-placa__texto h2 { margin: .8rem 0 1rem; font: 400 clamp(2.4rem, 5vw, 3.8rem)/1.02 var(--libro); letter-spacing: -.02em; }
+.cu-placa__texto p { margin: 0; max-width: 36ch; color: #5b4d45; font: 400 1.2rem/1.5 var(--libro); }
+
+/* ---------- Pie ---------- */
+.cu .cf-footer .cu-logo { color: #f3d9cf; }
+.cu .cf-footer .cu-logo small { color: inherit; }
+.cu .cf-footer nav a { font: 400 1.05rem/1 var(--libro); }
+.cu .cf-footer nav a:hover { color: #ffb4a6; }
+.cu .cf-outro p { color: #cbbcae; font: 400 1.2rem/1.5 var(--libro); }
+.cu .cf-btn { background: var(--papel); color: var(--bordo); font-family: var(--libro); font-size: 1.1rem; font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cu-gota, .cu-vapor, .cu-type.is-tipeando::after { animation: none; }
+  .cu-vapor { opacity: .4; }
+  .cu-telon { display: none; }
+}
+
+/* ---------- Escena 3D del café sobre papel (Café) ---------- */
+.cu .cu-story { background: var(--papel); --c3-ink: var(--tinta); --c3-accent: var(--bordo); }
+.cu .cu-story .c3-sticky { background: radial-gradient(90% 80% at 50% 40%, #fffaf1 0%, var(--papel) 60%, #e6dccb 100%); }
+.cu .cu-story .c3-caption { background: rgba(246, 241, 231, .82); }
+.cu .c3-caption strong { font-family: var(--libro); font-weight: 400; }
+.cu .c3-caption p { font-family: var(--libro); font-size: 1.1rem; }
+.cu .cu-placa__texto h1, .cu .cu-placa__texto h2 { margin: .8rem 0 1rem; font: 400 clamp(2.6rem, 6vw, 4.6rem)/1.02 var(--libro); letter-spacing: -.02em; }
+.cu .cu-placa__texto h1 em { color: var(--bordo); font: 400 1.25em/.9 var(--script); font-style: normal; }
+.cu .cu-placa__texto .cu-cap { display: flex; }
+.cu .cu-placa__texto .cf-more span { background: var(--bordo); color: var(--papel); }
+.cu .cf-top .cu-mono-azul { margin-top: 1.4rem; color: var(--azul); font: 500 .74rem/1.5 var(--mono); letter-spacing: .16em; }

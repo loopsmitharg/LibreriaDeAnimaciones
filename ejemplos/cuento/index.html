@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cuento · Confitería y café — Recoleta</title>
+  <meta name="description" content="Cuento: confitería y café en Recoleta. Lunes a viernes de 8 a 20 h, sábados y feriados de 9 a 20 h." />
+  <!-- Tipografías: Pinyon Script (el script del logo y de sus bolsas) y EB Garamond (libro), de Google Fonts. Mono local: IBM Plex Mono. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Pinyon+Script&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/coffee-3d/styles/scene.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="cuento.css" />
+  <script>document.documentElement.classList.add('cf-js', 'cu-js'); if (sessionStorage.getItem('cu-telon')) document.documentElement.classList.add('cu-llegando');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="cuento.js"></script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/","cannon-es":"../../assets/vendor/cannon-es/cannon-es.js"}}</script>
+  <script type="module" src="../../animaciones/cafeteria-ejemplo/shared/scenes.js"></script>
+</head>
+<body class="cu">
+  <script src="arte.js"></script>
+  <div class="cu-telon" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#mono"/></svg><small></small><span></span></div>
+
+  <header class="cf-nav" data-nav data-hide-logo>
+    <a class="cu-logo" href="index.html" aria-label="Cuento, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg><b>Cuento</b></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html" aria-current="page"><i>I</i>Inicio</a>
+      <a href="carta.html"><i>II</i>Carta</a>
+      <a href="cafe.html"><i>III</i>Café</a>
+      <a href="visitanos.html"><i>IV</i>Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="visitanos.html">Cómo llegar</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html" aria-current="page">Inicio</a></li>
+      <li><a href="carta.html">Carta</a></li>
+      <li><a href="cafe.html">Café</a></li>
+      <li><a href="visitanos.html">Visitanos</a></li>
+    </ul></nav>
+    <p>Confitería y café · Recoleta</p>
+  </div>
+
+  <main>
+    <!-- Hero: papel crema, piso damero en perspectiva y granos 3D (Coffee Product Hero) alrededor del nombre -->
+    <section class="cf-hero">
+      <div class="cu-piso" aria-hidden="true"></div>
+      <div class="cf-hero__fallback">
+        <span class="cf-kicker">confitería y café</span>
+        <h1>Cuento</h1>
+      </div>
+      <div data-c3="hero" data-roast="medium" data-rig="soft" style="position:absolute;inset:0">
+        <template data-c3-html>
+          <small>confitería y café</small>
+          <h1>Cuento</h1>
+          <p><b>Recoleta · Buenos Aires</b>Había una vez un mostrador con medialunas tibias, platos de borde rojo y café de especialidad.</p>
+          <a href="carta.html">Abrir la carta</a>
+        </template>
+      </div>
+      <span class="cf-scroll-cue">Pasá la página</span>
+    </section>
+
+    <section class="cf-overview">
+      <span class="cu-mono-azul" data-type>Érase una vez · Recoleta</span>
+      <p class="cf-overview__text cu-capitular cf-fade">En Cuento la confitería se hornea todos los días y el café se sirve en porcelana blanca con filete rojo. Una mesa de mármol, algo dulce y un rato para vos: así empieza la historia.</p>
+    </section>
+
+    <!-- Portada con clip-path: una mesa de mármol vista desde arriba, como sus fotos -->
+    <section class="cf-frame-wrap" aria-label="Una mesa de Cuento" data-rim>
+      <div class="cf-frame" data-frame>
+        <div class="cf-frame__media" data-frame-media>
+          <div class="cu-mesa" aria-hidden="true">
+            <svg class="p1" viewBox="0 0 400 400"><use href="#tostadas"/></svg>
+            <svg class="p2" viewBox="0 0 400 400"><use href="#taza"/></svg>
+            <svg class="p3" viewBox="0 0 400 400"><use href="#plato"/><use href="#croissant-dulce" x="40" y="60" width="320" height="320"/></svg>
+            <svg class="p4" viewBox="0 0 400 400"><use href="#taza"/></svg>
+            <div class="cu-vale"><strong>Vale por un café.</strong><span>Cuento · Recoleta</span><svg viewBox="0 0 100 100"><use href="#mono"/></svg></div>
+          </div>
+        </div>
+        <span class="cf-frame__label">Una mesa de Cuento</span>
+      </div>
+    </section>
+
+    <!-- Índice del libro: cada página es un capítulo; la ilustración sigue al cursor -->
+    <section class="cu-indice" aria-labelledby="t-indice" data-indice>
+      <span class="cu-cap">Índice</span>
+      <h2 id="t-indice">Este <em>cuento</em> sigue en tres capítulos</h2>
+      <ol>
+        <li><a href="carta.html" data-peek="carta"><i>II</i><b>La carta</b><small>Medialunas, tartas, tostadas</small><em>p. 12</em></a></li>
+        <li><a href="cafe.html" data-peek="cafe"><i>III</i><b>El café</b><small>Filtrados, espresso y granos</small><em>p. 27</em></a></li>
+        <li><a href="visitanos.html" data-peek="visita"><i>IV</i><b>Visitanos</b><small>Recoleta, de lunes a sábado</small><em>p. 40</em></a></li>
+      </ol>
+    </section>
+    <div class="cu-peek" aria-hidden="true">
+      <svg data-for="carta" viewBox="0 0 400 400"><use href="#tarta"/></svg>
+      <svg data-for="cafe" viewBox="0 0 400 400"><use href="#bolsa"/></svg>
+      <svg data-for="visita" viewBox="0 0 400 400"><use href="#taza"/></svg>
+    </div>
+
+    <!-- Del mostrador: tarjetas-acordeón (como los sabores de Traiano) con ilustraciones de fondo -->
+    <section class="cf-features" aria-labelledby="t-mostrador">
+      <span class="cu-cap">Del mostrador</span>
+      <h2 class="cf-features__title" id="t-mostrador">Lo que sale <em>del horno</em></h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#croissant-dulce"/></svg></span>
+          <div class="cf-item__head"><h3>Medialunas y croissants</h3><span class="cf-item__num">i.</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>De manteca, recién horneadas. El croissant relleno de dulce, para los que no se deciden.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#tarta"/></svg></span>
+          <div class="cf-item__head"><h3>Tartas de frutilla</h3><span class="cf-item__num">ii.</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Hojaldre, crema pastelera y frutillas enteras. Salen de a una, sobre la rejilla.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#palmerita"/></svg></span>
+          <div class="cf-item__head"><h3>Palmeritas y alfajores</h3><span class="cf-item__num">iii.</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Para acompañar el cortado o llevarse en la cajita, con un vale por un café adentro.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg" aria-hidden="true" data-item-bg><svg viewBox="0 0 400 400"><use href="#tostadas"/></svg></span>
+          <div class="cf-item__head"><h3>Tostadas</h3><span class="cf-item__num">iv.</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Pan de masa madre con manteca y dulce de leche. El desayuno de toda la vida.</p>
+            <a class="cf-more" href="carta.html">Ver la carta completa <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- El ticket rojo de sus cajitas: se inclina con el puntero -->
+    <section class="cu-vale-sec" aria-label="Vale por un café">
+      <a class="cu-vale" href="visitanos.html" data-tilt><strong>Vale por<br />un café.</strong><span>Canjealo en el mostrador · Cuento, Recoleta</span><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg></a>
+      <p>Algunas historias empiezan con un papelito rojo dentro de una caja de palmeritas.</p>
+    </section>
+
+    <section class="cf-outro">
+      <span class="cu-mono-azul" data-type style="color:#9fc2f2">Lun a vie 8–20 h · Sáb y feriados 9–20 h</span>
+      <h2>Y fueron felices <em>con café</em></h2>
+      <p>Te esperamos en Recoleta, de lunes a sábado.</p>
+      <a class="cf-btn" href="visitanos.html">Cómo llegar</a>
+    </section>
+  </main>
+
+  <div class="cu-damero" aria-hidden="true"></div>
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="cu-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#mono"/></svg><b>Cuento</b><small>confitería<br />y café</small></span>
+      <nav aria-label="Pie"><a href="carta.html">Carta</a><a href="cafe.html">Café</a><a href="visitanos.html">Visitanos</a><a href="https://www.instagram.com/cuento.ba/" target="_blank" rel="noopener">Instagram</a></nav>
+      <span>Sitio de ejemplo · Librería de Animaciones</span>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Cuento · confitería y café</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo multi-page para un local real (@cuento.ba)</span><span>Componentes de la cafetería de ejemplo + Coffee 3D, pariente de Traiano</span><span>Three.js · GSAP + ScrollTrigger · SVG</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Identidad y animaciones</h3>
+          <ul>
+            <li><strong>Un libro:</strong> cada página es un capítulo (I Inicio, II Carta, III Café, IV Visitanos). Entre páginas cae un <strong>telón bordó</strong> con el monograma y el número de capítulo (<code>.cu-telon</code>, guardado en <code>sessionStorage</code>).</li>
+            <li><strong>De Traiano:</strong> nombre en script con granos 3D en el hero, portada con clip-path, acordeón con fondos ilustrados, tarjetas con arte SVG y la escena 3D del café por scroll.</li>
+            <li><strong>Nuevo:</strong> filete rojo de los platos que se dibuja (<code>[data-rim]</code>, <code>@property --rim</code> heredada por los <code>&lt;use&gt;</code>), texto azul a máquina (<code>[data-type]</code>), índice con ilustración que sigue al cursor, ticket que se inclina y el V60 anclado de la página Café.</li>
+            <li>Ilustraciones en un solo sprite (<code>arte.js</code>), insertado por script para que funcione también abriendo el HTML directo.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido a confirmar</h3>
+          <ul>
+            <li>De Instagram salen: "confitería y café", Recoleta, el horario (lun–vie 8–20 h, sáb y feriados 9–20 h), el link de Maps, el monograma, los platos con filete rojo, las bolsas de café y el "Vale por un café".</li>
+            <li>La carta, los textos de la casa y los números de página del índice son de ejemplo. Sin precios a propósito.</li>
+            <li>Sin fotos: con fotos reales, van en la portada (<code>.cf-frame__media</code>) y en las tarjetas de la carta.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cuento</small></a>
+</body>
+</html>
