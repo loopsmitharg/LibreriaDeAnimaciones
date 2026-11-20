@@ -38,6 +38,9 @@ html, body { background: var(--crema); color: var(--tinta); }
 .dl-logo { display: inline-grid; place-items: center; width: 3.4rem; height: 3.4rem; border-radius: 50%; background: var(--frambuesa); color: #fbf6ec; text-decoration: none; font: 600 .62rem/1 var(--cartel); letter-spacing: .04em; text-transform: uppercase; box-shadow: 0 6px 18px rgba(142, 15, 56, .35); }
 .dl-logo--big { width: clamp(11rem, 26vw, 17rem); height: clamp(11rem, 26vw, 17rem); font-size: clamp(2rem, 4.6vw, 3.1rem); box-shadow: 0 30px 60px rgba(0, 0, 0, .35), inset 0 0 0 6px rgba(255, 255, 255, .08); }
 .dl .cf-nav { padding-block: .7rem; }
+/* Inicio: el logo chico de la barra aparece recién al bajar (arriba ya está el logo grande del hero). */
+.dl .cf-nav .dl-logo { transition: opacity .45s ease, transform .6s cubic-bezier(.34, 1.56, .64, 1); }
+.dl .cf-nav:not(.cf-nav--light):not(.is-solid):not(.is-open) .dl-logo { opacity: 0; transform: scale(.4) rotate(-20deg); pointer-events: none; }
 .dl .cf-nav__links a { font-family: var(--cartel); font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; }
 .dl .cf-nav__cta, .dl .cf-burger { background: var(--mostaza); color: var(--tinta); }
 .dl .cf-nav.is-solid .cf-nav__cta { background: var(--frambuesa); color: #fbf6ec; }
@@ -49,7 +52,8 @@ html, body { background: var(--crema); color: var(--tinta); }
 
 /* ---------- Hero: pared verde, platos colgados y granos 3D ---------- */
 .dl-wall, .dl .dl-wall { background-color: var(--verde); background-image: radial-gradient(80% 70% at 50% 40%, rgba(255, 230, 170, .14), transparent 60%, rgba(0, 0, 0, .35)), var(--pared); background-size: auto, 100% 100%; }
-.dl-plates { position: absolute; z-index: 1; top: 12%; left: 0; right: 0; display: flex; justify-content: center; gap: clamp(1rem, 5vw, 4.5rem); pointer-events: none; }
+/* z-index 0 y antes en el DOM que la escena 3D: los platos quedan detrás de los granos. */
+.dl-plates { position: absolute; z-index: 0; top: 12%; left: 0; right: 0; display: flex; justify-content: center; gap: clamp(1rem, 5vw, 4.5rem); pointer-events: none; }
 .dl-plates svg { width: clamp(3.4rem, 7vw, 6rem); height: clamp(3.4rem, 7vw, 6rem); filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .35)); }
 .dl-plates svg:nth-child(2n) { width: clamp(2.6rem, 5vw, 4.4rem); height: clamp(2.6rem, 5vw, 4.4rem); margin-top: 2.2rem; }
 @media (max-width: 640px) { .dl-plates svg:nth-child(n+5) { display: none; } }
