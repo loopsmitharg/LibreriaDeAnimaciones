@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ritmo LS·01 Runner · Zapatillas de running</title>
+  <meta name="description" content="Ritmo LS·01 Runner: zapatilla de running con capa de perlas, entresuela EVA y malla respirable. Recorré su tecnología en 3D y conocé la colección." />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/sneaker-3d/styles/sneaker.css" />
+  <link rel="stylesheet" href="ritmo.css" />
+  <script src="../../assets/vendor/gsap.min.js"></script>
+  <script src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <!-- Con GSAP, las escenas se anclan; sin GSAP queda todo en flujo (ver el final de ritmo.css). -->
+  <script>if (window.gsap && window.ScrollTrigger) document.documentElement.classList.add('rt-motion');</script>
+  <script type="importmap">{"imports":{"three":"../../assets/vendor/three/build/three.module.js","three/addons/":"../../assets/vendor/three/jsm/"}}</script>
+  <script type="module" src="ritmo.js"></script>
+</head>
+<body class="rt">
+  <header class="rt-nav" data-nav>
+    <a class="rt-logo" href="#inicio" aria-label="Ritmo, inicio"><svg viewBox="0 0 40 24" aria-hidden="true"><path d="M2 20 C 8 20 10 4 16 4 S 24 20 30 20 S 36 8 38 4"/></svg>Ritmo</a>
+    <nav class="rt-nav__links" aria-label="Principal">
+      <a href="#inicio">Tecnología</a>
+      <a href="#coleccion">Colección</a>
+      <a href="#comprar">Comprar</a>
+    </nav>
+    <button class="rt-cart" type="button" data-cart aria-live="polite"><span class="material-icons-round" aria-hidden="true">shopping_bag</span><span>Carrito</span><b data-cart-count>0</b></button>
+  </header>
+
+  <main>
+    <!-- ── Tecnología: modelo 3D + etapas por scroll ─────────────────────────────── -->
+    <section class="rt-tech" id="inicio" aria-label="Tecnología de la LS·01 Runner en 3D">
+      <div class="rt-track" data-track>
+        <div class="rt-sticky" data-sticky>
+          <p class="rt-bigword" aria-hidden="true" data-bigword>LS·01</p>
+
+          <!-- Trazo en recorrido: un trazo por cada cambio de etapa (pathLength="1"). -->
+          <svg class="rt-ribbon" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+            <path data-ribbon pathLength="1" d="M -80 720 C 260 560 420 860 700 640 S 1020 180 860 260 S 1180 520 1520 300" />
+            <path data-ribbon pathLength="1" d="M 1520 120 C 1180 260 1100 40 860 220 S 560 760 760 700 S 300 380 -80 520" />
+            <path data-ribbon pathLength="1" d="M -80 200 C 300 120 360 520 640 420 S 980 120 1080 360 S 1240 820 1520 700" />
+            <path data-ribbon pathLength="1" d="M 1520 860 C 1160 700 1300 380 980 420 S 520 760 420 520 S 600 120 -80 140" />
+            <path data-ribbon-thin pathLength="1" d="M -80 720 C 260 560 420 860 700 640 S 1020 180 860 260 S 1180 520 1520 300" />
+            <path data-ribbon-thin pathLength="1" d="M 1520 120 C 1180 260 1100 40 860 220 S 560 760 760 700 S 300 380 -80 520" />
+            <path data-ribbon-thin pathLength="1" d="M -80 200 C 300 120 360 520 640 420 S 980 120 1080 360 S 1240 820 1520 700" />
+            <path data-ribbon-thin pathLength="1" d="M 1520 860 C 1160 700 1300 380 980 420 S 520 760 420 520 S 600 120 -80 140" />
+          </svg>
+
+          <!-- El canvas 3D y las flechas comparten caja: las coordenadas proyectadas caen directo acá. -->
+          <div class="rt-model" data-model>
+            <svg class="rt-callouts" data-callouts aria-hidden="true"></svg>
+            <div class="rt-labels" data-labels></div>
+            <p class="rt-loading" data-loading>Cargando modelo</p>
+          </div>
+
+          <!-- Textos de cada etapa (data-stage = índice). -->
+          <div class="rt-copy">
+            <article class="rt-step rt-step--hero" data-stage="0">
+              <p class="rt-kicker">Nueva · Running ruta</p>
+              <h1>LS·01 <span>Runner</span></h1>
+              <p class="rt-lead">Construida pieza por pieza para que cada kilómetro pese menos. Bajá y desarmala.</p>
+              <div class="rt-buy"><b class="rt-price">$ 189.900</b><button class="rt-btn" type="button" data-add="LS·01 Runner">Agregar al carrito</button></div>
+              <p class="rt-note">6 cuotas sin interés · Envío gratis</p>
+            </article>
+            <article class="rt-step" data-stage="1">
+              <p class="rt-kicker">01 — Capellada</p>
+              <h2>Respira.<br />Sujeta. No aprieta.</h2>
+              <p class="rt-lead">Malla de doble capa, refuerzos soldados sin costura y siete ojales que distribuyen la presión del cordón sobre todo el empeine.</p>
+            </article>
+            <article class="rt-step" data-stage="2">
+              <p class="rt-kicker">02 — Amortiguación</p>
+              <h2>Pisá blando,<br />salí rápido.</h2>
+              <p class="rt-lead">Tres capas debajo del pie: entresuela EVA que absorbe, perlas de TPU que devuelven la energía y goma que agarra en mojado.</p>
+            </article>
+            <article class="rt-step" data-stage="3">
+              <p class="rt-kicker">03 — Despiece</p>
+              <h2>Veintiocho piezas.<br />Ninguna de relleno.</h2>
+              <p class="rt-lead">El talón se sostiene solo, la lengüeta no se corre y la plantilla copia la forma del arco. Así está hecha por dentro.</p>
+            </article>
+            <article class="rt-step" data-stage="4" id="comprar">
+              <p class="rt-kicker">04 — Lista para correr</p>
+              <h2>LS·01 Runner</h2>
+              <ul class="rt-specs">
+                <li><b>248 g</b><span>Peso (talle 42)</span></li>
+                <li><b>8 mm</b><span>Drop</span></li>
+                <li><b>36 / 28</b><span>Altura talón / punta</span></li>
+              </ul>
+              <fieldset class="rt-sizes" aria-label="Talle">
+                <legend>Talle (AR)</legend>
+                <label><input type="radio" name="talle" value="39" /><span>39</span></label>
+                <label><input type="radio" name="talle" value="40" /><span>40</span></label>
+                <label><input type="radio" name="talle" value="41" checked /><span>41</span></label>
+                <label><input type="radio" name="talle" value="42" /><span>42</span></label>
+                <label><input type="radio" name="talle" value="43" /><span>43</span></label>
+                <label><input type="radio" name="talle" value="44" /><span>44</span></label>
+              </fieldset>
+              <div class="rt-buy"><b class="rt-price">$ 189.900</b><button class="rt-btn" type="button" data-add="LS·01 Runner">Agregar al carrito</button></div>
+            </article>
+          </div>
+
+          <!-- Riel de etapas: se llena con el scroll; cada punto lleva a su etapa. -->
+          <nav class="rt-rail" aria-label="Etapas">
+            <i class="rt-rail__fill" data-rail-fill></i>
+            <button type="button" data-goto="0"><span>Inicio</span></button>
+            <button type="button" data-goto="1"><span>Capellada</span></button>
+            <button type="button" data-goto="2"><span>Amortiguación</span></button>
+            <button type="button" data-goto="3"><span>Despiece</span></button>
+            <button type="button" data-goto="4"><span>Comprar</span></button>
+          </nav>
+          <p class="rt-hint" data-hint>Scroll <span class="material-icons-round" aria-hidden="true">south</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Colección: navegador de productos 3D con fotos ───────────────────────── -->
+    <section class="rt-col" id="coleccion" aria-label="Colección">
+      <div class="rt-col__track" data-col-track>
+        <div class="rt-col__sticky">
+          <div class="rt-col__head"><p class="rt-kicker">Colección otoño · 4 modelos</p><p class="rt-col__count"><b data-col-index>01</b> / <span data-col-total>04</span></p></div>
+
+          <div class="rt-col__list"><div class="rt-col__listInner" data-col-list>
+            <button class="rt-col__item" type="button" data-index="0"><span class="rt-col__cap">Running ruta</span><span class="rt-col__title">LS·01</span></button>
+            <button class="rt-col__item" type="button" data-index="1"><span class="rt-col__cap">Running diario</span><span class="rt-col__title">Nube</span></button>
+            <button class="rt-col__item" type="button" data-index="2"><span class="rt-col__cap">Urbana</span><span class="rt-col__title">Ciudad</span></button>
+            <button class="rt-col__item" type="button" data-index="3"><span class="rt-col__cap">Trabajo</span><span class="rt-col__title">Obra</span></button>
+          </div></div>
+
+          <div class="rt-col__stage" aria-hidden="true">
+            <div class="rt-col__ring">
+              <figure class="pcard pcard--cover"><div class="pcard__face"><img src="../../animaciones/sneaker-3d/previews/blender/three-quarter-front.jpg" alt="" loading="lazy" /><figcaption>LS·01 Runner</figcaption></div></figure>
+              <figure class="pcard pcard--duo"><div class="pcard__face"><img src="img/nube-lateral.png" alt="" loading="lazy" /><img src="img/nube-talon.png" alt="" loading="lazy" /><figcaption>Nube</figcaption></div></figure>
+              <figure class="pcard"><div class="pcard__face"><img src="img/urbana-gris.png" alt="" loading="lazy" /><figcaption>Ciudad</figcaption></div></figure>
+              <figure class="pcard pcard--cover"><div class="pcard__face"><img src="img/obra-mesh.webp" alt="" loading="lazy" /><figcaption>Obra</figcaption></div></figure>
+            </div>
+          </div>
+
+          <!-- Datos de cada producto: el JS los copia al panel cuando cambia el activo. -->
+          <ul hidden data-col-data>
+            <li data-name="LS·01 Runner" data-type="Running ruta" data-price="$ 189.900" data-desc="Capa de perlas sobre entresuela EVA, malla de doble capa y contrafuerte de TPU. La del modelo de arriba."></li>
+            <li data-name="Nube" data-type="Running diario" data-price="$ 214.900" data-desc="Espuma de celdas abiertas a la vista, talón ancho y estable y una malla técnica gris perla con suela verde lima."></li>
+            <li data-name="Ciudad" data-type="Urbana" data-price="$ 159.900" data-desc="Cuero hidrófugo gris, suela de una pieza sin tacos y ojales con acento lima. Para caminar todo el día."></li>
+            <li data-name="Obra" data-type="Trabajo" data-price="$ 139.900" data-desc="Puntera de protección, malla 3D respirable y entresuela con canales de ventilación. Cordones de alta visibilidad."></li>
+          </ul>
+          <div class="rt-col__info" aria-live="polite" data-col-info>
+            <p class="rt-col__infoType" data-col-type>Running ruta</p>
+            <p class="rt-col__infoName"><span data-col-name>LS·01 Runner</span> <b data-col-price>$ 189.900</b></p>
+            <p class="rt-col__infoDesc" data-col-desc>Capa de perlas sobre entresuela EVA, malla de doble capa y contrafuerte de TPU.</p>
+            <div class="rt-col__ctrl">
+              <button class="rt-round" type="button" data-col-prev aria-label="Modelo anterior"><span class="material-icons-round" aria-hidden="true">arrow_back</span></button>
+              <button class="rt-round" type="button" data-col-next aria-label="Modelo siguiente"><span class="material-icons-round" aria-hidden="true">arrow_forward</span></button>
+              <button class="rt-btn rt-btn--lime" type="button" data-col-add>Agregar al carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rt-close">
+      <p class="rt-kicker">Cambios sin cargo · 30 días</p>
+      <h2>Si no te cambia el ritmo,<br />te devolvemos la plata.</h2>
+      <a class="rt-btn rt-btn--lime" href="#comprar">Elegir mi talle</a>
+    </section>
+  </main>
+
+  <footer class="rt-foot"><span>Ritmo · marca de ejemplo</span><span>Modelo 3D propio (sneaker-3d) · Three.js · GSAP ScrollTrigger</span></footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Ritmo · one-page de zapatillas</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo de venta y promoción (marca ficticia)</span><span>sneaker-3d + trazo en recorrido + navegador de productos 3D</span><span>Three.js · GSAP + ScrollTrigger · SVG</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Cómo funciona</h3>
+          <ul>
+            <li><strong>Modelo:</strong> <code>mountExploded(el, { scroll: false, captions: false })</code> de <code>sneaker-3d</code>. La página tiene su propio tramo sticky y lleva el despiece a un progreso fijo por etapa (<code>STAGES</code> en <code>ritmo.js</code>): armada, estructura separada, despiece total y reensamble.</li>
+            <li><strong>Trazo en recorrido:</strong> un <code>path</code> SVG por cambio de etapa con <code>pathLength="1"</code> y <code>stroke-dasharray: 1 1</code>; el offset va de 1 a −1, así que el trazo entra dibujándose y sale borrándose desde la cola.</li>
+            <li><strong>Flechas:</strong> cada etiqueta apunta a un punto de una pieza real del GLB (centro de su caja ± <code>at</code>), que se proyecta con la cámara en cada cuadro: siguen a la pieza mientras se mueve.</li>
+            <li><strong>Colección:</strong> el anillo de tarjetas CSS 3D de <code>navegador-productos-3d</code>, en un tramo sticky de la página (sin overlay) con snap por producto.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Qué tocar</h3>
+          <ul>
+            <li><code>STAGES</code>: progreso del despiece por etapa y sus flechas (<code>part</code>, <code>at</code>, <code>dx/dy</code> en px a 1440 de ancho).</li>
+            <li>Las fotos de <code>img/</code> son de referencia (productos de otras marcas): reemplazarlas por fotos propias antes de publicar. Precios, nombres y especificaciones son de ejemplo.</li>
+            <li>Con movimiento reducido no se dibujan los trazos; sin GSAP las etapas quedan en flujo, legibles.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Ritmo</small></a>
+</body>
+</html>

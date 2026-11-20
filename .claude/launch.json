@@ -4,14 +4,39 @@
     {
       "name": "libreria",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "5510", "--directory", "C:/Users/Usuario/Documents/GitHub/LibreriaDeAnimaciones"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5510",
+        "--directory",
+        "C:/Users/Usuario/Documents/GitHub/LibreriaDeAnimaciones"
+      ],
       "port": 5510
     },
     {
       "name": "libreria-d",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "5511", "--directory", "D:/Git/LibreriaDeAnimaciones"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5511",
+        "--directory",
+        "D:/Git/LibreriaDeAnimaciones"
+      ],
       "port": 5511
+    },
+    {
+      "name": "libreria-5513",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5513",
+        "--directory",
+        "C:/Users/Usuario/Documents/GitHub/LibreriaDeAnimaciones"
+      ],
+      "port": 5513,
+      "autoPort": false
     }
   ]
 }
