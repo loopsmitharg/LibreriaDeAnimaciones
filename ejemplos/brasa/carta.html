@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es" data-pedido-key="brasa_pedido">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carta · Brasa</title>
+  <meta name="description" content="Brasa: hamburguesería de ejemplo. Smash burgers a la parrilla, pan de papa y cheddar que chorrea." />
+  <!-- Tipografía de cartel: Anton (Google Fonts). Texto: Outfit e IBM Plex Mono locales. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="../../animaciones/menu-carta-pedidos/style.css" />
+  <link rel="stylesheet" href="brasa.css" />
+  <script>document.documentElement.classList.add('cf-js', 'bz-js'); if (sessionStorage.getItem('bz-papel')) document.documentElement.classList.add('bz-llegando');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="../../animaciones/cursor-invertido/script.js"></script>
+  <script defer src="../../animaciones/menu-carta-pedidos/script.js"></script>
+  <script defer src="brasa.js"></script>
+</head>
+<body class="bz">
+  <script src="arte.js"></script>
+  <!-- Cursor invertido (animaciones/cursor-invertido): hijos directos del body para que funcione el blend. -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <!-- Papel de envoltorio a cuadros: tapa la pantalla al cambiar de página -->
+  <div class="bz-papel" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#logo"/></svg><span></span></div>
+
+  <header class="cf-nav" id="site-header" data-nav data-solid-after="top">
+    <a class="bz-logo" href="index.html" aria-label="Brasa, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Brasa</b></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="carta.html" aria-current="page">Carta</a>
+      <a href="locales.html">Locales</a>
+    </nav>
+    <a class="cf-nav__cta" href="locales.html">Locales</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carta.html" aria-current="page">Carta</a></li>
+      <li><a href="locales.html">Locales</a></li>
+    </ul></nav>
+    <p>Smash burgers a la parrilla</p>
+  </div>
+
+  <main class="bz-carta menu-page">
+    <!-- Carta con filtros de dos niveles, opciones y pedido (animaciones/menu-carta-pedidos) -->
+    <div class="menu-hero">
+      <span class="menu-kicker">La carta</span>
+      <h1 data-words>Elegí</h1>
+      <p class="menu-subtitle">Filtrá, elegí si va con papas y armá el pedido. Pasá el mouse por una hamburguesa: se abre para mostrarte qué tiene.</p>
+      <span class="menu-note">Productos y precios de ejemplo · marca ficticia</span>
+    </div>
+    <div class="filter-sticky-container">
+      <div class="filter-pills">
+        <button class="filter-pill main-filter active" data-filter-category="all">Todo</button>
+        <button class="filter-pill main-filter" data-filter-category="burgers" data-filter-is-sub="true">Burgers</button>
+        <button class="filter-pill main-filter" data-filter-category="papas">Papas</button>
+        <button class="filter-pill main-filter" data-filter-category="bebidas">Bebidas</button>
+        <button class="filter-pill main-filter" data-filter-category="postres">Postres</button>
+        <button class="filter-pill sub-filter sub-burgers hidden" data-filter-category="back">← Volver</button>
+        <button class="filter-pill sub-filter sub-burgers hidden" data-filter-category="burgers">Todas</button>
+        <button class="filter-pill sub-filter sub-burgers hidden" data-filter-category="burgers-carne">De carne</button>
+        <button class="filter-pill sub-filter sub-burgers hidden" data-filter-category="burgers-veggie">Veggie</button>
+      </div>
+    </div>
+    <div class="masonry-grid">
+      <div class="menu-card-rich category-burgers category-burgers-carne">
+        <div class="card-img-container bz-mini" aria-hidden="true"><svg viewBox="0 314 400 398"><use href="#pan-base" y="622" width="400" height="80" style="--i:0"/><use href="#carne" y="560" width="400" height="64" style="--i:1"/><use href="#queso" y="548" width="400" height="56" style="--i:2"/><use href="#carne" y="506" width="400" height="64" style="--i:3"/><use href="#queso" y="494" width="400" height="56" style="--i:4"/><use href="#panceta" y="472" width="400" height="40" style="--i:5"/><use href="#salsa" y="460" width="400" height="30" style="--i:6"/><use href="#pan-top" y="324" width="400" height="150" style="--i:7"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Doble Brasa</h3><span class="card-price">$11.800 / $14.600</span></div>
+          <p class="card-desc">Dos smash, doble cheddar, panceta y salsa Brasa.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Sola", "price": 11800}, {"name": "Con papas", "price": 14600}]' aria-label="Añadir Doble Brasa al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-burgers category-burgers-carne">
+        <div class="card-img-container bz-mini" aria-hidden="true"><svg viewBox="0 384 400 328"><use href="#pan-base" y="622" width="400" height="80" style="--i:0"/><use href="#carne" y="560" width="400" height="64" style="--i:1"/><use href="#queso" y="548" width="400" height="56" style="--i:2"/><use href="#cebolla" y="530" width="400" height="30" style="--i:3"/><use href="#pan-top" y="394" width="400" height="150" style="--i:4"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Clásica de plancha</h3><span class="card-price">$7.900 / $10.700</span></div>
+          <p class="card-desc">Un smash, cheddar y cebolla a la plancha.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Sola", "price": 7900}, {"name": "Con papas", "price": 10700}]' aria-label="Añadir Clásica de plancha al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-burgers category-burgers-carne">
+        <div class="card-img-container bz-mini" aria-hidden="true"><svg viewBox="0 368 400 344"><use href="#pan-base" y="622" width="400" height="80" style="--i:0"/><use href="#carne" y="560" width="400" height="64" style="--i:1"/><use href="#queso" y="548" width="400" height="56" style="--i:2"/><use href="#panceta" y="526" width="400" height="40" style="--i:3"/><use href="#salsa" y="514" width="400" height="30" style="--i:4"/><use href="#pan-top" y="378" width="400" height="150" style="--i:5"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Panceta &amp; barbacoa</h3><span class="card-price">$9.800 / $12.600</span></div>
+          <p class="card-desc">Smash, cheddar, panceta y barbacoa ahumada.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Sola", "price": 9800}, {"name": "Con papas", "price": 12600}]' aria-label="Añadir Panceta &amp; barbacoa al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-burgers category-burgers-carne">
+        <div class="card-img-container bz-mini" aria-hidden="true"><svg viewBox="0 296 400 416"><use href="#pan-base" y="622" width="400" height="80" style="--i:0"/><use href="#carne" y="560" width="400" height="64" style="--i:1"/><use href="#queso" y="548" width="400" height="56" style="--i:2"/><use href="#carne" y="506" width="400" height="64" style="--i:3"/><use href="#queso" y="494" width="400" height="56" style="--i:4"/><use href="#carne" y="452" width="400" height="64" style="--i:5"/><use href="#queso" y="440" width="400" height="56" style="--i:6"/><use href="#pan-top" y="306" width="400" height="150" style="--i:7"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Triple</h3><span class="card-price">$14.200 / $17.000</span></div>
+          <p class="card-desc">Tres smash y triple cheddar. Para valientes.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Sola", "price": 14200}, {"name": "Con papas", "price": 17000}]' aria-label="Añadir Triple al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-burgers category-burgers-veggie">
+        <div class="card-img-container bz-mini" aria-hidden="true"><svg viewBox="0 376 400 336"><use href="#pan-base" y="622" width="400" height="80" style="--i:0"/><use href="#lechuga" y="600" width="400" height="50" style="--i:1"/><use href="#carne" y="560" width="400" height="64" style="--i:2"/><use href="#tomate" y="540" width="400" height="34" style="--i:3"/><use href="#pepinos" y="522" width="400" height="30" style="--i:4"/><use href="#pan-top" y="386" width="400" height="150" style="--i:5"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Verde</h3><span class="card-price">$8.600 / $11.400</span></div>
+          <p class="card-desc">Medallón de garbanzos, lechuga, tomate y pepinos.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Sola", "price": 8600}, {"name": "Con papas", "price": 11400}]' aria-label="Añadir Verde al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-burgers category-burgers-carne">
+        <div class="card-img-container bz-mini" aria-hidden="true"><svg viewBox="0 402 400 310"><use href="#pan-base" y="622" width="400" height="80" style="--i:0"/><use href="#carne" y="560" width="400" height="64" style="--i:1"/><use href="#queso" y="548" width="400" height="56" style="--i:2"/><use href="#pan-top" y="412" width="400" height="150" style="--i:3"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Chiquita</h3><span class="card-price">$6.900</span></div>
+          <p class="card-desc">Un smash y cheddar, en pan chico. Con jugo.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Combo", "price": 6900}]' aria-label="Añadir Chiquita al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-papas">
+        <div class="card-img-container bz-mini" aria-hidden="true"><span class="material-icons-round">fastfood</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Papas con piel</h3><span class="card-price">$3.800 / $5.200</span></div>
+          <p class="card-desc">Doble cocción, sal gruesa.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Chicas", "price": 3800}, {"name": "Grandes", "price": 5200}]' aria-label="Añadir Papas con piel al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-papas">
+        <div class="card-img-container bz-mini" aria-hidden="true"><span class="material-icons-round">fastfood</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Papas Brasa</h3><span class="card-price">$6.900</span></div>
+          <p class="card-desc">Con cheddar fundido, panceta y verdeo.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Porción", "price": 6900}]' aria-label="Añadir Papas Brasa al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-papas">
+        <div class="card-img-container bz-mini" aria-hidden="true"><span class="material-icons-round">donut_large</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Aros de cebolla</h3><span class="card-price">$5.400</span></div>
+          <p class="card-desc">Rebozado de cerveza, con salsa Brasa.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Porción", "price": 5400}]' aria-label="Añadir Aros de cebolla al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-bebidas">
+        <div class="card-img-container bz-mini" aria-hidden="true"><span class="material-icons-round">local_drink</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Limonada</h3><span class="card-price">$3.200 / $7.800</span></div>
+          <p class="card-desc">Con menta y jengibre.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Vaso", "price": 3200}, {"name": "Jarra", "price": 7800}]' aria-label="Añadir Limonada al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-bebidas">
+        <div class="card-img-container bz-mini" aria-hidden="true"><span class="material-icons-round">sports_bar</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Cerveza tirada</h3><span class="card-price">$4.500</span></div>
+          <p class="card-desc">Rubia o roja, de la canilla.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Pinta", "price": 4500}]' aria-label="Añadir Cerveza tirada al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-postres">
+        <div class="card-img-container bz-mini" aria-hidden="true"><span class="material-icons-round">icecream</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Milkshake</h3><span class="card-price">$5.600 / $5.900</span></div>
+          <p class="card-desc">Vainilla, chocolate o dulce de leche.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Vainilla", "price": 5600}, {"name": "Chocolate", "price": 5600}, {"name": "Dulce de leche", "price": 5900}]' aria-label="Añadir Milkshake al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-postres">
+        <div class="card-img-container bz-mini" aria-hidden="true"><span class="material-icons-round">cookie</span></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Cookie tibia</h3><span class="card-price">$2.900</span></div>
+          <p class="card-desc">Chips de chocolate, sale del horno.</p>
+          <button class="btn-icon-only" data-options='[{"name": "Unidad", "price": 2900}]' aria-label="Añadir Cookie tibia al pedido" data-cursor="SUMAR"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="optionsModal" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
+    <div class="modal-content">
+      <button class="modal-close" data-action="close-options-modal" aria-label="Cerrar">&times;</button>
+      <h3 class="modal-title" id="modalProductTitle">Producto</h3>
+      <div class="modal-options-list" id="modalOptionsContainer"></div>
+      <button class="btn-modal-add" data-action="confirm-options">Añadir al pedido</button>
+    </div>
+  </div>
+  <button class="fab-order" data-action="toggle-order" aria-label="Ver pedido" aria-expanded="false" aria-controls="orderPanel" data-cursor="PEDIDO">
+    <span class="material-icons-round">shopping_bag</span>
+    <span class="fab-badge hidden" id="orderBadge">0</span>
+  </button>
+  <section class="order-panel" id="orderPanel" aria-label="Panel de pedido">
+    <div class="order-header">
+      <h2>Tu pedido</h2>
+      <button class="close-order-btn" data-action="toggle-order" aria-label="Cerrar panel de pedido">&times;</button>
+    </div>
+    <div class="order-items" id="orderItemsContainer"><div class="empty-state">Todavía no elegiste nada.<br>La plancha está prendida.</div></div>
+    <div class="order-footer">
+      <div class="order-total"><span>Total</span><span id="orderTotal">$0</span></div>
+      <p class="order-notice">Mostrá este pedido en la caja.</p>
+    </div>
+  </section>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="bz-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Brasa</b></span>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="locales.html">Locales</a></nav>
+      <span>Sitio de ejemplo · marca ficticia · Librería de Animaciones</span>
+    </div>
+  </footer>
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Brasa · Carta</small></a>
+</body>
+</html>

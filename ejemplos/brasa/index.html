@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brasa · Smash burgers a la parrilla</title>
+  <meta name="description" content="Brasa: hamburguesería de ejemplo. Smash burgers a la parrilla, pan de papa y cheddar que chorrea." />
+  <!-- Tipografía de cartel: Anton (Google Fonts). Texto: Outfit e IBM Plex Mono locales. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="brasa.css" />
+  <script>document.documentElement.classList.add('cf-js', 'bz-js'); if (sessionStorage.getItem('bz-papel')) document.documentElement.classList.add('bz-llegando');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="brasa.js"></script>
+</head>
+<body class="bz">
+  <script src="arte.js"></script>
+  <!-- Papel de envoltorio a cuadros: tapa la pantalla al cambiar de página -->
+  <div class="bz-papel" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#logo"/></svg><span></span></div>
+
+  <header class="cf-nav" data-nav data-solid-after="top">
+    <a class="bz-logo" href="index.html" aria-label="Brasa, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Brasa</b></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html" aria-current="page">Inicio</a>
+      <a href="carta.html">Carta</a>
+      <a href="locales.html">Locales</a>
+    </nav>
+    <a class="cf-nav__cta" href="carta.html">Pedir</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html" aria-current="page">Inicio</a></li>
+      <li><a href="carta.html">Carta</a></li>
+      <li><a href="locales.html">Locales</a></li>
+    </ul></nav>
+    <p>Smash burgers a la parrilla</p>
+  </div>
+
+  <main>
+    <!-- Hero: la hamburguesa se despliega en capas cuando el mouse se acerca; el puntero deja un trazo de salsa (clic: cambia de salsa) -->
+    <section class="bz-hero" data-explota>
+      <canvas class="bz-salsa" data-salsa aria-hidden="true"></canvas>
+      <p class="bz-hero__fondo" aria-hidden="true"><span>Smash</span><span>Brasa</span></p>
+      <div class="bz-hero__texto">
+        <span class="bz-kicker">Hamburguesería · a la parrilla</span>
+        <h1>Aplastada en la plancha, <em>servida al toque</em></h1>
+        <div class="bz-hero__ctas">
+          <a class="bz-btn" href="carta.html" data-imantado>Ver la carta</a>
+          <a class="bz-btn bz-btn--linea" href="#armador" data-imantado>Mirala armarse ↓</a>
+        </div>
+      </div>
+      <div class="bz-hero__burger">
+        <svg class="bz-pila" viewBox="0 250 400 470" role="img" aria-label="Hamburguesa doble con cheddar, panceta y vegetales">
+          <g class="bz-capa" data-etiqueta="Pan de papa tostado"><use href="#pan-base" y="622" width="400" height="80"/></g>
+          <g class="bz-capa" data-etiqueta="Lechuga criolla"><use href="#lechuga" y="598" width="400" height="50"/></g>
+          <g class="bz-capa" data-etiqueta="Medallón smash 110 g"><use href="#carne" y="556" width="400" height="64"/></g>
+          <g class="bz-capa"><use href="#queso" y="546" width="400" height="56"/></g>
+          <g class="bz-capa" data-etiqueta="Doble carne"><use href="#carne" y="502" width="400" height="64"/></g>
+          <g class="bz-capa" data-etiqueta="Cheddar fundido"><use href="#queso" y="492" width="400" height="56"/></g>
+          <g class="bz-capa" data-etiqueta="Panceta crocante"><use href="#panceta" y="470" width="400" height="40"/></g>
+          <g class="bz-capa" data-etiqueta="Tomate"><use href="#tomate" y="450" width="400" height="34"/></g>
+          <g class="bz-capa" data-etiqueta="Cebolla morada"><use href="#cebolla" y="432" width="400" height="30"/></g>
+          <g class="bz-capa" data-etiqueta="Pepinos"><use href="#pepinos" y="416" width="400" height="30"/></g>
+          <g class="bz-capa" data-etiqueta="Salsa Brasa"><use href="#salsa" y="404" width="400" height="30"/></g>
+          <g class="bz-capa" data-etiqueta="Pan con sésamo"><use href="#pan-top" y="268" width="400" height="150"/></g>
+        </svg>
+        <ul class="bz-callouts" aria-hidden="true"></ul>
+      </div>
+      <p class="bz-hero__pista" aria-hidden="true"><b class="bz-solo-mouse"><span data-salsa-nombre>Ketchup</span> · acercá el mouse a la hamburguesa · clic para cambiar de salsa</b><b class="bz-solo-tactil">Tocá la hamburguesa para abrirla</b></p>
+    </section>
+
+    <!-- Cinta que corre; la velocidad del scroll la inclina y la acelera -->
+    <div class="bz-cinta" data-cinta aria-hidden="true">
+      <div class="bz-cinta__riel"><span>Smash</span><i>✺</i><span>Doble cheddar</span><i>✺</i><span>Pan de papa</span><i>✺</i><span>Papas con piel</span><i>✺</i><span>Salsa Brasa</span><i>✺</i><span>Smash</span><i>✺</i><span>Doble cheddar</span><i>✺</i><span>Pan de papa</span><i>✺</i><span>Papas con piel</span><i>✺</i><span>Salsa Brasa</span><i>✺</i></div>
+    </div>
+
+    <section class="cf-overview">
+      <span class="bz-kicker">La casa</span>
+      <p class="cf-overview__text" data-lines>Bolita de carne sobre la plancha a 250 grados, la espátula que la aplasta, el borde que se pone crocante y el cheddar que se derrite antes de que cierre el pan. Eso es todo. Lo hacemos así cada vez.</p>
+    </section>
+
+    <!-- El armador: escena sticky. Con el scroll caen los ingredientes y el ticket se completa -->
+    <section class="bz-armador" id="armador" data-armador aria-labelledby="t-armador">
+      <div class="bz-armador__fijo">
+        <div class="bz-armador__intro">
+          <span class="bz-kicker">Seguí bajando</span>
+          <h2 id="t-armador">Mirala <em>armarse</em></h2>
+        </div>
+        <div class="bz-armador__escena">
+          <span class="bz-armador__tabla" aria-hidden="true"></span>
+          <svg class="bz-pila" viewBox="0 150 400 570" role="img" aria-label="La Doble Brasa, capa por capa">
+            <g class="bz-cae" data-paso="0"><use href="#pan-base" y="622" width="400" height="80"/></g>
+            <g class="bz-cae" data-paso="1"><use href="#lechuga" y="598" width="400" height="50"/></g>
+            <g class="bz-cae" data-paso="2" data-peso="1"><use href="#carne" y="556" width="400" height="64"/></g>
+            <g class="bz-cae" data-paso="3" data-derrite><use href="#queso" y="546" width="400" height="56"/></g>
+            <g class="bz-cae" data-paso="4" data-peso="1"><use href="#carne" y="502" width="400" height="64"/></g>
+            <g class="bz-cae" data-paso="5" data-derrite><use href="#queso" y="492" width="400" height="56"/></g>
+            <g class="bz-cae" data-paso="6"><use href="#panceta" y="470" width="400" height="40"/></g>
+            <g class="bz-cae" data-paso="7"><use href="#tomate" y="450" width="400" height="34"/></g>
+            <g class="bz-cae" data-paso="8"><use href="#cebolla" y="432" width="400" height="30"/></g>
+            <g class="bz-cae" data-paso="9"><use href="#pepinos" y="416" width="400" height="30"/></g>
+            <g class="bz-cae" data-paso="10" data-chorrea><use href="#salsa" y="404" width="400" height="30"/></g>
+            <g class="bz-cae" data-paso="11" data-peso="1"><use href="#pan-top" y="268" width="400" height="150"/></g>
+            <g class="bz-cae" data-paso="12" data-clava><use href="#palillo" x="214" y="170" width="72" height="132"/></g>
+          </svg>
+          <span class="bz-sello" aria-hidden="true">¡Lista!</span>
+        </div>
+
+        <!-- Ticket de cocina: cada línea se marca cuando su ingrediente aterriza -->
+        <aside class="bz-ticket" aria-label="Ticket de la Doble Brasa">
+          <header class="bz-ticket__head">
+            <span>Comanda <b>#0427</b></span>
+            <span data-estado>Esperando el pan…</span>
+          </header>
+          <h3>Doble Brasa</h3>
+          <div class="bz-ticket__barra" aria-hidden="true"><i data-barra></i></div>
+          <ol class="bz-ticket__lineas">
+            <li data-linea="0"><span>Pan de papa (base)</span><b>$1.200</b><small>180 kcal</small></li>
+            <li data-linea="1"><span>Lechuga criolla</span><b>$300</b><small>5 kcal</small></li>
+            <li data-linea="2"><span>Medallón smash 110 g</span><b>$3.400</b><small>290 kcal</small></li>
+            <li data-linea="3"><span>Cheddar</span><b>$700</b><small>80 kcal</small></li>
+            <li data-linea="4"><span>Segundo medallón</span><b>$3.400</b><small>290 kcal</small></li>
+            <li data-linea="5"><span>Más cheddar</span><b>$700</b><small>80 kcal</small></li>
+            <li data-linea="6"><span>Panceta crocante</span><b>$1.100</b><small>120 kcal</small></li>
+            <li data-linea="7"><span>Tomate</span><b>$300</b><small>6 kcal</small></li>
+            <li data-linea="8"><span>Cebolla morada</span><b>$200</b><small>8 kcal</small></li>
+            <li data-linea="9"><span>Pepinos</span><b>$200</b><small>3 kcal</small></li>
+            <li data-linea="10"><span>Salsa Brasa</span><b>$300</b><small>60 kcal</small></li>
+            <li data-linea="11"><span>Pan con sésamo</span><b>$0</b><small>170 kcal</small></li>
+          </ol>
+          <footer class="bz-ticket__pie">
+            <span>Total</span><b data-total>$11.800</b>
+            <small><span data-kcal>1.292</span> kcal · <span data-cuenta>12</span>/12 capas</small>
+          </footer>
+          <a class="bz-btn bz-ticket__cta" href="carta.html" data-imantado>Pedila en la carta</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Tarjetas-acordeón por scroll (del "Scroll de agencia", vía cafeteria-ejemplo) -->
+    <section class="cf-features" aria-labelledby="t-casa">
+      <span class="bz-kicker">Las de la casa</span>
+      <h2 class="cf-features__title" id="t-casa" data-words>Cuatro que no fallan</h2>
+      <ol class="cf-items" data-items>
+        <li class="cf-item is-open" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg bz-item-arte" aria-hidden="true" data-item-bg><svg viewBox="0 300 400 420"><use href="#pan-base" y="622" width="400" height="80"/><use href="#carne" y="560" width="400" height="64"/><use href="#queso" y="548" width="400" height="56"/><use href="#carne" y="506" width="400" height="64"/><use href="#queso" y="494" width="400" height="56"/><use href="#pan-top" y="352" width="400" height="150"/></svg></span>
+          <div class="cf-item__head"><h3>Doble Brasa</h3><span class="cf-item__num">01</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Dos medallones smash, doble cheddar, panceta y salsa Brasa en pan de papa. La que se arma arriba.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg bz-item-arte" aria-hidden="true" data-item-bg><svg viewBox="0 300 400 420"><use href="#pan-base" y="622" width="400" height="80"/><use href="#carne" y="560" width="400" height="64"/><use href="#queso" y="548" width="400" height="56"/><use href="#cebolla" y="530" width="400" height="30"/><use href="#pan-top" y="394" width="400" height="150"/></svg></span>
+          <div class="cf-item__head"><h3>Clásica de plancha</h3><span class="cf-item__num">02</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Un medallón, cheddar y cebolla que se cocina debajo de la carne mientras se aplasta. Simple, como en los carritos.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg bz-item-arte" aria-hidden="true" data-item-bg><svg viewBox="0 300 400 420"><use href="#pan-base" y="622" width="400" height="80"/><use href="#lechuga" y="600" width="400" height="50"/><use href="#carne" y="560" width="400" height="64"/><use href="#tomate" y="540" width="400" height="34"/><use href="#pepinos" y="522" width="400" height="30"/><use href="#pan-top" y="386" width="400" height="150"/></svg></span>
+          <div class="cf-item__head"><h3>Verde</h3><span class="cf-item__num">03</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Medallón de garbanzos y remolacha, lechuga, tomate y pepinos. También sale sin queso.</p>
+          </div></div>
+        </li>
+        <li class="cf-item" data-item>
+          <span class="cf-item__fill" aria-hidden="true"></span>
+          <span class="cf-item__bg bz-item-arte" aria-hidden="true" data-item-bg><svg viewBox="0 300 400 420"><use href="#pan-base" y="622" width="400" height="80"/><use href="#carne" y="560" width="400" height="64"/><use href="#queso" y="548" width="400" height="56"/><use href="#panceta" y="526" width="400" height="40"/><use href="#salsa" y="514" width="400" height="30"/><use href="#pan-top" y="378" width="400" height="150"/></svg></span>
+          <div class="cf-item__head"><h3>Panceta &amp; barbacoa</h3><span class="cf-item__num">04</span></div>
+          <div class="cf-item__acc"><div class="cf-item__content">
+            <p>Medallón, cheddar, panceta crocante y barbacoa ahumada de la casa.</p>
+            <a class="cf-more" href="carta.html">Ver la carta completa <span aria-hidden="true">→</span></a>
+          </div></div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Tarjetas oscuras en dos columnas (cafeteria-ejemplo) + calor que sigue al puntero -->
+    <section class="cf-work">
+      <div class="cf-work__inner">
+        <span class="bz-kicker">Para acompañar</span>
+        <h2 data-words>Lo que va al costado</h2>
+        <div class="cf-cards">
+          <a class="cf-card" href="carta.html" data-card data-calor>
+            <div class="cf-card__img bz-card-arte bz-card-arte--papas" aria-hidden="true"><span class="cf-card__tag">Siempre</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <h3>Papas con piel</h3><p>Cortadas a mano, doble cocción, sal gruesa. Con cheddar y panceta si querés.</p>
+          </a>
+          <a class="cf-card" href="carta.html" data-card data-calor>
+            <div class="cf-card__img bz-card-arte bz-card-arte--aros" aria-hidden="true"><span class="cf-card__tag">Crocantes</span><i></i><i></i><i></i><i></i></div>
+            <h3>Aros de cebolla</h3><p>Rebozado de cerveza. Vienen con salsa Brasa para mojar.</p>
+          </a>
+          <a class="cf-card" href="carta.html" data-card data-calor>
+            <div class="cf-card__img bz-card-arte bz-card-arte--shake" aria-hidden="true"><span class="cf-card__tag">Frío</span><i></i></div>
+            <h3>Milkshakes</h3><p>Vainilla, chocolate o dulce de leche. Espesos, con sorbete de papel.</p>
+          </a>
+          <a class="cf-card" href="carta.html" data-card data-calor>
+            <div class="cf-card__img bz-card-arte bz-card-arte--salsas" aria-hidden="true"><span class="cf-card__tag">Gratis</span><i></i><i></i><i></i></div>
+            <h3>Barra de salsas</h3><p>Ketchup, mostaza, barbacoa, alioli y la salsa Brasa. Servite las que quieras.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>Tenemos la plancha prendida</h2>
+      <p class="cf-fade">Tres locales, todos los días desde el mediodía.</p>
+      <a class="cf-btn cf-fade" href="locales.html" data-imantado>Ver locales <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="bz-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Brasa</b></span>
+      <nav aria-label="Pie"><a href="carta.html">Carta</a><a href="locales.html">Locales</a></nav>
+      <span>Sitio de ejemplo · marca ficticia · Librería de Animaciones</span>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Brasa · hamburguesería</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo multi-page (Inicio, Carta, Locales) para una marca ficticia</span><span>Componentes de la cafetería de ejemplo + carta con pedido + acordeón horizontal + cursor invertido</span><span>GSAP + ScrollTrigger · SVG · Canvas 2D</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Nuevo en esta página</h3>
+          <ul>
+            <li><strong>El armador</strong> (<code>[data-armador]</code>): escena <code>position: sticky</code> (sin pin, así funciona igual en el teléfono) con una línea de tiempo de GSAP atada al scroll. Cada ingrediente cae desde arriba con rebote (los pesados con <code>bounce.out</code>), el cheddar se estira al derretirse, la tapa aplasta la pila y el palillo se clava. El ticket de cocina lee <code>tl.time()</code> y marca cada línea cuando su capa aterriza, suma precio y calorías y llena la barra.</li>
+            <li><strong>Hamburguesa que se despliega</strong> (<code>[data-explota]</code>): al acercar el mouse, las capas se separan en vista explotada (más cuanto más cerca), se inclinan según la posición del puntero y aparecen las etiquetas de cada ingrediente. En pantallas táctiles, un toque la abre y la cierra.</li>
+            <li><strong>Trazo de salsa</strong> (<code>[data-salsa]</code>): un canvas sobre el hero dibuja la estela del puntero como salsa espesa que gotea y se seca. Clic: ketchup → mostaza → barbacoa.</li>
+            <li><strong>Botones imantados</strong> (<code>[data-imantado]</code>), <strong>calor</strong> que sigue al puntero sobre las tarjetas (<code>[data-calor]</code>) y la <strong>cinta</strong> que se inclina y acelera con la velocidad del scroll (<code>[data-cinta]</code>).</li>
+            <li><strong>Papel de envoltorio</strong> a cuadros entre páginas (<code>.bz-papel</code>, como el telón de Cuento).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>De la librería</h3>
+          <ul>
+            <li><code>cafeteria-ejemplo/shared</code>: menú con barra que se esconde, títulos por palabras, párrafo por líneas, tarjetas-acordeón por scroll y tarjetas en dos columnas con parallax.</li>
+            <li>Carta: <code>menu-carta-pedidos</code> (filtros de dos niveles, opciones y pedido) + <code>cursor-invertido</code>.</li>
+            <li>Locales: <code>acordeon-horizontal</code> con FLIP, más una parrilla con ingredientes que se arrastran y se tiran (física propia, nueva).</li>
+            <li>Ilustraciones en un solo sprite (<code>arte.js</code>), con bordes y semillas generados con azar con semilla. Sin fotos: se reemplazan por fotos reales del producto.</li>
+            <li>Con <code>prefers-reduced-motion</code> o sin GSAP, la hamburguesa queda armada, el ticket completo y no hay estela.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Brasa</small></a>
+</body>
+</html>

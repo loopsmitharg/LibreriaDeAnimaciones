@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Locales · Brasa</title>
+  <meta name="description" content="Brasa: hamburguesería de ejemplo. Tres locales, todos los días desde el mediodía." />
+  <!-- Tipografía de cartel: Anton (Google Fonts). Texto: Outfit e IBM Plex Mono locales. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="../../animaciones/acordeon-horizontal/style.css" />
+  <link rel="stylesheet" href="brasa.css" />
+  <script>document.documentElement.classList.add('cf-js', 'bz-js'); if (sessionStorage.getItem('bz-papel')) document.documentElement.classList.add('bz-llegando');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="../../animaciones/acordeon-horizontal/script.js"></script>
+  <script defer src="brasa.js"></script>
+</head>
+<body class="bz">
+  <script src="arte.js"></script>
+  <div class="bz-papel" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#logo"/></svg><span></span></div>
+
+  <header class="cf-nav" data-nav data-solid-after="top">
+    <a class="bz-logo" href="index.html" aria-label="Brasa, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Brasa</b></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="carta.html">Carta</a>
+      <a href="locales.html" aria-current="page">Locales</a>
+    </nav>
+    <a class="cf-nav__cta" href="carta.html">Pedir</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="carta.html">Carta</a></li>
+      <li><a href="locales.html" aria-current="page">Locales</a></li>
+    </ul></nav>
+    <p>Smash burgers a la parrilla</p>
+  </div>
+
+  <main>
+    <!-- Acordeón horizontal con FLIP (animaciones/acordeon-horizontal): un local por tarjeta -->
+    <section class="services" style="padding-top:clamp(7rem,14vh,9rem)">
+      <div class="services__inner">
+        <div class="services__heading">
+          <span class="kicker">Locales</span>
+          <h1 data-words>Tres planchas</h1>
+          <p>Pasá el mouse por cada local (o navegá con Tab). En el teléfono quedan como lista.</p>
+        </div>
+        <div class="services-accordion">
+          <article class="service-accordion__item is-active" tabindex="0" aria-expanded="true">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">place</span><i></i><span class="material-icons-round">outdoor_grill</span></div>
+            <div class="service-accordion__copy"><span class="bz-local-num">Local 01</span><h3>Centro</h3><p><span class="bz-local-dir">Dirección de ejemplo 1234</span>Todos los días de 12 a 0 h. Barra al paso y mesas en la vereda.</p><a class="service-card__more" href="carta.html">Ver la carta <span class="material-icons-round">north_east</span></a></div>
+          </article>
+          <article class="service-accordion__item" tabindex="0" aria-expanded="false">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">place</span><i></i><span class="material-icons-round">deck</span></div>
+            <div class="service-accordion__copy"><span class="bz-local-num">Local 02</span><h3>Parque</h3><p><span class="bz-local-dir">Dirección de ejemplo 567</span>Todos los días de 12 a 1 h. Patio con parrilla a la vista y cerveza tirada.</p><a class="service-card__more" href="carta.html">Ver la carta <span class="material-icons-round">north_east</span></a></div>
+          </article>
+          <article class="service-accordion__item" tabindex="0" aria-expanded="false">
+            <div class="service-accordion__signal" aria-hidden="true"><span class="material-icons-round">place</span><i></i><span class="material-icons-round">delivery_dining</span></div>
+            <div class="service-accordion__copy"><span class="bz-local-num">Local 03</span><h3>Estación</h3><p><span class="bz-local-dir">Dirección de ejemplo 89</span>De lunes a sábado de 11 a 23 h. Solo para llevar: pedís, esperás tres minutos y te vas.</p><a class="service-card__more" href="carta.html">Ver la carta <span class="material-icons-round">north_east</span></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- La parrilla: fichas de ingredientes con física propia (arrastrar, tirar, empujar) -->
+    <section class="bz-parrilla-sec" aria-labelledby="t-parrilla">
+      <div class="bz-parrilla-sec__head">
+        <div>
+          <span class="bz-kicker" style="color:var(--mostaza)">Mientras esperás</span>
+          <h2 id="t-parrilla">Jugá con <em>la parrilla</em></h2>
+        </div>
+        <p>Agarrá un ingrediente y tiralo. Pasá el mouse rápido por encima y los empujás como con la espátula.</p>
+      </div>
+      <div class="bz-parrilla" data-parrilla>
+        <div class="bz-ficha" data-r="64"><svg viewBox="0 0 400 150"><use href="#pan-top" width="400" height="150"/></svg><b>Pan</b></div>
+        <div class="bz-ficha" data-r="58"><svg viewBox="0 0 400 64"><use href="#carne" width="400" height="64"/></svg><b>Carne</b></div>
+        <div class="bz-ficha" data-r="58"><svg viewBox="0 0 400 64"><use href="#carne" width="400" height="64"/></svg><b>Carne</b></div>
+        <div class="bz-ficha" data-r="50"><svg viewBox="0 0 400 56"><use href="#queso" width="400" height="56"/></svg><b>Cheddar</b></div>
+        <div class="bz-ficha" data-r="50"><svg viewBox="0 0 400 56"><use href="#queso" width="400" height="56"/></svg><b>Cheddar</b></div>
+        <div class="bz-ficha" data-r="46"><svg viewBox="0 0 400 34"><use href="#tomate" width="400" height="34"/></svg><b>Tomate</b></div>
+        <div class="bz-ficha" data-r="46"><svg viewBox="0 0 400 50"><use href="#lechuga" width="400" height="50"/></svg><b>Lechuga</b></div>
+        <div class="bz-ficha" data-r="44"><svg viewBox="0 0 400 30"><use href="#cebolla" width="400" height="30"/></svg><b>Cebolla</b></div>
+        <div class="bz-ficha" data-r="44"><svg viewBox="0 0 400 40"><use href="#panceta" width="400" height="40"/></svg><b>Panceta</b></div>
+        <div class="bz-ficha" data-r="40"><svg viewBox="0 0 400 30"><use href="#pepinos" width="400" height="30"/></svg><b>Pepinos</b></div>
+        <div class="bz-ficha" data-r="54"><svg viewBox="0 0 400 80"><use href="#pan-base" width="400" height="80"/></svg><b>Pan</b></div>
+        <div class="bz-ficha" data-r="40"><svg viewBox="0 0 400 30"><use href="#salsa" width="400" height="30"/></svg><b>Salsa</b></div>
+      </div>
+      <p class="bz-parrilla-sec__pista">Funciona con mouse y con el dedo.</p>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>¿Ya sabés qué pedir?</h2>
+      <a class="cf-btn cf-fade" href="carta.html" data-imantado>Ir a la carta <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="bz-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Brasa</b></span>
+      <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="carta.html">Carta</a></nav>
+      <span>Sitio de ejemplo · marca ficticia · Librería de Animaciones</span>
+    </div>
+  </footer>
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Brasa · Locales</small></a>
+</body>
+</html>
