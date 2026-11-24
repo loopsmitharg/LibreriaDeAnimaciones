@@ -1,0 +1,244 @@
+/* ==========================================================================
+   Granel · almacén natural y dietética (marca ficticia) — one-page
+   Piezas de la librería:
+     animaciones/cafeteria-ejemplo/shared  menú, títulos por palabras/líneas, fundidos, visita, cierre
+     animaciones/scroll-horizontal         pasillos (su script; los estilos están acá, adaptados)
+     animaciones/menu-carta-pedidos        productos por peso + bolsa
+     animaciones/titulos-sticky            "Cómo se compra a granel"
+     ejemplos/brasa                        armador (frasco), física, cinta, imantados
+   Paleta: papel kraft, verde oliva, salvia, terracota y tinta.
+   ========================================================================== */
+:root {
+  --kraft: #efe3cc;
+  --kraft-2: #e3d2b2;
+  --papel: #faf5ea;
+  --oliva: #4f6b2f;
+  --oliva-2: #3b5222;
+  --salvia: #a8b97e;
+  --terracota: #c8643b;
+  --tinta: #2b2a1f;
+  --gris: #6f6a58;
+  --linea: rgba(43, 42, 31, .14);
+  --titulo: "Fraunces", "Playfair Display", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* cafe.css */
+  --cream: var(--kraft); --paper: var(--papel); --ink: var(--tinta); --espresso: var(--oliva-2); --roast: var(--oliva);
+  --caramel: var(--terracota); --muted: var(--gris); --closed: var(--kraft-2); --serif: var(--titulo);
+  --c3-ink: var(--papel); --c3-accent: var(--salvia);
+  /* titulos-sticky */
+  --color-bg: var(--papel); --color-text: var(--tinta); --color-text-muted: var(--gris); --color-accent: var(--oliva);
+  --color-border: var(--linea); --nav-height: 4.6rem;
+  /* menu-carta-pedidos */
+  --bg-cream: var(--papel); --bg-beige: var(--kraft); --wood-dark: var(--tinta); --wood-light: var(--gris);
+  --gold: var(--oliva); --white: #fffdf7; --white-pink: var(--kraft); --border-light: var(--linea); --bg-light-gray: var(--kraft);
+  --text-secondary: var(--gris); --gold-tint: rgba(79, 107, 47, .1); --gold-glow: rgba(79, 107, 47, .3);
+  --glass-bg: rgba(250, 245, 234, .88); --glass-pills-bg: rgba(255, 253, 247, .9); --glass-pills-border: var(--linea);
+  --panel-bg: rgba(255, 253, 247, .98); --card-shadow: 0 0 0 1px var(--linea); --card-shadow-hover: 0 0 0 1px var(--oliva), 0 18px 36px rgba(59, 82, 34, .14);
+  --header-h: 4.6rem;
+}
+html, body { background: var(--papel); color: var(--tinta); }
+/* scroll-behavior: auto (titulos-sticky trae smooth): con smooth, ScrollTrigger mide mal al refrescar. Las anclas se animan por JS. */
+html { overflow-x: clip; scroll-behavior: auto; scroll-padding-top: 4.6rem; }
+body.gr { font-family: "Outfit", system-ui, sans-serif; }
+.gr ::selection { background: var(--salvia); color: var(--tinta); }
+.gr-kicker { display: block; margin: 0 0 1rem; color: var(--oliva); font: 500 .74rem/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; }
+.gr-h2, .gr .cf-outro h2, .gr .menu-hero .gr-h2 { font: 500 clamp(2.4rem, 5.6vw, 4.8rem)/1 var(--titulo); letter-spacing: -.02em; }
+
+/* ---------- Logo y navegación ---------- */
+.gr-logo { display: inline-flex; align-items: center; gap: .5rem; color: var(--oliva-2); text-decoration: none; }
+.gr-logo svg { width: 2.3rem; height: 2.3rem; flex: none; }
+.gr-logo b { font: 700 1.6rem/1 var(--titulo); letter-spacing: -.02em; }
+.gr-logo small { margin-left: .2rem; color: var(--gris); font: 500 .58rem/1.2 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.cf-footer .gr-logo { color: var(--papel); --logo-hoja: var(--salvia); }
+.gr .cf-nav { color: var(--tinta); padding-block: .6rem; }
+.gr .cf-nav.is-solid { background: rgba(250, 245, 234, .9); }
+.gr .cf-nav__links a { font: 500 .95rem/1 "Outfit", sans-serif; }
+.gr .cf-nav__cta, .gr .cf-burger { background: var(--oliva); color: var(--papel); }
+.gr .cf-drawer { background: var(--oliva-2); color: var(--papel); }
+.gr .cf-drawer li a { font: 500 clamp(2.8rem, 13vw, 4.4rem)/1.1 var(--titulo); }
+.gr .cf-drawer p { color: rgba(250, 245, 234, .75); }
+@media (max-width: 760px) { .gr .cf-nav.is-open, .gr .cf-nav.is-open .gr-logo { color: var(--papel); } .gr .cf-nav.is-open .cf-burger { background: var(--papel); color: var(--oliva-2); } .gr-logo small { display: none; } }
+
+/* ---------- Botones ---------- */
+.gr-btn, .gr .cf-btn { display: inline-flex; align-items: center; gap: .6rem; padding: .95rem 1.4rem; border: 1.5px solid var(--oliva-2); border-radius: 999px; background: var(--oliva); color: var(--papel); text-decoration: none; font: 600 .95rem/1 "Outfit", sans-serif; transition: translate .45s cubic-bezier(.22, 1, .36, 1), background-color .25s ease; }
+.gr-btn:hover, .gr .cf-btn:hover { background: var(--oliva-2); transform: none; }
+.gr-btn--linea { background: transparent; color: var(--oliva-2); }
+.gr-btn--linea:hover { background: var(--kraft); }
+.gr .cf-outro .cf-btn { background: var(--papel); color: var(--oliva-2); border-color: var(--papel); }
+
+/* ---------- Frascos (comunes) ---------- */
+.gr-frasco { display: block; overflow: visible; }
+.gr-frasco__cont { transition: transform .7s cubic-bezier(.34, 1.56, .64, 1); }
+
+/* ---------- Hero ---------- */
+.gr-hero { position: relative; height: 100vh; height: 100svh; min-height: 40rem; display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 2rem; padding: 5rem clamp(1.25rem, 5vw, 5rem) 7.5rem; overflow: clip;
+  background: radial-gradient(60% 60% at 75% 40%, #fbf4e4 0%, transparent 70%), var(--kraft); }
+.gr-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .35 0 0 0 0 .2 0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.gr-hero__texto { position: relative; z-index: 3; }
+.gr-hero h1 { margin: 0; max-width: 6.5em; text-wrap: balance; font: 500 clamp(3.2rem, 7.4vw, 7rem)/.95 var(--titulo); letter-spacing: -.035em; color: var(--oliva-2); }
+.gr-hero__texto > p { max-width: 38ch; margin: 1.4rem 0 0; color: #4c4838; font-size: 1.08rem; line-height: 1.6; }
+.gr-hero__ctas { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+.gr-estante { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: center; gap: 0; height: min(52vh, 28rem); perspective: 900px; }
+.gr-estante .gr-frasco { height: 100%; width: auto; filter: drop-shadow(0 18px 18px rgba(80, 60, 20, .18)); transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
+.gr-estante__f1 { height: 100% !important; margin-right: -3rem; }
+.gr-estante__f2 { height: 76% !important; margin-right: -2.2rem; position: relative; z-index: 1; }
+.gr-estante__f3 { height: 88% !important; }
+.gr-estante__tabla { position: absolute; left: -6%; right: -6%; bottom: -.9rem; height: 1rem; border-radius: .3rem; background: linear-gradient(#a7804f, #7d5c33); box-shadow: 0 12px 20px rgba(80, 60, 20, .25); }
+.gr-hero__pista { position: absolute; z-index: 3; right: clamp(1.25rem, 5vw, 5rem); bottom: 1.2rem; margin: 0; color: var(--gris); font: 500 .66rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+/* Pila de frutos secos: el contenedor no captura el puntero; cada fruto sí. */
+.gr-pila { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 46%; pointer-events: none; }
+.gr-suelto { position: absolute; top: 0; left: 0; display: block; pointer-events: auto; cursor: grab; touch-action: none; user-select: none; will-change: transform; filter: drop-shadow(0 4px 3px rgba(60, 40, 10, .3)); }
+.gr-suelto:active { cursor: grabbing; }
+.gr-suelto svg { display: block; width: 100%; height: 100%; pointer-events: none; }
+/* Sin JS (o movimiento reducido): una fila quieta al pie del hero. */
+.gr-pila:not(.is-viva) { display: flex; flex-wrap: wrap; align-content: flex-end; justify-content: center; gap: .2rem; padding: 0 1rem .5rem; overflow: hidden; }
+.gr-pila:not(.is-viva) .gr-suelto { position: relative; width: 2.6rem; height: 2.6rem; }
+@media (max-width: 900px) {
+  .gr-hero { grid-template-columns: 1fr; height: auto; min-height: 100svh; padding-top: 6.5rem; padding-bottom: 8rem; }
+  .gr-estante { height: 15rem; }
+  .gr-pila { height: 30%; }
+}
+
+/* ---------- Cinta ---------- */
+.gr-cinta { position: relative; z-index: 4; overflow: clip; padding: .9rem 0; background: var(--oliva); color: var(--papel); }
+.gr-cinta__riel { display: flex; width: max-content; gap: 1.4rem; align-items: center; font: italic 500 clamp(1.6rem, 3.4vw, 2.6rem)/1 var(--titulo); animation: gr-cinta 30s linear infinite; }
+.gr-cinta__riel i { color: var(--salvia); font-style: normal; font-size: .7em; }
+@keyframes gr-cinta { to { transform: translateX(-50%); } }
+.gr-cinta.is-js .gr-cinta__riel { animation: none; }
+
+.gr .cf-overview__text { font: 500 clamp(1.4rem, 2.6vw, 2.1rem)/1.3 var(--titulo); letter-spacing: -.01em; }
+
+/* ---------- Pasillos (estilos de animaciones/scroll-horizontal, en kraft) ---------- */
+.projects { position: relative; height: 100svh; min-height: 38rem; overflow: hidden; background: var(--oliva-2); color: var(--papel); }
+.projects__topline { position: absolute; z-index: 5; top: 0; right: 0; left: 0; height: 4.25rem; display: flex; justify-content: space-between; align-items: center; padding: 0 clamp(1rem, 3vw, 3rem); border-bottom: 1px solid rgba(250, 245, 234, .18); color: rgba(250, 245, 234, .7); font: 500 .66rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.projects__hint { color: var(--salvia); }
+.projects__track { height: 100%; display: flex; width: max-content; padding-top: 4.25rem; will-change: transform; }
+.project { position: relative; display: block; width: min(72vw, 64rem); height: calc(100svh - 4.25rem); min-height: 33rem; flex: none; overflow: hidden; border-right: 1px solid rgba(250, 245, 234, .16); }
+.project__index { position: absolute; top: 2rem; left: 2rem; color: var(--salvia); font: 500 1rem/1 var(--mono); }
+.project__caption { position: absolute; left: clamp(1.5rem, 4vw, 4rem); bottom: clamp(2.5rem, 6vw, 5rem); width: min(26rem, 46%); }
+.project__caption h3 { margin: 0; font: 500 clamp(3rem, 6vw, 6rem)/.9 var(--titulo); letter-spacing: -.03em; }
+.project__caption p { margin: 1.2rem 0 1.6rem; color: rgba(250, 245, 234, .8); font-size: 1rem; line-height: 1.55; }
+.arrow-link { color: var(--salvia); font: 500 .8rem/1 var(--mono); letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.project--intro { width: min(46vw, 40rem); display: flex; flex-direction: column; justify-content: center; padding: clamp(1rem, 3vw, 3rem); background: var(--oliva-2); }
+.project--intro h2 { margin: 0; font: italic 500 clamp(5rem, 10vw, 10rem)/.85 var(--titulo); writing-mode: vertical-rl; transform: rotate(180deg); color: var(--salvia); }
+.project--intro p { position: absolute; right: clamp(1rem, 3vw, 3rem); bottom: 8rem; width: 16rem; margin: 0; color: rgba(250, 245, 234, .8); line-height: 1.55; }
+.project--intro > span { position: absolute; right: clamp(1rem, 3vw, 3rem); bottom: 3rem; color: var(--salvia); font: 500 .66rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.projects__progress { position: absolute; z-index: 7; right: clamp(1rem, 3vw, 3rem); bottom: 1rem; left: clamp(1rem, 3vw, 3rem); height: 2px; background: rgba(250, 245, 234, .2); }
+.projects__progress span { display: block; width: 100%; height: 100%; background: var(--salvia); transform: scaleX(0); transform-origin: left; }
+@media (min-width: 781px) { body:not(.motion-on) .projects { overflow-x: auto; } }
+/* Cada pasillo: un color de góndola y dos frascos */
+.gr-pasillo--a { background: #5d4127; } .gr-pasillo--b { background: #3e4a3a; } .gr-pasillo--c { background: #8a7552; }
+.gr-pasillo--d { background: #6b3f24; } .gr-pasillo--e { background: #7a2f1f; }
+.gr-pasillo__arte { position: absolute; right: 4%; bottom: 3.5rem; width: 44%; display: flex; align-items: flex-end; justify-content: center; }
+.gr-pasillo__arte .gr-frasco { width: 58%; height: auto; max-height: calc(100svh - 12rem); filter: drop-shadow(0 20px 20px rgba(0, 0, 0, .35)); }
+.gr-pasillo__arte .gr-frasco.is-chico { width: 40%; margin-left: -1.5rem; }
+.gr-pasillo__arte::after { content: ""; position: absolute; left: -10%; right: -10%; bottom: -1rem; height: .9rem; border-radius: .3rem; background: rgba(0, 0, 0, .3); }
+@media (max-width: 780px) {
+  .projects { height: auto; min-height: 0; overflow: visible; padding-top: 4.25rem; }
+  .projects__hint, .projects__progress { display: none; }
+  .projects__track { width: auto; height: auto; display: block; padding: 0; }
+  .project, .project--intro { width: 100%; height: 74svh; min-height: 30rem; border-right: 0; border-bottom: 1px solid rgba(250, 245, 234, .16); }
+  .project--intro { height: 50svh; min-height: 22rem; }
+  .project--intro h2 { font-size: clamp(4rem, 22vw, 7rem); writing-mode: initial; transform: none; }
+  .project--intro p { left: clamp(1rem, 3vw, 3rem); bottom: 6rem; width: auto; }
+  .project__caption { width: auto; right: clamp(1.5rem, 4vw, 4rem); bottom: 2rem; }
+  .project__caption h3 { font-size: clamp(2.8rem, 13vw, 4rem); }
+  .gr-pasillo__arte { top: 3.5rem; bottom: auto; width: min(80%, 20rem); right: 50%; translate: 50% 0; }
+  .gr-pasillo__arte .gr-frasco { max-height: 34svh; width: auto; }
+  .gr-pasillo__arte .gr-frasco.is-chico { max-height: 24svh; width: auto; }
+}
+
+/* ---------- El mix (frasco que se llena) ---------- */
+.gr-mix { position: relative; height: 560vh; background: var(--papel); }
+.gr-mix__fijo { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; grid-template-columns: 1fr min(22rem, 32vw); grid-template-rows: auto minmax(0, 1fr); gap: 0 clamp(1.5rem, 4vw, 4rem); padding: 5.4rem clamp(1.25rem, 5vw, 5rem) 1.6rem; overflow: clip;
+  background: radial-gradient(50% 55% at 35% 65%, #fff 0%, transparent 70%), var(--papel); }
+.gr-mix__intro h2 { margin: 0; font: 500 clamp(2.2rem, 4.6vw, 4.2rem)/.98 var(--titulo); letter-spacing: -.03em; color: var(--oliva-2); }
+.gr-mix__intro h2 em { color: var(--terracota); }
+.gr-mix__escena { position: relative; grid-column: 1; grid-row: 2; display: flex; align-items: flex-end; justify-content: center; gap: clamp(1rem, 4vw, 4rem); min-height: 0; }
+.gr-mix__frasco { height: 100%; max-height: 74vh; width: auto; overflow: visible; filter: drop-shadow(0 24px 24px rgba(80, 60, 20, .18)); }
+.gr-balanza { flex: none; align-self: flex-end; display: grid; justify-items: center; width: clamp(8rem, 14vw, 11rem); padding: .8rem .8rem 1rem; border: 1.5px solid var(--tinta); border-radius: 1rem 1rem .6rem .6rem; background: #fffdf7; color: var(--tinta); box-shadow: 0 10px 0 var(--kraft-2); }
+.gr-balanza svg { width: 100%; height: auto; }
+.gr-balanza b { font: 500 1.1rem/1 var(--mono); font-variant-numeric: tabular-nums; }
+/* Etiqueta kraft colgada del frasco */
+.gr-etiqueta { grid-column: 2; grid-row: 1 / 3; align-self: center; position: relative; display: grid; gap: .8rem; padding: 2.4rem 1.4rem 1.6rem; border-radius: .4rem 2.4rem .4rem .4rem; background: var(--kraft); color: var(--tinta); transform: rotate(-2deg); box-shadow: 0 20px 40px rgba(80, 60, 20, .18);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .35 0 0 0 0 .2 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.gr-etiqueta__ojal { position: absolute; top: .9rem; right: 1.4rem; width: .9rem; height: .9rem; border-radius: 50%; background: var(--papel); box-shadow: inset 0 0 0 2px var(--kraft-2); }
+.gr-etiqueta header { display: grid; gap: .3rem; padding-bottom: .7rem; border-bottom: 1.5px dashed rgba(43, 42, 31, .35); }
+.gr-etiqueta header span { font: 500 clamp(1.5rem, 2.2vw, 2rem)/1 var(--titulo); color: var(--oliva-2); }
+.gr-etiqueta header small { color: var(--terracota); font: 500 .68rem/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.gr-etiqueta__lineas { display: grid; gap: .1rem; margin: 0; padding: 0; list-style: none; font: 400 .86rem/1.3 var(--mono); }
+.gr-etiqueta__lineas li { display: grid; grid-template-columns: 1fr auto 4.4rem; gap: .6rem; padding: .3rem 0; }
+.gr-etiqueta__lineas li i { font-style: normal; color: var(--gris); }
+.gr-etiqueta__lineas li b { font-weight: 500; text-align: right; }
+.gr-js .gr-etiqueta__lineas li { transition: opacity .3s ease, transform .4s cubic-bezier(.34, 1.56, .64, 1); }
+.gr-js .gr-etiqueta__lineas li:not(.is-on) { opacity: .22; transform: translateX(.5rem); }
+.gr-js .gr-etiqueta__lineas li.is-nueva span { color: var(--terracota); }
+.gr-etiqueta footer { display: flex; justify-content: space-between; align-items: baseline; padding-top: .7rem; border-top: 1.5px dashed rgba(43, 42, 31, .35); }
+.gr-etiqueta footer span { font: 500 1rem/1 var(--mono); }
+.gr-etiqueta footer b { font: 700 1.7rem/1 var(--titulo); color: var(--oliva-2); font-variant-numeric: tabular-nums; }
+.gr-sello { position: absolute; right: -1rem; bottom: -1.2rem; display: grid; place-items: center; width: 5.4rem; height: 5.4rem; border: 2px dashed var(--terracota); border-radius: 50%; color: var(--terracota); font: italic 500 .95rem/1 var(--titulo); text-align: center; transform: rotate(14deg); background: rgba(250, 245, 234, .6); }
+.gr-js .gr-sello { opacity: 0; transform: rotate(14deg) scale(2); transition: opacity .2s ease, transform .45s cubic-bezier(.34, 1.56, .64, 1); }
+.gr-js .gr-mix.is-listo .gr-sello { opacity: 1; transform: rotate(14deg) scale(1); }
+@media (min-width: 901px) and (max-height: 820px) {
+  .gr-etiqueta { gap: .5rem; padding-top: 2rem; }
+  .gr-etiqueta__lineas li { padding: .18rem 0; }
+}
+@media (max-width: 900px) {
+  .gr-mix { height: 500vh; }
+  .gr-mix__fijo { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; padding: 4.8rem 1rem 1rem; gap: .6rem; }
+  .gr-mix__intro h2 { font-size: clamp(1.9rem, 8.6vw, 2.6rem); }
+  .gr-mix__frasco { max-width: 80%; }
+  .gr-balanza { position: absolute; z-index: 2; right: 0; bottom: .4rem; width: 6.5rem; padding: .5rem; }
+  .gr-balanza b { font-size: .9rem; }
+  .gr-etiqueta { grid-column: 1; grid-row: 3; transform: none; padding: .9rem 1rem; gap: .4rem; }
+  .gr-etiqueta__ojal, .gr-etiqueta header small { display: none; }
+  .gr-etiqueta header { padding-bottom: .4rem; }
+  .gr-etiqueta header span { font-size: 1.2rem; }
+  .gr-etiqueta__lineas { display: block; min-height: 1.5rem; }
+  .gr-js .gr-etiqueta__lineas li { display: none; }
+  .gr-js .gr-etiqueta__lineas li.is-ultima { display: grid; }
+  .gr-sello { width: 4rem; height: 4rem; right: .4rem; bottom: auto; top: -2.2rem; font-size: .75rem; }
+}
+
+/* ---------- Productos (menu-carta-pedidos) ---------- */
+.gr-productos { background: var(--papel); padding-top: 2rem; }
+.gr .menu-kicker { color: var(--oliva); font-family: var(--mono); font-weight: 500; letter-spacing: .2em; }
+.gr .menu-hero .gr-h2 { margin: .4rem 0 0; color: var(--oliva-2); }
+.gr .menu-note { display: inline-block; margin-top: 1.2rem; padding: .5rem .9rem; border: 1.5px dashed var(--oliva); border-radius: 999px; color: var(--oliva); font: 500 .72rem/1.3 var(--mono); letter-spacing: .06em; }
+.gr .filter-pill.active { background: var(--oliva); color: var(--papel); }
+.gr .menu-card-rich { background: #fffdf7; }
+.gr .card-title { font: 500 1.35rem/1.1 var(--titulo); }
+.gr .card-price { font: 500 .82rem/1 var(--mono); color: var(--oliva); white-space: nowrap; }
+.gr .btn-icon-only { background: var(--kraft); color: var(--oliva-2); }
+.gr .btn-icon-only:hover { background: var(--oliva); color: var(--papel); }
+.gr .fab-order { bottom: 5.2rem; background: var(--oliva); color: var(--papel); }
+.gr .fab-badge { background: var(--terracota); color: var(--papel); }
+.gr .order-header h2, .gr .modal-title { font-family: var(--titulo); font-weight: 500; }
+.gr .btn-modal-add { background: var(--oliva); color: var(--papel); }
+.gr #toast { bottom: 10.5rem; background: var(--oliva-2); color: var(--papel); }
+/* Frasco de cada tarjeta: al pasar el mouse el contenido sube (como si lo llenaran) */
+.gr-mini { position: relative; height: clamp(150px, 18vw, 190px); display: grid; place-items: center; background: radial-gradient(60% 80% at 50% 100%, var(--kraft-2), var(--kraft) 70%); border-bottom: 1px solid var(--linea); }
+.gr-mini { overflow: hidden; }
+.gr-mini .gr-frasco { position: absolute; inset: 7% 0 5%; width: 100%; height: 88%; filter: drop-shadow(0 10px 10px rgba(80, 60, 20, .2)); }
+.gr-mini .gr-frasco__cont, .gr-mini .gr-frasco path { transition: transform .7s cubic-bezier(.34, 1.56, .64, 1); }
+.gr-js .gr-mini .gr-frasco__cont, .gr-js .gr-mini .gr-frasco g path { transform: translateY(70px); }
+.gr-js .menu-card-rich:hover .gr-mini .gr-frasco__cont, .gr-js .menu-card-rich:hover .gr-mini .gr-frasco g path { transform: none; }
+
+/* ---------- Cómo comprar (titulos-sticky) ---------- */
+.gr-como { padding: clamp(3rem, 8vh, 5rem) 0 clamp(5rem, 12vh, 8rem); background: var(--kraft); }
+.gr-como .svc-section:first-child { margin-top: 0; }
+.gr .svc-h2 { font: 500 clamp(2rem, 3.6vw, 3.4rem)/1.02 var(--titulo); letter-spacing: -.02em; color: var(--oliva-2); }
+.gr .svc-cards li, .gr .svc-signals { background: var(--papel); border-color: var(--linea); }
+.gr .svc-cards .material-icons-round { background: rgba(79, 107, 47, .12); color: var(--oliva); }
+.gr .svc-prose p { color: #4c4838; }
+
+/* ---------- Visita, cierre y pie ---------- */
+.gr .cf-visit h3 { color: var(--oliva); }
+.gr .cf-outro { background: var(--oliva-2); }
+.gr .cf-outro p { color: rgba(250, 245, 234, .8); }
+.gr .cf-footer { background: var(--tinta); }
+.gr .cf-footer nav a:hover { color: var(--salvia); }
+
+@media (prefers-reduced-motion: reduce) { .gr-cinta__riel { animation: none; } }

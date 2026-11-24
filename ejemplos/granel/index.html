@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="es" data-pedido-key="granel_bolsa">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Granel · Almacén natural y dietética</title>
+  <meta name="description" content="Granel: dietética de ejemplo. Frutos secos, semillas, harinas, legumbres y especias al peso." />
+  <!-- Tipografía: Fraunces (Google Fonts) para títulos. Texto: Outfit e IBM Plex Mono locales. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../animaciones/cafeteria-ejemplo/shared/cafe.css" />
+  <link rel="stylesheet" href="../../animaciones/titulos-sticky/style.css" />
+  <link rel="stylesheet" href="../../animaciones/menu-carta-pedidos/style.css" />
+  <link rel="stylesheet" href="granel.css" />
+  <script>document.documentElement.classList.add('cf-js', 'gr-js');</script>
+  <script defer src="../../assets/vendor/gsap.min.js"></script>
+  <script defer src="../../assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="../../animaciones/cafeteria-ejemplo/shared/cafe.js"></script>
+  <script defer src="../../animaciones/scroll-horizontal/script.js"></script>
+  <script defer src="../../animaciones/menu-carta-pedidos/script.js"></script>
+  <script defer src="granel.js"></script>
+</head>
+<body class="gr">
+  <script src="arte.js"></script>
+
+  <header class="cf-nav" id="site-header" data-nav data-solid-after="top">
+    <a class="gr-logo" href="#inicio" aria-label="Granel, inicio"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Granel</b><small>almacén natural</small></a>
+    <nav class="cf-nav__links" aria-label="Principal">
+      <a href="#pasillos">Pasillos</a>
+      <a href="#mix">El mix</a>
+      <a href="#productos">Productos</a>
+      <a href="#visitanos">Visitanos</a>
+    </nav>
+    <a class="cf-nav__cta" href="#productos">Armar la bolsa</a>
+    <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
+  </header>
+  <div class="cf-drawer" id="menu-movil" data-drawer>
+    <nav aria-label="Principal (móvil)"><ul>
+      <li><a href="#pasillos">Pasillos</a></li>
+      <li><a href="#mix">El mix</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#visitanos">Visitanos</a></li>
+    </ul></nav>
+    <p>Almacén natural · todo al peso</p>
+  </div>
+
+  <main>
+    <!-- Hero: frascos que se inclinan con el puntero y una pila de frutos secos con física (arrastrar y tirar) -->
+    <section class="gr-hero" id="inicio">
+      <div class="gr-hero__texto">
+        <span class="gr-kicker">Dietética · almacén natural</span>
+        <h1 data-words>Lo natural, al peso</h1>
+        <p class="cf-fade">Frutos secos, semillas, harinas, legumbres y especias sueltos. Llevás lo que necesitás, en tu frasco o en bolsa de papel.</p>
+        <div class="gr-hero__ctas cf-fade">
+          <a class="gr-btn" href="#productos" data-imantado>Armar la bolsa</a>
+          <a class="gr-btn gr-btn--linea" href="#mix" data-imantado>Ver cómo se arma un mix</a>
+        </div>
+      </div>
+      <div class="gr-estante" data-estante aria-hidden="true">
+        <svg class="gr-frasco gr-estante__f1" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="156" width="220" height="244" fill="url(#p-almendra)"/><path d="M40 156 Q150 142 260 156" fill="url(#p-almendra)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg>
+        <svg class="gr-frasco gr-estante__f2" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="215" width="220" height="185" fill="url(#p-chia)"/><path d="M40 215 Q150 201 260 215" fill="url(#p-chia)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg>
+        <svg class="gr-frasco gr-estante__f3" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="185" width="220" height="215" fill="url(#p-lenteja)"/><path d="M40 185 Q150 171 260 185" fill="url(#p-lenteja)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg>
+        <span class="gr-estante__tabla"></span>
+      </div>
+      <div class="gr-pila" data-pila aria-hidden="true"><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-almendra"/></svg></span><span class="gr-suelto" data-r="36"><svg viewBox="0 0 100 100"><use href="#s-nuez"/></svg></span><span class="gr-suelto" data-r="28"><svg viewBox="0 0 100 100"><use href="#s-avellana"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-caju"/></svg></span><span class="gr-suelto" data-r="32"><svg viewBox="0 0 100 100"><use href="#s-mani"/></svg></span><span class="gr-suelto" data-r="22"><svg viewBox="0 0 100 100"><use href="#s-pasa"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-almendra"/></svg></span><span class="gr-suelto" data-r="36"><svg viewBox="0 0 100 100"><use href="#s-nuez"/></svg></span><span class="gr-suelto" data-r="28"><svg viewBox="0 0 100 100"><use href="#s-avellana"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-caju"/></svg></span><span class="gr-suelto" data-r="32"><svg viewBox="0 0 100 100"><use href="#s-mani"/></svg></span><span class="gr-suelto" data-r="22"><svg viewBox="0 0 100 100"><use href="#s-pasa"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-almendra"/></svg></span><span class="gr-suelto" data-r="36"><svg viewBox="0 0 100 100"><use href="#s-nuez"/></svg></span><span class="gr-suelto" data-r="28"><svg viewBox="0 0 100 100"><use href="#s-avellana"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-caju"/></svg></span><span class="gr-suelto" data-r="32"><svg viewBox="0 0 100 100"><use href="#s-mani"/></svg></span><span class="gr-suelto" data-r="22"><svg viewBox="0 0 100 100"><use href="#s-pasa"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-almendra"/></svg></span><span class="gr-suelto" data-r="36"><svg viewBox="0 0 100 100"><use href="#s-nuez"/></svg></span><span class="gr-suelto" data-r="28"><svg viewBox="0 0 100 100"><use href="#s-avellana"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-caju"/></svg></span><span class="gr-suelto" data-r="32"><svg viewBox="0 0 100 100"><use href="#s-mani"/></svg></span><span class="gr-suelto" data-r="22"><svg viewBox="0 0 100 100"><use href="#s-pasa"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-almendra"/></svg></span><span class="gr-suelto" data-r="36"><svg viewBox="0 0 100 100"><use href="#s-nuez"/></svg></span><span class="gr-suelto" data-r="28"><svg viewBox="0 0 100 100"><use href="#s-avellana"/></svg></span><span class="gr-suelto" data-r="30"><svg viewBox="0 0 100 100"><use href="#s-caju"/></svg></span><span class="gr-suelto" data-r="32"><svg viewBox="0 0 100 100"><use href="#s-mani"/></svg></span><span class="gr-suelto" data-r="22"><svg viewBox="0 0 100 100"><use href="#s-pasa"/></svg></span></div>
+      <p class="gr-hero__pista" aria-hidden="true">Agarrá un fruto seco y tiralo</p>
+    </section>
+
+    <!-- Cinta que corre; la velocidad del scroll la inclina y la acelera (como en Brasa) -->
+    <div class="gr-cinta" data-cinta aria-hidden="true">
+      <div class="gr-cinta__riel"><span>Al peso</span><i>✿</i><span>Sin TACC</span><i>✿</i><span>Traé tu frasco</span><i>✿</i><span>Sin azúcar agregado</span><i>✿</i><span>Veggie</span><i>✿</i><span>Al peso</span><i>✿</i><span>Sin TACC</span><i>✿</i><span>Traé tu frasco</span><i>✿</i><span>Sin azúcar agregado</span><i>✿</i><span>Veggie</span><i>✿</i></div>
+    </div>
+
+    <section class="cf-overview">
+      <span class="gr-kicker">La idea</span>
+      <p class="cf-overview__text" data-lines>Comprar suelto es comprar lo justo: cien gramos de chía para probar, un kilo de avena para el mes. Menos envases, precios por kilo a la vista y la balanza siempre a mano.</p>
+    </section>
+
+    <!-- Pasillos: scroll horizontal anclado (animaciones/scroll-horizontal) -->
+    <section class="projects gr-pasillos" id="pasillos" aria-label="Pasillos de la dietética">
+      <div class="projects__topline"><span>Los pasillos</span><span class="projects__hint">Seguí bajando →</span></div>
+      <div class="projects__track">
+        <div class="project project--intro gr-pasillo--intro">
+          <h2>Pasillos</h2>
+          <p>Cinco góndolas de frascos grandes, con el precio por kilo en la tapa.</p>
+          <span>05 pasillos / desplazá →</span>
+        </div>
+        <article class="project gr-pasillo gr-pasillo--a">
+          <div class="gr-pasillo__arte"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="162" width="220" height="238" fill="url(#p-almendra)"/><path d="M40 162 Q150 148 260 162" fill="url(#p-almendra)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg><svg class="gr-frasco is-chico" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="230" width="220" height="170" fill="url(#p-nuez)"/><path d="M40 230 Q150 216 260 230" fill="url(#p-nuez)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+          <span class="project__index">01</span>
+          <div class="project__caption"><h3>Frutos secos</h3><p>Almendras, nueces, cajú, avellanas y mixes. Los tostamos acá, de a poco.</p><a class="arrow-link" href="#productos">Ver productos ↓</a></div>
+        </article>
+        <article class="project gr-pasillo gr-pasillo--b">
+          <div class="gr-pasillo__arte"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="162" width="220" height="238" fill="url(#p-chia)"/><path d="M40 162 Q150 148 260 162" fill="url(#p-chia)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg><svg class="gr-frasco is-chico" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="230" width="220" height="170" fill="url(#p-girasol)"/><path d="M40 230 Q150 216 260 230" fill="url(#p-girasol)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+          <span class="project__index">02</span>
+          <div class="project__caption"><h3>Semillas</h3><p>Chía, lino, girasol, sésamo y zapallo. Para el yogur, el pan o la ensalada.</p><a class="arrow-link" href="#productos">Ver productos ↓</a></div>
+        </article>
+        <article class="project gr-pasillo gr-pasillo--c">
+          <div class="gr-pasillo__arte"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="162" width="220" height="238" fill="url(#p-harina)"/><path d="M40 162 Q150 148 260 162" fill="url(#p-harina)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg><svg class="gr-frasco is-chico" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="230" width="220" height="170" fill="url(#p-quinoa)"/><path d="M40 230 Q150 216 260 230" fill="url(#p-quinoa)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+          <span class="project__index">03</span>
+          <div class="project__caption"><h3>Harinas</h3><p>Integral, de almendras, de garbanzo, de arroz y premezclas sin TACC.</p><a class="arrow-link" href="#productos">Ver productos ↓</a></div>
+        </article>
+        <article class="project gr-pasillo gr-pasillo--d">
+          <div class="gr-pasillo__arte"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="162" width="220" height="238" fill="url(#p-lenteja)"/><path d="M40 162 Q150 148 260 162" fill="url(#p-lenteja)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg><svg class="gr-frasco is-chico" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="230" width="220" height="170" fill="url(#p-garbanzo)"/><path d="M40 230 Q150 216 260 230" fill="url(#p-garbanzo)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+          <span class="project__index">04</span>
+          <div class="project__caption"><h3>Legumbres</h3><p>Lentejas, garbanzos, porotos y arvejas partidas. Sin conservantes.</p><a class="arrow-link" href="#productos">Ver productos ↓</a></div>
+        </article>
+        <article class="project gr-pasillo gr-pasillo--e">
+          <div class="gr-pasillo__arte"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="162" width="220" height="238" fill="url(#p-pimenton)"/><path d="M40 162 Q150 148 260 162" fill="url(#p-pimenton)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg><svg class="gr-frasco is-chico" viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="230" width="220" height="170" fill="url(#p-coco)"/><path d="M40 230 Q150 216 260 230" fill="url(#p-coco)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+          <span class="project__index">05</span>
+          <div class="project__caption"><h3>Especias</h3><p>Pimentón ahumado, cúrcuma, comino y mezclas de la casa, molidas en el día.</p><a class="arrow-link" href="#productos">Ver productos ↓</a></div>
+        </article>
+      </div>
+      <div class="projects__progress" aria-hidden="true"><span></span></div>
+    </section>
+
+    <!-- El mix: escena sticky. Con el scroll cae cada ingrediente, el frasco se llena, la balanza sube y la etiqueta se completa -->
+    <section class="gr-mix" id="mix" data-mix aria-labelledby="t-mix">
+      <div class="gr-mix__fijo">
+        <div class="gr-mix__intro">
+          <span class="gr-kicker">Seguí bajando</span>
+          <h2 id="t-mix">Así se arma <em>el mix energía</em></h2>
+        </div>
+        <div class="gr-mix__escena">
+          <svg class="gr-mix__frasco" viewBox="0 -40 300 450" role="img" aria-label="Frasco lleno con capas de avena, almendras, pasas, girasol, chía, coco y nueces">
+            <g clip-path="url(#c-frasco)"><rect class="gr-capa" data-capa="0" x="40" y="313" width="220" height="83" fill="url(#p-avena)"/><rect class="gr-capa" data-capa="1" x="40" y="270" width="220" height="45" fill="url(#p-almendra)"/><rect class="gr-capa" data-capa="2" x="40" y="232" width="220" height="40" fill="url(#p-pasa)"/><rect class="gr-capa" data-capa="3" x="40" y="200" width="220" height="34" fill="url(#p-girasol)"/><rect class="gr-capa" data-capa="4" x="40" y="184" width="220" height="18" fill="url(#p-chia)"/><rect class="gr-capa" data-capa="5" x="40" y="157" width="220" height="29" fill="url(#p-coco)"/><rect class="gr-capa" data-capa="6" x="40" y="125" width="220" height="34" fill="url(#p-nuez)"/></g>
+            <g class="gr-chorros"><rect class="gr-chorro" data-chorro="0" x="136" y="-40" width="28" height="0" rx="12" fill="url(#p-avena)"/><rect class="gr-chorro" data-chorro="1" x="136" y="-40" width="28" height="0" rx="12" fill="url(#p-almendra)"/><rect class="gr-chorro" data-chorro="2" x="136" y="-40" width="28" height="0" rx="12" fill="url(#p-pasa)"/><rect class="gr-chorro" data-chorro="3" x="136" y="-40" width="28" height="0" rx="12" fill="url(#p-girasol)"/><rect class="gr-chorro" data-chorro="4" x="136" y="-40" width="28" height="0" rx="12" fill="url(#p-chia)"/><rect class="gr-chorro" data-chorro="5" x="136" y="-40" width="28" height="0" rx="12" fill="url(#p-coco)"/><rect class="gr-chorro" data-chorro="6" x="136" y="-40" width="28" height="0" rx="12" fill="url(#p-nuez)"/></g>
+            <use href="#frasco" width="300" height="420"/>
+            <g class="gr-mix__tapa"><use href="#tapa" width="300" height="420"/></g>
+          </svg>
+          <!-- Balanza: la aguja sigue los gramos que van entrando -->
+          <div class="gr-balanza" aria-hidden="true">
+            <svg viewBox="0 0 200 120">
+              <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="currentColor" stroke-width="3"/>
+              <g stroke="currentColor" stroke-width="2"><path d="M100 26 V42" transform="rotate(-90 100 100)"/><path d="M100 26 V36" transform="rotate(-72 100 100)"/><path d="M100 26 V36" transform="rotate(-54 100 100)"/><path d="M100 26 V36" transform="rotate(-36 100 100)"/><path d="M100 26 V36" transform="rotate(-18 100 100)"/><path d="M100 26 V42" transform="rotate(0 100 100)"/><path d="M100 26 V36" transform="rotate(18 100 100)"/><path d="M100 26 V36" transform="rotate(36 100 100)"/><path d="M100 26 V36" transform="rotate(54 100 100)"/><path d="M100 26 V36" transform="rotate(72 100 100)"/><path d="M100 26 V42" transform="rotate(90 100 100)"/></g>
+              <g class="gr-balanza__aguja" transform="rotate(90 100 100)"><path d="M100 104 V34" stroke="#c8643b" stroke-width="4" stroke-linecap="round"/></g>
+              <circle cx="100" cy="100" r="7" fill="currentColor"/>
+            </svg>
+            <b><span data-gramos>500</span> g</b>
+          </div>
+        </div>
+        <!-- Etiqueta kraft: cada línea se marca cuando su capa termina de caer -->
+        <aside class="gr-etiqueta" aria-label="Etiqueta del mix energía">
+          <span class="gr-etiqueta__ojal" aria-hidden="true"></span>
+          <header><span>Mix energía</span><small data-estado>Listo para llevar</small></header>
+          <ol class="gr-etiqueta__lineas">
+            <li data-linea="0" data-g="150" data-kg="2800"><span>Avena</span><i>150 g</i><b>$420</b></li><li data-linea="1" data-g="80" data-kg="18000"><span>Almendras</span><i>80 g</i><b>$1.440</b></li><li data-linea="2" data-g="70" data-kg="7000"><span>Pasas</span><i>70 g</i><b>$490</b></li><li data-linea="3" data-g="60" data-kg="5000"><span>Girasol</span><i>60 g</i><b>$300</b></li><li data-linea="4" data-g="30" data-kg="8000"><span>Chía</span><i>30 g</i><b>$240</b></li><li data-linea="5" data-g="50" data-kg="9000"><span>Coco en escamas</span><i>50 g</i><b>$450</b></li><li data-linea="6" data-g="60" data-kg="16000"><span>Nueces</span><i>60 g</i><b>$960</b></li>
+          </ol>
+          <footer><span>500 g</span><b data-total>$4.300</b></footer>
+          <span class="gr-sello" aria-hidden="true">Hecho hoy</span>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Productos: carta con filtros, opciones por peso y bolsa (animaciones/menu-carta-pedidos) -->
+    <section class="gr-productos menu-page" id="productos">
+      <div class="menu-hero">
+        <span class="menu-kicker">Productos</span>
+        <h2 class="gr-h2" data-words>Armá tu bolsa</h2>
+        <p class="menu-subtitle">Elegí el peso de cada producto. La bolsa queda guardada en este dispositivo para mostrarla en el mostrador.</p>
+        <span class="menu-note">Productos y precios por kilo de ejemplo · marca ficticia</span>
+      </div>
+      <div class="filter-sticky-container">
+        <div class="filter-pills">
+          <button class="filter-pill main-filter active" data-filter-category="all">Todo</button>
+          <button class="filter-pill main-filter" data-filter-category="frutos">Frutos secos</button>
+          <button class="filter-pill main-filter" data-filter-category="semillas">Semillas</button>
+          <button class="filter-pill main-filter" data-filter-category="harinas">Harinas y cereales</button>
+          <button class="filter-pill main-filter" data-filter-category="legumbres">Legumbres</button>
+          <button class="filter-pill main-filter" data-filter-category="especias">Especias</button>
+        </div>
+      </div>
+      <div class="masonry-grid">
+      <div class="menu-card-rich category-frutos">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-almendra)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-almendra)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Almendras</h3><span class="card-price">$18.000 / kg</span></div>
+          <p class="card-desc">Non pareil, enteras y crudas.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 1800}, {"name": "250 g", "price": 4500}, {"name": "500 g", "price": 9000}, {"name": "1 kg", "price": 18000}]' aria-label="Añadir Almendras a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-frutos">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-nuez)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-nuez)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Nueces mariposa</h3><span class="card-price">$16.000 / kg</span></div>
+          <p class="card-desc">Peladas, de la última cosecha.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 1600}, {"name": "250 g", "price": 4000}, {"name": "500 g", "price": 8000}, {"name": "1 kg", "price": 16000}]' aria-label="Añadir Nueces mariposa a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-frutos">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-pasa)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-pasa)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Pasas de uva</h3><span class="card-price">$7.000 / kg</span></div>
+          <p class="card-desc">Morochas, sin semilla.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 700}, {"name": "250 g", "price": 1750}, {"name": "500 g", "price": 3500}, {"name": "1 kg", "price": 7000}]' aria-label="Añadir Pasas de uva a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-frutos">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-avena)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-avena)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Mix energía</h3><span class="card-price">$8.600 / kg</span></div>
+          <p class="card-desc">El del frasco de arriba: avena, frutos secos y semillas.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 860}, {"name": "250 g", "price": 2150}, {"name": "500 g", "price": 4300}, {"name": "1 kg", "price": 8600}]' aria-label="Añadir Mix energía a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-semillas">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-chia)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-chia)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Chía</h3><span class="card-price">$8.000 / kg</span></div>
+          <p class="card-desc">Para hidratar o espolvorear.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 800}, {"name": "250 g", "price": 2000}, {"name": "500 g", "price": 4000}, {"name": "1 kg", "price": 8000}]' aria-label="Añadir Chía a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-semillas">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-girasol)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-girasol)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Girasol pelado</h3><span class="card-price">$5.000 / kg</span></div>
+          <p class="card-desc">Tostado sin sal.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 500}, {"name": "250 g", "price": 1250}, {"name": "500 g", "price": 2500}, {"name": "1 kg", "price": 5000}]' aria-label="Añadir Girasol pelado a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-semillas">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-quinoa)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-quinoa)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Quinoa</h3><span class="card-price">$9.000 / kg</span></div>
+          <p class="card-desc">Lavada, lista para cocinar.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 900}, {"name": "250 g", "price": 2250}, {"name": "500 g", "price": 4500}, {"name": "1 kg", "price": 9000}]' aria-label="Añadir Quinoa a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-harinas">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-harina)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-harina)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Harina de almendras</h3><span class="card-price">$24.000 / kg</span></div>
+          <p class="card-desc">Ideal para pastelería sin TACC.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 2400}, {"name": "250 g", "price": 6000}, {"name": "500 g", "price": 12000}, {"name": "1 kg", "price": 24000}]' aria-label="Añadir Harina de almendras a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-harinas">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-avena)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-avena)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Avena arrollada</h3><span class="card-price">$2.800 / kg</span></div>
+          <p class="card-desc">Gruesa, para granola y porridge.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 280}, {"name": "250 g", "price": 700}, {"name": "500 g", "price": 1400}, {"name": "1 kg", "price": 2800}]' aria-label="Añadir Avena arrollada a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-legumbres">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-lenteja)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-lenteja)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Lentejas</h3><span class="card-price">$3.000 / kg</span></div>
+          <p class="card-desc">Chicas, se cocinan en 25 minutos.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 300}, {"name": "250 g", "price": 750}, {"name": "500 g", "price": 1500}, {"name": "1 kg", "price": 3000}]' aria-label="Añadir Lentejas a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-legumbres">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-garbanzo)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-garbanzo)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Garbanzos</h3><span class="card-price">$3.200 / kg</span></div>
+          <p class="card-desc">Para hummus o guiso.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 320}, {"name": "250 g", "price": 800}, {"name": "500 g", "price": 1600}, {"name": "1 kg", "price": 3200}]' aria-label="Añadir Garbanzos a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-especias">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-pimenton)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-pimenton)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Pimentón ahumado</h3><span class="card-price">$12.000 / kg</span></div>
+          <p class="card-desc">Molido en el día.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 1200}, {"name": "250 g", "price": 3000}, {"name": "500 g", "price": 6000}, {"name": "1 kg", "price": 12000}]' aria-label="Añadir Pimentón ahumado a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      <div class="menu-card-rich category-especias">
+        <div class="card-img-container gr-mini" aria-hidden="true"><svg class="gr-frasco " viewBox="0 0 300 420" aria-hidden="true"><g clip-path="url(#c-frasco)"><rect class="gr-frasco__cont" x="40" y="209" width="220" height="191" fill="url(#p-coco)"/><path d="M40 209 Q150 195 260 209" fill="url(#p-coco)"/></g><use href="#frasco" width="300" height="420"/><use href="#tapa" width="300" height="420"/></svg></div>
+        <div class="card-content">
+          <div class="card-header"><h3 class="card-title">Coco en escamas</h3><span class="card-price">$9.000 / kg</span></div>
+          <p class="card-desc">Sin azúcar agregado.</p>
+          <button class="btn-icon-only" data-options='[{"name": "100 g", "price": 900}, {"name": "250 g", "price": 2250}, {"name": "500 g", "price": 4500}, {"name": "1 kg", "price": 9000}]' aria-label="Añadir Coco en escamas a la bolsa"><span class="material-icons-round" aria-hidden="true">add</span></button>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- Cómo comprar: títulos sticky en dos columnas (animaciones/titulos-sticky) -->
+    <div class="gr-como">
+      <section class="svc-section svc-section--split" aria-labelledby="t-c1">
+        <h2 id="t-c1" class="svc-h2">Cómo se compra a granel</h2>
+        <div class="svc-prose">
+          <ul class="svc-cards">
+            <li><span class="material-icons-round">inventory_2</span><b>1 · Traé tu frasco</b><small>Lo pesamos vacío antes de llenarlo. Si no traés, hay bolsas de papel.</small></li>
+            <li><span class="material-icons-round">scale</span><b>2 · Pedí al peso</b><small>Desde 50 g. El precio por kilo está en la tapa de cada frasco.</small></li>
+            <li><span class="material-icons-round">local_offer</span><b>3 · Etiqueta</b><small>Cada bolsa sale con nombre, fecha de envasado y peso.</small></li>
+            <li><span class="material-icons-round">recycling</span><b>4 · Volvé</b><small>Con tu frasco, cada compra tiene 5% de descuento.</small></li>
+          </ul>
+        </div>
+      </section>
+      <section class="svc-section svc-section--split" aria-labelledby="t-c2">
+        <h2 id="t-c2" class="svc-h2">Sin TACC, veggie y sin azúcar</h2>
+        <div class="svc-prose">
+          <p>Los productos sin TACC están en un pasillo aparte, con su propia pala y frascos cerrados, para evitar el contacto cruzado.</p>
+          <p>Marcamos en cada frasco si es apto veggie, sin azúcar agregado o sin sal. Si tenés dudas sobre un producto, preguntá: tenemos la ficha del proveedor.</p>
+          <div class="svc-signals">
+            <h3>En cada frasco vas a ver:</h3>
+            <ul>
+              <li><span class="material-icons-round" aria-hidden="true">check_circle</span>Precio por kilo y origen.</li>
+              <li><span class="material-icons-round" aria-hidden="true">check_circle</span>Fecha en que se llenó el frasco.</li>
+              <li><span class="material-icons-round" aria-hidden="true">check_circle</span>Sellos: sin TACC, veggie, sin azúcar agregado.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="cf-visit" id="visitanos" aria-label="Visitanos">
+      <div><h3>Dónde</h3><p>Dirección de ejemplo 1234<br />Ciudad de ejemplo</p></div>
+      <div><h3>Horarios</h3><ul><li><span>Lunes a viernes</span><span>9 – 20 h</span></li><li><span>Sábados</span><span>9 – 14 h</span></li><li><span>Domingos</span><span>Cerrado</span></li></ul></div>
+      <div><h3>Pedidos</h3><p>Armá la bolsa acá, mostrala en el mostrador y la tenemos lista en diez minutos.</p></div>
+    </section>
+
+    <section class="cf-outro">
+      <h2 data-words>Traé tu frasco</h2>
+      <p class="cf-fade">Te lo llenamos con lo que quieras, al peso.</p>
+      <a class="cf-btn cf-fade" href="#productos" data-imantado>Armar la bolsa <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="optionsModal" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
+    <div class="modal-content">
+      <button class="modal-close" data-action="close-options-modal" aria-label="Cerrar">&times;</button>
+      <h3 class="modal-title" id="modalProductTitle">Producto</h3>
+      <div class="modal-options-list" id="modalOptionsContainer"></div>
+      <button class="btn-modal-add" data-action="confirm-options">Añadir a la bolsa</button>
+    </div>
+  </div>
+  <button class="fab-order" data-action="toggle-order" aria-label="Ver la bolsa" aria-expanded="false" aria-controls="orderPanel">
+    <span class="material-icons-round">shopping_basket</span>
+    <span class="fab-badge hidden" id="orderBadge">0</span>
+  </button>
+  <section class="order-panel" id="orderPanel" aria-label="Tu bolsa">
+    <div class="order-header">
+      <h2>Tu bolsa</h2>
+      <button class="close-order-btn" data-action="toggle-order" aria-label="Cerrar la bolsa">&times;</button>
+    </div>
+    <div class="order-items" id="orderItemsContainer"><div class="empty-state">La bolsa está vacía.<br>Empezá por cien gramos de algo nuevo.</div></div>
+    <div class="order-footer">
+      <div class="order-total"><span>Total</span><span id="orderTotal">$0</span></div>
+      <p class="order-notice">Mostrá la bolsa en el mostrador.</p>
+    </div>
+  </section>
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="cf-footer">
+    <div class="cf-footer__inner">
+      <span class="gr-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Granel</b></span>
+      <nav aria-label="Pie"><a href="#pasillos">Pasillos</a><a href="#productos">Productos</a><a href="#visitanos">Visitanos</a></nav>
+      <span>Sitio de ejemplo · marca ficticia · Librería de Animaciones</span>
+    </div>
+  </footer>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Granel · dietética</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo one-page para una dietética (marca ficticia)</span><span>Siete piezas de la librería en una sola página</span><span>GSAP + ScrollTrigger · SVG · física propia</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>De la librería</h3>
+          <ul>
+            <li><code>cafeteria-ejemplo/shared</code>: menú con barra que se esconde (con anclas), títulos por palabras, párrafo por líneas y fundidos.</li>
+            <li><code>scroll-horizontal</code>: los pasillos se anclan y corren de costado con su barra de progreso; en móvil se apilan.</li>
+            <li><code>menu-carta-pedidos</code>: productos con filtros, opciones por peso (100 g a 1 kg) y la bolsa guardada en <code>localStorage</code> (<code>data-pedido-key="granel_bolsa"</code>).</li>
+            <li><code>titulos-sticky</code>: "Cómo se compra a granel" con el título pegado mientras pasan las tarjetas.</li>
+            <li>De <code>ejemplos/brasa</code>: el armador (acá un frasco que se llena con el scroll y una etiqueta que se completa), la física de la parrilla (acá frutos secos sueltos en el hero), la cinta que reacciona al scroll y los botones imantados.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Propio de esta página</h3>
+          <ul>
+            <li>Las capas del frasco y los chorros que caen se animan con <code>attr</code> (y y height del <code>&lt;rect&gt;</code>), así no hay orígenes de transformación que se pisen. La balanza lee el avance de cada capa y mueve la aguja de forma continua.</li>
+            <li>Doce texturas a granel en <code>arte.js</code> como <code>&lt;pattern&gt;</code> con azar con semilla, y un solo <code>clipPath</code> del frasco que reutilizan el hero, los pasillos, el mix y las tarjetas.</li>
+            <li>Con <code>prefers-reduced-motion</code> o sin GSAP: frasco lleno, etiqueta completa, pasillos en lista y frutos secos quietos.</li>
+            <li>Productos, precios, dirección y horarios son de ejemplo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Granel</small></a>
+</body>
+</html>
