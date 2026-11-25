@@ -176,8 +176,11 @@
     <button class="cf-burger" type="button" data-burger aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span><b class="cf-sr">Abrir menú</b></button>
   </header>
   <div class="cf-drawer" id="menu-movil" data-drawer>
-    <nav aria-label="Principal (móvil)"><ul><li><a href="index.html" aria-current="page">Inicio</a></li><li><a href="pasteleria.html">Pastelería</a></li><li><a href="cocina.html">Cocina</a></li><li><a href="visitanos.html">Visitanos</a></li></ul></nav>
-    <p>Laprida 2015, Recoleta · Lunes a sábado de 8 a 20 h</p>
+    <nav aria-label="Principal (móvil)"><ul><li><a href="index.html" aria-current="page"><span>Inicio</span><small>Arte en la cocina</small></a></li><li><a href="pasteleria.html"><span>Pastelería</span><small>Tortas, budines y medialunas</small></a></li><li><a href="cocina.html"><span>Cocina</span><small>Brunch, almuerzos y café</small></a></li><li><a href="visitanos.html"><span>Visitanos</span><small>Laprida 2015, Recoleta</small></a></li></ul></nav>
+    <div class="dl-drawer__pie">
+      <p>Lunes a sábado<br />de 8 a 20 h</p>
+      <a href="https://www.instagram.com/delicious.bsas/" target="_blank" rel="noopener">Instagram <span aria-hidden="true">→</span></a>
+    </div>
   </div>
 
   <main>
@@ -188,8 +191,9 @@
         <span class="cf-kicker">Arte en la cocina ✷</span>
         <h1 class="dl-logo dl-logo--big">Delicious</h1>
       </div>
-      <div data-c3="hero" data-roast="medium" data-rig="soft" style="position:absolute;inset:0">
+      <div data-c3="hero" data-roast="medium" data-rig="soft" data-fit="frame" style="position:absolute;inset:0">
         <template data-c3-html>
+          <span class="dl-plates-m" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg><svg viewBox="0 0 100 100"><use href="#plato"/></svg></span>
           <h1 class="dl-logo dl-logo--big">Delicious</h1>
           <small>Arte en la cocina ✷</small>
           <p>Pastelería artesanal, almuerzos y brunch. De lunes a sábado, de 8 a 20 h, en Recoleta.</p>
@@ -212,14 +216,16 @@
           <svg class="dl-vitrina" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <rect width="1600" height="900" fill="#33503a"/>
             <rect width="1600" height="900" fill="#000" opacity=".12"/>
-            <use href="#plato" x="180" y="70" width="110" height="110"/>
-            <use href="#plato" x="420" y="110" width="80" height="80"/>
-            <use href="#plato" x="1110" y="100" width="90" height="90"/>
-            <use href="#plato" x="1320" y="60" width="120" height="120"/>
+            <use class="dl-vit__plato" href="#plato" x="180" y="70" width="110" height="110"/>
+            <use class="dl-vit__plato" href="#plato" x="420" y="110" width="80" height="80"/>
+            <use class="dl-vit__plato" href="#plato" x="1110" y="100" width="90" height="90"/>
+            <use class="dl-vit__plato" href="#plato" x="1320" y="60" width="120" height="120"/>
             <rect y="636" width="1600" height="30" fill="#8a5a2b"/>
             <rect y="666" width="1600" height="234" fill="#5e3a1d"/>
             <rect y="636" width="1600" height="6" fill="#b07a42"/>
-            <g>
+            <!-- Estante de arriba: solo en móvil, donde la vitrina pasa a dos pisos -->
+            <g class="dl-vit__estante"><rect y="338" width="1600" height="26" fill="#000" opacity=".18"/><rect y="324" width="1600" height="18" fill="#8a5a2b"/><rect y="324" width="1600" height="5" fill="#b07a42"/></g>
+            <g class="dl-vit__torta dl-vit__torta--a">
               <ellipse cx="380" cy="632" rx="150" ry="14" fill="#000" opacity=".25"/>
               <path d="M340 630H420L398 600H362Z" fill="#e9e2d4"/>
               <rect x="370" y="560" width="20" height="44" fill="#f4f1e8"/>
@@ -229,9 +235,9 @@
               <path d="M204 556Q200 250 380 238Q560 250 556 556" fill="#ffffff" fill-opacity=".1" stroke="#fff" stroke-opacity=".45" stroke-width="4"/>
               <path d="M250 470Q240 320 320 278" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
               <circle cx="380" cy="230" r="14" fill="#f4f1e8"/>
-              <g transform="translate(470 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Carrot cake</text></g>
+              <g class="dl-vit__cartel" transform="translate(470 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Carrot cake</text></g>
             </g>
-            <g>
+            <g class="dl-vit__torta dl-vit__torta--b">
               <ellipse cx="800" cy="632" rx="150" ry="14" fill="#000" opacity=".25"/>
               <path d="M760 630H840L818 600H782Z" fill="#e9e2d4"/>
               <rect x="790" y="560" width="20" height="44" fill="#f4f1e8"/>
@@ -241,9 +247,9 @@
               <path d="M624 556Q620 250 800 238Q980 250 976 556" fill="#ffffff" fill-opacity=".1" stroke="#fff" stroke-opacity=".45" stroke-width="4"/>
               <path d="M670 470Q660 320 740 278" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
               <circle cx="800" cy="230" r="14" fill="#f4f1e8"/>
-              <g transform="translate(890 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Chocolate & ddl</text></g>
+              <g class="dl-vit__cartel" transform="translate(890 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Chocolate & ddl</text></g>
             </g>
-            <g>
+            <g class="dl-vit__torta dl-vit__torta--c">
               <ellipse cx="1220" cy="632" rx="150" ry="14" fill="#000" opacity=".25"/>
               <path d="M1180 630H1260L1238 600H1202Z" fill="#e9e2d4"/>
               <rect x="1210" y="560" width="20" height="44" fill="#f4f1e8"/>
@@ -253,7 +259,7 @@
               <path d="M1044 556Q1040 250 1220 238Q1400 250 1396 556" fill="#ffffff" fill-opacity=".1" stroke="#fff" stroke-opacity=".45" stroke-width="4"/>
               <path d="M1090 470Q1080 320 1160 278" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
               <circle cx="1220" cy="230" r="14" fill="#f4f1e8"/>
-              <g transform="translate(1310 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Frutos rojos</text></g>
+              <g class="dl-vit__cartel" transform="translate(1310 650) rotate(-6)"><rect x="-92" y="0" width="184" height="44" rx="6" fill="#fbf6ec"/><text x="0" y="29" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="20" fill="#2a1d1a">Frutos rojos</text></g>
             </g>
           </svg>
         </div>
