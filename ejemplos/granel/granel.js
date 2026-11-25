@@ -93,6 +93,9 @@
     let W = 0, H = 0, escala = 1;
     const medir = () => { W = pila.clientWidth; H = pila.clientHeight; escala = clamp(W / 1280, .7, 1.15); };
     medir(); addEventListener('resize', medir);
+    // En pantallas angostas, menos frutos secos para que no tapen frascos ni textos.
+    const maxSueltos = W < 520 ? 9 : W < 900 ? 16 : Infinity;
+    $$('.gr-suelto', pila).slice(maxSueltos).forEach((el) => el.remove());
     const cuerpos = $$('.gr-suelto', pila).map((el, i) => {
       const r = (Number(el.dataset.r) || 28) * escala;
       el.style.width = el.style.height = `${r * 2}px`;
