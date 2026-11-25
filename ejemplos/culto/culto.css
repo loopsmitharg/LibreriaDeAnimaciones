@@ -57,11 +57,63 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
 .site-nav__links a { font-family: var(--cartel); font-size: 1.15rem; letter-spacing: .06em; }
 .site-nav__links a[aria-current="page"] { color: var(--bronce); }
 .site-nav__links a.is-cta { margin-left: .4rem; background: var(--bronce); color: var(--negro); }
-.site-nav .cf-burger { background: var(--bronce); color: var(--negro); }
-@media (max-width: 760px) { .site-nav__links { display: none; } .site-nav .cf-burger { display: block; margin-left: auto; } }
-.cf-drawer { background: var(--negro); }
-.cf-drawer li a { font-family: var(--cartel); font-weight: 400; letter-spacing: .02em; font-size: clamp(3.4rem, 17vw, 5.4rem); }
-.cf-drawer p { color: var(--hueso-2); }
+@media (max-width: 760px) {
+  .site-nav__links { display: none; }
+  .site-nav { top: .7rem; width: calc(100% - 1.4rem); }
+  .site-nav__inner { padding: .4rem .4rem .4rem .55rem; }
+}
+
+/* Botón de menú: píldora con la palabra (MENÚ / CERRAR) y un disco de bronce con dos trazos que se cruzan. */
+.site-nav .cf-burger { position: relative; display: none; flex: 0 0 auto; width: auto; height: 2.9rem; margin-left: auto; padding: 0 3.35rem 0 1.1rem; border-radius: 999px;
+  background: rgba(236, 230, 218, .05); box-shadow: inset 0 0 0 1px rgba(195, 155, 95, .42); color: var(--hueso); -webkit-tap-highlight-color: transparent;
+  transition: box-shadow .35s ease, background-color .35s ease; }
+.site-nav .cf-burger::before { content: "Menú"; content: "Menú" / ""; display: block; font: 400 1.18rem/1 var(--cartel); letter-spacing: .14em; transform: translateY(.06em); }
+.site-nav .cf-burger::after { content: ""; position: absolute; top: .35rem; right: .35rem; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--bronce);
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1), background-color .35s ease; }
+.site-nav .cf-burger span { position: absolute; z-index: 1; top: calc(1.45rem - .75px); right: calc(.35rem + 1.1rem - .5rem); width: 1rem; height: 1.5px; margin: 0; border-radius: 2px;
+  background: var(--negro); transform-origin: 50% 50%; transition: transform .5s cubic-bezier(.65, 0, .35, 1), width .4s cubic-bezier(.65, 0, .35, 1); }
+.site-nav .cf-burger span:first-child { transform: translateY(-3px); }
+.site-nav .cf-burger span:nth-child(2) { display: none; }
+.site-nav .cf-burger span:nth-child(3) { width: .6rem; transform: translateY(3px); }
+.site-nav .cf-burger:hover::after, .site-nav .cf-burger:focus-visible::after { transform: scale(1.08); }
+.site-nav .cf-burger:hover span:nth-child(3) { width: 1rem; }
+.site-nav .cf-burger:focus-visible { outline: 2px solid var(--bronce); outline-offset: 3px; }
+@media (max-width: 760px) { .site-nav .cf-burger { display: block; } }
+
+.site-nav.is-open .cf-burger { background: transparent; box-shadow: inset 0 0 0 1px var(--linea); }
+.site-nav.is-open .cf-burger::before { content: "Cerrar"; content: "Cerrar" / ""; color: var(--hueso-2); }
+.site-nav.is-open .cf-burger::after { transform: rotate(90deg); background: var(--hueso); }
+.site-nav.is-open .cf-burger span:first-child { transform: rotate(45deg); }
+.site-nav.is-open .cf-burger span:nth-child(3) { width: 1rem; transform: rotate(-45deg); }
+.site-nav.is-open .site-nav__inner::before { opacity: 0; }
+/* Abierto, el menú tapa todo (filtros sticky y botón de pedido incluidos) y el navbar queda encima. */
+.site-nav.is-open { z-index: 1002; }
+.cf-drawer { z-index: 1001; overflow-y: auto; overscroll-behavior: contain; }
+/* Con el menú abierto la página no se mueve. cafe.js pone overflow:hidden en el body, pero acá el html tiene
+   overflow-x:clip (scroll-logo-al-navbar) y entonces el body ya no controla el scroll de la ventana: se traba en el html. */
+html:has(.cf-drawer.is-open) { overflow: hidden; }
+
+/* Menú móvil: se abre desde el disco del botón; ítems numerados en romanos, separados por filetes. */
+.cf-drawer { grid-template-rows: 1fr auto; align-content: stretch; gap: 2rem; padding: 6.5rem 1.4rem max(1.6rem, env(safe-area-inset-bottom));
+  background: radial-gradient(90% 55% at 0% 100%, rgba(195, 155, 95, .16), transparent 70%),
+    linear-gradient(rgba(236, 230, 218, .035) 1px, transparent 1px) 0 0 / 100% 3.5rem, var(--negro);
+  clip-path: circle(0% at calc(100% - 2.6rem) 2.15rem); }
+.cf-drawer.is-open { clip-path: circle(150% at calc(100% - 2.6rem) 2.15rem); }
+.cf-drawer nav { align-self: center; }
+.cf-drawer ul { gap: 0; counter-reset: rito; border-top: 1px solid var(--linea); }
+.cf-drawer li { counter-increment: rito; border-bottom: 1px solid var(--linea); }
+.cf-drawer li a { display: grid; grid-template-columns: 2.4rem 1fr auto; align-items: center; padding: .55rem 0 .35rem;
+  font-family: var(--cartel); font-weight: 400; font-size: clamp(3rem, 15vw, 5rem); line-height: .95; letter-spacing: .02em; color: var(--hueso); }
+.cf-drawer li a::before { content: counter(rito, upper-roman) "."; align-self: start; padding-top: .55rem; font: 500 italic 1.05rem/1 var(--rito); letter-spacing: 0; color: var(--bronce); }
+.cf-drawer li a::after { content: "→"; font: 300 1.5rem/1 "Outfit", system-ui, sans-serif; color: var(--hueso-2); transform: translateX(-.4rem); opacity: .55; transition: transform .35s ease, opacity .35s ease, color .35s ease; }
+.cf-drawer li a:hover::after, .cf-drawer li a:focus-visible::after { transform: none; opacity: 1; color: var(--bronce); }
+.cf-drawer li a[aria-current="page"] { color: var(--bronce); }
+.cf-drawer li a[aria-current="page"]::after { content: "●"; font-size: .55rem; color: var(--bronce); opacity: 1; transform: none; }
+.cf-drawer p { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; margin: 0; padding-top: 1rem; border-top: 1px solid var(--linea);
+  color: var(--hueso-2); font: 500 .62rem/1.5 "IBM Plex Mono", monospace; letter-spacing: .14em; text-transform: uppercase;
+  opacity: 0; transform: translateY(.6rem); transition: opacity .4s ease, transform .4s ease; }
+.cf-drawer.is-open p { opacity: 1; transform: none; transition: opacity .6s ease .55s, transform .6s cubic-bezier(.22, 1, .36, 1) .55s; }
+@media (prefers-reduced-motion: reduce) { .site-nav .cf-burger span, .site-nav .cf-burger::after { transition: none; } }
 
 /* ---------- Intro: el monograma viaja al navbar ---------- */
 .brand-stage__pin::before { background: radial-gradient(circle at 50% 50%, rgba(195, 155, 95, .14), transparent 50%); }
@@ -189,9 +241,3 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
 .culto-footer a:hover { color: var(--bronce); }
 
 .lib-notes { border-top: 1px solid var(--linea); }
-
-/* La hamburguesa se vuelve X también con el navbar en píldora (cafe.css lo hace solo para .cf-nav). */
-.site-nav.is-open .cf-burger span:first-child { transform: translateY(5.5px) rotate(45deg); }
-.site-nav.is-open .cf-burger span:nth-child(2) { opacity: 0; }
-.site-nav.is-open .cf-burger span:last-child { transform: translateY(-5.5px) rotate(-45deg); }
-.site-nav.is-open .site-nav__inner::before { opacity: 0; }
