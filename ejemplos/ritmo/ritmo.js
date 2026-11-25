@@ -25,32 +25,35 @@ const isMobile = () => matchMedia("(max-width: 900px)").matches;
  * Etapas. p = progreso del despiece (0..1 del timeline de sneaker-3d: 0–.1 armada, .1–.3 suela/capellada se separan,
  * .3–.52 detalle, .52–.62 despiece total, .62–.9 reensamble). cam = [objetivo xyz, azimut°, elevación°, distancia].
  * Flechas: part = pieza del GLB, at = punto en su caja (-1..1 por eje: x punta, y arriba, z lateral),
- * dx/dy = posición de la etiqueta respecto del punto, en px a 1440 de ancho.
+ * dx/dy = posición de la etiqueta respecto del punto, en px a 1440 de ancho. fit = encuadre en el teléfono: [ancho, alto]
+ * que necesita la etapa (ver mobileDist); más chico = modelo más grande.
  */
 const STAGES = [
-  { p: 0, cam: [[.13, .085, 0], 38, 14, .95], callouts: [] },
-  { p: .05, cam: [[.13, .09, 0], 10, 20, .92], callouts: [
+  { p: 0, cam: [[.13, .085, 0], 38, 14, .95], fit: [.8, .65], callouts: [] },
+  { p: .05, cam: [[.13, .09, 0], 10, 20, .92], fit: [.8, .65], callouts: [
     { part: "Mesh_Panel_Lat", at: [.15, .1, 1], dx: 240, dy: -110, t: "Malla de doble capa", d: "Perforaciones ovaladas: el aire circula y el pie no se recalienta." },
     { part: "Laces", at: [.2, 1, 0], dx: 40, dy: -190, t: "Siete ojales", d: "El cordón reparte la presión sobre todo el empeine." },
     { part: "Heel_Pull_Tab", at: [0, 1, 0], dx: -110, dy: -170, t: "Tirador de talón", d: "Se calza en un segundo, sin pisar el contrafuerte." },
     { part: "Toe_Box", at: [1, -.2, .6], dx: 150, dy: 90, t: "Puntera reforzada", d: "Film soldado que protege sin sumar costuras." },
   ] },
-  { p: .3, cam: [[.14, .02, 0], 24, 7, 1.75], callouts: [
+  { p: .3, cam: [[.14, .02, 0], 24, 7, 1.75], fit: [.91, 1], callouts: [
     { part: "Midsole", at: [1, 0, .4], dx: 170, dy: -70, t: "Entresuela EVA", d: "Absorbe el impacto del talón en cada apoyo." },
     { part: "Foam_Cushioning_Layer", at: [.4, 0, 1], dx: 250, dy: 60, t: "Capa de perlas", d: "TPU expandido: devuelve hasta 70% de la energía de la pisada." },
     { part: "Outsole_Forefoot", at: [.3, -1, .5], dx: 170, dy: 150, t: "Goma de tracción", d: "Tacos con surcos que agarran en asfalto mojado." },
     { part: "Shank", at: [-.6, 0, 0], dx: -200, dy: 60, t: "Placa de estabilidad", d: "Evita que el medio pie se tuerza en las curvas." },
   ] },
-  { p: .56, cam: [[.15, .11, 0], 34, 15, 2.5], callouts: [
+  { p: .56, cam: [[.15, .11, 0], 34, 15, 2.5], fit: [.75, .7], callouts: [
     { part: "Heel_Counter", at: [-1, 0, 0], dx: -170, dy: 120, t: "Contrafuerte TPU", d: "Sostiene el talón sin rigidizar el tobillo." },
     { part: "Tongue_Padding", at: [0, 1, 0], dx: 230, dy: -110, t: "Lengüeta acolchada", d: "Anclada a la capellada: no se corre al correr." },
     { part: "Collar", at: [-.4, 1, 0], dx: -200, dy: -60, t: "Cuello acolchado", d: "Espuma de memoria alrededor del tobillo." },
     { part: "Insole", at: [.6, 0, 1], dx: 250, dy: 10, t: "Plantilla anatómica", d: "Copa de talón y arco que copian la forma del pie." },
     { part: "Side_Overlay_Lat", at: [0, 0, 1], dx: 200, dy: 170, t: "Refuerzos laterales", d: "Tiras soldadas que sujetan el pie en los cambios de ritmo." },
   ] },
-  { p: 1, cam: [[.14, .07, 0], -30, 11, 1.0], callouts: [] },
+  { p: 1, cam: [[.14, .07, 0], -30, 11, 1.0], fit: [.8, .65], callouts: [] },
 ];
 const N = STAGES.length;
+// teléfono: la distancia alcanza para que entre el ancho (fit[0] / aspecto) y el alto (fit[1]) de lo que se ve en la etapa
+const mobileDist = (a, b, t, dist, aspect) => dist * Math.max(lerp(a.fit[0], b.fit[0], t) / aspect, lerp(a.fit[1], b.fit[1], t));
 const HOLD = .22;                         // fracción de etapa que queda quieta a cada lado del entero
 
 /* ── Carrito (demo) ────────────────────────────────────────────────────── */
@@ -68,8 +71,21 @@ if (gsap && ScrollTrigger) {
   document.documentElement.classList.add("rt-motion");
   initTech();
   initCollection();
-  // la navbar pasa a texto claro sobre la colección
-  ScrollTrigger.create({ trigger: "#coleccion", start: "top 40px", end: "bottom 40px", toggleClass: { targets: "[data-nav]", className: "is-dark" } });
+}
+
+/* ── Navbar: toma el tema de la sección que tiene debajo ────────────────── */
+{
+  const nav = $("[data-nav]"), zones = $$("[data-nav-theme]");
+  let queued = false;
+  const update = () => {
+    queued = false;
+    const y = nav.offsetHeight / 2;                                           // la sección que pasa por el medio de la barra
+    const zone = zones.find((z) => { const r = z.getBoundingClientRect(); return r.top <= y && r.bottom > y; });
+    nav.dataset.theme = zone?.dataset.navTheme || "light";
+    nav.classList.toggle("is-scrolled", scrollY > 8);
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+  addEventListener("scroll", queue, { passive: true }); addEventListener("resize", queue); update();
 }
 
 /* ═════════════════════════════════════════════════════════════════════════
@@ -99,17 +115,40 @@ function initTech() {
     scrollTo({ top: top + (i / (N - 1)) * (track.offsetHeight - innerHeight), behavior: "smooth" });
   }));
 
-  // etiquetas + flechas (el DOM se arma ya; la pieza se engancha cuando carga el modelo)
-  STAGES.forEach((s, si) => s.callouts.forEach((c) => {
-    const g = document.createElementNS(NS, "g");
-    const ln = document.createElementNS(NS, "path"); ln.setAttribute("class", "ln"); ln.setAttribute("pathLength", "1");
-    const hd = document.createElementNS(NS, "path"); hd.setAttribute("class", "hd");
-    const ring = document.createElementNS(NS, "circle"); ring.setAttribute("class", "ring");
-    const dot = document.createElementNS(NS, "circle"); dot.setAttribute("class", "dot"); dot.setAttribute("r", "4.5");
-    g.append(ln, ring, dot, hd); svg.append(g);
-    const label = document.createElement("div"); label.className = "rt-label"; label.innerHTML = `<b>${c.t}</b><span>${c.d}</span>`; labelsBox.append(label);
-    callouts.push({ ...c, stage: si, g, ln, hd, ring, dot, label, local: null, obj: null });
-  }));
+  // etiquetas + flechas (el DOM se arma ya; la pieza se engancha cuando carga el modelo).
+  // En el teléfono: pin numerado sobre la pieza + leyenda (una lista por etapa) en vez de flecha y etiqueta.
+  const legendBox = $("[data-legend]"), legends = [];
+  let pick = { stage: -1, i: 0, at: -1e9 };                                    // pieza elegida a mano (tocando chip o pin)
+  const CYCLE = 2400, PICK_HOLD = 8000;
+  // pieza destacada de una etapa: la elegida a mano por un rato; si no, van rotando solas
+  const activeOf = (stage, n, now) => pick.stage === stage && now - pick.at < PICK_HOLD ? pick.i : Math.floor(now / CYCLE) % n;
+  STAGES.forEach((s, si) => {
+    const ol = document.createElement("ol");
+    if (s.callouts.length) { legendBox.append(ol); legends.push({ stage: si, ol }); }
+    s.callouts.forEach((c, ci) => {
+      const g = document.createElementNS(NS, "g");
+      const ln = document.createElementNS(NS, "path"); ln.setAttribute("class", "ln"); ln.setAttribute("pathLength", "1");
+      const hd = document.createElementNS(NS, "path"); hd.setAttribute("class", "hd");
+      const ring = document.createElementNS(NS, "circle"); ring.setAttribute("class", "ring");
+      const dot = document.createElementNS(NS, "circle"); dot.setAttribute("class", "dot"); dot.setAttribute("r", "4.5");
+      const num = document.createElementNS(NS, "text"); num.setAttribute("class", "num"); num.textContent = ci + 1;
+      g.append(ln, ring, dot, hd, num); svg.append(g);
+      const label = document.createElement("div"); label.className = "rt-label"; label.innerHTML = `<b>${c.t}</b><span>${c.d}</span>`; labelsBox.append(label);
+      const li = document.createElement("li"); li.innerHTML = `<button type="button" tabindex="-1"><i>${ci + 1}</i><span>${c.t}</span></button>`; ol.append(li);
+      const choose = () => { pick = { stage: si, i: ci, at: performance.now() }; drawCallouts(state.f); };
+      li.firstChild.addEventListener("click", choose); g.addEventListener("click", choose);
+      callouts.push({ ...c, stage: si, idx: ci, g, ln, hd, ring, dot, num, label, li, local: null, obj: null });
+    });
+  });
+  // teléfono: el modelo ocupa lo que dejan la leyenda más alta y el texto más alto de las etapas con leyenda
+  const sticky = $("[data-sticky]");
+  const fitLayout = () => {
+    if (!isMobile()) return sticky.style.removeProperty("--copy-h"), sticky.style.removeProperty("--legend-h");
+    const withLegend = steps.filter((el) => STAGES[+el.dataset.stage].callouts.length);
+    sticky.style.setProperty("--copy-h", `${Math.ceil(Math.max(...withLegend.map((el) => el.offsetHeight)))}px`);
+    sticky.style.setProperty("--legend-h", `${Math.ceil(Math.max(0, ...legends.map((l) => l.ol.offsetHeight)))}px`);
+  };
+  fitLayout(); addEventListener("resize", fitLayout); document.fonts?.ready.then(fitLayout);
 
   mountExploded(model, {
     scroll: false, captions: false,
@@ -158,7 +197,7 @@ function initTech() {
     // despiece + cámara propia de la página
     exp.setProgress(lerp(a.p, b.p, t));
     const [ta, aza, ela, da] = a.cam, [tb, azb, elb, db] = b.cam;
-    exp.stage.look(lerp(ta[0], tb[0], t), lerp(ta[1], tb[1], t), lerp(ta[2], tb[2], t), rad(lerp(aza, azb, t)), rad(lerp(ela, elb, t)), lerp(da, db, t), 1.3);
+    exp.stage.look(lerp(ta[0], tb[0], t), lerp(ta[1], tb[1], t), lerp(ta[2], tb[2], t), rad(lerp(aza, azb, t)), rad(lerp(ela, elb, t)), ...(isMobile() ? [mobileDist(a, b, t, lerp(da, db, t), exp.stage.aspect), 0] : [lerp(da, db, t), 1.3]));
     drawCallouts(f);
   }
 
@@ -167,8 +206,11 @@ function initTech() {
     camera.updateMatrixWorld(); scene.updateMatrixWorld();
     const s = clamp(innerWidth / 1440, .5, 1), mob = isMobile();
     // las etiquetas de la izquierda no pisan el texto de la etapa
-    const minL = mob ? 8 : Math.max(8, copyBox.getBoundingClientRect().right - model.getBoundingClientRect().left + 16);
+    if (mob) return drawPins(f, camera, W, H);
+    const minL = Math.max(8, copyBox.getBoundingClientRect().right - model.getBoundingClientRect().left + 16);
     for (const c of callouts) {
+      c.ln.style.display = c.hd.style.display = c.num.style.display = c.label.style.display = "";
+      c.dot.setAttribute("r", "4.5"); c.g.style.opacity = ""; c.num.style.display = "none";
       const k = clamp((.36 - Math.abs(f - c.stage)) / .14);
       c.g.style.display = c.label.style.display = k > 0 ? "" : "none";
       if (k <= 0) continue;
@@ -192,6 +234,44 @@ function initTech() {
       c.label.classList.toggle("is-left", !right);
       c.label.style.opacity = smooth(.3, 1, k);
       c.label.style.transform = `translate(${right ? lx + 10 : lx - 10 - lw}px, ${ly - 13 + (1 - k) * 12}px)`;
+    }
+  }
+
+  // teléfono: pines numerados sobre cada pieza (sin flechas) + leyenda que entra con la etapa
+  function drawPins(f, camera, W, H) {
+    const now = performance.now(), pulse = Math.sin(now / 300), pins = [];
+    const R = 8, RA = 12;                                                     // pin normal / pin destacado
+    for (const c of callouts) {
+      const k = clamp((.36 - Math.abs(f - c.stage)) / .14);
+      c.g.style.display = k > 0 ? "" : "none";
+      c.ln.style.display = c.hd.style.display = c.label.style.display = "none";
+      if (k <= 0) continue;
+      v.copy(c.local).applyMatrix4(c.obj.matrixWorld).project(camera);
+      pins.push({ c, k, x: (v.x + 1) / 2 * W, y: (1 - v.y) / 2 * H });
+    }
+    // separa los pines que caen encima de otro (piezas vecinas en el despiece)
+    for (let it = 0; it < 4; it++) for (let a = 0; a < pins.length; a++) for (let b = a + 1; b < pins.length; b++) {
+      const p = pins[a], q = pins[b], dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx, dy) || .01, min = R * 2 + 6;
+      if (d < min) { const push = (min - d) / 2, ux = dx / d, uy = dy / d; p.x -= ux * push; p.y -= uy * push; q.x += ux * push; q.y += uy * push; }
+    }
+    for (const p of pins) { p.x = clamp(p.x, RA + 6, W - RA - 6); p.y = clamp(p.y, RA + 6, H - RA - 6); }   // nunca debajo de la leyenda
+    for (const { c, k, x, y } of pins) {
+      const e = smooth(.5, 1, k), sc = .4 + .6 * e, n = STAGES[c.stage].callouts.length, on = activeOf(c.stage, n, now) === c.idx;
+      // la animación del pin destacado: crece y late; el resto queda chico y claro
+      c.grow = lerp(c.grow ?? 0, on ? 1 : 0, .18);
+      const r = lerp(R, RA, c.grow) * sc;
+      c.g.style.opacity = e; c.g.classList.toggle("is-on", on); c.li.classList.toggle("is-on", on);
+      if (on && !c.wasOn) c.g.parentNode.append(c.g);                         // el destacado queda arriba de los demás
+      c.wasOn = on;
+      c.dot.setAttribute("cx", x); c.dot.setAttribute("cy", y); c.dot.setAttribute("r", r); c.dot.style.opacity = 1;
+      c.num.setAttribute("x", x); c.num.setAttribute("y", y); c.num.style.display = ""; c.num.style.opacity = smooth(.8, 1, k);
+      c.num.style.fontSize = `${9 + 2.5 * c.grow}px`;
+      c.ring.setAttribute("cx", x); c.ring.setAttribute("cy", y); c.ring.setAttribute("r", r + 5 + 3 * pulse); c.ring.style.opacity = .5 * e * c.grow;
+    }
+    for (const { stage, ol } of legends) {
+      const k = clamp((.36 - Math.abs(f - stage)) / .14);
+      ol.style.opacity = smooth(.3, 1, k); ol.classList.toggle("is-on", k > 0);
+      [...ol.children].forEach((li, j) => { li.style.transform = `translateY(${(1 - smooth(.2 + j * .1, 1, k)) * 10}px)`; });
     }
   }
 

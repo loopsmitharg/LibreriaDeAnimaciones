@@ -17,7 +17,7 @@
   <script type="module" src="ritmo.js"></script>
 </head>
 <body class="rt">
-  <header class="rt-nav" data-nav>
+  <header class="rt-nav" data-nav data-theme="light">
     <a class="rt-logo" href="#inicio" aria-label="Ritmo, inicio"><svg viewBox="0 0 40 24" aria-hidden="true"><path d="M2 20 C 8 20 10 4 16 4 S 24 20 30 20 S 36 8 38 4"/></svg>Ritmo</a>
     <nav class="rt-nav__links" aria-label="Principal">
       <a href="#inicio">Tecnología</a>
@@ -29,7 +29,7 @@
 
   <main>
     <!-- ── Tecnología: modelo 3D + etapas por scroll ─────────────────────────────── -->
-    <section class="rt-tech" id="inicio" aria-label="Tecnología de la LS·01 Runner en 3D">
+    <section class="rt-tech" id="inicio" data-nav-theme="light" aria-label="Tecnología de la LS·01 Runner en 3D">
       <div class="rt-track" data-track>
         <div class="rt-sticky" data-sticky>
           <p class="rt-bigword" aria-hidden="true" data-bigword>LS·01</p>
@@ -52,6 +52,8 @@
             <div class="rt-labels" data-labels></div>
             <p class="rt-loading" data-loading>Cargando modelo</p>
           </div>
+          <!-- Móvil: leyenda numerada de los pines (la arma el JS, una lista por etapa). -->
+          <div class="rt-legend" data-legend aria-hidden="true"></div>
 
           <!-- Textos de cada etapa (data-stage = índice). -->
           <div class="rt-copy">
@@ -113,7 +115,7 @@
     </section>
 
     <!-- ── Colección: navegador de productos 3D con fotos ───────────────────────── -->
-    <section class="rt-col" id="coleccion" aria-label="Colección">
+    <section class="rt-col" id="coleccion" data-nav-theme="dark" aria-label="Colección">
       <div class="rt-col__track" data-col-track>
         <div class="rt-col__sticky">
           <div class="rt-col__head"><p class="rt-kicker">Colección otoño · 4 modelos</p><p class="rt-col__count"><b data-col-index>01</b> / <span data-col-total>04</span></p></div>
@@ -155,14 +157,14 @@
       </div>
     </section>
 
-    <section class="rt-close">
+    <section class="rt-close" data-nav-theme="lime">
       <p class="rt-kicker">Cambios sin cargo · 30 días</p>
       <h2>Si no te cambia el ritmo,<br />te devolvemos la plata.</h2>
       <a class="rt-btn rt-btn--lime" href="#comprar">Elegir mi talle</a>
     </section>
   </main>
 
-  <footer class="rt-foot"><span>© 2026 Ritmo</span><span>LS·01 Runner</span></footer>
+  <footer class="rt-foot" data-nav-theme="dark"><span>© 2026 Ritmo</span><span>LS·01 Runner</span></footer>
 
 </body>
 </html>
