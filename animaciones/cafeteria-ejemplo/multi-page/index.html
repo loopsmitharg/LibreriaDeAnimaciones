@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Alba · Tostadores de café — Inicio</title>
-  <meta name="description" content="Cafetería y tostaduría de especialidad. Sitio de ejemplo (multi-page) de la Librería de Animaciones." />
+  <meta name="description" content="Cafetería y tostaduría de especialidad." />
   <link rel="stylesheet" href="../../../assets/css/fonts.css" />
   <link rel="stylesheet" href="../../../assets/css/shell.css" />
   <link rel="stylesheet" href="../../coffee-3d/styles/scene.css" />
@@ -169,34 +169,9 @@
     <div class="cf-footer__inner">
       <a class="cf-logo" href="index.html">Alba<i>.</i></a>
       <nav aria-label="Pie"><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="nosotros.html">Nosotros</a><a href="visitanos.html">Visitanos</a></nav>
-      <span>Marca y textos ficticios · sitio de ejemplo</span>
+      <span>© 2026 Alba</span>
     </div>
   </footer>
 
-  <section class="lib-notes">
-    <div class="lib-notes__inner">
-      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Cafetería de ejemplo · Multi-page</h2></div>
-      <div class="lib-notes__meta"><span>4 páginas con menú (Inicio, Carta, Nosotros, Visitanos)</span><span>Coffee 3D Motion Lab + Scroll de agencia</span><span>Three.js · GSAP + ScrollTrigger</span></div>
-      <div class="lib-notes__grid">
-        <div>
-          <h3>Qué se reutiliza</h3>
-          <ul>
-            <li><strong>Escenas 3D:</strong> <code>shared/scenes.js</code> monta efectos de <code>coffee-3d</code> con <code>data-c3="hero|wave|orbit|journey"</code>. Inicio usa el Product Hero (21) y la ola (17) dentro de la portada que se abre con clip-path; Nosotros, el Macro Journey (11) con textos propios; Visitanos, la corriente infinita (18).</li>
-            <li><strong>Tarjetas del Scroll de agencia:</strong> el acordeón que se abre con el scroll (<code>data-items</code>) y las tarjetas en dos columnas desfasadas (<code>data-card</code>). En la Carta el acordeón también se abre con clic y lista los precios.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Menú</h3>
-          <ul>
-            <li>Barra fija transparente sobre el hero, sólida después; se esconde al bajar y vuelve al subir.</li>
-            <li>En móvil, botón hamburguesa: panel a pantalla completa que se abre con <code>clip-path: circle()</code> y links que suben desde su máscara. <kbd>Esc</kbd> lo cierra.</li>
-            <li>Sin GSAP o con <code>prefers-reduced-motion</code>: todo visible y las tarjetas abiertas; las escenas 3D que no son de scroll arrancan en pausa.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <a class="lib-back" href="../../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Cafetería · Multi-page</small></a>
 </body>
 </html>

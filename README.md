@@ -89,11 +89,11 @@ y abrir `http://localhost:5510/`.
 3. Terminar la página con una `<section class="lib-notes">` (ficha técnica) y el `<a class="lib-back">` para volver.
 4. Sumar el botón en el grupo que corresponda de `index.html` y actualizar el contador.
 
-## Agregar una página de ejemplo (`ejemplos/<sitio>/`)
+## Agregar una página de ejemplo (`ejemplos/<sitio>/`, también `animaciones/cafeteria-ejemplo/`)
 
 Estas páginas se muestran a los dueños, así que van **limpias**: sin `.lib-notes`, sin `.lib-back` y con un pie propio de la marca (nada de "Sitio de ejemplo · Librería de Animaciones").
 
-1. La info interna (ficha técnica, de dónde sale cada pieza, qué reemplazar) va en `ejemplos/<sitio>/ficha.html`, con `assets/css/ficha.css`: botón para abrir la página, accesos a cada página del sitio y "Copiar link para el cliente". Copiar la de otro sitio y cambiar el contenido.
+1. La info interna (ficha técnica, de dónde sale cada pieza, qué reemplazar) va en `ficha.html`, en la misma carpeta que su `index.html`, con `assets/css/ficha.css`: botón para abrir la página, accesos a cada página del sitio y "Copiar link para el cliente". Copiar la de otro sitio y cambiar el contenido.
 2. La tarjeta de `index.html` apunta a `ficha.html`, no a `index.html`.
 
 ## Reglas que traen las animaciones

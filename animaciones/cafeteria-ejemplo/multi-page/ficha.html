@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Alba multi-page — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Sitio de ejemplo · Multi-page</div>
+      <h1>Cafetería con menú: Inicio, Carta, Nosotros y Visitanos</h1>
+      <p class="fi-lead">Los granos 3D en el hero, en una portada que se abre con clip-path y en un recorrido macro por scroll, más las tarjetas del Scroll de agencia: acordeón de la carta con precios y granos en dos columnas desfasadas. Menú fijo y panel móvil.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <nav class="fi-paginas" aria-label="Páginas del sitio"><span>Páginas</span><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="nosotros.html">Nosotros</a><a href="visitanos.html">Visitanos</a></nav>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Cafetería de ejemplo · Multi-page</h2></div>
+      <div class="lib-notes__meta"><span>4 páginas con menú (Inicio, Carta, Nosotros, Visitanos)</span><span>Coffee 3D Motion Lab + Scroll de agencia</span><span>Three.js · GSAP + ScrollTrigger</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué se reutiliza</h3>
+          <ul>
+            <li><strong>Escenas 3D:</strong> <code>shared/scenes.js</code> monta efectos de <code>coffee-3d</code> con <code>data-c3="hero|wave|orbit|journey"</code>. Inicio usa el Product Hero (21) y la ola (17) dentro de la portada que se abre con clip-path; Nosotros, el Macro Journey (11) con textos propios; Visitanos, la corriente infinita (18).</li>
+            <li><strong>Tarjetas del Scroll de agencia:</strong> el acordeón que se abre con el scroll (<code>data-items</code>) y las tarjetas en dos columnas desfasadas (<code>data-card</code>). En la Carta el acordeón también se abre con clic y lista los precios.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Menú</h3>
+          <ul>
+            <li>Barra fija transparente sobre el hero, sólida después; se esconde al bajar y vuelve al subir.</li>
+            <li>En móvil, botón hamburguesa: panel a pantalla completa que se abre con <code>clip-path: circle()</code> y links que suben desde su máscara. <kbd>Esc</kbd> lo cierra.</li>
+            <li>Sin GSAP o con <code>prefers-reduced-motion</code>: todo visible y las tarjetas abiertas; las escenas 3D que no son de scroll arrancan en pausa.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>
