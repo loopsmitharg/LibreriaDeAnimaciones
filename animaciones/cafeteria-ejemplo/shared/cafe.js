@@ -29,6 +29,8 @@
     burger.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
     addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); burger.focus(); } });
     $$('a', drawer).forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    // Si la ventana se agranda con el panel abierto (rotar el teléfono, por ejemplo), se cierra y se libera el scroll.
+    matchMedia('(min-width: 761px)').addEventListener('change', (e) => { if (e.matches && nav.classList.contains('is-open')) setOpen(false); });
     // Barra sólida fuera del hero; se esconde al bajar y vuelve al subir.
     let last = scrollY;
     const onScroll = () => {

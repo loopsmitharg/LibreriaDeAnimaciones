@@ -31,24 +31,33 @@
   </header>
   <div class="cf-drawer" id="menu-movil" data-drawer>
     <nav aria-label="Principal (móvil)"><ul>
-      <li><a href="index.html" aria-current="page">Inicio</a></li>
-      <li><a href="carta.html">Carta</a></li>
-      <li><a href="nosotros.html">Nosotros</a></li>
-      <li><a href="visitanos.html">Visitanos</a></li>
+      <li><a href="index.html" aria-current="page"><span>Inicio</span><small>La casa y los granos de la semana</small></a></li>
+      <li><a href="carta.html"><span>Carta</span><small>Barra, cocina y granos para llevar</small></a></li>
+      <li><a href="nosotros.html"><span>Nosotros</span><small>Del origen a la taza</small></a></li>
+      <li><a href="visitanos.html"><span>Visitanos</span><small>Dirección, horarios y talleres</small></a></li>
     </ul></nav>
-    <p>Calle del Tueste 1234 · Lunes a sábado de 8 a 20 h</p>
+    <div class="cf-drawer__pie">
+      <p>Calle del Tueste 1234<br />Lun a sáb · 8 a 20 h</p>
+      <a href="carta.html">Ver la carta <span aria-hidden="true">→</span></a>
+    </div>
   </div>
 
   <main>
     <!-- Hero: escena 21 · Coffee Product Hero. El HTML del template se monta sobre los granos. -->
     <section class="cf-hero">
-      <div class="cf-hero__fallback">
-        <span class="cf-kicker">Tostadores de especialidad · desde 2014</span>
-        <h1>Café recién tostado, <em>grano a grano</em></h1>
+      <!-- Respaldo con el mismo contenido y la misma caja que el texto de la escena: al montarse no salta nada. -->
+      <div class="cf-hero__scene cf-hero__fallback">
+        <div class="c3-hero">
+          <small>Tostadores de especialidad <span>· desde 2014</span></small>
+          <h1>Café recién tostado, <em>grano a grano</em></h1>
+          <p>Tostamos en el local dos veces por semana y lo servimos en la barra, en filtrado o para llevar a casa.</p>
+          <a href="carta.html">Ver la carta</a>
+        </div>
       </div>
-      <div data-c3="hero" data-roast="dark" style="position:absolute;inset:0">
+      <!-- data-fit="frame": en pantallas verticales los granos van en una banda arriba y otra abajo del texto, enteros. -->
+      <div class="cf-hero__scene" data-c3="hero" data-roast="dark" data-fit="frame">
         <template data-c3-html>
-          <small>Tostadores de especialidad · desde 2014</small>
+          <small>Tostadores de especialidad <span>· desde 2014</span></small>
           <h1>Café recién tostado, <em>grano a grano</em></h1>
           <p>Tostamos en el local dos veces por semana y lo servimos en la barra, en filtrado o para llevar a casa.</p>
           <a href="carta.html">Ver la carta</a>

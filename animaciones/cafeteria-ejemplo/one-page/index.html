@@ -21,19 +21,24 @@
     <!-- 1 · Hero: escena 21 · Coffee Product Hero. Sin menú: solo la marca arriba a la izquierda. -->
     <section class="cf-hero">
       <span class="cf-logo cf-mark">Alba<i>.</i><small>tostadores</small></span>
-      <div class="cf-hero__fallback">
-        <span class="cf-kicker">Café de especialidad · tostado en el local</span>
-        <h1>Una taza que empieza <em>en el grano</em></h1>
+      <!-- Respaldo con el mismo contenido y la misma caja que el texto de la escena: al montarse no salta nada. -->
+      <div class="cf-hero__scene cf-hero__fallback">
+        <div class="c3-hero">
+          <small>Café de especialidad <span>· tostado en el local</span></small>
+          <h1>Una taza que empieza <em>en el grano</em></h1>
+          <p>Tostamos lotes chicos dos veces por semana y los servimos en la barra, filtrados o para llevar.</p>
+          <a href="#visita">Cómo llegar</a>
+        </div>
       </div>
-      <div data-c3="hero" data-roast="dark" style="position:absolute;inset:0">
+      <!-- data-fit="frame": en pantallas verticales los granos van en una banda arriba y otra abajo del texto, enteros. -->
+      <div class="cf-hero__scene" data-c3="hero" data-roast="dark" data-fit="frame">
         <template data-c3-html>
-          <small>Café de especialidad · tostado en el local</small>
+          <small>Café de especialidad <span>· tostado en el local</span></small>
           <h1>Una taza que empieza <em>en el grano</em></h1>
           <p>Tostamos lotes chicos dos veces por semana y los servimos en la barra, filtrados o para llevar.</p>
           <a href="#visita">Cómo llegar</a>
         </template>
       </div>
-      <span class="cf-scroll-cue">Bajá</span>
     </section>
 
     <!-- 2 · Presentación por líneas -->
