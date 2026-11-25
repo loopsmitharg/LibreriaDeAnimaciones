@@ -110,27 +110,67 @@
       return li;
     });
     const c = (capas.length - 1) / 2;
-    let abre = 0, meta = 0, px = 0, py = 0, tx = 0, ty = 0, tocado = false;
+    // Pantalla angosta: no hay lugar a los dos costados. Al abrirse, la hamburguesa se achica hacia
+    // la izquierda y todas las etiquetas van en columna a la derecha, con más aire entre capas.
+    const angosta = matchMedia('(max-width: 700px)');
+    const cajas = etiquetas.map((g, i) => g && capas[i].getBBox());
+    let abre = 0, meta = 0, px = 0, py = 0, tx = 0, ty = 0, tocado = false, lateralAntes = null, anchoAntes = 0;
+    let escAbierta = 1, aireLateral = 36;
+    if (document.fonts) document.fonts.ready.then(() => { anchoAntes = 0; });   // re-medir etiquetas con la fuente cargada
     const pintar = (t) => {
       abre += (meta - abre) * .09; px += (tx - px) * .08; py += (ty - py) * .08;
       const flota = reduce ? 0 : Math.sin(t / 900) * 3;
-      svg.style.transform = `rotateY(${(px * 14).toFixed(2)}deg) rotateX(${(-py * 10).toFixed(2)}deg)`;
+      const lateral = angosta.matches;
+      const W = caja.clientWidth, H = svg.clientHeight || W * VB.height / VB.width;
+      if (lateral !== lateralAntes || W !== anchoAntes) {
+        etiquetas.forEach((li, i) => { if (li) { li.className = lateral || i % 2 ? 'is-der' : 'is-izq'; li.style.left = li.style.right = ''; } });
+        if (lateral) {
+          // Escala abierta: la justa para que la etiqueta más larga entre a la derecha de la hamburguesa.
+          const larga = Math.max(...etiquetas.filter(Boolean).map((li) => li.offsetWidth));
+          const limite = hero.clientWidth - caja.offsetLeft - 10;
+          escAbierta = clamp((limite - larga - 2 + caja.offsetLeft) / W, .42, .8);
+          // Aire entre capas: poco, para que abierta no sea más alta que cerrada (las etiquetas se acomodan solas).
+          aireLateral = 26;
+        }
+        lateralAntes = lateral; anchoAntes = W;
+      }
+      const esc = lateral ? 1 - (1 - escAbierta) * abre : 1;          // escala del dibujo
+      const izq = lateral ? (-caja.offsetLeft + 6 - W * (1 - esc) / 2) * abre : 0;  // corrimiento a la izquierda
+      const aire = lateral ? aireLateral : 20;                         // separación entre capas abiertas
+      svg.style.transform = `translateX(${(izq).toFixed(1)}px) scale(${esc.toFixed(3)}) rotateY(${(px * 14).toFixed(2)}deg) rotateX(${(-py * 10).toFixed(2)}deg)`;
       capas.forEach((g, i) => {
         const k = i - c;
-        const y = -k * 20 * abre + flota * (i / capas.length);
+        const y = -k * aire * abre + flota * (i / capas.length);
         const x = px * k * 5 * abre;
         const rot = px * k * 1.1 * abre;
         g.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) rotate(${rot.toFixed(2)}deg)`;
         const li = etiquetas[i];
         if (li) {
-          const bb = g.getBBox();
+          const bb = cajas[i];
           const centro = bb.y + bb.height / 2 + y;
-          li.style.top = `${((centro - VB.y) / VB.height * 100).toFixed(2)}%`;
-          li.style[li.classList.contains('is-der') ? 'left' : 'right'] = `${(86 + (i % 3) * 3)}%`;
+          if (lateral) {
+            // Coordenadas en px de la caja, aplicando la escala (centrada) y el corrimiento del SVG
+            const yPx = H / 2 + ((centro - VB.y) / VB.height * H - H / 2) * esc;
+            li.style.top = `${yPx.toFixed(1)}px`;
+            li.style.left = `${(W / 2 + W * esc / 2 + izq - 4).toFixed(1)}px`;
+          } else {
+            li.style.top = `${((centro - VB.y) / VB.height * 100).toFixed(2)}%`;
+            li.style[li.classList.contains('is-der') ? 'left' : 'right'] = `${(86 + (i % 3) * 3)}%`;
+          }
           li.style.translate = '0 -50%';
           li.classList.toggle('is-on', abre > .55);
         }
       });
+      // Columna lateral: si dos etiquetas quedan pegadas se separan, manteniendo el centro del grupo.
+      if (lateral) {
+        const ls = etiquetas.filter(Boolean).map((li) => ({ li, y: parseFloat(li.style.top) })).sort((a, b) => a.y - b.y);
+        const paso = (ls[0].li.offsetHeight || 18) + 3;
+        const antes = ls.reduce((s, e) => s + e.y, 0);
+        for (let j = 1; j < ls.length; j++) ls[j].y = Math.max(ls[j].y, ls[j - 1].y + paso);
+        const corre = (antes - ls.reduce((s, e) => s + e.y, 0)) / ls.length;
+        ls.forEach((e) => { e.li.style.top = `${(e.y + corre).toFixed(1)}px`; });
+      }
+      hero.classList.toggle('is-abierta', abre > .3);
     };
     if (reduce) { pintar(0); }
     else {
@@ -233,6 +273,8 @@
     if (!armador) return;
     if (!window.gsap || !window.ScrollTrigger || reduce) { root.classList.remove('bz-js'); return; }
     gsap.registerPlugin(ScrollTrigger);
+    // En el celular la barra del navegador aparece y desaparece al scrollear: que eso no re-mida la escena (saltos).
+    ScrollTrigger.config({ ignoreMobileResize: true });
     const pila = $('.bz-armador__escena .bz-pila', armador);
     const cae = $$('.bz-cae', armador);
     const lineas = $$('[data-linea]', armador);

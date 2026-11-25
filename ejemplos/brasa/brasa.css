@@ -57,12 +57,40 @@ body.bz { font-family: "Outfit", system-ui, sans-serif; }
 .bz .cf-nav__links a[aria-current="page"] { color: var(--rojo); }
 .bz .cf-nav__cta { background: var(--rojo); color: var(--crema); font: 400 1.1rem/1 var(--cartel); letter-spacing: .05em; text-transform: uppercase; box-shadow: 3px 3px 0 var(--carbon); transition: transform .2s ease, box-shadow .2s ease; }
 .bz .cf-nav__cta:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--carbon); }
-.bz .cf-burger { background: var(--rojo); color: var(--crema); }
-.bz .cf-drawer { background: var(--rojo); color: var(--crema); }
-.bz .cf-drawer li a { font: 400 clamp(3.4rem, 16vw, 5.4rem)/1.05 var(--cartel); text-transform: uppercase; }
+/* Hamburguesa → X: las tres rayas apiladas en el centro (el <b> de lectores de pantalla es el último hijo) */
+.bz .cf-burger { display: none; place-items: center; border: 2px solid var(--carbon); background: var(--rojo); color: var(--crema); box-shadow: 3px 3px 0 var(--carbon); transition: background-color .3s ease, color .3s ease, box-shadow .3s ease, transform .4s cubic-bezier(.34, 1.56, .64, 1); }
+.bz .cf-burger span { grid-area: 1 / 1; width: 1.15rem; height: 2.5px; margin: 0; border-radius: 2px; }
+.bz .cf-burger span:nth-child(1) { transform: translateY(-6px); }
+.bz .cf-burger span:nth-child(3) { transform: translateY(6px); }
+.bz .cf-nav.is-open .cf-burger { transform: rotate(90deg); box-shadow: 0 0 0 var(--carbon); }
+.bz .cf-nav.is-open .cf-burger span:nth-child(1) { transform: rotate(45deg); }
+.bz .cf-nav.is-open .cf-burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.bz .cf-nav.is-open .cf-burger span:nth-child(3) { transform: rotate(-45deg); }
+@media (max-width: 760px) { .bz .cf-burger { display: grid; } }
+/* Panel: enlaces numerados como una comanda, con franja de papel a cuadros abajo */
+.bz .cf-drawer { align-content: center; gap: 2.2rem; padding: 6.5rem 1.5rem 4.5rem; background: var(--rojo); color: var(--crema); }
+.bz .cf-drawer::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.6rem; background: repeating-conic-gradient(var(--carbon) 0 25%, var(--crema) 0 50%) 0 0 / 1.6rem 1.6rem; border-top: 2px solid var(--carbon); }
+.bz .cf-drawer ul { gap: 0; counter-reset: menu; border-top: 2px dashed rgba(255, 244, 226, .35); }
+.bz .cf-drawer li { border-bottom: 2px dashed rgba(255, 244, 226, .35); }
+.bz .cf-drawer li a { display: flex; align-items: center; gap: 1rem; padding: .7rem 0 .55rem; font: 400 clamp(2.8rem, 14vw, 4.6rem)/1 var(--cartel); text-transform: uppercase; color: var(--crema); }
+.bz .cf-drawer li a::before { counter-increment: menu; content: "0" counter(menu); align-self: flex-start; margin-top: .4rem; color: rgba(255, 244, 226, .65); font: 500 .75rem/1 var(--mono); letter-spacing: .1em; }
+.bz .cf-drawer li a::after { content: "→"; margin-left: auto; font: 400 .5em/1 "Outfit", sans-serif; opacity: .7; transition: transform .3s ease; }
+.bz .cf-drawer li a:hover::after, .bz .cf-drawer li a:active::after { transform: translateX(.3rem); }
 .bz .cf-drawer li a[aria-current="page"] { color: var(--mostaza); }
-.bz .cf-drawer p { color: rgba(255, 244, 226, .8); }
-@media (max-width: 760px) { .bz .cf-nav.is-open { color: var(--crema); } .bz .cf-nav.is-open .bz-logo b { color: var(--crema); } .bz .cf-nav.is-open .cf-burger { background: var(--crema); color: var(--rojo); } }
+.bz .cf-drawer li a[aria-current="page"]::before { color: var(--mostaza); }
+.bz-drawer__pie { display: grid; justify-items: start; gap: 1.2rem; opacity: 0; transform: translateY(1rem); transition: opacity .4s ease, transform .5s cubic-bezier(.22, 1, .36, 1); }
+.cf-drawer.is-open .bz-drawer__pie { opacity: 1; transform: none; transition-delay: .5s; }
+.bz-drawer__pie .bz-btn { background: var(--mostaza); color: var(--carbon); }
+.bz .cf-drawer p { color: rgba(255, 244, 226, .85); font: 500 .7rem/1.6 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+/* Menú abierto: el nav se funde con el panel rojo (sin la barra crema) */
+@media (max-width: 760px) {
+  .bz .cf-nav.is-open, .bz .cf-nav.is-open.is-solid { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; color: var(--crema); }
+  .bz .cf-nav.is-open .bz-logo { color: var(--crema); }
+  .bz .cf-nav.is-open .bz-logo b { color: var(--crema); }
+  .bz .cf-nav.is-open .cf-burger { background: var(--crema); color: var(--rojo); }
+}
+/* Con el menú abierto no asoman la barra de filtros ni el botón del pedido (carta) */
+body:has(.cf-nav.is-open) .fab-order, body:has(.cf-nav.is-open) .filter-sticky-container { opacity: 0; pointer-events: none; }
 
 /* ---------- Botones ---------- */
 .bz-btn, .bz .cf-btn { display: inline-flex; align-items: center; gap: .6rem; padding: 1rem 1.5rem; border: 2px solid var(--carbon); border-radius: 999px; background: var(--rojo); color: var(--crema); text-decoration: none; font: 400 1.15rem/1 var(--cartel); letter-spacing: .05em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--carbon); transition: box-shadow .25s ease, background-color .25s ease; }
@@ -109,6 +137,14 @@ html.bz-llegando .bz-papel { clip-path: inset(0); }
 .bz-callouts li span { padding: .3rem .5rem; border: 1.5px solid var(--carbon); border-radius: .3rem; background: var(--crema); }
 .bz-callouts li.is-on { opacity: 1; }
 .bz-callouts li.is-on::before { transform: none; }
+/* Abierta: la pista se corre para no tapar las capas */
+.bz-hero__pista { transition: opacity .3s ease; }
+.bz-hero.is-abierta .bz-hero__pista { opacity: 0; }
+@media (max-width: 700px) {
+  .bz-callouts li { gap: .3rem; font-size: .58rem; letter-spacing: .06em; }
+  .bz-callouts li::before { width: .9rem; }
+  .bz-callouts li span { padding: .22rem .4rem; }
+}
 @media (max-width: 900px) {
   .bz-hero { grid-template-columns: 1fr; padding-top: 6.5rem; text-align: left; }
   .bz-hero__burger { width: min(82%, 22rem); }
@@ -132,6 +168,16 @@ html.bz-llegando .bz-papel { clip-path: inset(0); }
 .bz .cf-item__num { font-family: var(--mono); }
 .bz-item-arte svg { position: absolute; right: 6%; top: 50%; translate: 0 -50%; height: 115%; width: auto; overflow: visible; filter: drop-shadow(0 12px 10px rgba(0, 0, 0, .3)); }
 .bz .cf-more span { background: var(--mostaza); color: var(--carbon); }
+/* Mobile: la hamburguesa va chica en la esquina, al lado del título, y el texto ocupa todo el ancho debajo */
+@media (max-width: 760px) {
+  .bz .cf-item { padding: 1.3rem 1.2rem 1.4rem; }
+  .bz .cf-item__head { min-height: 4.6rem; padding-right: 6.2rem; flex-direction: column; justify-content: center; align-items: flex-start; gap: .4rem; }
+  .bz .cf-item__num { order: -1; }
+  .bz .cf-item h3 { font-size: clamp(1.7rem, 8vw, 2.1rem); }
+  .bz .cf-item__content > p { margin-top: .9rem; }
+  .bz-item-arte { top: .7rem; right: .6rem; bottom: auto; left: auto; width: 6.4rem; height: 5.6rem; -webkit-mask-image: none; mask-image: none; }
+  .bz-item-arte svg { right: 0; top: 0; translate: none; width: 100%; height: 100%; filter: drop-shadow(0 6px 5px rgba(0, 0, 0, .3)); }
+}
 
 /* ---------- El armador ---------- */
 .bz-armador { position: relative; height: 520vh; background: var(--carbon); color: var(--crema); --ticket-w: min(24rem, 34vw); }
@@ -170,7 +216,7 @@ html.bz-llegando .bz-papel { clip-path: inset(0); }
 .bz-js .bz-ticket__lineas li:not(.is-on)::before { content: "·"; color: var(--gris); }
 .bz-js .bz-ticket__lineas li.is-nueva { color: var(--rojo); }
 .bz-ticket__pie { display: grid; grid-template-columns: 1fr auto; align-items: baseline; padding-top: .7rem; border-top: 1.5px dashed rgba(26, 18, 16, .4); }
-.bz-ticket__pie span:first-child { font: 400 1.3rem/1 var(--cartel); text-transform: uppercase; }
+.bz-ticket__pie > span:first-child { font: 400 1.3rem/1 var(--cartel); text-transform: uppercase; }
 .bz-ticket__pie b { font: 400 1.7rem/1 var(--cartel); color: var(--rojo); font-variant-numeric: tabular-nums; }
 .bz-ticket__pie small { grid-column: 1 / 3; margin-top: .3rem; color: var(--gris); font-size: .7rem; }
 .bz-ticket__cta { justify-content: center; margin-top: .4rem; font-size: 1rem; padding: .8rem 1rem; }
@@ -188,11 +234,15 @@ html.bz-llegando .bz-papel { clip-path: inset(0); }
 }
 @media (max-width: 900px) {
   .bz-armador { height: 480vh; }
-  .bz-armador__fijo { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr) auto; padding: 4.8rem 1rem 1rem; gap: .6rem; }
+  .bz-armador__fijo { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; padding: 4.6rem 1.25rem 1.25rem; gap: .8rem; }
+  .bz-armador__intro .bz-kicker { margin-bottom: .6rem; }
   .bz-armador__intro h2 { font-size: clamp(2rem, 9vw, 2.8rem); }
-  .bz-armador__escena { grid-row: 2; }
-  .bz-armador__escena .bz-pila { max-height: 100%; }
-  .bz-sello { right: 0; top: 0; }
+  /* La pila no llega a los bordes: entra con aire a los costados y apoyada en la tabla */
+  .bz-armador__escena { grid-row: 2; padding-bottom: .4rem; }
+  /* El SVG llena la caja y su dibujo se ajusta adentro (preserveAspectRatio xMidYMax): nunca pisa el ticket */
+  .bz-armador__escena .bz-pila { position: absolute; inset: 0 8% .4rem; width: 84%; height: calc(100% - .4rem); max-height: none; max-width: none; }
+  .bz-armador__tabla { width: 80%; height: 1.6rem; bottom: -.2rem; }
+  .bz-sello { right: .2rem; top: .2rem; padding: .25rem .7rem; border-width: 2.5px; font-size: 1.7rem; }
   /* Ticket compacto: solo la última línea marcada + total */
   .bz-ticket { grid-column: 1; grid-row: 3; transform: none; gap: .4rem; padding: .8rem .9rem 1.1rem; }
   .bz-ticket h3 { display: none; }
@@ -251,6 +301,10 @@ html.bz-llegando .bz-papel { clip-path: inset(0); }
 .bz .menu-hero h1 { font: 400 clamp(4.5rem, 14vw, 11rem)/.85 var(--cartel); text-transform: uppercase; letter-spacing: 0; }
 .bz .menu-kicker { color: var(--rojo); font-family: var(--mono); font-weight: 500; letter-spacing: .2em; }
 .bz .menu-note { display: inline-block; margin-top: 1.2rem; padding: .5rem .9rem; border: 1.5px dashed var(--rojo); border-radius: 999px; color: var(--rojo); font: 500 .72rem/1.3 var(--mono); letter-spacing: .06em; }
+/* Debajo del nav (60) y del menú móvil (55): al abrir el menú no se superpone */
+.bz .filter-sticky-container { z-index: 50; top: 4.15rem; background: rgba(255, 244, 226, .96); border-bottom: 1.5px solid var(--linea-c); transition: top .45s cubic-bezier(.65, 0, .35, 1), opacity .3s ease; }
+/* Cuando el nav se esconde al bajar, la barra sube al borde (sin hueco por donde asoman las tarjetas) */
+body:has(.cf-nav.is-hidden) .filter-sticky-container { top: 0; }
 .bz .filter-pill { border: 1.5px solid var(--carbon); color: var(--carbon); font-weight: 600; }
 .bz .filter-pill.active { background: var(--carbon); color: var(--crema); box-shadow: 3px 3px 0 var(--rojo); }
 .bz .menu-card-rich { background: #fffaf0; border-radius: 1.2rem; }
@@ -263,6 +317,11 @@ html.bz-llegando .bz-papel { clip-path: inset(0); }
 .bz .order-header h2, .bz .modal-title, .bz .order-total { font-family: var(--cartel); font-weight: 400; text-transform: uppercase; letter-spacing: .02em; }
 .bz .btn-modal-add { background: var(--rojo); color: var(--crema); }
 .bz #toast { bottom: 10.5rem; background: var(--carbon); color: var(--crema); }
+@media (max-width: 760px) {
+  .bz .fab-order { right: 1rem; bottom: 1rem; width: 56px; height: 56px; }
+  .bz .fab-order .material-icons-round { font-size: 28px; }
+  .bz #toast { right: 1rem; bottom: 5rem; }
+}
 /* Imagen de cada tarjeta: mini pila que se despliega al pasar el mouse */
 .bz-mini { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1.5px solid var(--carbon); background: var(--cuadros); background-size: 36px 36px; }
 .bz-mini::before { content: ""; position: absolute; inset: 0; background: radial-gradient(closest-side, rgba(255, 244, 226, .92), rgba(255, 244, 226, .55)); }
