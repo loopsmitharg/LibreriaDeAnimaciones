@@ -85,7 +85,10 @@ if (gsap && ScrollTrigger) {
     nav.classList.toggle("is-scrolled", scrollY > 8);
   };
   const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
-  addEventListener("scroll", queue, { passive: true }); addEventListener("resize", queue); update();
+  // alto real de la barra: el modelo 3D arranca debajo (ver .rt-model)
+  const measure = () => document.documentElement.style.setProperty("--nav-h", `${nav.offsetHeight}px`);
+  addEventListener("scroll", queue, { passive: true }); addEventListener("resize", () => { measure(); queue(); });
+  measure(); update(); document.fonts?.ready.then(measure);
 }
 
 /* ═════════════════════════════════════════════════════════════════════════
@@ -207,20 +210,36 @@ function initTech() {
     const s = clamp(innerWidth / 1440, .5, 1), mob = isMobile();
     // las etiquetas de la izquierda no pisan el texto de la etapa
     if (mob) return drawPins(f, camera, W, H);
-    const minL = Math.max(8, copyBox.getBoundingClientRect().right - model.getBoundingClientRect().left + 16);
+    const mr = model.getBoundingClientRect();
+    const minL = Math.max(8, copyBox.getBoundingClientRect().right - mr.left + 16);
+    // las etiquetas arrancan debajo de la navbar (el chip queda 13px arriba de la línea)
+    const minT = Math.max(70, $("[data-nav]").getBoundingClientRect().bottom - mr.top + 24);
+    const maxB = H - 80, GAP = 10, items = [];
+    // las de la derecha no llegan al riel (ni a su texto, que aparece en la etapa activa)
+    const maxR = $(".rt-rail").getBoundingClientRect().left - mr.left - 16;                              // su caja ya incluye el texto
     for (const c of callouts) {
-      c.ln.style.display = c.hd.style.display = c.num.style.display = c.label.style.display = "";
+      c.ln.style.display = c.hd.style.display = c.label.style.display = "";
       c.dot.setAttribute("r", "4.5"); c.g.style.opacity = ""; c.num.style.display = "none";
       const k = clamp((.36 - Math.abs(f - c.stage)) / .14);
       c.g.style.display = c.label.style.display = k > 0 ? "" : "none";
       if (k <= 0) continue;
       v.copy(c.local).applyMatrix4(c.obj.matrixWorld).project(camera);
       const ax = (v.x + 1) / 2 * W, ay = (1 - v.y) / 2 * H;
-      const right = c.dx >= 0, lw = c.label.offsetWidth || 200, dir = right ? 1 : -1;
-      const sx = mob ? .62 : s, sy = mob ? .55 : s;
+      const right = c.dx >= 0, lw = c.label.offsetWidth || 200, lh = c.label.offsetHeight || 60;
       // la etiqueta no se sale de la caja del modelo
-      const lx = clamp(ax + c.dx * sx, right ? 12 : minL + lw + 10, right ? W - lw - (mob ? 40 : 120) : W - 12);
-      const ly = clamp(ay + c.dy * sy, 70, H - (mob ? 30 : 80));
+      const lx = clamp(ax + c.dx * s, right ? 12 : minL + lw + 10, right ? maxR - lw - 10 : W - 12);
+      const ly = clamp(ay + c.dy * s, minT, maxB);
+      items.push({ c, k, ax, ay, right, lw, lh, lx, ly });
+    }
+    // las etiquetas de un mismo lado no se pisan: se empujan hacia abajo y, si no entran, hacia arriba
+    for (const side of [true, false]) {
+      const col = items.filter((it) => it.right === side).sort((a, b) => a.ly - b.ly);
+      for (let j = 1; j < col.length; j++) col[j].ly = Math.max(col[j].ly, col[j - 1].ly + col[j - 1].lh + GAP);
+      if (col.length) col[col.length - 1].ly = Math.min(col[col.length - 1].ly, maxB);
+      for (let j = col.length - 2; j >= 0; j--) col[j].ly = Math.max(minT, Math.min(col[j].ly, col[j + 1].ly - col[j].lh - GAP));
+    }
+    for (const { c, k, ax, ay, right, lw, lx, ly } of items) {
+      const dir = right ? 1 : -1;
       const ex = lx - dir * 26;                                                // codo: tramo horizontal y después diagonal a la pieza
       const ang = Math.atan2(ay - ly, ax - ex), tipX = ax - Math.cos(ang) * 8, tipY = ay - Math.sin(ang) * 8;
       c.ln.setAttribute("d", `M${lx},${ly} H${ex} L${tipX},${tipY}`);

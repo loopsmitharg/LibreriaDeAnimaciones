@@ -62,7 +62,7 @@ button { font: inherit; }
 .rt-ribbon [data-ribbon] { stroke: var(--lime); stroke-width: clamp(26px, 4vw, 54px); }
 .rt-ribbon [data-ribbon-thin] { stroke: var(--ink); stroke-width: 1.5px; }
 
-.rt-model { position: absolute; top: 0; bottom: 0; left: 30%; right: 0; }
+.rt-model { position: absolute; top: var(--nav-h, 4.75rem); bottom: 0; left: 30%; right: 9vw; }   /* arranca debajo de la navbar: la cámara encuadra solo lo visible */
 .rt-model .sn-canvas { position: absolute; z-index: 1; inset: 0; }
 .rt-callouts, .rt-labels { z-index: 2; }
 .rt-callouts { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
