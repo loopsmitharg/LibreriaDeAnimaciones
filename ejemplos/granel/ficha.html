@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Granel — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Granel · Dietética</div>
+      <h1>Granel: one-page de dietética</h1>
+      <p class="fi-lead">Marca ficticia de almacén natural: frutos secos con física en el hero, pasillos con scroll horizontal anclado, un frasco que se llena por capas con el scroll mientras la balanza sube y la etiqueta se completa, productos por peso con bolsa y "cómo comprar" con títulos sticky.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Granel · dietética</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo one-page para una dietética (marca ficticia)</span><span>Siete piezas de la librería en una sola página</span><span>GSAP + ScrollTrigger · SVG · física propia</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>De la librería</h3>
+          <ul>
+            <li><code>cafeteria-ejemplo/shared</code>: menú con barra que se esconde (con anclas), títulos por palabras, párrafo por líneas y fundidos.</li>
+            <li><code>scroll-horizontal</code>: los pasillos se anclan y corren de costado con su barra de progreso; en móvil se apilan.</li>
+            <li><code>menu-carta-pedidos</code>: productos con filtros, opciones por peso (100 g a 1 kg) y la bolsa guardada en <code>localStorage</code> (<code>data-pedido-key="granel_bolsa"</code>).</li>
+            <li><code>titulos-sticky</code>: "Cómo se compra a granel" con el título pegado mientras pasan las tarjetas.</li>
+            <li>De <code>ejemplos/brasa</code>: el armador (acá un frasco que se llena con el scroll y una etiqueta que se completa), la física de la parrilla (acá frutos secos sueltos en el hero), la cinta que reacciona al scroll y los botones imantados.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Propio de esta página</h3>
+          <ul>
+            <li>Las capas del frasco y los chorros que caen se animan con <code>attr</code> (y y height del <code>&lt;rect&gt;</code>), así no hay orígenes de transformación que se pisen. La balanza lee el avance de cada capa y mueve la aguja de forma continua.</li>
+            <li>Doce texturas a granel en <code>arte.js</code> como <code>&lt;pattern&gt;</code> con azar con semilla, y un solo <code>clipPath</code> del frasco que reutilizan el hero, los pasillos, el mix y las tarjetas.</li>
+            <li>Con <code>prefers-reduced-motion</code> o sin GSAP: frasco lleno, etiqueta completa, pasillos en lista y frutos secos quietos.</li>
+            <li>Productos, precios, dirección y horarios son de ejemplo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>

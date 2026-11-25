@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Café Gutiérrez — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Café Gutiérrez · Recoleta</div>
+      <h1>Café Gutiérrez: one-page de loft y carta en bordó</h1>
+      <p class="fi-lead">Hermana de Traiano: ladrillo visto con lámpara colgante y granos 3D, la barra de filtrados dibujada en SVG que se traza sola, filtrados en acordeón, la carta de eventos real en papel crema, cinta de eventos y dos sedes.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Café Gutiérrez · one-page</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@cafe_gutierrez)</span><span>Hermana de Traiano: misma base, otra identidad</span><span>Three.js · GSAP + ScrollTrigger · SVG</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué comparte con Traiano y qué no</h3>
+          <ul>
+            <li><strong>Igual:</strong> one-page con menú de anclas, textura de material en el hero con granos 3D (Coffee Product Hero), portada con clip-path, tarjetas-acordeón por scroll e ilustraciones SVG en lugar de fotos.</li>
+            <li><strong>Distinto:</strong> ladrillo visto (SVG que tilea sin cortes) y lámpara colgante en vez de madera gris; slab bordó sobre papel crema; dibujos de línea que se trazan solos al entrar (<code>[data-draw]</code>, <code>pathLength="1"</code>); cinta de eventos que corre.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido</h3>
+          <ul>
+            <li>De Instagram: "Café de especialidad", las dos direcciones en Recoleta, el linktree y los destacados (Horarios, Eventos, Café…). El logo (la G de arcos) es una aproximación en SVG.</li>
+            <li>La carta es la de eventos de su PDF, con sus precios. Las descripciones de los filtrados y los textos de la casa son de ejemplo.</li>
+            <li>Sin fotos del local: si las pasan, van en la portada y en las tarjetas de sedes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>

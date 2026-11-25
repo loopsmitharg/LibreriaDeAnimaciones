@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Delicious — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Delicious · Arte en la cocina</div>
+      <h1>Delicious: multi-page de bistró vintage</h1>
+      <p class="fi-lead">Prima de Traiano en cuatro páginas: pared verde con platos de porcelana y granos 3D, vitrina de tortas en SVG, acordeón en los colores de sus destacados, pastelería, brunch y almuerzos con títulos sticky, y la caja registradora del local.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <nav class="fi-paginas" aria-label="Páginas del sitio"><span>Páginas</span><a href="index.html">Inicio</a><a href="pasteleria.html">Pastelería</a><a href="cocina.html">Cocina</a><a href="visitanos.html">Visitanos</a></nav>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Delicious · multi-page</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@delicious.bsas)</span><span>Prima de Traiano: misma base, otra identidad</span><span>4 páginas · Three.js · GSAP + ScrollTrigger · SVG</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué comparte con Traiano</h3>
+          <ul>
+            <li>Textura de material en el hero con los granos 3D alrededor de la marca, una vitrina dentro de la portada con clip-path, tarjetas-acordeón con un fondo de color cada una, tarjetas desfasadas e ilustraciones en lugar de fotos.</li>
+            <li>Distinto: pared verde con platos de porcelana y zócalo de azulejos, el círculo frambuesa del logo, serif itálica, cuatro páginas (con títulos sticky en Cocina) e ilustraciones planas reutilizables: se dibujan una vez en <code>arte.svg</code>, se embeben en cada página y se usan con <code>&lt;use href="#porcion-torta"&gt;</code>.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido</h3>
+          <ul>
+            <li>De Instagram: "Arte en la cocina", pastelería artesanal, almuerzos y brunch, lunes a sábado de 8 a 20 h, Laprida 2015 (Recoleta). Lo visual sale de sus fotos: caja registradora, platos en la pared, porcelana azul, taza verde.</li>
+            <li>Los platos y textos son de ejemplo (sin precios): reemplazar por su carta real. Sin fotos del local: las ilustraciones van en su lugar.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>

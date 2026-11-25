@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Brasa — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Brasa · Hamburguesería</div>
+      <h1>Brasa: multi-page de hamburguesería</h1>
+      <p class="fi-lead">Marca ficticia en tres páginas (Inicio, Carta, Locales): con el scroll caen los ingredientes uno por uno y un ticket de cocina se completa con precio y calorías. Mouse nuevo: la hamburguesa se despliega en capas al acercarte, el puntero deja un trazo de salsa que gotea, botones imantados y una parrilla con ingredientes que se arrastran y se tiran.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <nav class="fi-paginas" aria-label="Páginas del sitio"><span>Páginas</span><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="locales.html">Locales</a></nav>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Brasa · hamburguesería</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo multi-page (Inicio, Carta, Locales) para una marca ficticia</span><span>Componentes de la cafetería de ejemplo + carta con pedido + acordeón horizontal + cursor invertido</span><span>GSAP + ScrollTrigger · SVG · Canvas 2D</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Nuevo en esta página</h3>
+          <ul>
+            <li><strong>El armador</strong> (<code>[data-armador]</code>): escena <code>position: sticky</code> (sin pin, así funciona igual en el teléfono) con una línea de tiempo de GSAP atada al scroll. Cada ingrediente cae desde arriba con rebote (los pesados con <code>bounce.out</code>), el cheddar se estira al derretirse, la tapa aplasta la pila y el palillo se clava. El ticket de cocina lee <code>tl.time()</code> y marca cada línea cuando su capa aterriza, suma precio y calorías y llena la barra.</li>
+            <li><strong>Hamburguesa que se despliega</strong> (<code>[data-explota]</code>): al acercar el mouse, las capas se separan en vista explotada (más cuanto más cerca), se inclinan según la posición del puntero y aparecen las etiquetas de cada ingrediente. En pantallas táctiles, un toque la abre y la cierra.</li>
+            <li><strong>Trazo de salsa</strong> (<code>[data-salsa]</code>): un canvas sobre el hero dibuja la estela del puntero como salsa espesa que gotea y se seca. Clic: ketchup → mostaza → barbacoa.</li>
+            <li><strong>Botones imantados</strong> (<code>[data-imantado]</code>), <strong>calor</strong> que sigue al puntero sobre las tarjetas (<code>[data-calor]</code>) y la <strong>cinta</strong> que se inclina y acelera con la velocidad del scroll (<code>[data-cinta]</code>).</li>
+            <li><strong>Papel de envoltorio</strong> a cuadros entre páginas (<code>.bz-papel</code>, como el telón de Cuento).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>De la librería</h3>
+          <ul>
+            <li><code>cafeteria-ejemplo/shared</code>: menú con barra que se esconde, títulos por palabras, párrafo por líneas, tarjetas-acordeón por scroll y tarjetas en dos columnas con parallax.</li>
+            <li>Carta: <code>menu-carta-pedidos</code> (filtros de dos niveles, opciones y pedido) + <code>cursor-invertido</code>.</li>
+            <li>Locales: <code>acordeon-horizontal</code> con FLIP, más una parrilla con ingredientes que se arrastran y se tiran (física propia, nueva).</li>
+            <li>Ilustraciones en un solo sprite (<code>arte.js</code>), con bordes y semillas generados con azar con semilla. Sin fotos: se reemplazan por fotos reales del producto.</li>
+            <li>Con <code>prefers-reduced-motion</code> o sin GSAP, la hamburguesa queda armada, el ticket completo y no hay estela.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>

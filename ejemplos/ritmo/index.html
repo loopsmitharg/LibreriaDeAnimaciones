@@ -162,34 +162,7 @@
     </section>
   </main>
 
-  <footer class="rt-foot"><span>Ritmo · marca de ejemplo</span><span>Modelo 3D propio (sneaker-3d) · Three.js · GSAP ScrollTrigger</span></footer>
+  <footer class="rt-foot"><span>© 2026 Ritmo</span><span>LS·01 Runner</span></footer>
 
-  <section class="lib-notes">
-    <div class="lib-notes__inner">
-      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Ritmo · one-page de zapatillas</h2></div>
-      <div class="lib-notes__meta"><span>Página de ejemplo de venta y promoción (marca ficticia)</span><span>sneaker-3d + trazo en recorrido + navegador de productos 3D</span><span>Three.js · GSAP + ScrollTrigger · SVG</span></div>
-      <div class="lib-notes__grid">
-        <div>
-          <h3>Cómo funciona</h3>
-          <ul>
-            <li><strong>Modelo:</strong> <code>mountExploded(el, { scroll: false, captions: false })</code> de <code>sneaker-3d</code>. La página tiene su propio tramo sticky y lleva el despiece a un progreso fijo por etapa (<code>STAGES</code> en <code>ritmo.js</code>): armada, estructura separada, despiece total y reensamble.</li>
-            <li><strong>Trazo en recorrido:</strong> un <code>path</code> SVG por cambio de etapa con <code>pathLength="1"</code> y <code>stroke-dasharray: 1 1</code>; el offset va de 1 a −1, así que el trazo entra dibujándose y sale borrándose desde la cola.</li>
-            <li><strong>Flechas:</strong> cada etiqueta apunta a un punto de una pieza real del GLB (centro de su caja ± <code>at</code>), que se proyecta con la cámara en cada cuadro: siguen a la pieza mientras se mueve.</li>
-            <li><strong>Colección:</strong> el anillo de tarjetas CSS 3D de <code>navegador-productos-3d</code>, en un tramo sticky de la página (sin overlay) con snap por producto.</li>
-          </ul>
-        </div>
-        <div>
-          <h3>Qué tocar</h3>
-          <ul>
-            <li><code>STAGES</code>: progreso del despiece por etapa y sus flechas (<code>part</code>, <code>at</code>, <code>dx/dy</code> en px a 1440 de ancho).</li>
-            <li>Las fotos de <code>img/</code> son de referencia (productos de otras marcas): reemplazarlas por fotos propias antes de publicar. Precios, nombres y especificaciones son de ejemplo.</li>
-            <li>Con movimiento reducido no se dibujan los trazos; sin GSAP las etapas quedan en flujo, legibles.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Ritmo</small></a>
 </body>
 </html>

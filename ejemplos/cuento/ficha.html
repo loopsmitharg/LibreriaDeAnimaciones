@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Cuento — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Cuento · Confitería y café</div>
+      <h1>Cuento: multi-page como un libro</h1>
+      <p class="fi-lead">Pariente de Traiano en cuatro capítulos (Inicio, Carta, Café, Visitanos) con telón bordó entre páginas: granos 3D sobre papel crema y piso damero, mesa de mármol con platos de filete rojo que se dibuja, índice con ilustración que sigue al cursor, texto azul a máquina y un V60 anclado que filtra con el scroll.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <nav class="fi-paginas" aria-label="Páginas del sitio"><span>Páginas</span><a href="index.html">Inicio</a><a href="carta.html">Carta</a><a href="cafe.html">Café</a><a href="visitanos.html">Visitanos</a></nav>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Cuento · confitería y café</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo multi-page para un local real (@cuento.ba)</span><span>Componentes de la cafetería de ejemplo + Coffee 3D, pariente de Traiano</span><span>Three.js · GSAP + ScrollTrigger · SVG</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Identidad y animaciones</h3>
+          <ul>
+            <li><strong>Un libro:</strong> cada página es un capítulo (I Inicio, II Carta, III Café, IV Visitanos). Entre páginas cae un <strong>telón bordó</strong> con el monograma y el número de capítulo (<code>.cu-telon</code>, guardado en <code>sessionStorage</code>).</li>
+            <li><strong>De Traiano:</strong> nombre en script con granos 3D en el hero, portada con clip-path, acordeón con fondos ilustrados, tarjetas con arte SVG y la escena 3D del café por scroll.</li>
+            <li><strong>Nuevo:</strong> filete rojo de los platos que se dibuja (<code>[data-rim]</code>, <code>@property --rim</code> heredada por los <code>&lt;use&gt;</code>), texto azul a máquina (<code>[data-type]</code>), índice con ilustración que sigue al cursor, ticket que se inclina y el V60 anclado de la página Café.</li>
+            <li>Ilustraciones en un solo sprite (<code>arte.js</code>), insertado por script para que funcione también abriendo el HTML directo.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido a confirmar</h3>
+          <ul>
+            <li>De Instagram salen: "confitería y café", Recoleta, el horario (lun–vie 8–20 h, sáb y feriados 9–20 h), el link de Maps, el monograma, los platos con filete rojo, las bolsas de café y el "Vale por un café".</li>
+            <li>La carta, los textos de la casa y los números de página del índice son de ejemplo. Sin precios a propósito.</li>
+            <li>Sin fotos: con fotos reales, van en la portada (<code>.cf-frame__media</code>) y en las tarjetas de la carta.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>

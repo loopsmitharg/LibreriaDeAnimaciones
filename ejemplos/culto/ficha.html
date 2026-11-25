@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Culto Café — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Culto Café · Oscura devoción</div>
+      <h1>Culto Café: multi-page en negro y bronce</h1>
+      <p class="fi-lead">Cuatro páginas (Inicio, Menú, Café, Sedes) armadas solo con la librería: monograma que aterriza en el navbar, granos 3D en tostado espresso, carta con pedido, títulos sticky, acordeón horizontal de sedes y cursor invertido.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <nav class="fi-paginas" aria-label="Páginas del sitio"><span>Páginas</span><a href="index.html">Inicio</a><a href="menu.html">Menú</a><a href="cafe.html">Café</a><a href="sedes.html">Sedes</a></nav>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Culto Café · multi-page</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@culto.arg)</span><span>4 páginas: Inicio, Menú, Café, Sedes</span><span>Hecha solo con componentes de la librería</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Componentes usados</h3>
+          <ul>
+            <li><strong>Logo al navbar</strong> (Inicio): el monograma a pantalla completa aterriza en la píldora del navbar, que es el mismo en todas las páginas.</li>
+            <li><strong>Coffee 3D:</strong> ola de granos (17) en la portada con clip-path y la explosión (07) dirigida por scroll en Inicio; el viaje macro (11) en Café. Tostado <code>espresso</code>.</li>
+            <li><strong>Scroll de agencia</strong> (vía <code>cafeteria-ejemplo/shared</code>): palabras y líneas que suben, acordeón por scroll, tarjetas desfasadas y menú móvil.</li>
+            <li><strong>Carta con pedido</strong> (Menú), <strong>Títulos sticky</strong> (Café), <strong>Acordeón horizontal</strong> (Sedes) y <strong>Cursor invertido</strong> en todo el sitio.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido a confirmar</h3>
+          <ul>
+            <li>De Instagram salen el nombre, "Oscura devoción", el año (MMXIX), las tres direcciones y los destacados (Horarios, Menú, Café, Alquimistas).</li>
+            <li>El monograma es una aproximación en SVG: con el logo vectorial real, va en <code>MONO</code> (en los cuatro HTML).</li>
+            <li>Productos, precios y textos son de ejemplo. Los horarios no se ven sin iniciar sesión: se enlaza a Instagram.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Traiano — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Traiano · Helados y café</div>
+      <h1>Traiano: heladería y café en CABA</h1>
+      <p class="fi-lead">Web one-page para una heladería-cafetería real: madera gris y logo en script, granos 3D en el hero, sabores en tarjetas-acordeón por scroll, vitrina de helados en CSS, granos que arman una taza y sedes con horarios.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+    <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Traiano · helados y café</h2></div>
+      <div class="lib-notes__meta"><span>Página de ejemplo para un local real (@traianoheladeriacafe)</span><span>Componentes de la cafetería de ejemplo + Coffee 3D</span><span>Three.js · GSAP + ScrollTrigger · CSS art</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Identidad</h3>
+          <ul>
+            <li><strong>Madera gris</strong> de tablas verticales como el fondo del logo: todo CSS (<code>.tr-wood</code>): ruido SVG para las vetas, juntas con <code>repeating-linear-gradient</code> y viñeta.</li>
+            <li><strong>Logo en texto</strong> con Yellowtail (Google Fonts), parecido al script del logo. Con el archivo vectorial del logo real, va un <code>&lt;svg&gt;</code> en su lugar.</li>
+            <li><strong>Helados en CSS:</strong> vitrina, bochas, cucurucho, pote y taza (<code>.tr-*</code>). Los colores de cada sabor son variables (<code>.f-ddl</code>, <code>.f-choc</code>…).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contenido a confirmar</h3>
+          <ul>
+            <li>De Instagram salen: "café y helados artesanales", "abrimos todos los días", CABA y el link de Maps. Las direcciones y horarios de cada sede están en sus historias destacadas, que no se ven sin iniciar sesión.</li>
+            <li>Los sabores, los productos y los textos de la casa son de ejemplo: hay que reemplazarlos por la carta real. No hay precios a propósito.</li>
+            <li>Sin fotos del local: con fotos reales, van en las tarjetas (<code>.cf-card__img</code>) y en la portada.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>

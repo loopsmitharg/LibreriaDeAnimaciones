@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Brasa · Smash burgers a la parrilla</title>
-  <meta name="description" content="Brasa: hamburguesería de ejemplo. Smash burgers a la parrilla, pan de papa y cheddar que chorrea." />
+  <meta name="description" content="Brasa: hamburguesería. Smash burgers a la parrilla, pan de papa y cheddar que chorrea." />
   <!-- Tipografía de cartel: Anton (Google Fonts). Texto: Outfit e IBM Plex Mono locales. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -222,39 +222,9 @@
     <div class="cf-footer__inner">
       <span class="bz-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#logo"/></svg><b>Brasa</b></span>
       <nav aria-label="Pie"><a href="carta.html">Carta</a><a href="locales.html">Locales</a></nav>
-      <span>Sitio de ejemplo · marca ficticia · Librería de Animaciones</span>
+      <span>© 2026 Brasa</span>
     </div>
   </footer>
 
-  <section class="lib-notes">
-    <div class="lib-notes__inner">
-      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Brasa · hamburguesería</h2></div>
-      <div class="lib-notes__meta"><span>Página de ejemplo multi-page (Inicio, Carta, Locales) para una marca ficticia</span><span>Componentes de la cafetería de ejemplo + carta con pedido + acordeón horizontal + cursor invertido</span><span>GSAP + ScrollTrigger · SVG · Canvas 2D</span></div>
-      <div class="lib-notes__grid">
-        <div>
-          <h3>Nuevo en esta página</h3>
-          <ul>
-            <li><strong>El armador</strong> (<code>[data-armador]</code>): escena <code>position: sticky</code> (sin pin, así funciona igual en el teléfono) con una línea de tiempo de GSAP atada al scroll. Cada ingrediente cae desde arriba con rebote (los pesados con <code>bounce.out</code>), el cheddar se estira al derretirse, la tapa aplasta la pila y el palillo se clava. El ticket de cocina lee <code>tl.time()</code> y marca cada línea cuando su capa aterriza, suma precio y calorías y llena la barra.</li>
-            <li><strong>Hamburguesa que se despliega</strong> (<code>[data-explota]</code>): al acercar el mouse, las capas se separan en vista explotada (más cuanto más cerca), se inclinan según la posición del puntero y aparecen las etiquetas de cada ingrediente. En pantallas táctiles, un toque la abre y la cierra.</li>
-            <li><strong>Trazo de salsa</strong> (<code>[data-salsa]</code>): un canvas sobre el hero dibuja la estela del puntero como salsa espesa que gotea y se seca. Clic: ketchup → mostaza → barbacoa.</li>
-            <li><strong>Botones imantados</strong> (<code>[data-imantado]</code>), <strong>calor</strong> que sigue al puntero sobre las tarjetas (<code>[data-calor]</code>) y la <strong>cinta</strong> que se inclina y acelera con la velocidad del scroll (<code>[data-cinta]</code>).</li>
-            <li><strong>Papel de envoltorio</strong> a cuadros entre páginas (<code>.bz-papel</code>, como el telón de Cuento).</li>
-          </ul>
-        </div>
-        <div>
-          <h3>De la librería</h3>
-          <ul>
-            <li><code>cafeteria-ejemplo/shared</code>: menú con barra que se esconde, títulos por palabras, párrafo por líneas, tarjetas-acordeón por scroll y tarjetas en dos columnas con parallax.</li>
-            <li>Carta: <code>menu-carta-pedidos</code> (filtros de dos niveles, opciones y pedido) + <code>cursor-invertido</code>.</li>
-            <li>Locales: <code>acordeon-horizontal</code> con FLIP, más una parrilla con ingredientes que se arrastran y se tiran (física propia, nueva).</li>
-            <li>Ilustraciones en un solo sprite (<code>arte.js</code>), con bordes y semillas generados con azar con semilla. Sin fotos: se reemplazan por fotos reales del producto.</li>
-            <li>Con <code>prefers-reduced-motion</code> o sin GSAP, la hamburguesa queda armada, el ticket completo y no hay estela.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <a class="lib-back" href="../../index.html"><span class="material-icons-round lib-back__arrow">arrow_back</span><b>Librería</b><small>Brasa</small></a>
 </body>
 </html>
