@@ -50,6 +50,19 @@
       ],
       "port": 5514,
       "autoPort": false
+    },
+    {
+      "name": "libreria-5516",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "5516",
+        "--directory",
+        "C:/Users/Usuario/Documents/GitHub/LibreriaDeAnimaciones"
+      ],
+      "port": 5516,
+      "autoPort": false
     }
   ]
 }

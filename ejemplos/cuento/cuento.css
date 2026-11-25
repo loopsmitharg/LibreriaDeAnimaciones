@@ -49,12 +49,55 @@ body.cu { background-image: var(--grano-papel); background-size: 400px; }
 .cu .cf-nav.is-solid { background: rgba(246, 241, 231, .9); }
 .cu .cf-nav__links a { font: 500 1.08rem/1 var(--libro); }
 .cu .cf-nav__links a i { margin-right: .35rem; color: var(--bordo); font: italic 400 .85rem/1 var(--libro); }
-.cu .cf-nav__cta, .cu .cf-burger { background: var(--bordo); color: var(--papel); }
-.cu .cf-drawer { background: var(--bordo) var(--grano-papel); color: var(--papel); }
-.cu .cf-drawer li a { font: 400 clamp(3.4rem, 15vw, 5rem)/1.15 var(--script); }
+.cu .cf-nav__cta { background: var(--bordo); color: var(--papel); }
+
+/* Botón del menú móvil: pastilla de papel con "Menú" a máquina y dos líneas que se cruzan al abrir */
+.cu .cf-burger { position: relative; display: none; align-items: center; width: auto; height: 2.6rem; padding: 0 2.7rem 0 1.05rem; border: 1px solid rgba(165, 34, 43, .28); border-radius: 999px;
+  background: rgba(246, 241, 231, .78); color: var(--bordo); box-shadow: 0 6px 18px -6px rgba(125, 22, 30, .3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: background-color .4s ease, color .4s ease, border-color .4s ease, box-shadow .4s ease; }
+.cu .cf-burger::before { content: "Menú" / ""; font: 500 .66rem/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; }
+.cu .cf-burger span { position: absolute; right: 1.05rem; top: 50%; width: 1.05rem; height: 1.5px; margin: -.75px 0 0; border-radius: 2px; background: currentColor; transition: transform .45s cubic-bezier(.65, 0, .35, 1); }
+.cu .cf-burger span:nth-child(1) { transform: translateY(-3.5px); }
+.cu .cf-burger span:nth-child(2) { display: none; }
+.cu .cf-burger span:nth-child(3) { transform: translateY(3.5px); }
+.cu .cf-nav.is-open .cf-burger::before { content: "Cerrar" / ""; }
+.cu .cf-nav.is-open .cf-burger span:nth-child(1) { transform: rotate(45deg); }
+.cu .cf-nav.is-open .cf-burger span:nth-child(3) { transform: rotate(-45deg); }
+
+@media (max-width: 760px) {
+  .cu .cf-burger { display: flex; }
+  .cu .cf-nav { padding: .7rem 1rem; }
+  .cu .cf-nav.is-solid { box-shadow: 0 1px 0 rgba(165, 34, 43, .16); }
+  .cu .cf-nav .cu-logo svg { width: 2.1rem; height: 2.1rem; }
+  .cu .cf-nav .cu-logo b { font-size: 1.8rem; }
+  /* Menú abierto: la barra se funde con el panel bordó */
+  .cu .cf-nav.is-open, .cu .cf-nav.is-open.is-solid { background: transparent; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; color: var(--papel); }
+  .cu .cf-nav.is-open .cu-logo { color: var(--papel); }
+  .cu .cf-nav.is-open .cf-burger { background: var(--papel); border-color: transparent; color: var(--bordo); box-shadow: none; }
+}
+
+/* Menú móvil: el índice del libro. Capítulos en romanos, nombre en script, línea de puntos y número de página. */
+.cu .cf-drawer { align-content: center; gap: 1.6rem; padding: 6rem 1.5rem 4.6rem; background: var(--bordo) var(--grano-papel); color: var(--papel); clip-path: circle(0% at calc(100% - 2.6rem) 2rem); }
+.cu .cf-drawer.is-open { clip-path: circle(150% at calc(100% - 2.6rem) 2rem); }
+.cu .cf-drawer::before { content: "Índice" / ""; display: flex; align-items: center; gap: .7rem; color: rgba(246, 241, 231, .7); font: italic 400 1.15rem/1 var(--libro); opacity: 0; transition: opacity .4s ease; }
+.cu .cf-drawer::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1.4rem; background: repeating-conic-gradient(#2a2321 0 25%, #f3ede2 0 50%) 0 0 / 1.4rem 1.4rem; }
+.cu .cf-drawer.is-open::before { opacity: 1; transition-delay: .25s; }
+.cu .cf-drawer ul { gap: 0; counter-reset: cap; border-top: 1px solid rgba(246, 241, 231, .22); }
+.cu .cf-drawer li { display: flex; align-items: baseline; gap: .6rem; border-bottom: 1px solid rgba(246, 241, 231, .22); }
+.cu .cf-drawer li a { flex: 1; display: flex; align-items: baseline; gap: .8rem; padding: .5rem 0 .3rem; color: inherit; font: 400 clamp(2.9rem, 13.5vw, 4.4rem)/1.12 var(--script); }
+.cu .cf-drawer li a::before { counter-increment: cap; content: counter(cap, upper-roman); min-width: 1.9rem; color: rgba(246, 241, 231, .6); font: italic 400 1.05rem/1 var(--libro); }
+.cu .cf-drawer li a::after { content: ""; flex: 1; min-width: .8rem; border-bottom: 2px dotted rgba(246, 241, 231, .35); transform: translateY(-.25em); }
+.cu .cf-drawer li::after { color: rgba(246, 241, 231, .7); font: 500 .7rem/1 var(--mono); letter-spacing: .12em; opacity: 0; transition: opacity .4s ease; }
+.cu .cf-drawer li:nth-child(1)::after { content: "p. 1"; } .cu .cf-drawer li:nth-child(2)::after { content: "p. 12"; }
+.cu .cf-drawer li:nth-child(3)::after { content: "p. 27"; } .cu .cf-drawer li:nth-child(4)::after { content: "p. 40"; }
+.cu .cf-drawer.is-open li::after { opacity: 1; transition-delay: .6s; }
 .cu .cf-drawer li a[aria-current="page"] { color: #ffd9c9; }
-.cu .cf-drawer p { color: rgba(246, 241, 231, .75); }
-@media (max-width: 760px) { .cu .cf-nav.is-open { color: var(--papel); } .cu .cf-nav.is-open .cu-logo { color: var(--papel); } .cu .cf-nav.is-open .cf-burger { background: var(--papel); color: var(--bordo); } }
+.cu .cf-drawer li:has(a[aria-current="page"])::after { color: #ffd9c9; content: "acá"; font-style: normal; }
+.cu .cf-drawer li a:active { color: #ffd9c9; }
+.cu-drawer__pie { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem; opacity: 0; transform: translateY(.8rem); transition: opacity .4s ease, transform .5s cubic-bezier(.22, 1, .36, 1); }
+.cf-drawer.is-open .cu-drawer__pie { opacity: 1; transform: none; transition-delay: .55s; }
+.cu .cf-drawer .cu-drawer__pie p { color: rgba(246, 241, 231, .78); font: 500 .66rem/1.8 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.cu-drawer__pie a { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.15rem; border-radius: 999px; background: var(--papel); color: var(--bordo); font: 500 1.05rem/1 var(--libro); text-decoration: none; }
 /* Inicio: el logo de la barra aparece al bajar (arriba manda el nombre grande del hero). */
 .cu .cf-nav[data-hide-logo] .cu-logo { transition: opacity .4s ease, transform .6s cubic-bezier(.34, 1.56, .64, 1); }
 .cu .cf-nav[data-hide-logo]:not(.is-solid):not(.is-open) .cu-logo { opacity: 0; transform: translateY(-.4rem) scale(.8); pointer-events: none; }
@@ -82,6 +125,15 @@ html.cu-llegando .cu-telon { transform: none; }
 .cu .c3-hero p b { display: block; margin-bottom: .2rem; color: var(--azul); font: 500 .72rem/1.6 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
 .cu .c3-hero a { background: var(--bordo); color: var(--papel); font-family: var(--libro); font-size: 1.05rem; font-weight: 500; }
 .cu .cf-scroll-cue { color: var(--tinta); }
+/* Móvil: texto más compacto (deja aire arriba y abajo para los granos) y damero más bajo y fino */
+@media (max-width: 640px) {
+  .cu .c3-hero { gap: .75rem; padding: 4.5rem 1.4rem 5rem; }
+  .cu .c3-hero h1 { font-size: clamp(5rem, 24vw, 7rem); }
+  .cu .c3-hero p { max-width: 21rem; font-size: 1.06rem; line-height: 1.45; }
+  .cu .c3-hero a { margin-top: .2rem; }
+  .cu-piso { height: 26%; background-size: 44px 44px; opacity: .38; }
+  .cu .cf-scroll-cue { bottom: 1.1rem; font-size: .6rem; }
+}
 
 /* ---------- Tipografía de los componentes: libro + script ---------- */
 .cu .cf-kicker { color: var(--bordo); }

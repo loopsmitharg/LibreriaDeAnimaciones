@@ -2,6 +2,7 @@
  * Cafetería de ejemplo · monta las escenas de Coffee 3D Motion Lab en la página.
  *
  *   <div data-c3="hero" data-roast="dark"><template data-c3-html>…HTML de la marca…</template></div>
+ *   data-fit="frame" (hero): en pantallas verticales los granos se reparten arriba y abajo del texto, sin cortarse.
  *
  * Escenas disponibles (ver ESCENAS): hero, wave, flow, explosion, assembly, journey.
  * - Las escenas comunes se montan cuando están cerca de la pantalla (y el bucle se pausa solo fuera de ella).
@@ -48,6 +49,7 @@ async function montar(host) {
     const listaId = host.dataset.captions;
     const lista = listaId ? JSON.parse(document.getElementById(listaId).textContent) : null;
     const params = tpl ? { html: tpl.innerHTML } : {};
+    if (host.dataset.fit) params.fit = host.dataset.fit;   // data-fit="frame": el hero acomoda los granos en pantallas verticales
     // data-screens="2.5": cuántas pantallas de scroll dura una escena de scroll (pisa el def.scroll del efecto).
     const largo = Number(host.dataset.screens);
     const base = def.scroll && largo > 0 ? { ...def, scroll: largo } : def;
