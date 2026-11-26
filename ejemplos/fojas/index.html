@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fojas · Estudio jurídico</title>
+  <meta name="description" content="Fojas, estudio jurídico: empresas, laboral, familia y sucesiones, inmobiliario, civil y litigios. Derecho explicado en castellano." />
+  <!-- Tipografía: EB Garamond (Google Fonts) para títulos. Texto y foliado: Outfit e IBM Plex Mono locales. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="fojas.css" />
+  <script>document.documentElement.classList.add('fj-js');</script>
+  <script defer src="fojas.js"></script>
+</head>
+<body class="fj">
+  <!-- Foliado: cada sección es una foja del expediente; el número del margen cambia con el scroll -->
+  <div class="fj-folio" aria-hidden="true"><span>Fs.</span><b data-folio>1</b><i></i></div>
+
+  <header class="fj-nav" data-nav>
+    <a class="fj-logo" href="#inicio" aria-label="Fojas, estudio jurídico, inicio">
+      <i aria-hidden="true">§</i>
+      <span><b>Fojas</b><small>Estudio jurídico</small></span>
+    </a>
+    <nav class="fj-nav__links" aria-label="Principal">
+      <a href="#areas">Áreas</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#glosario">Glosario</a>
+      <a href="#estudio">Estudio</a>
+    </nav>
+    <a class="fj-btn fj-btn--chico fj-nav__cta" href="#consulta">Consulta confidencial</a>
+    <button class="fj-burger" type="button" data-burger aria-expanded="false" aria-controls="fj-menu"><span></span><span></span><b class="fj-sr">Abrir menú</b></button>
+  </header>
+  <div class="fj-drawer" id="fj-menu" data-drawer>
+    <nav aria-label="Principal (móvil)"><ol>
+      <li><a href="#areas"><span>Áreas de práctica</span></a></li>
+      <li><a href="#proceso"><span>Proceso</span></a></li>
+      <li><a href="#glosario"><span>Glosario</span></a></li>
+      <li><a href="#estudio"><span>Estudio</span></a></li>
+      <li><a href="#consulta"><span>Consulta</span></a></li>
+    </ol></nav>
+    <p>Secreto profesional · Lunes a viernes, 9 a 19 h</p>
+  </div>
+
+  <main>
+    <!-- ============ Hero: título + cláusula que se corrige sola (control de cambios) ============ -->
+    <section class="fj-hero" id="inicio" data-foja="1">
+      <div class="fj-hero__texto">
+        <span class="fj-kicker fj-rev">Estudio jurídico · Buenos Aires</span>
+        <h1 class="fj-rev">Derecho claro<br>para decisiones <em>serenas.</em></h1>
+        <p class="fj-lead fj-rev">Asesoramos a personas, familias y empresas. Leemos la letra chica, la escribimos mejor y, cuando hace falta, la defendemos. Siempre explicado en castellano.</p>
+        <div class="fj-hero__ctas fj-rev">
+          <a class="fj-btn" href="#consulta">Hacer una consulta</a>
+          <a class="fj-btn fj-btn--linea" href="#areas">Áreas de práctica</a>
+        </div>
+      </div>
+
+      <figure class="fj-hoja fj-rev" data-redline aria-label="Ejemplo de una cláusula corregida por el estudio">
+        <div class="fj-hoja__head"><span>Contrato de locación</span><span>Borrador 2 · con cambios</span></div>
+        <p class="fj-clausula">
+          <b>Cláusula séptima.</b> — Las partes
+          <del>podrán, en caso de considerarlo eventualmente pertinente,</del> <ins>deberán</ins>
+          notificar cualquier modificación del domicilio
+          <del>dentro de un plazo razonable</del> <ins>dentro de los diez (10) días hábiles</ins>,
+          por medio fehaciente<del> o por cualquier otro medio</del>.
+        </p>
+        <aside class="fj-nota"><span>Nota del estudio</span>Un plazo concreto evita discusiones. “Razonable” es lo que después se discute en un juicio.</aside>
+        <div class="fj-hoja__pie">
+          <span class="fj-sello"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Revisado</span>
+          <span>Fs. <b>7</b></span>
+        </div>
+      </figure>
+    </section>
+
+    <!-- ============ Principios ============ -->
+    <section class="fj-principios" aria-label="Principios del estudio" data-foja="2">
+      <div class="fj-rev"><span>I.</span><h2>Confidencialidad</h2><p>Lo que nos contás queda protegido por el secreto profesional desde la primera consulta.</p></div>
+      <div class="fj-rev"><span>II.</span><h2>Claridad</h2><p>Te decimos qué podés esperar, qué no, y cuánto puede llevar. Por escrito.</p></div>
+      <div class="fj-rev"><span>III.</span><h2>Honorarios previsibles</h2><p>Presupuesto cerrado por etapa. Sin sorpresas al final del expediente.</p></div>
+    </section>
+
+    <!-- ============ Áreas como índice de un código ============ -->
+    <section class="fj-seccion" id="areas" data-foja="3">
+      <header class="fj-encabezado">
+        <span class="fj-kicker fj-rev">Áreas de práctica</span>
+        <h2 class="fj-rev">Seis áreas, un mismo criterio: anticiparnos al conflicto.</h2>
+      </header>
+      <div class="fj-codigo fj-rev" data-codigo>
+        <ol class="fj-codigo__indice" role="tablist" aria-label="Áreas de práctica">
+          <li><button role="tab" aria-selected="true" aria-controls="fj-area" data-area="0"><span>Art. 1</span>Empresas y sociedades</button></li>
+          <li><button role="tab" aria-selected="false" aria-controls="fj-area" data-area="1"><span>Art. 2</span>Laboral</button></li>
+          <li><button role="tab" aria-selected="false" aria-controls="fj-area" data-area="2"><span>Art. 3</span>Familia y sucesiones</button></li>
+          <li><button role="tab" aria-selected="false" aria-controls="fj-area" data-area="3"><span>Art. 4</span>Inmobiliario</button></li>
+          <li><button role="tab" aria-selected="false" aria-controls="fj-area" data-area="4"><span>Art. 5</span>Civil y daños</button></li>
+          <li><button role="tab" aria-selected="false" aria-controls="fj-area" data-area="5"><span>Art. 6</span>Litigios y mediación</button></li>
+        </ol>
+        <article class="fj-codigo__det" id="fj-area" role="tabpanel" aria-live="polite" data-det></article>
+      </div>
+    </section>
+
+    <!-- ============ Proceso: fojas que se apilan con el scroll ============ -->
+    <section class="fj-seccion fj-proceso" id="proceso" data-foja="4">
+      <header class="fj-encabezado">
+        <span class="fj-kicker fj-rev">Proceso</span>
+        <h2 class="fj-rev">Cómo avanza un caso, foja por foja.</h2>
+        <p class="fj-rev">Cada etapa queda por escrito antes de pasar a la siguiente.</p>
+      </header>
+      <ol class="fj-pila" data-pila>
+        <li class="fj-foja"><div class="fj-foja__n">Fs. 1</div><h3>Primera consulta</h3><p>Escuchamos, pedimos la documentación y te decimos con franqueza si hay caso, qué riesgos tiene y qué alternativas existen.</p><small>Semana 1</small></li>
+        <li class="fj-foja"><div class="fj-foja__n">Fs. 2</div><h3>Dictamen y presupuesto</h3><p>Un informe breve, en lenguaje simple, con la estrategia recomendada, los plazos estimados y el honorario por etapa.</p><small>Semana 2</small></li>
+        <li class="fj-foja"><div class="fj-foja__n">Fs. 3</div><h3>Negociación o mediación</h3><p>Intentamos primero el acuerdo: suele ser más rápido, más barato y más previsible que un juicio.</p><small>Semanas 3 a 10</small></li>
+        <li class="fj-foja"><div class="fj-foja__n">Fs. 4</div><h3>Juicio, si hace falta</h3><p>Si no hay acuerdo, litigamos. Te informamos cada novedad del expediente el mismo día en que ocurre.</p><small>Según el caso</small></li>
+        <li class="fj-foja"><div class="fj-foja__n">Fs. 5</div><h3>Cierre y archivo</h3><p>Ejecutamos lo resuelto, te entregamos el expediente ordenado y dejamos todo listo por si alguna vez lo necesitás.</p><small>Final</small></li>
+      </ol>
+    </section>
+
+    <!-- ============ Glosario: el derecho sin latín ============ -->
+    <section class="fj-seccion fj-glosario" id="glosario" data-foja="5">
+      <header class="fj-encabezado">
+        <span class="fj-kicker fj-rev">Glosario</span>
+        <h2 class="fj-rev">El derecho, traducido.</h2>
+        <p class="fj-rev">Palabras que vas a escuchar en tu caso, explicadas sin vueltas.</p>
+      </header>
+      <div class="fj-glos fj-rev">
+        <label class="fj-buscar"><span class="fj-sr">Buscar un término</span><input type="search" placeholder="Buscar un término…" data-buscar autocomplete="off" /></label>
+        <dl class="fj-terminos" data-terminos></dl>
+        <p class="fj-glos__vacio" data-vacio hidden>No está en el glosario. Preguntanos en la consulta: también lo traducimos.</p>
+      </div>
+    </section>
+
+    <!-- ============ Estudio ============ -->
+    <section class="fj-seccion fj-estudio" id="estudio" data-foja="6">
+      <header class="fj-encabezado">
+        <span class="fj-kicker fj-rev">El estudio</span>
+        <h2 class="fj-rev">Tres socios y un equipo que contesta el teléfono.</h2>
+      </header>
+      <div class="fj-socios">
+        <article class="fj-socio fj-rev"><span aria-hidden="true">MA</span><div><h3>María Laura Arana</h3><p>Socia · Empresas y sociedades</p><small>Abogada (UBA) · Especialista en derecho societario</small></div></article>
+        <article class="fj-socio fj-rev"><span aria-hidden="true">DE</span><div><h3>Diego Etchart</h3><p>Socio · Litigios y mediación</p><small>Abogado (UCA) · Mediador</small></div></article>
+        <article class="fj-socio fj-rev"><span aria-hidden="true">PR</span><div><h3>Paula Ríos</h3><p>Socia · Familia y sucesiones</p><small>Abogada (UNLP) · Especialista en derecho de familia</small></div></article>
+      </div>
+      <blockquote class="fj-cita fj-rev"><p>“Un buen contrato es el juicio que nunca tuviste.”</p><cite>Criterio de la casa</cite></blockquote>
+    </section>
+
+    <!-- ============ Consulta ============ -->
+    <section class="fj-consulta" id="consulta" data-foja="7" data-oscura>
+      <div class="fj-consulta__texto">
+        <span class="fj-kicker">Consulta confidencial</span>
+        <h2>Contanos qué pasa. Te respondemos en el día.</h2>
+        <p>Lo que escribas acá está protegido por el secreto profesional. No hace falta que sepas el nombre técnico de tu problema: para eso estamos.</p>
+        <dl>
+          <div><dt>Dirección</dt><dd>Dirección de ejemplo 1234, piso 8 · CABA</dd></div>
+          <div><dt>Horario</dt><dd>Lunes a viernes · 9 a 19 h</dd></div>
+          <div><dt>Teléfono</dt><dd>(011) 0000-0000</dd></div>
+        </dl>
+      </div>
+      <form class="fj-form" data-form novalidate>
+        <label><span>Nombre</span><input name="nombre" autocomplete="name" required /></label>
+        <label><span>Email o teléfono</span><input name="contacto" autocomplete="email" required /></label>
+        <label><span>Tema</span>
+          <select name="area">
+            <option>No estoy seguro</option><option>Empresas y sociedades</option><option>Laboral</option><option>Familia y sucesiones</option><option>Inmobiliario</option><option>Civil y daños</option><option>Litigios y mediación</option>
+          </select>
+        </label>
+        <label><span>Tu consulta, en pocas líneas</span><textarea name="mensaje" rows="4"></textarea></label>
+        <div class="fj-form__pie">
+          <button class="fj-btn" type="submit">Enviar consulta</button>
+          <small>Protegido por secreto profesional</small>
+        </div>
+        <p class="fj-form__ok" data-ok hidden>Recibimos tu consulta. Un abogado del estudio te contacta hoy. <small>(Formulario de ejemplo: no se envía.)</small></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="fj-pie">
+    <div class="fj-logo"><i aria-hidden="true">§</i><span><b>Fojas</b><small>Estudio jurídico</small></span></div>
+    <p>Derecho, en limpio.</p>
+    <small>Marca ficticia · página de ejemplo · la información no constituye asesoramiento legal</small>
+  </footer>
+</body>
+</html>

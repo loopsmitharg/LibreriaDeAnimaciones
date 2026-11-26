@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Fojas — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Fojas · Estudio jurídico</div>
+      <h1>Fojas: one-page de estudio jurídico</h1>
+      <p class="fi-lead">Marca ficticia, institucional y sobria: hueso, tinta azul noche y bordó solo para las correcciones. Foliado de expediente que acompaña el scroll, una cláusula que se corrige sola con control de cambios, áreas como índice de un código, fojas que se apilan y un glosario que traduce el derecho.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Fojas · estudio jurídico</h2></div>
+      <div class="lib-notes__meta"><span>One-page para un estudio jurídico (marca ficticia)</span><span>Sin dependencias: CSS + JS propio</span><span>IntersectionObserver · position: sticky</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué tiene</h3>
+          <ul>
+            <li>Foliado fijo en el margen derecho: cada sección es una foja (<code>data-foja</code>) y el número "Fs." cambia al pasar. En el menú móvil los links también van foliados.</li>
+            <li>Hero con una cláusula de contrato en control de cambios: el texto vago se tacha con una línea bordó, el texto nuevo se escribe letra por letra, aparece la nota del estudio y el sello "Revisado".</li>
+            <li>Áreas de práctica como índice de un código (Art. 1 a 6), con pestañas accesibles por teclado; en móvil el índice corre de costado.</li>
+            <li>Proceso en cinco fojas que se apilan con <code>position: sticky</code>; la de abajo se achica y oscurece apenas cuando la tapa la siguiente.</li>
+            <li>Glosario "El derecho, traducido" con buscador que ignora tildes y resalta la coincidencia.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Qué tocar</h3>
+          <ul>
+            <li>Paleta y tipografías en los tokens de <code>:root</code> de <code>fojas.css</code> (EB Garamond de Google Fonts, Outfit e IBM Plex Mono locales).</li>
+            <li>Áreas y términos en <code>AREAS</code> y <code>TERMINOS</code> de <code>fojas.js</code>. La cláusula del hero se edita en el HTML con <code>&lt;del&gt;</code> e <code>&lt;ins&gt;</code>: se animan en el orden en que aparecen.</li>
+            <li>Sin JS o con <code>prefers-reduced-motion</code>, la cláusula se ve ya corregida y las fojas quedan sin escala.</li>
+            <li>Socios, dirección y el formulario (no envía) son de ejemplo. El pie aclara que la página no es asesoramiento legal.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>
