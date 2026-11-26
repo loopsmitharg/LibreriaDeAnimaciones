@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Partida · Estudio contable</title>
+  <meta name="description" content="Partida, estudio contable: impuestos, sueldos, balances, sociedades y asesoramiento para personas, PyMEs y profesionales." />
+  <!-- Tipografía: Newsreader (Google Fonts) para títulos. Texto y cifras: Outfit e IBM Plex Mono locales. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" />
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="partida.css" />
+  <script>document.documentElement.classList.add('pd-js');</script>
+  <script defer src="partida.js"></script>
+</head>
+<body class="pd">
+  <!-- Barra de progreso: un filete fino que se completa con el scroll -->
+  <div class="pd-progreso" aria-hidden="true"><i data-progreso></i></div>
+
+  <header class="pd-nav" data-nav>
+    <a class="pd-logo" href="#inicio" aria-label="Partida, estudio contable, inicio">
+      <i class="pd-logo__m" aria-hidden="true">P</i>
+      <span><b>Partida</b><small>Estudio contable</small></span>
+    </a>
+    <nav class="pd-nav__links" aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#metodo">Método</a>
+      <a href="#vencimientos">Vencimientos</a>
+      <a href="#estudio">Estudio</a>
+    </nav>
+    <a class="pd-btn pd-btn--chico pd-nav__cta" href="#contacto">Agendar reunión</a>
+    <button class="pd-burger" type="button" data-burger aria-expanded="false" aria-controls="pd-menu"><span></span><span></span><b class="pd-sr">Abrir menú</b></button>
+  </header>
+  <div class="pd-drawer" id="pd-menu" data-drawer>
+    <nav aria-label="Principal (móvil)"><ol>
+      <li><a href="#servicios"><span>Servicios</span></a></li>
+      <li><a href="#metodo"><span>Método</span></a></li>
+      <li><a href="#vencimientos"><span>Vencimientos</span></a></li>
+      <li><a href="#estudio"><span>Estudio</span></a></li>
+      <li><a href="#contacto"><span>Contacto</span></a></li>
+    </ol></nav>
+    <p>Lunes a viernes · 9 a 18 h</p>
+  </div>
+
+  <main>
+    <!-- ============ Hero: título con doble filete + asiento que cuadra ============ -->
+    <section class="pd-hero" id="inicio">
+      <div class="pd-hero__renglones" aria-hidden="true"></div>
+      <div class="pd-hero__texto">
+        <span class="pd-kicker pd-rev">Estudio contable · Buenos Aires · desde 1998</span>
+        <h1 class="pd-rev">Las cuentas, <span class="pd-total" data-total>en orden.</span><br><em>La cabeza, tranquila.</em></h1>
+        <p class="pd-lead pd-rev">Llevamos los impuestos, los sueldos y la contabilidad de personas, profesionales y PyMEs. Sin sobresaltos, sin jerga, con un contador que te conoce por tu nombre.</p>
+        <div class="pd-hero__ctas pd-rev">
+          <a class="pd-btn" href="#contacto">Pedir una primera reunión</a>
+          <a class="pd-btn pd-btn--linea" href="#servicios">Ver servicios</a>
+        </div>
+      </div>
+
+      <figure class="pd-asiento pd-rev" data-asiento aria-label="Ejemplo de asiento contable balanceado">
+        <figcaption class="pd-asiento__head">
+          <span>Libro diario</span>
+          <span>Asiento N.º 1.284 · 30/11</span>
+        </figcaption>
+        <div class="pd-asiento__cols" aria-hidden="true"><span>Cuenta</span><span>Debe</span><span>Haber</span></div>
+        <ol class="pd-asiento__filas">
+          <li><span>Caja y bancos</span><b data-num="5832200"></b><b></b></li>
+          <li class="is-haber"><span>a Ventas</span><b></b><b data-num="4820000"></b></li>
+          <li class="is-haber"><span>a IVA débito fiscal</span><b></b><b data-num="1012200"></b></li>
+          <li><span>Sueldos y jornales</span><b data-num="1450000"></b><b></b></li>
+          <li class="is-haber"><span>a Caja y bancos</span><b></b><b data-num="1450000"></b></li>
+        </ol>
+        <div class="pd-asiento__total">
+          <span>Totales</span><b data-num="7282200"></b><b data-num="7282200"></b>
+        </div>
+        <div class="pd-asiento__pie">
+          <span class="pd-sello"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Cuadra</span>
+          <span>Diferencia <b>$ 0,00</b></span>
+        </div>
+      </figure>
+    </section>
+
+    <!-- ============ A quiénes ============ -->
+    <section class="pd-quienes" aria-label="A quiénes atendemos">
+      <p>Atendemos a</p>
+      <ul>
+        <li>Monotributistas</li><li>Responsables inscriptos</li><li>Profesionales</li><li>Comercios</li><li>PyMEs</li><li>Sociedades</li>
+      </ul>
+    </section>
+
+    <!-- ============ Servicios como plan de cuentas ============ -->
+    <section class="pd-seccion" id="servicios">
+      <header class="pd-encabezado">
+        <span class="pd-kicker pd-rev">Servicios · Plan de cuentas</span>
+        <h2 class="pd-rev">Todo lo que lleva un estudio, ordenado como lo ordenaríamos nosotros.</h2>
+      </header>
+
+      <div class="pd-plan" data-plan>
+        <article class="pd-cuenta pd-rev">
+          <button type="button" aria-expanded="false"><code>1</code><h3>Impuestos</h3><p>Declaraciones juradas y pagos a término, mes a mes.</p><i aria-hidden="true"></i></button>
+          <div class="pd-cuenta__det"><div><ul>
+            <li><code>1.01</code>IVA y libro IVA digital</li>
+            <li><code>1.02</code>Ganancias y Bienes Personales</li>
+            <li><code>1.03</code>Ingresos Brutos y Convenio Multilateral</li>
+            <li><code>1.04</code>Monotributo: altas, bajas y recategorizaciones</li>
+          </ul></div></div>
+        </article>
+        <article class="pd-cuenta pd-rev">
+          <button type="button" aria-expanded="false"><code>2</code><h3>Sueldos y cargas sociales</h3><p>Liquidaciones correctas, recibos a tiempo, equipo tranquilo.</p><i aria-hidden="true"></i></button>
+          <div class="pd-cuenta__det"><div><ul>
+            <li><code>2.01</code>Liquidación mensual, SAC y vacaciones</li>
+            <li><code>2.02</code>Formulario 931 y aportes</li>
+            <li><code>2.03</code>Altas, bajas y libro de sueldos digital</li>
+            <li><code>2.04</code>Lectura de convenios colectivos</li>
+          </ul></div></div>
+        </article>
+        <article class="pd-cuenta pd-rev">
+          <button type="button" aria-expanded="false"><code>3</code><h3>Contabilidad y balances</h3><p>Registros al día y estados contables firmados.</p><i aria-hidden="true"></i></button>
+          <div class="pd-cuenta__det"><div><ul>
+            <li><code>3.01</code>Registración y conciliaciones bancarias</li>
+            <li><code>3.02</code>Estados contables anuales</li>
+            <li><code>3.03</code>Certificaciones de ingresos y manifestaciones de bienes</li>
+            <li><code>3.04</code>Informes para bancos y licitaciones</li>
+          </ul></div></div>
+        </article>
+        <article class="pd-cuenta pd-rev">
+          <button type="button" aria-expanded="false"><code>4</code><h3>Sociedades</h3><p>Desde el estatuto hasta el acta de cada asamblea.</p><i aria-hidden="true"></i></button>
+          <div class="pd-cuenta__det"><div><ul>
+            <li><code>4.01</code>Constitución de SAS, SRL y SA</li>
+            <li><code>4.02</code>Inscripciones y trámites registrales</li>
+            <li><code>4.03</code>Libros societarios y actas</li>
+            <li><code>4.04</code>Cambios de autoridades y de domicilio</li>
+          </ul></div></div>
+        </article>
+        <article class="pd-cuenta pd-rev">
+          <button type="button" aria-expanded="false"><code>5</code><h3>Asesoramiento</h3><p>Una segunda opinión antes de decidir, no después.</p><i aria-hidden="true"></i></button>
+          <div class="pd-cuenta__det"><div><ul>
+            <li><code>5.01</code>Planificación fiscal del año</li>
+            <li><code>5.02</code>Costos, precios y márgenes</li>
+            <li><code>5.03</code>Proyecciones y flujo de fondos</li>
+            <li><code>5.04</code>Acompañamiento en inspecciones</li>
+          </ul></div></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ Método: título fijo + pasos con filete que avanza ============ -->
+    <section class="pd-seccion pd-metodo" id="metodo">
+      <div class="pd-metodo__fijo">
+        <span class="pd-kicker">Método</span>
+        <h2>Cuatro pasos, siempre los mismos.</h2>
+        <p>La tranquilidad no es suerte: es un procedimiento que se repite todos los meses.</p>
+      </div>
+      <ol class="pd-pasos" data-pasos>
+        <li class="pd-pasos__riel" aria-hidden="true"><i data-riel></i></li>
+        <li class="pd-paso" data-paso><span>01</span><h3>Diagnóstico</h3><p>Una primera reunión sin costo para entender tu situación: qué tenés inscripto, qué vence y qué quedó pendiente.</p></li>
+        <li class="pd-paso" data-paso><span>02</span><h3>Puesta en orden</h3><p>Regularizamos lo atrasado, ordenamos claves y accesos, y armamos tu calendario de obligaciones.</p></li>
+        <li class="pd-paso" data-paso><span>03</span><h3>Cumplimiento</h3><p>Cada mes nos mandás la documentación; nosotros presentamos, te pasamos los VEP y confirmamos cada pago.</p></li>
+        <li class="pd-paso" data-paso><span>04</span><h3>Seguimiento</h3><p>Un resumen mensual en una página y una reunión al trimestre para mirar números y anticiparnos.</p></li>
+      </ol>
+    </section>
+
+    <!-- ============ Vencimientos: calendario por terminación de CUIT ============ -->
+    <section class="pd-seccion pd-venc" id="vencimientos">
+      <header class="pd-encabezado">
+        <span class="pd-kicker pd-rev">Vencimientos</span>
+        <h2 class="pd-rev">¿Cuándo vence lo tuyo?</h2>
+        <p class="pd-rev">Elegí el último número de tu CUIT y mirá cómo se ordena el mes.</p>
+      </header>
+
+      <div class="pd-venc__panel pd-rev">
+        <div class="pd-digitos" role="radiogroup" aria-label="Terminación de CUIT" data-digitos></div>
+        <div class="pd-venc__cuerpo">
+          <div class="pd-cal">
+            <div class="pd-cal__head"><b data-mes></b><span>Fechas ilustrativas</span></div>
+            <div class="pd-cal__dias" aria-hidden="true"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+            <div class="pd-cal__grilla" data-grilla></div>
+          </div>
+          <ul class="pd-agenda" data-agenda aria-live="polite"></ul>
+        </div>
+        <p class="pd-venc__nota">Calendario de ejemplo. A cada cliente le mandamos el suyo con las fechas oficiales de ARCA y de su jurisdicción.</p>
+      </div>
+    </section>
+
+    <!-- ============ Cifras ============ -->
+    <section class="pd-cifras" aria-label="El estudio en números">
+      <div><b data-cuenta="28">0</b><span>años llevando cuentas</span></div>
+      <div><b data-cuenta="312">0</b><span>clientes activos</span></div>
+      <div><b data-cuenta="4900" data-miles>0</b><span>declaraciones juradas por año</span></div>
+      <div><b data-cuenta="0">0</b><span>vencimientos perdidos en 2025</span></div>
+    </section>
+
+    <!-- ============ Estudio y socios ============ -->
+    <section class="pd-seccion pd-estudio" id="estudio">
+      <header class="pd-encabezado">
+        <span class="pd-kicker pd-rev">El estudio</span>
+        <h2 class="pd-rev">Tres socios, un equipo de doce y una sola manera de trabajar.</h2>
+      </header>
+      <blockquote class="pd-cita pd-rev">
+        <p>“No te vamos a hablar en contable. Te vamos a explicar qué pasa con tu plata y qué conviene hacer.”</p>
+      </blockquote>
+      <div class="pd-socios">
+        <article class="pd-socio pd-rev"><span class="pd-mono" aria-hidden="true">IA</span><h3>Inés Aguirre</h3><p>Socia · Impuestos</p><small>Contadora pública (UBA)</small></article>
+        <article class="pd-socio pd-rev"><span class="pd-mono" aria-hidden="true">TF</span><h3>Tomás Ferrari</h3><p>Socio · Sueldos y sociedades</p><small>Contador público (UBA)</small></article>
+        <article class="pd-socio pd-rev"><span class="pd-mono" aria-hidden="true">JS</span><h3>Julia Sosa</h3><p>Socia · Contabilidad y balances</p><small>Contadora pública (UNLP)</small></article>
+      </div>
+    </section>
+
+    <!-- ============ Contacto ============ -->
+    <section class="pd-contacto" id="contacto">
+      <div class="pd-contacto__texto">
+        <span class="pd-kicker">Contacto</span>
+        <h2>La primera reunión no tiene costo.</h2>
+        <p>Contanos en dos líneas qué necesitás. Te respondemos dentro de las 24 horas hábiles con una propuesta clara y un honorario fijo.</p>
+        <dl>
+          <div><dt>Dirección</dt><dd>Dirección de ejemplo 1234, piso 6 · CABA</dd></div>
+          <div><dt>Horario</dt><dd>Lunes a viernes · 9 a 18 h</dd></div>
+          <div><dt>Teléfono</dt><dd>(011) 0000-0000</dd></div>
+        </dl>
+      </div>
+      <form class="pd-form" data-form novalidate>
+        <label><span>Nombre</span><input name="nombre" autocomplete="name" required /></label>
+        <label><span>Email</span><input name="email" type="email" autocomplete="email" required /></label>
+        <fieldset>
+          <legend>Tu situación</legend>
+          <div class="pd-chips">
+            <label><input type="radio" name="tipo" value="monotributo" checked /><span>Monotributo</span></label>
+            <label><input type="radio" name="tipo" value="ri" /><span>Responsable inscripto</span></label>
+            <label><input type="radio" name="tipo" value="sociedad" /><span>Sociedad</span></label>
+            <label><input type="radio" name="tipo" value="otro" /><span>Otro</span></label>
+          </div>
+        </fieldset>
+        <label><span>¿Qué necesitás?</span><textarea name="mensaje" rows="3"></textarea></label>
+        <button class="pd-btn" type="submit">Enviar consulta</button>
+        <p class="pd-form__ok" data-ok hidden>Gracias. Te escribimos dentro de las 24 horas hábiles. <small>(Formulario de ejemplo: no se envía.)</small></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="pd-pie">
+    <div class="pd-logo pd-logo--pie">
+      <i class="pd-logo__m" aria-hidden="true">P</i>
+      <span><b>Partida</b><small>Estudio contable</small></span>
+    </div>
+    <p>Cada partida, en su lugar.</p>
+    <small>Marca ficticia · página de ejemplo · datos ilustrativos</small>
+  </footer>
+</body>
+</html>

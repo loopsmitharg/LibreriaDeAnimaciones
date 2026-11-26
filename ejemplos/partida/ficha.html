@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Ficha · Partida — Librería de Animaciones</title>
+  <link rel="stylesheet" href="../../assets/css/fonts.css" />
+  <link rel="stylesheet" href="../../assets/css/shell.css" />
+  <link rel="stylesheet" href="../../assets/css/ficha.css" />
+</head>
+<body>
+  <header class="fi-top">
+    <div class="fi-top__inner">
+      <a class="fi-volver" href="../../index.html"><span class="material-icons-round" aria-hidden="true">arrow_back</span>Librería</a>
+      <div class="fi-kicker"><i></i>Ficha interna · Partida · Estudio contable</div>
+      <h1>Partida: one-page de estudio contable</h1>
+      <p class="fi-lead">Marca ficticia, institucional y sobria: papel cálido, tinta verde y un acento latón. El doble filete contable como motivo, un asiento del libro diario que se carga y "cuadra", servicios como plan de cuentas, método con riel que avanza y un calendario de vencimientos por terminación de CUIT.</p>
+      <div class="fi-acciones">
+        <a class="fi-btn fi-btn--main" href="index.html">Abrir la página <span class="material-icons-round" aria-hidden="true">arrow_forward</span></a>
+        <button class="fi-btn" type="button" data-copiar="index.html"><span class="material-icons-round" aria-hidden="true">link</span><span>Copiar link para el cliente</span></button>
+      </div>
+      <p class="fi-aviso">La página del cliente no tiene esta ficha ni el botón de volver a la librería: se puede mostrar tal cual.</p>
+    </div>
+  </header>
+
+  <section class="lib-notes">
+    <div class="lib-notes__inner">
+      <div><span class="lib-notes__kicker">Ficha técnica</span><h2>Partida · estudio contable</h2></div>
+      <div class="lib-notes__meta"><span>One-page para un estudio contable (marca ficticia)</span><span>Sin dependencias: CSS + JS propio</span><span>IntersectionObserver · requestAnimationFrame</span></div>
+      <div class="lib-notes__grid">
+        <div>
+          <h3>Qué tiene</h3>
+          <ul>
+            <li>Hero con renglones de libro diario que se trazan y el doble filete debajo de "en orden" (el subrayado de un total que cuadra). El mismo filete se usa en el hover del menú y en los kickers.</li>
+            <li>Asiento contable: las filas entran una por una, las cifras ruedan, los totales Debe/Haber coinciden, se dibuja el doble filete y aparece el sello "Cuadra".</li>
+            <li>Servicios como plan de cuentas (1, 1.01…) en acordeón con <code>grid-template-rows: 0fr → 1fr</code>.</li>
+            <li>Método con título fijo y riel vertical que se llena con el scroll; cada paso se enciende al pasar el 60 % de la pantalla.</li>
+            <li>Vencimientos: se elige la terminación de CUIT y se marca el mes en un calendario más una agenda con "en N días". Se guarda en <code>localStorage</code> (<code>partida_cuit</code>).</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Qué tocar</h3>
+          <ul>
+            <li>Paleta y tipografías en los tokens de <code>:root</code> de <code>partida.css</code> (Newsreader de Google Fonts, Outfit e IBM Plex Mono locales).</li>
+            <li>Reglas de vencimientos en <code>OBLIG</code> de <code>partida.js</code>: son ilustrativas. Pasado el día 15 se muestra el mes siguiente; fines de semana y feriados fijos corren al próximo hábil.</li>
+            <li>Movimiento lento y sin rebotes a propósito. Con <code>prefers-reduced-motion</code> todo aparece en su estado final.</li>
+            <li>Socios, cifras, dirección y el formulario (no envía) son de ejemplo.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('[data-copiar]').forEach((btn) => {
+      const label = btn.querySelector('span:last-child');
+      btn.addEventListener('click', async () => {
+        const url = new URL(btn.dataset.copiar, location.href).href;
+        try { await navigator.clipboard.writeText(url); label.textContent = 'Link copiado'; }
+        catch { window.prompt('Copiá el link:', url); }
+        setTimeout(() => { label.textContent = 'Copiar link para el cliente'; }, 1800);
+      });
+    });
+  </script>
+</body>
+</html>
